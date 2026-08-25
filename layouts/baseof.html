@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body{{ if .IsHome }} class="is-home"{{ end }}>
+    <a class="skip-link" href="#main">{{ if eq site.Language.Lang "mn" }}Үндсэн агуулга руу очих{{ else }}Skip to content{{ end }}</a>
+    {{ partial "header.html" . }}
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+    {{ with resources.Get "js/site.js" }}
+      {{ $script := . | minify | fingerprint }}
+      <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+    {{ end }}
+  </body>
+</html>

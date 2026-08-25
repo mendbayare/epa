@@ -1,0 +1,29 @@
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="EPA@Lab">
+      <span class="brand__symbol">E</span>
+      <span class="brand__lockup"><strong>EPA<span class="brand__at">@</span>Lab</strong><small>{{ if eq site.Language.Lang "mn" }}ШУТИС · ЭХИС{{ else }}MUST · PES{{ end }}</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" data-nav-toggle>
+      <span class="sr-only">{{ if eq site.Language.Lang "mn" }}Цэс нээх{{ else }}Open menu{{ end }}</span>
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" id="main-navigation" aria-label="{{ if eq site.Language.Lang "mn" }}Үндсэн цэс{{ else }}Main navigation{{ end }}" data-nav>
+      <ul>
+        {{ range site.Menus.main }}
+          <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+      <button class="theme-toggle" type="button" data-theme-toggle>
+        <span class="sr-only" data-theme-label>{{ if eq site.Language.Lang "mn" }}Өнгийн горим солих{{ else }}Change color theme{{ end }}</span>
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path></svg>
+      </button>
+      <div class="language-switcher">
+        {{ range .AllTranslations }}
+          {{ if ne .Language.Lang site.Language.Lang }}<a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}">{{ .Language.Label }}</a>{{ end }}
+        {{ end }}
+      </div>
+    </nav>
+  </div>
+</header>

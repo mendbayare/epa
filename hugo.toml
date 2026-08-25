@@ -1,0 +1,98 @@
+baseURL = "https://example.org/"
+title = "EPA@Lab"
+defaultContentLanguage = "mn"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+enableGitInfo = false
+disableKinds = ["taxonomy", "term"]
+
+[pagination]
+  pagerSize = 9
+
+[params]
+  description = "Electrical Power Automation Laboratory at MUST"
+  email = ""
+  phone = "+976 9553 2207"
+  address = "ШУТИС, Эрчим хүчний инженерчлэлийн сургууль, VIII байр, 601 тоот"
+  instagramURL = ""
+  facebookURL = ""
+
+[languages]
+  [languages.mn]
+    locale = "mn-MN"
+    label = "Монгол"
+    title = "EPA@Lab"
+    weight = 1
+    contentDir = "content"
+    [languages.mn.params]
+      description = "ШУТИС-ийн Цахилгаан эрчим хүчний автоматжуулалтын лаборатори"
+      address = "ШУТИС, ЭХИС-ийн VIII байр, 601 тоот"
+    [[languages.mn.menus.main]]
+      name = "Нүүр"
+      pageRef = "/"
+      weight = 10
+    [[languages.mn.menus.main]]
+      name = "Бидний тухай"
+      pageRef = "/about"
+      weight = 20
+    [[languages.mn.menus.main]]
+      name = "Гишүүд"
+      pageRef = "/members"
+      weight = 30
+    [[languages.mn.menus.main]]
+      name = "Төслүүд"
+      pageRef = "/projects"
+      weight = 40
+    [[languages.mn.menus.main]]
+      name = "Мэдээ"
+      pageRef = "/news"
+      weight = 50
+    [[languages.mn.menus.main]]
+      name = "Холбоо барих"
+      pageRef = "/contact"
+      weight = 60
+
+  [languages.en]
+    locale = "en"
+    label = "English"
+    title = "EPA@Lab"
+    weight = 2
+    contentDir = "content"
+    [languages.en.params]
+      description = "Electrical Power Automation Laboratory at MUST"
+      address = "MUST School of Power and Electrical Engineering, Building VIII, room 601"
+    [[languages.en.menus.main]]
+      name = "Home"
+      pageRef = "/"
+      weight = 10
+    [[languages.en.menus.main]]
+      name = "About"
+      pageRef = "/about"
+      weight = 20
+    [[languages.en.menus.main]]
+      name = "Members"
+      pageRef = "/members"
+      weight = 30
+    [[languages.en.menus.main]]
+      name = "Projects"
+      pageRef = "/projects"
+      weight = 40
+    [[languages.en.menus.main]]
+      name = "News"
+      pageRef = "/news"
+      weight = 50
+    [[languages.en.menus.main]]
+      name = "Contact"
+      pageRef = "/contact"
+      weight = 60
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = false
+
+[minify]
+  minifyOutput = true

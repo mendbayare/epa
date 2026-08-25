@@ -1,0 +1,9 @@
+{{- $image := resources.Get .src -}}
+{{- with $image -}}
+  {{- $small := .Resize "640x webp q78" -}}
+  {{- $medium := .Resize "960x webp q80" -}}
+  {{- $large := .Resize "1440x webp q82" -}}
+  <img class="{{ $.class }}" src="{{ $medium.RelPermalink }}" srcset="{{ $small.RelPermalink }} 640w, {{ $medium.RelPermalink }} 960w, {{ $large.RelPermalink }} 1440w" sizes="{{ default "(max-width: 800px) 100vw, 50vw" $.sizes }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.alt }}" loading="{{ default "lazy" $.loading }}" decoding="async">
+{{- else -}}
+  <div class="image-placeholder {{ $.class }}" role="img" aria-label="{{ $.alt }}"></div>
+{{- end -}}

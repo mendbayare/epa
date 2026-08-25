@@ -1,0 +1,50 @@
+{{- $category := .category -}}
+<svg class="research-motif research-motif--{{ $category }}" viewBox="0 0 640 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="grid-{{ $category }}" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" class="research-motif__grid"></path>
+    </pattern>
+    <marker id="arrow-{{ $category }}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" class="research-motif__arrow"></path>
+    </marker>
+  </defs>
+  <rect width="640" height="420" fill="url(#grid-{{ $category }})"></rect>
+  {{- if eq $category "protection-relays" -}}
+    <path class="research-motif__line research-motif__line--strong" d="M80 110H560"></path>
+    <path class="research-motif__line" d="M150 110V185M320 110V185M490 110V185"></path>
+    <path class="research-motif__line" d="m132 185 18 18 18-18M302 185l18 18 18-18M472 185l18 18 18-18"></path>
+    <path class="research-motif__line" d="M150 203V285M320 203V285M490 203V285"></path>
+    <rect class="research-motif__device" x="105" y="285" width="90" height="62" rx="4"></rect>
+    <rect class="research-motif__device" x="275" y="285" width="90" height="62" rx="4"></rect>
+    <rect class="research-motif__device" x="445" y="285" width="90" height="62" rx="4"></rect>
+    <text class="research-motif__label" x="150" y="322" text-anchor="middle">IED-1</text>
+    <text class="research-motif__label" x="320" y="322" text-anchor="middle">IED-2</text>
+    <text class="research-motif__label" x="490" y="322" text-anchor="middle">IED-3</text>
+    <circle class="research-motif__node" cx="320" cy="110" r="9"></circle>
+  {{- else if eq $category "scada-hmi" -}}
+    <path class="research-motif__line" d="M320 88 145 190M320 88l175 102M145 190l95 145M495 190l-95 145M145 190h350M240 335h160"></path>
+    <circle class="research-motif__device" cx="320" cy="88" r="42"></circle>
+    <circle class="research-motif__device" cx="145" cy="190" r="34"></circle>
+    <circle class="research-motif__device" cx="495" cy="190" r="34"></circle>
+    <circle class="research-motif__device" cx="240" cy="335" r="30"></circle>
+    <circle class="research-motif__device" cx="400" cy="335" r="30"></circle>
+    <circle class="research-motif__node" cx="320" cy="88" r="9"></circle>
+    <circle class="research-motif__node" cx="145" cy="190" r="7"></circle>
+    <circle class="research-motif__node" cx="495" cy="190" r="7"></circle>
+    <text class="research-motif__label" x="320" y="94" text-anchor="middle">SCADA</text>
+    <text class="research-motif__label" x="145" y="195" text-anchor="middle">RTU</text>
+    <text class="research-motif__label" x="495" y="195" text-anchor="middle">HMI</text>
+  {{- else -}}
+    <rect class="research-motif__device" x="70" y="165" width="112" height="86" rx="5"></rect>
+    <rect class="research-motif__device" x="264" y="165" width="112" height="86" rx="5"></rect>
+    <rect class="research-motif__device" x="458" y="165" width="112" height="86" rx="5"></rect>
+    <path class="research-motif__line" marker-end="url(#arrow-{{ $category }})" d="M182 208H264M376 208h82"></path>
+    <path class="research-motif__line" marker-end="url(#arrow-{{ $category }})" d="M514 251v95H126v-95"></path>
+    <circle class="research-motif__node" cx="223" cy="208" r="8"></circle>
+    <circle class="research-motif__node" cx="417" cy="208" r="8"></circle>
+    <text class="research-motif__label" x="126" y="213" text-anchor="middle">SET</text>
+    <text class="research-motif__label" x="320" y="213" text-anchor="middle">PLC</text>
+    <text class="research-motif__label" x="514" y="213" text-anchor="middle">PLANT</text>
+    <text class="research-motif__label" x="320" y="365" text-anchor="middle">FEEDBACK</text>
+  {{- end -}}
+</svg>

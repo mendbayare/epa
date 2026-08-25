@@ -1,0 +1,22 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1b2a6b">
+<script>
+  (() => {
+    const saved = localStorage.getItem('epa-theme');
+    const dark = saved === 'dark' || (!saved && matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  })();
+</script>
+<title>{{ if .IsHome }}{{ site.Title }} — {{ .Title }}{{ else }}{{ .Title }} — {{ site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{ range .AllTranslations }}<link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">{{ end }}
+{{ with resources.Get "fonts/noto-sans-variable.woff2" }}
+  {{ $font := . | fingerprint }}
+  <style>@font-face{font-family:"Noto Sans";font-style:normal;font-weight:100 900;font-display:swap;src:url("{{ $font.RelPermalink }}") format("woff2")}</style>
+{{ end }}
+{{ with resources.Get "css/main.css" }}
+  {{ $style := . | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end }}
