@@ -1,6 +1,6 @@
 +++
 title = "About us"
-description = "The origins, development, achievements, and teaching team of EPA@Lab."
+description = "The origins, development, achievements, and supervising lecturer of EPA@Lab."
 hero_image = "images/lab-hero.jpg"
 founded_label = "Established"
 founded_value = "January 2025"
@@ -33,21 +33,13 @@ description = "Provisional information used to test long titles and responsive d
 image = "images/activity-relay.jpg"
 provisional = true
 
-[[teachers]]
+[supervisor]
 name = "Dr. (Ph.D.) B. Tuvshinbayar"
 role = "EPA@Lab supervising lecturer"
 portrait = "images/mentor-tuvshinbayar.jpg"
 summary = "Leads the laboratory's teaching and research in power-system automation, monitoring and control, and protection."
 bio = "This extended biography is provisional. Academic position, education, research interests, and publication details must be reviewed by the lecturer before release."
 provisional = true
-
-[[teachers]]
-name = "Sample lecturer name"
-role = "Lecturer and researcher"
-portrait = "images/activity-classroom.jpg"
-summary = "A provisional record used to test an additional lecturer card, long names, and biography layout."
-bio = "Replace this entry when approved lecturer information becomes available."
-provisional = true
 +++
 
-This page structure is ready for real history, achievement, and teacher records without template changes.
+This page structure is ready for real history, achievement, and supervising-lecturer information without template changes.

@@ -10,6 +10,8 @@ mentor_role = "EPA@Lab faculty mentor"
 mentor_image = "images/mentor-tuvshinbayar.jpg"
 mentor_greeting = "EPA@Lab gives students a place to test their initiative and research interests on real systems. Together, we learn, experiment, and develop solutions that can contribute to the power sector."
 mentor_page = "about/"
+equipment = ["ABB", "SEL", "MEGGER", "RTAC", "RTU", "PLC", "RASPBERRY PI", "ARDUINO", "ESP32", "LoRa"]
+
 [[stats]]
 key = "publications"
 value = "12"

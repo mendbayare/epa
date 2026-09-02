@@ -58,6 +58,12 @@
       <div class="stats__grid">
         {{ range .Params.stats }}<div class="stat"><strong>{{ .value }}{{ with .suffix }}<small>{{ . }}</small>{{ end }}</strong><span>{{ .label }}{{ if .provisional }} <small>({{ if $isMn }}түр{{ else }}draft{{ end }})</small>{{ end }}</span></div>{{ end }}
       </div>
+      {{ with .Params.equipment }}
+        <div class="equipment-strip" aria-label="{{ if $isMn }}Лабораторийн тоног төхөөрөмж{{ else }}Laboratory equipment{{ end }}">
+          <span class="equipment-strip__label">{{ if $isMn }}Тоног төхөөрөмж{{ else }}Equipment{{ end }}</span>
+          <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+        </div>
+      {{ end }}
     </div>
   </section>
 

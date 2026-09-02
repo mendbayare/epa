@@ -52,8 +52,8 @@ live SCADA data, database-backed submissions, or complex interactive tools.
 The stakeholder-confirmed website contains seven main sections:
 
 1. **Home** — introduction and headline statistics for publications, projects,
-   and alumni; an optional partner-organizations section may also appear.
-2. **About Us** — achievements, laboratory history, and teacher biographies.
+   and alumni, a laboratory-equipment strip, and optional partner organizations.
+2. **About Us** — achievements, laboratory history, and the supervising teacher.
 3. **Projects** — funded/commissioned work, with a structured detail page for
    each project.
 4. **Publications** — a table-style list of published works, with optional
@@ -70,6 +70,7 @@ confirmed primary information architecture.
 #### Home
 
 - Statistics for published works, projects, and alumni.
+- Compact laboratory-equipment list.
 - Optional partner-organizations section.
 - The existing hero, vision/mission, mentor greeting, and featured-content
   components should be reassessed against this reduced scope before they are
@@ -79,7 +80,7 @@ confirmed primary information architecture.
 
 - Laboratory achievements.
 - Laboratory history.
-- Teacher biographies.
+- Supervising teacher biography only; no additional teacher or researcher directory.
 
 #### Members
 
@@ -1571,3 +1572,10 @@ At the end of every working session:
 - Removed the supervising teacher's telephone number from site configuration,
   Contact content, the Contact layout, and the footer. Email is now the only
   direct-contact field; its public address remains pending stakeholder input.
+
+### 2026-09-02 — Home equipment restored and About people scope reduced
+
+- Restored the compact laboratory-equipment strip on Home using a structured
+  bilingual-page field that can be replaced with approved values later.
+- Replaced About's repeatable teacher list with one supervising-teacher object
+  and removed the provisional additional lecturer/researcher.

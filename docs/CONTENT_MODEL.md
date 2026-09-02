@@ -55,6 +55,7 @@ fields define the stakeholder-requested sections.
 | `vision` | short rich text | Yes | Алсын хараа |
 | `mission` | short rich text | Yes | Эрхэм зорилго |
 | `stats` | ordered list | Yes | Key, numeric value, label, optional suffix |
+| `equipment` | string list | Yes | Compact Home strip of laboratory equipment brands/models |
 | `partners` | object list | No | Home-only partners with name, URL, description, mark, and provisional state |
 
 Baseline statistic keys:
@@ -190,23 +191,12 @@ News is a confirmed primary section and may also supply featured cards to Home.
 The current records are provisional samples and must be replaced or approved
 before launch.
 
-## 7. Equipment — legacy prototype, not stakeholder-required
+## 7. Home equipment
 
-Equipment is not part of the stakeholder-confirmed structure. Keep the current
-prototype data only until the Home and About redesign establishes whether any of
-it should be reused; do not create an equipment collection for the initial release.
-
-Each optional item contains only:
-
-| Field | Type | Required | Purpose |
-| --- | --- | --- | --- |
-| `name` | string | Yes | Equipment name, optionally including model |
-| `category` | string | No | Simple display grouping |
-| `description` | string | No | One short sentence when useful |
-| `image` | image path | No | Approved photo if the design uses one |
-
-This list can later be promoted to a collection without changing the public URL
-structure if detailed equipment pages become valuable.
+Laboratory equipment is shown as a compact string list on Home. It does not need
+a standalone section, categories, images, or detail pages for the initial
+release. Each value may be a brand, platform, or model name such as `ABB`,
+`SEL`, `RTAC`, or `PLC`.
 
 ## 8. About and Contact pages
 
@@ -221,20 +211,19 @@ About front matter:
 - `history_intro`
 - ordered `history` milestones with year, title, description, and provisional state
 - ordered `achievements` with title, year, description, image, and provisional state
-- ordered `teachers` with name, role, portrait, summary, biography, and provisional state
+- one `supervisor` object with name, role, portrait, summary, biography, and provisional state
 - page-level `provisional` state
 
-The body may contain the longer laboratory history and supporting context.
-Adding, removing, or replacing a history milestone, achievement, or teacher must
-not require a template change. Until approved content arrives, every invented
-sample record must retain `provisional = true` and a visible public label.
+The body may contain the longer laboratory history and supporting context. About
+contains only the supervising teacher; it is not a directory of lecturers or
+researchers. Until approved content arrives, every invented sample record must
+retain `provisional = true` and a visible public label.
 
 Contact front matter:
 
 - `title`
 - `description`
 - `address`
-- `email`
 - `email`
 - `supervisor_name` and `supervisor_role`
 - `map_url`

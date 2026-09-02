@@ -36,9 +36,9 @@
 
     <section class="about-teachers">
       <div class="container">
-        <div class="about-section-heading"><div><p class="eyebrow">{{ if $isMn }}Багш, судлаачид{{ else }}Lecturers and researchers{{ end }}</p><h2>{{ if $isMn }}Мэдлэг, туршлагыг чиглүүлэгчид{{ else }}Guiding knowledge and practice{{ end }}</h2></div><p>{{ if $isMn }}Намтар бүрийг бүтэцтэй мэдээллээр удирдах тул багш нэмэхэд загвар өөрчлөх шаардлагагүй.{{ else }}Each biography is structured, so adding lecturers does not require a template change.{{ end }}</p></div>
+        <div class="about-section-heading"><div><p class="eyebrow">{{ if $isMn }}Удирдагч багш{{ else }}Supervising lecturer{{ end }}</p><h2>{{ if $isMn }}Мэдлэг, туршлагыг чиглүүлэгч{{ else }}Guiding knowledge and practice{{ end }}</h2></div></div>
         <div class="teacher-list">
-          {{ range $index, $teacher := .Params.teachers }}<article class="teacher-card"><div class="teacher-card__portrait">{{ partial "responsive-image.html" (dict "src" .portrait "alt" .name "class" "teacher-card__image" "sizes" "(max-width: 700px) 100vw, 34vw") }}<span>{{ printf "%02d" (add $index 1) }}</span></div><div class="teacher-card__copy"><p class="eyebrow">{{ .role }}</p><h3>{{ .name }}</h3><p class="teacher-card__summary">{{ .summary }}</p><p class="teacher-card__bio">{{ .bio }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Намтрыг баталгаажуулна{{ else }}Biography pending review{{ end }}</span>{{ end }}</div></article>{{ end }}
+          {{ with .Params.supervisor }}<article class="teacher-card"><div class="teacher-card__portrait">{{ partial "responsive-image.html" (dict "src" .portrait "alt" .name "class" "teacher-card__image" "sizes" "(max-width: 700px) 100vw, 34vw") }}<span>01</span></div><div class="teacher-card__copy"><p class="eyebrow">{{ .role }}</p><h3>{{ .name }}</h3><p class="teacher-card__summary">{{ .summary }}</p><p class="teacher-card__bio">{{ .bio }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Намтрыг баталгаажуулна{{ else }}Biography pending review{{ end }}</span>{{ end }}</div></article>{{ end }}
         </div>
       </div>
     </section>
