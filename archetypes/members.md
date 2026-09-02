@@ -1,15 +1,15 @@
 +++
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
-draft = true
-role = ''
+role = 'EPA@Lab member'
 program = ''
 study_year = ''
-joined_year = '{{ now.Year }}'
+generation = ''
 portrait = ''
 summary = ''
-research_interests = []
+yearbook_quote = ''
 achievements = []
-links = []
 alumni = false
 weight = 10
+provisional = true
+draft = true
 +++

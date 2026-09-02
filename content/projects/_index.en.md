@@ -1,5 +1,4 @@
 +++
-title = "Research and projects"
-description = "Student research, experiments, and engineering solutions."
+title = "Projects"
+description = "Commissioned and collaborative engineering work delivered by EPA@Lab, with implementation details and outcomes."
 +++
-

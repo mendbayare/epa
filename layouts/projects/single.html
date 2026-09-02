@@ -1,0 +1,35 @@
+{{ define "main" }}
+  {{ $isMn := eq site.Language.Lang "mn" }}
+  <article class="project-page">
+    <header class="project-hero">
+      <div class="container project-hero__grid">
+        <div class="project-hero__copy">
+          <a class="project-back" href="{{ (site.GetPage "/projects").RelPermalink }}">← {{ if $isMn }}Бүх төсөл{{ else }}All projects{{ end }}</a>
+          <p class="eyebrow">{{ if $isMn }}Төслийн танилцуулга{{ else }}Project profile{{ end }}</p>
+          <h1>{{ .Title }}</h1>
+          {{ with .Params.summary }}<p class="project-hero__lead">{{ . }}</p>{{ end }}
+          {{ if .Params.provisional }}<span class="draft-label">{{ if $isMn }}Загварын түр агуулга{{ else }}Draft sample content{{ end }}</span>{{ end }}
+        </div>
+        {{ with .Params.cover }}<div class="project-hero__media">{{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "project-hero__image" "loading" "eager" "sizes" "(max-width: 900px) 100vw, 46vw") }}<span aria-hidden="true">EPA / PROJECT</span></div>{{ end }}
+      </div>
+    </header>
+    <div class="container project-detail">
+      <dl class="project-facts">
+        {{ with .Params.client }}<div><dt>{{ if $isMn }}Захиалагч{{ else }}Client{{ end }}</dt><dd>{{ . }}</dd></div>{{ end }}
+        {{ with .Params.collaborators }}<div><dt>{{ if $isMn }}Хамтран гүйцэтгэгч{{ else }}Collaborators{{ end }}</dt><dd>{{ delimit . ", " }}</dd></div>{{ end }}
+        {{ with .Params.duration_text }}<div><dt>{{ if $isMn }}Хугацаа{{ else }}Duration{{ end }}</dt><dd>{{ . }}</dd></div>{{ end }}
+        {{ with .Params.implementation_site }}<div><dt>{{ if $isMn }}Хэрэгжүүлсэн газар / объект{{ else }}Location / site{{ end }}</dt><dd>{{ . }}</dd></div>{{ end }}
+      </dl>
+      <div class="project-narrative">
+        <aside><p class="eyebrow">{{ if $isMn }}Төслийн мэдээлэл{{ else }}Project information{{ end }}</p><span>01 — 02</span></aside>
+        <div>
+          {{ with .Params.objective }}<section class="project-copy"><p class="project-copy__number">01</p><h2>{{ if $isMn }}Зорилго{{ else }}Objective{{ end }}</h2><p>{{ . }}</p></section>{{ end }}
+          {{ with .Params.results }}<section class="project-copy"><p class="project-copy__number">02</p><h2>{{ if $isMn }}Үр дүн, хийсэн ажил{{ else }}Results and completed work{{ end }}</h2><p>{{ . }}</p></section>{{ end }}
+          {{ with .Content }}<div class="prose project-body">{{ . }}</div>{{ end }}
+        </div>
+      </div>
+      {{ with .Params.related_publications }}<section class="project-related"><p class="eyebrow">{{ if $isMn }}Холбогдох бүтээл{{ else }}Related publications{{ end }}</p>{{ range . }}{{ with site.GetPage . }}<a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong><span>{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }} ↗</span></a>{{ end }}{{ end }}</section>{{ end }}
+      {{ with .Params.gallery }}<section class="project-gallery"><div><p class="eyebrow">{{ if $isMn }}Зургийн цомог{{ else }}Gallery{{ end }}</p><h2>{{ if $isMn }}Төслийн явц, үр дүн{{ else }}Process and outcomes{{ end }}</h2></div><div class="project-gallery__grid">{{ range . }}{{ partial "responsive-image.html" (dict "src" .src "alt" .alt "class" "project-gallery__image" "sizes" "(max-width: 700px) 100vw, 50vw") }}{{ end }}</div></section>{{ end }}
+    </div>
+  </article>
+{{ end }}

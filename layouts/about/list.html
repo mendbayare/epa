@@ -1,0 +1,48 @@
+{{ define "main" }}
+  {{ $isMn := eq site.Language.Lang "mn" }}
+  <article class="about-page">
+    <header class="about-hero">
+      <div class="container about-hero__grid">
+        <div class="about-hero__copy">
+          <p class="eyebrow">EPA@Lab / {{ if $isMn }}Бидний тухай{{ else }}About us{{ end }}</p>
+          <h1>{{ .Title }}</h1>
+          <p>{{ .Params.description }}</p>
+          {{ if .Params.provisional }}<span class="draft-label">{{ if $isMn }}Загварын түр агуулгатай{{ else }}Contains draft sample content{{ end }}</span>{{ end }}
+        </div>
+        <div class="about-hero__media">
+          {{ partial "responsive-image.html" (dict "src" .Params.hero_image "alt" .Title "class" "about-hero__image" "loading" "eager" "sizes" "(max-width: 900px) 100vw, 48vw") }}
+          <div class="about-founded"><small>{{ .Params.founded_label }}</small><strong>{{ .Params.founded_value }}</strong></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="about-history">
+      <div class="container about-section-heading"><div><p class="eyebrow">{{ if $isMn }}Лабораторийн түүх{{ else }}Our history{{ end }}</p><h2>{{ if $isMn }}Санаанаас инженерийн орчин хүртэл{{ else }}From an idea to an engineering environment{{ end }}</h2></div><p>{{ .Params.history_intro }}</p></div>
+      <div class="container about-timeline">
+        {{ range .Params.history }}
+          <article><time>{{ .year }}</time><div><h3>{{ .title }}</h3><p>{{ .description }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Жишээ мэдээлэл{{ else }}Sample record{{ end }}</span>{{ end }}</div></article>
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="about-achievements">
+      <div class="container">
+        <div class="about-section-heading"><div><p class="eyebrow">{{ if $isMn }}Амжилт{{ else }}Achievements{{ end }}</p><h2>{{ if $isMn }}Хийсэн ажлын үнэ цэн{{ else }}The value of work completed{{ end }}</h2></div><p>{{ if $isMn }}Бодит мэдээлэл ирэхэд амжилтын картууд он, зураг, тайлбараар шинэчлэгдэнэ.{{ else }}When approved information arrives, each card can be replaced with its real year, image, and description.{{ end }}</p></div>
+        <div class="achievement-grid">
+          {{ range $achievement := .Params.achievements }}<article class="achievement-card"><div class="achievement-card__media">{{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" $achievement.title "class" "achievement-card__image" "sizes" "(max-width: 700px) 100vw, 50vw") }}{{ end }}<time>{{ .year }}</time></div><div><h3>{{ .title }}</h3><p>{{ .description }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Жишээ мэдээлэл{{ else }}Sample record{{ end }}</span>{{ end }}</div></article>{{ end }}
+        </div>
+      </div>
+    </section>
+
+    <section class="about-teachers">
+      <div class="container">
+        <div class="about-section-heading"><div><p class="eyebrow">{{ if $isMn }}Багш, судлаачид{{ else }}Lecturers and researchers{{ end }}</p><h2>{{ if $isMn }}Мэдлэг, туршлагыг чиглүүлэгчид{{ else }}Guiding knowledge and practice{{ end }}</h2></div><p>{{ if $isMn }}Намтар бүрийг бүтэцтэй мэдээллээр удирдах тул багш нэмэхэд загвар өөрчлөх шаардлагагүй.{{ else }}Each biography is structured, so adding lecturers does not require a template change.{{ end }}</p></div>
+        <div class="teacher-list">
+          {{ range $index, $teacher := .Params.teachers }}<article class="teacher-card"><div class="teacher-card__portrait">{{ partial "responsive-image.html" (dict "src" .portrait "alt" .name "class" "teacher-card__image" "sizes" "(max-width: 700px) 100vw, 34vw") }}<span>{{ printf "%02d" (add $index 1) }}</span></div><div class="teacher-card__copy"><p class="eyebrow">{{ .role }}</p><h3>{{ .name }}</h3><p class="teacher-card__summary">{{ .summary }}</p><p class="teacher-card__bio">{{ .bio }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Намтрыг баталгаажуулна{{ else }}Biography pending review{{ end }}</span>{{ end }}</div></article>{{ end }}
+        </div>
+      </div>
+    </section>
+
+    {{ with .Content }}<footer class="container about-editor-note prose">{{ . }}</footer>{{ end }}
+  </article>
+{{ end }}

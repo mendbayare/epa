@@ -1,0 +1,8 @@
+[[terms]]
+member = "sample-first"
+role_key = "lab-leader"
+role_mn = "Лабораторийн ахлагч"
+role_en = "Laboratory leader"
+start_year = 2025
+current = true
+provisional = true

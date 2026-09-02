@@ -35,7 +35,6 @@
     <div class="site-footer__contact-block">
       <p class="footer-heading">{{ if $isMn }}Холбоо барих{{ else }}Contact{{ end }}</p>
       <address>{{ site.Params.address }}</address>
-      <a class="footer-contact-link" href="tel:+97695532207">{{ site.Params.phone }}</a>
       {{ with site.Params.email }}<a class="footer-contact-link" href="mailto:{{ . }}">{{ . }}</a>{{ end }}
       <a class="footer-direction" href="{{ relLangURL "contact/" }}">{{ if $isMn }}Байршил, дэлгэрэнгүй{{ else }}Location and details{{ end }} <span aria-hidden="true">↗</span></a>
     </div>

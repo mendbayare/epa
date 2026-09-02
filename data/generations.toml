@@ -1,0 +1,15 @@
+[[generations]]
+key = "first-generation"
+order = 10
+label_mn = "I үе"
+heading_mn = "I үеийн гишүүд"
+label_en = "First generation"
+heading_en = "First-generation members"
+
+[[generations]]
+key = "second-generation"
+order = 20
+label_mn = "II үе"
+heading_mn = "II үеийн гишүүд"
+label_en = "Second generation"
+heading_en = "Second-generation members"

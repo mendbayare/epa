@@ -1,0 +1,30 @@
+{{ define "main" }}
+  {{ $isMn := eq site.Language.Lang "mn" }}
+  {{ $publications := sort (sort .Pages "Params.month" "desc") "Params.year" "desc" }}
+  <header class="publications-hero">
+    <div class="container publications-hero__grid">
+      <div><p class="eyebrow">EPA@Lab / {{ if $isMn }}Бүтээлийн сан{{ else }}Published work{{ end }}</p><h1>{{ .Title }}</h1></div>
+      <div><p>{{ .Params.description }}</p><span class="publications-count">{{ len $publications }} <small>{{ if $isMn }}түр бүртгэл{{ else }}draft records{{ end }}</small></span></div>
+    </div>
+  </header>
+  <section class="container publications-index">
+    <div class="publication-table-wrap">
+      <table class="publication-table">
+        <thead><tr><th>{{ if $isMn }}Нэр, тайлбар{{ else }}Name and description{{ end }}</th><th>{{ if $isMn }}Он, сар{{ else }}Year, month{{ end }}</th><th>{{ if $isMn }}Файл / холбоос{{ else }}File / link{{ end }}</th></tr></thead>
+        <tbody>
+          {{ range $publications }}
+            <tr>
+              <td data-label="{{ if $isMn }}Нэр{{ else }}Name{{ end }}"><strong>{{ .Title }}</strong>{{ with .Params.summary }}<span>{{ . }}</span>{{ end }}{{ if .Params.provisional }}<small class="publication-draft">{{ if $isMn }}Түр агуулга{{ else }}Draft sample{{ end }}</small>{{ end }}</td>
+              <td data-label="{{ if $isMn }}Он, сар{{ else }}Year, month{{ end }}"><time datetime="{{ .Params.year }}-{{ printf "%02d" (int .Params.month) }}">{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }}</time></td>
+              <td data-label="{{ if $isMn }}Файл / холбоос{{ else }}File / link{{ end }}" class="publication-actions">
+                {{ with .Params.file }}<a class="publication-action" href="{{ . | relURL }}" download>{{ if $isMn }}Файл татах{{ else }}Download file{{ end }} <span>↓</span></a>{{ end }}
+                {{ with .Params.external_url }}<a class="publication-action" href="{{ . }}" target="_blank" rel="noopener">{{ if $isMn }}Гадаад холбоос{{ else }}External link{{ end }} <span>↗</span></a>{{ end }}
+                {{ if and (not .Params.file) (not .Params.external_url) }}<span class="publication-pending">{{ if $isMn }}Холбоос хүлээгдэж байна{{ else }}Link pending{{ end }}</span>{{ end }}
+              </td>
+            </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+  </section>
+{{ end }}

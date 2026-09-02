@@ -12,7 +12,6 @@ disableKinds = ["taxonomy", "term"]
 [params]
   description = "Electrical Power Automation Laboratory at MUST"
   email = ""
-  phone = "+976 9553 2207"
   address = "ШУТИС, Эрчим хүчний инженерчлэлийн сургууль, VIII байр, 601 тоот"
   instagramURL = ""
   facebookURL = ""
@@ -36,21 +35,26 @@ disableKinds = ["taxonomy", "term"]
       pageRef = "/about"
       weight = 20
     [[languages.mn.menus.main]]
-      name = "Гишүүд"
-      pageRef = "/members"
+      name = "Төсөл"
+      pageRef = "/projects"
       weight = 30
     [[languages.mn.menus.main]]
-      name = "Төслүүд"
-      pageRef = "/projects"
+      name = "Хэвлүүлсэн бүтээл"
+      pageRef = "/publications"
       weight = 40
     [[languages.mn.menus.main]]
       name = "Мэдээ"
       pageRef = "/news"
       weight = 50
     [[languages.mn.menus.main]]
+      identifier = "members"
+      name = "Гишүүд"
+      pageRef = "/members"
+      weight = 60
+    [[languages.mn.menus.main]]
       name = "Холбоо барих"
       pageRef = "/contact"
-      weight = 60
+      weight = 70
 
   [languages.en]
     locale = "en"
@@ -70,21 +74,26 @@ disableKinds = ["taxonomy", "term"]
       pageRef = "/about"
       weight = 20
     [[languages.en.menus.main]]
-      name = "Members"
-      pageRef = "/members"
-      weight = 30
-    [[languages.en.menus.main]]
       name = "Projects"
       pageRef = "/projects"
+      weight = 30
+    [[languages.en.menus.main]]
+      name = "Publications"
+      pageRef = "/publications"
       weight = 40
     [[languages.en.menus.main]]
       name = "News"
       pageRef = "/news"
       weight = 50
     [[languages.en.menus.main]]
+      identifier = "members"
+      name = "Members"
+      pageRef = "/members"
+      weight = 60
+    [[languages.en.menus.main]]
       name = "Contact"
       pageRef = "/contact"
-      weight = 60
+      weight = 70
 
 [outputs]
   home = ["HTML", "RSS"]

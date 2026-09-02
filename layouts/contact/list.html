@@ -1,0 +1,23 @@
+{{ define "main" }}
+  {{ $isMn := eq site.Language.Lang "mn" }}
+  <article class="contact-page">
+    <header class="contact-hero">
+      <div class="container contact-hero__grid">
+        <div><p class="eyebrow">EPA@Lab / {{ if $isMn }}Холбоо{{ else }}Contact{{ end }}</p><h1>{{ .Title }}</h1></div>
+        <p>{{ .Params.description }}</p>
+      </div>
+    </header>
+    <div class="container contact-content">
+      <section class="contact-details" aria-label="{{ if $isMn }}Холбоо барих мэдээлэл{{ else }}Contact details{{ end }}">
+        <div class="contact-detail contact-detail--wide"><span>01</span><div><p class="eyebrow">{{ if $isMn }}Байршил{{ else }}Location{{ end }}</p><address>{{ .Params.address }}</address></div></div>
+        <div class="contact-detail"><span>02</span><div><p class="eyebrow">{{ if $isMn }}Имэйл{{ else }}Email{{ end }}</p>{{ with .Params.email }}<a href="mailto:{{ . }}">{{ . }}</a>{{ else }}<p class="contact-pending">{{ if $isMn }}Албан ёсны имэйл хүлээгдэж байна{{ else }}Official email pending{{ end }}</p>{{ end }}</div></div>
+        <div class="contact-detail contact-detail--wide"><span>03</span><div><p class="eyebrow">{{ if $isMn }}Хариуцсан багш{{ else }}Supervising lecturer{{ end }}</p><strong>{{ .Params.supervisor_name }}</strong><small>{{ .Params.supervisor_role }}</small></div></div>
+      </section>
+      <section class="map-preview" aria-label="{{ if $isMn }}EPA@Lab-ийн газрын зураг{{ else }}Map of EPA@Lab{{ end }}">
+        <iframe class="contact-map-frame" src="{{ .Params.map_embed_url | safeURL }}" title="{{ if $isMn }}EPA@Lab-ийн Google газрын зураг{{ else }}Google Map showing EPA@Lab{{ end }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <a class="map-preview__copy" href="{{ .Params.map_url }}" target="_blank" rel="noopener"><div><p class="eyebrow">Google Maps</p><h2>{{ if $isMn }}Газрын зураг дээр нээх{{ else }}Open in Google Maps{{ end }}</h2><p>{{ if $isMn }}Том газрын зураг, чиглэл болон ойр орчмын мэдээллийг Google Maps дээр харна уу.{{ else }}Open the full map for directions and nearby location information.{{ end }}</p></div><span>↗</span></a>
+      </section>
+      {{ if .Params.provisional }}<p class="contact-source-note">{{ .Params.source_note }}</p>{{ end }}
+    </div>
+  </article>
+{{ end }}

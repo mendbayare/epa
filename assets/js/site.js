@@ -19,23 +19,6 @@ if (themeToggle) {
   });
 }
 
-const projectBrowser = document.querySelector('[data-project-browser]');
-
-if (projectBrowser) {
-  const filters = projectBrowser.querySelectorAll('[data-filter]');
-  const cards = projectBrowser.querySelectorAll('[data-project-card]');
-
-  filters.forEach((filter) => {
-    filter.addEventListener('click', () => {
-      const selected = filter.dataset.filter;
-      filters.forEach((item) => item.classList.toggle('is-active', item === filter));
-      cards.forEach((card) => {
-        card.hidden = selected !== 'all' && card.dataset.category !== selected;
-      });
-    });
-  });
-}
-
 const homeHero = document.querySelector('.home-hero');
 const siteHeader = document.querySelector('[data-header]');
 

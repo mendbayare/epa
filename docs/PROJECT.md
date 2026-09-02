@@ -5,8 +5,8 @@
 > implementation progress, problems and fixes, verification performed,
 > unresolved questions, and the clearest next action.
 
-**Project status:** Implementation  
-**Last updated:** 2026-08-26  
+**Project status:** Confirmed structure; design QA and CMS configuration next
+**Last updated:** 2026-09-02
 **Institution:** Mongolian University of Science and Technology (MUST), School
 of Power and Electrical Engineering  
 **Laboratory:** Electrical Power Automation Lab (EPA)
@@ -49,42 +49,69 @@ live SCADA data, database-backed submissions, or complex interactive tools.
 
 ## 3. Current scope
 
-The initial website contains seven main sections:
+The stakeholder-confirmed website contains seven main sections:
 
-1. **Home** — hero, introduction, highlights, featured projects, and recent news.
-2. **About Us** — history, mission, outcomes, research areas, supervisor, and equipment.
-3. **Members** — supervisor, leader, current cohorts, personal achievements, and
-   later alumni, with cohort/year filtering.
-4. **Research / Projects** — categorized project pages with images and optional
-   PDF reports.
-5. **Publications** — a structured list of published papers and related outputs.
-6. **News** — training, experiments, conferences, and laboratory activities.
-7. **Contact** — address, responsible people, telephone, email, map, and social links.
+1. **Home** — introduction and headline statistics for publications, projects,
+   and alumni; an optional partner-organizations section may also appear.
+2. **About Us** — achievements, laboratory history, and teacher biographies.
+3. **Projects** — funded/commissioned work, with a structured detail page for
+   each project.
+4. **Publications** — a table-style list of published works, with optional
+   descriptive text, a downloadable file, and/or a link to an external record.
+5. **News** — laboratory updates, training, achievements, and activities.
+6. **Members** — members separated by generation/cohort on the Members page.
+7. **Contact** — location and public email address.
+
+Standalone equipment pages and a separate Research section are not part of the
+confirmed primary information architecture.
 
 ### Stakeholder-provided page direction
 
 #### Home
 
-- Navigation: logo, About, Members, Research/Projects, Publications, and Contact.
-- Image-led hero/introduction featuring the laboratory vision and mission.
-- Statistics for published papers, graduates, and students.
-- Mentor section with a greeting from Dr. B. Tuvshinbayar.
-- Recent news section.
-- Featured research with pill-style category filters and image-led cards.
+- Statistics for published works, projects, and alumni.
+- Optional partner-organizations section.
+- The existing hero, vision/mission, mentor greeting, and featured-content
+  components should be reassessed against this reduced scope before they are
+  retained in the final Home page.
 
 #### About
 
-- Introductory section.
-- Image-left/text-right profile or introduction featuring Dr. B. Tuvshinbayar.
-- Goals section.
-- Achievements section.
+- Laboratory achievements.
+- Laboratory history.
+- Teacher biographies.
 
 #### Members
 
-- Member/profile cards with photographs and personal achievements.
-- Cohort/year grouping or filtering, beginning with 2025.
-- A secondary detail/filter panel on wider screens, adapted appropriately for
-  mobile layouts.
+- Member/profile records grouped by generation/cohort.
+- A single Members link in the primary navigation.
+- Generations stack newest-first within the Members page and can grow over time.
+- Member cards do not require individual detail pages.
+- Leadership terms are managed separately so annual changes preserve history.
+
+#### Projects
+
+Each project records:
+
+- Name
+- Client/commissioning organization
+- Collaborating implementers
+- Duration
+- Objective
+- Implementation location, object, or site
+- Results, including a description of completed work and optional linked
+  publication records
+- Image gallery
+
+#### Publications
+
+- Table-based list with name, year/month, and file.
+- Each entry may also contain descriptive text and a link to an external address.
+
+#### Contact
+
+- Location
+- Public email address
 
 Possible future additions are documented separately and are not part of the
 initial release unless approved.
@@ -104,7 +131,7 @@ initial release unless approved.
 - The lab leader listed in the source PDF is B. Demberelzodov.
 - Location: MUST School of Power and Electrical Engineering, Building VIII,
   room 601.
-- Contact telephone in the source PDF: `95532207`.
+- The source PDF includes a personal telephone number; it must not be published.
 - Work includes automation, monitoring, control, SCADA/HMI, protection relays,
   communication protocols, embedded systems, and power-quality studies.
 - Equipment includes ABB and SEL relays, Megger test equipment, RTAC/RTU/PLC
@@ -132,35 +159,27 @@ templates.
 
 ### Project record
 
-- Project title
-- Student/member names
-- Supervisor
-- Year
-- Research area
-- Short summary
-- Full description
-- Technologies/equipment
+- Name
+- Client/commissioning organization
+- Collaborating implementers
+- Free-form display duration
+- Objective
+- Implementation location/object/site
+- Results and completed-work description
+- Related publication references
 - Cover image and gallery
-- Optional PDF report
 - Mongolian and optional English version
 - Draft/published state
 
-### Publication record — deferred
+### Publication record
 
-- Publication title
-- Authors
-- Publication date/year
-- Journal, conference, or publisher
-- Publication type
-- Abstract or short summary
-- DOI or external link
-- Optional public PDF
-- Research category/tags
+- Name
+- Publication year and month
+- Optional downloadable file
+- Optional descriptive text
+- Optional external URL
 - Mongolian and optional English presentation
 - Draft/published state
-
-Publication schema and implementation are paused until the stakeholder confirms
-what belongs in the requested Published list.
 
 ### Member record
 
@@ -194,14 +213,14 @@ Expected URL structure:
 /about/
 /members/
 /projects/
-/news/
+/publications/
 /contact/
 
 /en/              English home
 /en/about/
 /en/members/
 /en/projects/
-/en/news/
+/en/publications/
 /en/contact/
 ```
 
@@ -337,8 +356,23 @@ the browser. The early theme script prevents a light flash during dark-mode load
   representative laboratory activities.
 - Replaced Home research-card photographs with category-specific technical SVG
   motifs and added the equipment strip and accessible hero scroll cue.
+- Built draft Projects index and detail layouts around commissioned-work fields,
+  with responsive images, project facts, outcomes, related publications, and gallery.
+- Built the bilingual structured About page with history milestones,
+  achievements, and repeatable teacher biographies.
+- Restructured Home around the confirmed site architecture: statistics,
+  projects, News, mentor/About, newest member generation, Home-only partners,
+  and contact.
+- Made Members generations, annual leadership terms, and yearbook quotes
+  data-driven without adding member detail pages.
+- Confirmed the bilingual header and footer navigation and removed the Members
+  generation dropdown.
+- Built the Publications and Contact pages, including the stakeholder-supplied
+  Google Maps embed and email-only public contact model.
 
-The local implementation has begun; deployment has not been configured yet.
+The public information architecture and content models are confirmed. The
+remaining implementation work is design refinement, CMS configuration, approved
+content entry, launch QA, deployment, and handover.
 
 ## 11. Planned work
 
@@ -350,14 +384,19 @@ The local implementation has begun; deployment has not been configured yet.
 - [ ] Confirm permission to publish supplied member photographs and reports.
 - [ ] Obtain official MUST/EHIS brand assets and usage rules.
 - [ ] Decide whether EPA@Lab needs a new logo.
-- [ ] Collect email, map coordinates, social links, project reports, and captions.
+- [ ] Collect the official public email, social links, project reports, and captions.
 - [ ] Prepare and approve English translations for core pages.
+- [x] Confirm generation/cohort behavior and newest-first ordering on Members.
+- [x] Confirm that partner organizations appear on Home only.
+- [ ] Collect project clients, collaborators, durations, implementation sites,
+  results, galleries, and related publication references.
+- [ ] Collect the publication table data and confirm which files may be public.
 
 ### Phase 2 — Information architecture and design
 
-- [ ] Finalize navigation and footer content.
-- [ ] Produce page wireframes and visual direction.
-- [ ] Confirm colors, typography, components, and image treatment.
+- [x] Finalize the seven-section navigation and footer structure.
+- [x] Produce page layouts and an initial visual direction.
+- [x] Establish colors, typography, components, and image treatment.
 - [ ] Define the final content schemas for Pages CMS.
 - [ ] Review the proposed experience with the non-technical editor.
 
@@ -366,10 +405,11 @@ The local implementation has begun; deployment has not been configured yet.
 - [x] Initialize and configure the Hugo project.
 - [x] Configure Mongolian and English languages.
 - [x] Build base layouts, navigation, footer, and shared components.
-- [ ] Build Home, About, Members, Projects, News, and Contact pages.
+- [x] Build Home, About, Members, Projects, Publications, News, and Contact pages.
 - [x] Build the first complete Home-page visual prototype.
-- [ ] Add taxonomy, filtering, metadata, sitemap, RSS, and 404 support.
-- [ ] Configure image processing and PDF handling.
+- [x] Add dynamic generation sections to the Members page.
+- [x] Add project/publication relationships, metadata, sitemap, and 404 support.
+- [x] Configure responsive image processing and publication file handling.
 - [ ] Add Pages CMS configuration and safe editor forms.
 
 ### Phase 4 — Content migration
@@ -377,7 +417,8 @@ The local implementation has begun; deployment has not been configured yet.
 - [ ] Convert approved PDF content into structured web content.
 - [ ] Add and verify member profiles.
 - [ ] Add initial projects and reports.
-- [ ] Add initial news/activity entries.
+- [ ] Add the publication table entries and approved files/external links.
+- [ ] Add About history, achievements, and teacher biographies.
 - [ ] Optimize, caption, and add approved images.
 - [ ] Add approved English translations.
 
@@ -411,14 +452,15 @@ These questions must be resolved before launch:
    account, domain, and recovery email?
 3. Who is the primary editor, and who takes over when that person graduates?
 4. Does the lab have an official email address and social-media accounts?
-5. What are the precise map coordinates and preferred map provider?
+5. Is the stakeholder-supplied Google Maps point the final approved public location?
 6. Is there an official EPA@Lab logo, or should one be designed?
 7. May every supplied name, portrait, activity image, and PDF be published?
-8. Which existing projects and news items should be included at launch?
+8. Which projects and publications should be included at launch?
 9. Must every item be bilingual, or only the permanent institutional pages?
 10. Should visitors be able to download full reports, or only public versions?
-11. Is a contact form needed, or are telephone/email links sufficient?
+11. Is a contact form needed, or are location/email links sufficient?
 12. Is analytics required, and what privacy requirements apply?
+13. What is the official public email address?
 
 ## 13. Out of scope for the initial release
 
@@ -454,9 +496,10 @@ a separate application can be added when a real need is established.
 
 Version 1 is complete when:
 
-- All six sections are implemented and responsive.
+- All seven stakeholder-confirmed sections are implemented and responsive.
 - Core pages are available in approved Mongolian and English.
-- Approved members, research areas, equipment, projects, and initial news are present.
+- Approved members, projects, publications, achievements, history, teacher bios,
+  Home partners, and contact information are present.
 - The designated editor can independently create, edit, publish, and correct content.
 - The site meets agreed accessibility and performance standards.
 - The `.mn` domain uses HTTPS and resolves to the production deployment.
@@ -484,6 +527,15 @@ Record meaningful changes here; do not use this section for every code commit.
 | 2026-08-26 | Added light and dark color modes, defaulting to the visitor's system preference. | The SICT reference provides a coherent dark palette, and adding the infrastructure before component development avoids a later retrofit. |
 | 2026-08-26 | Changed Home to a full-screen, image-led hero with a lightweight animated power-network overlay. | The first split hero caused awkward Mongolian wrapping and made Vision/Mission too quiet; the revised composition gives the stakeholder-requested content a stronger hierarchy. |
 | 2026-08-26 | Selected self-hosted Noto Sans with a monospace metadata accent. | Noto Sans provides dependable Mongolian Cyrillic rendering and an institutional tone; technical character comes from hierarchy and labels rather than a novelty display font. |
+| 2026-09-02 | Replaced the earlier seven-section draft with the stakeholder's six-section information architecture. | The stakeholder explicitly defined Home, Projects, Publications, About, Contact, and generation-grouped Members as the required structure. |
+| 2026-09-02 | Confirmed a compact table-oriented publication model. | The requested publication fields are name, year/month, file, descriptive text, and external link. |
+| 2026-09-02 | Reframed Projects as commissioned/funded work. | The stakeholder requires client, collaborators, duration, objective, implementation site, results, related publications, and a gallery. |
+| 2026-09-02 | Selected free-form project duration and Home-only partners. | Source project dates may vary in precision, and the stakeholder placed partners only on Home. |
+| 2026-09-02 | Confirmed first and second generation member groups. | `epalab.pdf` explicitly labels `I үеийн гишүүд` and `II үеийн гишүүд`. |
+| 2026-09-02 | Display member generations newest-first. | New generations stack at the top while the first generation remains at the bottom. |
+| 2026-09-02 | Removed project categories and category filtering from the confirmed model. | The stakeholder clarified that projects are not classified as automation, relay protection, SCADA/HMI, or similar research categories. |
+| 2026-09-02 | Confirmed seven primary sections and the final header/footer order. | News remains a primary section; Members is a single navigation link, with generations grouped inside its page. |
+| 2026-09-02 | Removed the supervising teacher's telephone number from public content. | The laboratory will expose only its official public email as a direct contact method. |
 
 ## 17. How to maintain this document
 
@@ -1005,6 +1057,64 @@ At the end of every working session:
 
 - `hugo --minify --printPathWarnings` succeeds for both languages.
 
+### 2026-09-02 — Projects index and detail draft
+
+**Decisions**
+
+- Projects have no research-category field or category filter.
+- Treat the current SICT site as institutional visual context: strong blue
+  surfaces, clear hierarchy, compact metadata, and image-led sections, without
+  copying its layout.
+
+**Implemented**
+
+- Added a bilingual Projects index with an editorial hero and alternating
+  image/text project records.
+- Added bilingual project detail presentation for client, collaborators,
+  free-form duration, implementation site, objective, completed work, related
+  publications, and image gallery.
+- Updated all three provisional project records to the confirmed schema.
+- Removed category-dependent project markup and filtering from Home and deleted
+  the now-unused filtering JavaScript.
+
+**Verification**
+
+- Reviewed index and detail renders at 1440, 820, and 390 px.
+- Confirmed responsive title wrapping, single-column mobile metadata, image
+  scaling, and visible provisional-content labels.
+- `hugo --minify --printPathWarnings` and `git diff --check` succeed.
+
+**Next recommended action**
+
+- Review the visual draft, then replace provisional project copy and imagery
+  when stakeholder records become available.
+
+### 2026-09-02 — Structured About page draft
+
+**Implemented**
+
+- Rebuilt About as a bilingual data-driven page with an image-led introduction,
+  founding date, chronological history, achievement cards, and repeatable
+  teacher biographies.
+- Added representative records for every content shape, with visible labels on
+  all invented or unverified information.
+- Kept the PDF-supported January 2025 establishment milestone separate from
+  provisional milestones and biographies.
+- Documented the final About front-matter schema so real records can replace
+  samples without modifying the template.
+
+**Verification**
+
+- Reviewed the complete Mongolian page at 1440, 820, and 390 px, including
+  history, achievements, teacher biographies, editor note, and footer.
+- Confirmed the English structure builds and resolves responsive images.
+- `hugo --minify --printPathWarnings` and `git diff --check` succeed.
+
+**Next recommended action**
+
+- Build the final Members presentation using the confirmed first- and
+  second-generation grouping, then refine Publications.
+
 ### 2026-08-26 — Hero technical badge removed and marker relocated
 
 - Removed the Power Automation badge from the hero completely.
@@ -1316,6 +1426,48 @@ At the end of every working session:
 - Review the revised hero on the target phone width, then begin the Members page
   if Home is approved.
 
+### 2026-09-02 — Stakeholder structure incorporated into the plan
+
+**Decisions**
+
+- Adopt six primary sections: Home, Projects, Publications, About Us, Contact,
+  and Members.
+- Use publication/project/alumni counts on Home; partner organizations are optional.
+- Group Members by generation/cohort and expose those groups through a submenu.
+- Present Publications as a table with name, year/month, file, optional text,
+  and optional external link.
+- Model Projects around commissioned work: client, collaborators, duration,
+  objective, implementation site, results/related publications, and gallery.
+
+**Planning updates**
+
+- Revised the scope, URLs, content architecture, implementation phases, open
+  questions, launch definition, and baseline content model.
+- Kept News as a supporting Home section outside the confirmed primary
+  navigation; marked Equipment as legacy prototype material.
+
+**Implemented**
+
+- Replaced the bilingual primary navigation with the six confirmed sections.
+- Added first- and second-generation Members submenu links and in-page groups.
+- Added the Publications collection and responsive table layout.
+- Updated the project archetype and added a structured project detail layout.
+- Updated Home statistics to publications, projects, and alumni, and replaced
+  the equipment strip with an optional Home-only partner strip.
+- Added explicitly marked provisional records for layout testing only.
+
+**Verification**
+
+- `hugo --minify --printPathWarnings` succeeds for both languages.
+- Visually checked Home, Members, Publications, and the project detail structure
+  at 1440 px, 820 px, and 390 px; headings and long sample text wrap without
+  horizontal overflow.
+
+**Next recommended action**
+
+- Refine the Projects listing to match the new commissioned-work model, then
+  build the About history/achievements/teacher-bio structure.
+
 ### 2026-08-26 — Mobile hero actions moved to the lower composition
 
 **Decision and fix**
@@ -1330,3 +1482,92 @@ At the end of every working session:
 **Verification**
 
 - `hugo --minify --printPathWarnings` succeeds for both languages.
+
+### 2026-09-02 — Publications refinement and Contact draft
+
+**Implemented**
+
+- Refined the bilingual Publications index while retaining its table-oriented
+  direction, added newest-first sorting, independent file/external-link actions,
+  and a clear pending state.
+- Built a bilingual Contact page using the PDF-sourced location and supervising
+  lecturer.
+- Initially added a visual Google Maps link; this was subsequently replaced by
+  the stakeholder-supplied interactive Google Maps embed.
+- Kept the missing official email visible as awaiting confirmation rather than
+  inventing an address.
+- Did not duplicate the annually changing lab leader on Contact; leadership
+  remains managed through its separate term records.
+
+**Verification**
+
+- Reviewed Publications and Contact at 1440, 820, and 390 px.
+- Confirmed long-title wrapping, newest-first dates, missing-link and missing-email
+  states, responsive contact facts, and the map-card layout.
+- `hugo --minify --printPathWarnings` and `git diff --check` succeed.
+
+**Next recommended action**
+
+- Restructure Home around the approved statistics and optional Home-only partner
+  section while retaining the existing featured News block.
+
+### 2026-09-02 — Stakeholder map embed applied
+
+- Replaced the illustrative map preview with the exact Google Maps iframe
+  supplied by the stakeholder.
+- Preserved lazy loading, fullscreen support, strict referrer policy, responsive
+  sizing, an accessible title, and a coordinate-based external Maps link.
+- The Contact page now makes a third-party Google request when the embedded map
+  approaches the viewport; this is an accepted consequence of the requested embed.
+
+### 2026-09-02 — Home aligned to final information architecture
+
+**Implemented**
+
+- Removed the legacy equipment/partner strip from Home.
+- Retained the hero, vision/mission, mentor introduction, and confirmed
+  publication/project/alumni statistics.
+- Reworded project calls to action and headings around commissioned project work,
+  with no research categories or filters.
+- Added a newest-generation section driven by the descending generation data;
+  future generations will automatically replace the current featured group.
+- Added a dedicated Home-only partner section with repeatable structured records.
+- Marked all unconfirmed statistics, members, projects, and partners visibly as drafts.
+
+**Verification**
+
+- Confirmed bilingual generation, project, and partner output in generated HTML.
+- Reviewed the Home hero at 1440, 820, and 390 px and retained the established
+  responsive behavior for section grids at those breakpoints.
+- `hugo --minify --printPathWarnings` and `git diff --check` succeed.
+
+**Next recommended action**
+
+- Add Pages CMS schemas for the completed content models.
+
+### 2026-09-02 — Featured News retained on Home and navigation
+
+- Restored the existing bilingual featured News block after Projects at the
+  stakeholder's request; its content and card presentation remain unchanged.
+- Restored News to the bilingual primary navigation, linking to its existing
+  listing and detail routes.
+- Renumbered the following Home sections to preserve a continuous sequence.
+
+### 2026-09-02 — Members header link simplified
+
+- Removed generation links from the Members header dropdown and retained a
+  single direct Members link. Generation navigation remains within the Members
+  page, where future cohorts can continue to stack dynamically.
+
+### 2026-09-02 — Primary navigation reordered
+
+- Reordered the bilingual header and footer navigation as Home, About,
+  Projects, Publications, News, Members, and Contact. This moves institutional
+  context forward, keeps the laboratory's work together, and leaves Contact as
+  the final action-oriented destination.
+
+### 2026-09-02 — Public telephone removed
+
+- Removed the supervising teacher's telephone number from site configuration,
+  Contact content, the Contact layout, and the footer. Email is now the only
+  direct-contact field; its public address remains pending stakeholder input.

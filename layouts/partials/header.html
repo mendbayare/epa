@@ -11,7 +11,14 @@
     <nav class="site-nav" id="main-navigation" aria-label="{{ if eq site.Language.Lang "mn" }}Үндсэн цэс{{ else }}Main navigation{{ end }}" data-nav>
       <ul>
         {{ range site.Menus.main }}
-          <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+          <li{{ if .HasChildren }} class="nav-parent"{{ end }}>
+            <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}{{ if .HasChildren }} <span class="nav-parent__mark" aria-hidden="true">⌄</span>{{ end }}</a>
+            {{ if .HasChildren }}
+              <ul class="nav-submenu" aria-label="{{ .Name }}">
+                {{ range .Children }}<li><a href="{{ .URL }}">{{ .Name }}</a></li>{{ end }}
+              </ul>
+            {{ end }}
+          </li>
         {{ end }}
       </ul>
       <button class="theme-toggle" type="button" data-theme-toggle>

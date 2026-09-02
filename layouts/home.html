@@ -4,7 +4,11 @@
   {{ $newsPage := site.GetPage "/news" }}
   {{ $projects := where $projectsPage.RegularPages "Params.featured" true }}
   {{ $news := where $newsPage.RegularPages "Params.featured" true }}
-  {{ $categoryLabels := dict "automation-control" (cond $isMn "Автоматжуулалт" "Automation") "protection-relays" (cond $isMn "Реле хамгаалалт" "Protection relays") "scada-hmi" "SCADA / HMI" }}
+  {{ $membersPage := site.GetPage "/members" }}
+  {{ $generations := sort hugo.Data.generations.generations "order" "desc" }}
+  {{ $latestGeneration := index $generations 0 }}
+  {{ $latestMembers := where $membersPage.RegularPages "Params.generation" $latestGeneration.key }}
+  {{ $latestGenerationLabel := cond $isMn $latestGeneration.heading_mn $latestGeneration.heading_en }}
 
   <section class="home-hero">
     <div class="home-hero__backdrop">
@@ -29,7 +33,7 @@
         </div>
         <p class="home-hero__lead">{{ .Params.description }}</p>
         <div class="home-hero__actions">
-          <a class="button" href="{{ relLangURL "projects/" }}">{{ if $isMn }}Судалгаатай танилцах{{ else }}Explore our research{{ end }}</a>
+          <a class="button" href="{{ relLangURL "projects/" }}">{{ if $isMn }}Төслүүдтэй танилцах{{ else }}Explore our projects{{ end }}</a>
           <a class="text-link" href="{{ relLangURL "about/" }}">{{ if $isMn }}Лабораторийн тухай{{ else }}About the laboratory{{ end }} <span aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -52,11 +56,7 @@
         <article><div><p class="eyebrow">{{ if $isMn }}Эрхэм зорилго{{ else }}Mission{{ end }}</p><p>{{ .Params.mission }}</p></div></article>
       </div>
       <div class="stats__grid">
-        {{ range .Params.stats }}<div class="stat"><strong>{{ .value }}{{ with .suffix }}<small>{{ . }}</small>{{ end }}</strong><span>{{ .label }}</span></div>{{ end }}
-      </div>
-      <div class="equipment-strip" aria-label="{{ if $isMn }}Лабораторийн тоног төхөөрөмж{{ else }}Laboratory equipment{{ end }}">
-        <span class="equipment-strip__label">{{ if $isMn }}Тоног төхөөрөмж{{ else }}Equipment{{ end }}</span>
-        <ul>{{ range .Params.equipment }}<li>{{ . }}</li>{{ end }}</ul>
+        {{ range .Params.stats }}<div class="stat"><strong>{{ .value }}{{ with .suffix }}<small>{{ . }}</small>{{ end }}</strong><span>{{ .label }}{{ if .provisional }} <small>({{ if $isMn }}түр{{ else }}draft{{ end }})</small>{{ end }}</span></div>{{ end }}
       </div>
     </div>
   </section>
@@ -76,18 +76,14 @@
     </div>
   </section>
 
-  <section class="section research-section" id="research" data-project-browser>
+  <section class="section research-section" id="research">
     <div class="container">
-      <div class="section-heading"><div><p class="eyebrow">{{ if $isMn }}Судалгаа ба төсөл{{ else }}Research and projects{{ end }}</p><h2>{{ if $isMn }}Бодит систем дээр туршиж, хөгжүүлнэ{{ else }}Built and tested on real systems{{ end }}</h2></div><span class="section-index">04</span><a class="text-link" href="{{ $projectsPage.RelPermalink }}">{{ if $isMn }}Бүх төслийг үзэх{{ else }}View all projects{{ end }} <span aria-hidden="true">→</span></a></div>
-      <div class="filter-pills" role="group" aria-label="{{ if $isMn }}Судалгааны төрлөөр шүүх{{ else }}Filter by research category{{ end }}">
-        <button class="filter-pill is-active" type="button" data-filter="all">{{ if $isMn }}Бүгд{{ else }}All{{ end }}</button>
-        {{ range $key, $label := $categoryLabels }}<button class="filter-pill" type="button" data-filter="{{ $key }}">{{ $label }}</button>{{ end }}
-      </div>
+      <div class="section-heading"><div><p class="eyebrow">{{ if $isMn }}Төслүүд{{ else }}Projects{{ end }}</p><h2>{{ if $isMn }}Бодит хэрэгжилт, хэмжигдэх үр дүн{{ else }}Practical implementation, measurable outcomes{{ end }}</h2></div><span class="section-index">04</span><a class="text-link" href="{{ $projectsPage.RelPermalink }}">{{ if $isMn }}Бүх төслийг үзэх{{ else }}View all projects{{ end }} <span aria-hidden="true">→</span></a></div>
       <div class="project-grid">
-        {{ range $projects.ByWeight }}
-          <article class="project-card" data-project-card data-category="{{ .Params.category }}">
-            <a class="project-card__media project-card__media--{{ .Params.category }}" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">{{ partial "research-motif.html" (dict "category" .Params.category) }}{{ if .Params.provisional }}<span class="provisional-badge">{{ if $isMn }}Түр агуулга{{ else }}Provisional{{ end }}</span>{{ end }}</a>
-            <div class="project-card__body"><p class="card-meta"><span>{{ index $categoryLabels .Params.category }}</span><span>{{ .Params.year }}</span></p><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p>{{ .Params.summary }}</p><a class="card-arrow" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">↗</a></div>
+        {{ range $project := $projects.ByWeight }}
+          <article class="project-card">
+            <a class="project-card__media" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">{{ with .Params.cover }}{{ partial "responsive-image.html" (dict "src" . "alt" $project.Title "class" "project-card__image" "sizes" "(max-width: 760px) 100vw, 33vw") }}{{ end }}{{ if .Params.provisional }}<span class="provisional-badge">{{ if $isMn }}Түр агуулга{{ else }}Provisional{{ end }}</span>{{ end }}</a>
+            <div class="project-card__body"><p class="card-meta"><span>{{ .Params.client }}</span><span>{{ .Params.duration_text }}</span></p><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p>{{ .Params.summary }}</p><a class="card-arrow" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">↗</a></div>
           </article>
         {{ end }}
       </div>
@@ -105,5 +101,18 @@
     </div>
   </section>
 
-  <section class="home-cta"><div class="container home-cta__inner"><div><p class="eyebrow">EPA@Lab</p><h2>{{ if $isMn }}Санаагаа бодит туршилт болгоё{{ else }}Turn your idea into a real experiment{{ end }}</h2></div><span class="section-index">06</span><a class="button button--light" href="{{ relLangURL "contact/" }}">{{ if $isMn }}Холбоо барих{{ else }}Contact us{{ end }} <span aria-hidden="true">→</span></a></div></section>
+  <section class="section home-generation" id="latest-generation">
+    <div class="container">
+      <div class="section-heading"><div><p class="eyebrow">{{ if $isMn }}Хамгийн шинэ үе{{ else }}Newest generation{{ end }}</p><h2>{{ $latestGenerationLabel }}</h2></div><span class="section-index">06</span><a class="text-link" href="{{ $membersPage.RelPermalink }}#{{ $latestGeneration.key }}">{{ if $isMn }}Бүх гишүүнийг үзэх{{ else }}View all members{{ end }} <span aria-hidden="true">→</span></a></div>
+      <div class="home-member-grid">
+        {{ range $member := first 3 $latestMembers.ByWeight }}
+          <article class="home-member-card"><div class="home-member-card__media">{{ with .Params.portrait }}{{ partial "responsive-image.html" (dict "src" . "alt" $member.Title "class" "home-member-card__image" "sizes" "(max-width: 600px) 100vw, 33vw") }}{{ end }}{{ if .Params.provisional }}<small>{{ if $isMn }}Түр мэдээлэл{{ else }}Draft profile{{ end }}</small>{{ end }}</div><div><p class="eyebrow">{{ .Params.role }}</p><h3>{{ .Title }}</h3>{{ with .Params.yearbook_quote }}<blockquote>“{{ . }}”</blockquote>{{ end }}</div></article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  {{ with .Params.partners }}<section class="section home-partners"><div class="container"><div class="section-heading"><div><p class="eyebrow">{{ if $isMn }}Хамтын ажиллагаа{{ else }}Collaboration{{ end }}</p><h2>{{ if $isMn }}Хамтрагч байгууллагууд{{ else }}Partner organizations{{ end }}</h2></div><span class="section-index">07</span></div><div class="partner-grid">{{ range . }}<article class="partner-card"><span>{{ .mark }}</span><div><h3>{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }} ↗</a>{{ else }}{{ .name }}{{ end }}</h3><p>{{ .description }}</p>{{ if .provisional }}<small>{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}</div></article>{{ end }}</div></div></section>{{ end }}
+
+  <section class="home-cta"><div class="container home-cta__inner"><div><p class="eyebrow">EPA@Lab</p><h2>{{ if $isMn }}Санаагаа бодит ажил болгоё{{ else }}Turn your idea into practical work{{ end }}</h2></div><span class="section-index">08</span><a class="button button--light" href="{{ relLangURL "contact/" }}">{{ if $isMn }}Холбоо барих{{ else }}Contact us{{ end }} <span aria-hidden="true">→</span></a></div></section>
 {{ end }}
