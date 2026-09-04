@@ -1,23 +1,22 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   <article class="about-page">
-    <header class="about-hero">
-      <div class="container about-hero__grid">
-        <div class="about-hero__copy">
-          <p class="eyebrow">EPA@Lab / {{ if $isMn }}Бидний тухай{{ else }}About us{{ end }}</p>
-          <h1>{{ .Title }}</h1>
-          <p>{{ .Params.description }}</p>
-          {{ if .Params.provisional }}<span class="draft-label">{{ if $isMn }}Загварын түр агуулгатай{{ else }}Contains draft sample content{{ end }}</span>{{ end }}
-        </div>
-        <div class="about-hero__media">
-          {{ partial "responsive-image.html" (dict "src" .Params.hero_image "alt" .Title "class" "about-hero__image" "loading" "eager" "sizes" "(max-width: 900px) 100vw, 48vw") }}
-          <div class="about-founded"><small>{{ .Params.founded_label }}</small><strong>{{ .Params.founded_value }}</strong></div>
-        </div>
-      </div>
-    </header>
+    {{ partial "page-hero.html" (dict
+      "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
+      "title" .Title
+      "lead" .Params.description
+      "image" .Params.hero_image
+      "stampLabel" .Params.founded_label
+      "stampValue" .Params.founded_value
+      "badge" (cond .Params.provisional (cond $isMn "Загварын түр агуулгатай" "Contains draft sample content") "")) }}
 
     <section class="about-history">
-      <div class="container about-section-heading"><div><p class="eyebrow">{{ if $isMn }}Лабораторийн түүх{{ else }}Our history{{ end }}</p><h2>{{ if $isMn }}Санаанаас инженерийн орчин хүртэл{{ else }}From an idea to an engineering environment{{ end }}</h2></div><p>{{ .Params.history_intro }}</p></div>
+      <div class="container">
+        {{ partial "section-head.html" (dict
+          "eyebrow" (cond $isMn "Лабораторийн түүх" "Our history")
+          "title" (cond $isMn "Санаанаас инженерийн орчин хүртэл" "From an idea to an engineering environment")
+          "support" .Params.history_intro) }}
+      </div>
       <div class="container about-timeline">
         {{ range .Params.history }}
           <article><time>{{ .year }}</time><div><h3>{{ .title }}</h3><p>{{ .description }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Жишээ мэдээлэл{{ else }}Sample record{{ end }}</span>{{ end }}</div></article>
@@ -27,18 +26,46 @@
 
     <section class="about-achievements">
       <div class="container">
-        <div class="about-section-heading"><div><p class="eyebrow">{{ if $isMn }}Амжилт{{ else }}Achievements{{ end }}</p><h2>{{ if $isMn }}Хийсэн ажлын үнэ цэн{{ else }}The value of work completed{{ end }}</h2></div><p>{{ if $isMn }}Бодит мэдээлэл ирэхэд амжилтын картууд он, зураг, тайлбараар шинэчлэгдэнэ.{{ else }}When approved information arrives, each card can be replaced with its real year, image, and description.{{ end }}</p></div>
-        <div class="achievement-grid">
-          {{ range $achievement := .Params.achievements }}<article class="achievement-card"><div class="achievement-card__media">{{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" $achievement.title "class" "achievement-card__image" "sizes" "(max-width: 700px) 100vw, 50vw") }}{{ end }}<time>{{ .year }}</time></div><div><h3>{{ .title }}</h3><p>{{ .description }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Жишээ мэдээлэл{{ else }}Sample record{{ end }}</span>{{ end }}</div></article>{{ end }}
+        {{ partial "section-head.html" (dict
+          "eyebrow" (cond $isMn "Амжилт" "Achievements")
+          "title" (cond $isMn "Хийсэн ажлын үнэ цэн" "The value of work completed")
+          "support" (cond $isMn "Бодит мэдээлэл ирэхэд амжилтын картууд он, зураг, тайлбараар шинэчлэгдэнэ." "When approved information arrives, each card can be replaced with its real year, image, and description.")) }}
+        <div class="card-grid--2">
+          {{ range $achievement := .Params.achievements }}
+            {{ partial "media-card.html" (dict
+              "feature" true
+              "title" .title
+              "image" .image
+              "imageAlt" $achievement.title
+              "sizes" "(max-width: 700px) 100vw, 50vw"
+              "stamp" .year
+              "summary" .description
+              "note" (cond .provisional (cond $isMn "Жишээ мэдээлэл" "Sample record") "")) }}
+          {{ end }}
         </div>
       </div>
     </section>
 
     <section class="about-teachers">
       <div class="container">
-        <div class="about-section-heading"><div><p class="eyebrow">{{ if $isMn }}Удирдагч багш{{ else }}Supervising lecturer{{ end }}</p><h2>{{ if $isMn }}Мэдлэг, туршлагыг чиглүүлэгч{{ else }}Guiding knowledge and practice{{ end }}</h2></div></div>
+        {{ partial "section-head.html" (dict
+          "eyebrow" (cond $isMn "Удирдагч багш" "Supervising lecturer")
+          "title" (cond $isMn "Мэдлэг, туршлагыг чиглүүлэгч" "Guiding knowledge and practice")) }}
         <div class="teacher-list">
-          {{ with .Params.supervisor }}<article class="teacher-card"><div class="teacher-card__portrait">{{ partial "responsive-image.html" (dict "src" .portrait "alt" .name "class" "teacher-card__image" "sizes" "(max-width: 700px) 100vw, 34vw") }}<span>01</span></div><div class="teacher-card__copy"><p class="eyebrow">{{ .role }}</p><h3>{{ .name }}</h3><p class="teacher-card__summary">{{ .summary }}</p><p class="teacher-card__bio">{{ .bio }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Намтрыг баталгаажуулна{{ else }}Biography pending review{{ end }}</span>{{ end }}</div></article>{{ end }}
+          {{ with .Params.supervisor }}
+            {{ partial "list-row.html" (dict
+              "level" "h3"
+              "portrait" true
+              "title" .name
+              "image" .portrait
+              "imageAlt" .name
+              "sizes" "(max-width: 700px) 100vw, 34vw"
+              "mark" "01"
+              "eyebrow" .role
+              "lead" .summary
+              "body" .bio
+              "note" (cond .provisional (cond $isMn "Намтрыг баталгаажуулна" "Biography pending review") "")) }}
+          {{ end }}
         </div>
       </div>
     </section>

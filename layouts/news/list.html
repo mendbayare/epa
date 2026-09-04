@@ -1,0 +1,37 @@
+{{ define "main" }}
+  {{ $isMn := eq site.Language.Lang "mn" }}
+  {{/* Order by publication date once records carry one. The current sample
+       records deliberately have no date pending laboratory review, so the
+       editorial weight is used until real dates arrive. */}}
+  {{ $items := .Pages.ByWeight }}
+  {{ if where .Pages "Params.date" "!=" nil }}{{ $items = .Pages.ByDate.Reverse }}{{ end }}
+
+  {{ partial "page-hero.html" (dict
+    "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
+    "title" .Title
+    "lead" .Params.description) }}
+
+  <div class="container section">
+    {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+    {{ if $items }}
+      <div class="card-grid--3">
+        {{ range $item := $items }}
+          {{ $date := "" }}
+          {{ if not .Date.IsZero }}{{ $date = .Date.Format "2006.01.02" }}{{ else }}{{ $date = cond $isMn "Огноо хүлээгдэж байна" "Date pending" }}{{ end }}
+          {{ partial "media-card.html" (dict
+            "invert" true
+            "title" .Title
+            "url" .RelPermalink
+            "image" .Params.cover
+            "imageAlt" $item.Title
+            "metaLeft" $date
+            "metaRight" (printf "%d %s" .ReadingTime (cond $isMn "мин унших" "min read"))
+            "summary" .Params.summary
+            "badge" (cond .Params.provisional (cond $isMn "Түр агуулга" "Provisional") "")) }}
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="empty-state">{{ if $isMn }}Мэдээ удахгүй нэмэгдэнэ.{{ else }}News will be added soon.{{ end }}</p>
+    {{ end }}
+  </div>
+{{ end }}

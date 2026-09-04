@@ -1,0 +1,48 @@
+{{- /*
+  The hero for every page except Home. Two shapes:
+
+    band   (default)  a compact navy band carrying the breadcrumb, title and
+                      a short supporting line. Used by the section indexes.
+    split  (image)    the same navy ground with a photograph beside the copy.
+                      Chosen automatically when an image is supplied.
+
+  Parameters:
+    title      required  page title
+    crumbs               slice for partials/breadcrumb.html
+    lead                 supporting paragraph
+    badge                draft label below the copy
+    image, imageAlt      photograph; supplying it selects the split shape
+    sizes                responsive sizes attribute for that photograph
+    mediaLabel           small vertical label in the image corner
+    stampLabel, stampValue  orange labelled value stamped on the image
+    action               dict of "url" and "text" for a button below the copy
+*/ -}}
+{{- $sizes := default "(max-width: 900px) 100vw, 48vw" .sizes -}}
+{{ if .image }}
+  <header class="page-hero page-hero--split">
+    <div class="container page-hero__grid">
+      <div class="page-hero__copy">
+        {{ partial "breadcrumb.html" .crumbs }}
+        <h1>{{ .title }}</h1>
+        {{ with .lead }}<p class="page-hero__lead">{{ . }}</p>{{ end }}
+        {{ with .badge }}<span class="draft-label">{{ . }}</span>{{ end }}
+        {{ with .action }}<a class="button" href="{{ .url }}">{{ .text }}</a>{{ end }}
+      </div>
+      <div class="page-hero__media">
+        {{ partial "responsive-image.html" (dict "src" .image "alt" (default .title .imageAlt) "class" "page-hero__image" "loading" "eager" "sizes" $sizes) }}
+        {{ with .mediaLabel }}<span class="page-hero__media-label">{{ . }}</span>{{ end }}
+        {{ with .stampValue }}<div class="page-hero__stamp"><small>{{ $.stampLabel }}</small><strong>{{ . }}</strong></div>{{ end }}
+      </div>
+    </div>
+  </header>
+{{ else }}
+  <header class="page-hero">
+    <div class="container">
+      {{ partial "breadcrumb.html" .crumbs }}
+      <h1>{{ .title }}</h1>
+      {{ with .lead }}<p class="page-hero__lead">{{ . }}</p>{{ end }}
+      {{ with .badge }}<span class="draft-label">{{ . }}</span>{{ end }}
+      {{ with .action }}<a class="button" href="{{ .url }}">{{ .text }}</a>{{ end }}
+    </div>
+  </header>
+{{ end }}

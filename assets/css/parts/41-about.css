@@ -1,0 +1,13 @@
+/* About page. */
+.about-history { padding-block: clamp(5rem, 10vw, 9rem); }
+.about-timeline { border-top: 1px solid var(--border); }
+.about-timeline article { display: grid; padding-block: clamp(2rem, 5vw, 4rem); border-bottom: 1px solid var(--border); grid-template-columns: minmax(7rem, .28fr) minmax(0, .72fr); gap: clamp(2rem, 6vw, 6rem); }
+.about-timeline time { color: var(--accent-600); font: 700 .78rem/1.5 var(--font-tech); letter-spacing: .08em; }
+.about-timeline h3 { max-width: 34ch; font-size: clamp(1.55rem, 3vw, 2.5rem); }
+.about-timeline article > div > p { max-width: 48rem; color: var(--text-muted); }
+.sample-note { display: inline-flex; width: fit-content; margin-top: .75rem; padding: .35rem .55rem; border: 1px solid var(--border); color: var(--text-muted); font: 700 .61rem/1.2 var(--font-tech); letter-spacing: .06em; text-transform: uppercase; }
+.about-achievements { padding-block: clamp(5rem, 10vw, 9rem); background: var(--surface-soft); }
+.about-teachers { padding-block: clamp(5rem, 10vw, 9rem); }
+
+.about-editor-note { margin-bottom: clamp(4rem, 8vw, 7rem); padding: 1rem 1.25rem; border-left: 3px solid var(--accent-600); color: var(--text-muted); font-size: .9rem; }
+

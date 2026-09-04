@@ -1,12 +1,19 @@
 +++
 title = "Protection relay laboratory work"
+date = 2025-04-22
 summary = "Second-year students explored protection relays and the component base of automation devices."
-category = "experiment"
 cover = "images/activity-relay.jpg"
-featured = true
+featured = false
 provisional = true
-weight = 20
 draft = false
 +++
 
-The publication date and full details will be added after review by the laboratory team.
+Second-year students carried out practical work on the laboratory's protection
+relay panel, studying the basic configuration of a digital relay.
+
+Students changed the settings of the current protection, measured the
+operating time and compared the result against the calculated value. They were
+asked to explain any difference between the measurement and the calculation.
+
+The purpose of the exercise is to reinforce lecture material on real
+equipment.

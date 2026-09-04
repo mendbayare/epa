@@ -1,12 +1,20 @@
 +++
 title = "Discussion of experimental results"
+date = 2025-05-30
 summary = "Laboratory results were presented to faculty members for discussion and technical feedback."
-category = "activity"
 cover = "images/activity-classroom.jpg"
-featured = true
+featured = false
 provisional = true
-weight = 30
 draft = false
 +++
 
-The publication date and full details will be added after review by the laboratory team.
+The laboratory team presented the results of six months of experimental work
+to faculty members.
+
+The presentation covered the measurement methodology, the equipment used, the
+results obtained, and the questions that still require closer study. Faculty
+members commented on the methodology and suggested directions for further
+experiments.
+
+The suggestions raised in the discussion will be reflected in the research
+plan for the coming semester.

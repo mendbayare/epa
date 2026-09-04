@@ -1,0 +1,120 @@
+/* ==========================================================================
+   EPA@Lab design tokens
+   The single source of truth for color, type, space, shape, and motion.
+   Components must consume these rather than restating raw values.
+   See docs/DESIGN_SYSTEM.md for the reasoning behind each group.
+
+   Breakpoints (CSS cannot use custom properties in media queries, so these
+   are fixed by convention and must not be invented per component):
+     mobile   max-width: 600px
+     tablet   max-width: 900px
+     desktop  min-width: 901px
+   ========================================================================== */
+
+:root {
+  /* --- Brand palette -------------------------------------------------- */
+  --navy-950: #0d1538;   /* footer, dark sections, strongest text */
+  --navy-900: #1b2a6b;   /* major headings, prominent brand surfaces */
+  --blue-700: #1b3faa;   /* primary actions, links, active navigation */
+  --blue-600: #2241a8;   /* hover states, gradients */
+  --blue-100: #e1e7f8;   /* pale borders and selected pale elements */
+  --blue-50: #f5f7fc;    /* alternating section backgrounds */
+  --accent-600: #d4712a; /* eyebrows, rules, metadata, small highlights */
+  --accent-700: #c0601e; /* accent hover/pressed */
+  --signal-500: #6d91ff; /* technical line work in diagrams and overlays */
+  --ink-950: #0d1538;
+  --white: #fff;
+
+  /* --- Semantic surfaces and text ------------------------------------- */
+  --background: #fff;
+  --surface: #fff;
+  --surface-soft: #f5f7fc;
+  --text: #0d1538;
+  --text-muted: #475569;
+  --border: #dde3ee;
+  --header-bg: rgb(255 255 255 / 92%);
+  --link: #1b3faa;
+  --link-hover: #d4712a;
+
+  /* --- Text and rules over dark surfaces ------------------------------
+     Dark navy sections exist in both themes, so these do not flip.
+     Use them instead of writing rgb(255 255 255 / x%) inline. */
+  --on-dark: #fff;
+  --on-dark-strong: rgb(255 255 255 / 88%);
+  --on-dark-muted: rgb(255 255 255 / 72%);
+  --on-dark-quiet: rgb(255 255 255 / 62%);
+  --on-dark-faint: rgb(255 255 255 / 35%);
+  --line-on-dark: rgb(255 255 255 / 12%);
+
+  /* --- Typography ------------------------------------------------------ */
+  --font-body: "Noto Sans", system-ui, sans-serif;
+  --font-display: "Noto Sans", system-ui, sans-serif;
+  --font-tech: ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --text-2xs: .65rem;                        /* vertical cues, tiny markers */
+  --text-xs: .72rem;                         /* eyebrows, table headings */
+  --text-sm: .87rem;                         /* navigation, card metadata */
+  --text-base: 1rem;
+  --text-lg: clamp(1.05rem, 1.6vw, 1.25rem); /* lead paragraphs */
+  --text-xl: clamp(1.25rem, 2vw, 1.6rem);    /* h3 */
+  --text-2xl: clamp(1.5rem, 3vw, 2.35rem);   /* card and item titles */
+  --text-3xl: clamp(2rem, 4vw, 3.35rem);     /* section headings */
+  --text-4xl: clamp(2.8rem, 5.6vw, 5.6rem);  /* page titles */
+
+  --leading-tight: 1.08;
+  --leading-snug: 1.35;
+  --leading-body: 1.7;
+  --tracking-tight: -.035em;
+  --tracking-wide: .08em;
+  --tracking-wider: .14em;
+
+  /* --- Space ----------------------------------------------------------- */
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --container: 76rem;
+  --page-space: clamp(1.25rem, 4vw, 3rem);   /* container side gutter */
+  --section-space: clamp(4rem, 9vw, 8rem);   /* vertical section rhythm */
+  --block-space: clamp(2rem, 5vw, 4.5rem);   /* padding inside large panels */
+  --grid-gap: 1.25rem;                       /* standard card-grid gap */
+
+  /* --- Shape ----------------------------------------------------------- */
+  --radius-sm: .4rem;
+  --radius-md: .65rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+  --radius-card: .75rem;                     /* every card and panel surface */
+  --radius: 1.25rem;                         /* legacy alias of --radius-lg */
+
+  /* --- Elevation -------------------------------------------------------- */
+  --shadow-sm: 0 .75rem 2rem rgb(7 24 45 / 8%);
+  --shadow-md: 0 1.25rem 2.5rem rgb(13 21 56 / 12%);
+  --shadow-lg: 0 1.5rem 4rem rgb(7 24 45 / 10%);
+  --shadow: 0 1.5rem 4rem rgb(7 24 45 / 10%); /* legacy alias of --shadow-lg */
+
+  /* --- Motion ----------------------------------------------------------
+     All of these are neutralised by the reduced-motion block in base. */
+  --ease: cubic-bezier(.4, 0, .2, 1);
+  --dur-fast: .18s;
+  --dur: .3s;
+  --dur-slow: .55s;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #0d1538;
+  --surface: #111d4a;
+  --surface-soft: #0a0f2e;
+  --text: #f8fafc;
+  --text-muted: #cbd5e1;
+  --border: rgb(255 255 255 / 10%);
+  --header-bg: rgb(13 21 56 / 92%);
+  --link: #f8fafc;
+  --link-hover: #d4712a;
+}

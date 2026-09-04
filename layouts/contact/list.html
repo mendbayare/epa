@@ -1,12 +1,10 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   <article class="contact-page">
-    <header class="contact-hero">
-      <div class="container contact-hero__grid">
-        <div><p class="eyebrow">EPA@Lab / {{ if $isMn }}Холбоо{{ else }}Contact{{ end }}</p><h1>{{ .Title }}</h1></div>
-        <p>{{ .Params.description }}</p>
-      </div>
-    </header>
+    {{ partial "page-hero.html" (dict
+      "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
+      "title" .Title
+      "lead" .Params.description) }}
     <div class="container contact-content">
       <section class="contact-details" aria-label="{{ if $isMn }}Холбоо барих мэдээлэл{{ else }}Contact details{{ end }}">
         <div class="contact-detail contact-detail--wide"><span>01</span><div><p class="eyebrow">{{ if $isMn }}Байршил{{ else }}Location{{ end }}</p><address>{{ .Params.address }}</address></div></div>

@@ -1,17 +1,25 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
-  <header class="projects-hero">
-    <div class="container projects-hero__grid">
-      <div><p class="eyebrow">EPA@Lab / {{ if $isMn }}Төсөл{{ else }}Projects{{ end }}</p><h1>{{ .Title }}</h1></div>
-      <div><p>{{ .Params.description }}</p><span class="projects-count">{{ len .Pages }} <small>{{ if $isMn }}түр төсөл{{ else }}draft projects{{ end }}</small></span></div>
-    </div>
-  </header>
+  {{ partial "page-hero.html" (dict
+    "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
+    "title" .Title
+    "lead" .Params.description) }}
   <div class="container projects-index">
     {{ range $index, $project := .Pages.ByWeight }}
-      <article class="project-list-card">
-        <a class="project-list-card__media" href="{{ .RelPermalink }}">{{ with .Params.cover }}{{ partial "responsive-image.html" (dict "src" . "alt" $project.Title "class" "project-list-card__image" "sizes" "(max-width: 700px) 100vw, 48vw") }}{{ end }}{{ if .Params.provisional }}<span class="draft-label">{{ if $isMn }}Түр агуулга{{ else }}Draft sample{{ end }}</span>{{ end }}</a>
-        <div class="project-list-card__copy"><p class="project-list-card__number">{{ printf "%02d" (add $index 1) }}</p><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2><p>{{ .Params.summary }}</p><dl><div><dt>{{ if $isMn }}Захиалагч{{ else }}Client{{ end }}</dt><dd>{{ default "—" .Params.client }}</dd></div><div><dt>{{ if $isMn }}Хугацаа{{ else }}Duration{{ end }}</dt><dd>{{ default "—" .Params.duration_text }}</dd></div><div><dt>{{ if $isMn }}Байршил / объект{{ else }}Location / site{{ end }}</dt><dd>{{ default "—" .Params.implementation_site }}</dd></div></dl><a class="project-list-card__link" href="{{ .RelPermalink }}">{{ if $isMn }}Төслийг үзэх{{ else }}View project{{ end }} <span>↗</span></a></div>
-      </article>
+      {{ partial "list-row.html" (dict
+        "title" .Title
+        "url" .RelPermalink
+        "image" .Params.cover
+        "imageAlt" $project.Title
+        "number" (printf "%02d" (add $index 1))
+        "body" .Params.summary
+        "facts" (slice
+          (dict "label" (cond $isMn "Захиалагч" "Client") "value" .Params.client)
+          (dict "label" (cond $isMn "Хугацаа" "Duration") "value" .Params.duration_text)
+          (dict "label" (cond $isMn "Байршил / объект" "Location / site") "value" .Params.implementation_site))
+        "linkURL" .RelPermalink
+        "linkText" (cond $isMn "Төслийг үзэх" "View project")
+        "badge" (cond .Params.provisional (cond $isMn "Түр агуулга" "Draft sample") "")) }}
     {{ end }}
   </div>
 {{ end }}

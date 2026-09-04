@@ -1,0 +1,25 @@
+/* Projects index and project detail. */
+.projects-index { padding-block: clamp(4rem, 9vw, 8rem); }
+.draft-label { display: inline-flex; width: fit-content; padding: .45rem .65rem; color: var(--white); background: var(--accent-600); font: 700 .63rem/1.2 var(--font-tech); letter-spacing: .07em; text-transform: uppercase; }
+
+.project-detail { padding-block: clamp(4rem, 9vw, 8rem); }
+.project-detail .project-facts { margin-bottom: clamp(5rem, 10vw, 9rem); grid-template-columns: repeat(4, 1fr); }
+.project-detail .project-facts > div { min-height: 9rem; }
+.project-narrative { display: grid; grid-template-columns: minmax(10rem, .32fr) minmax(0, .68fr); gap: clamp(2rem, 8vw, 8rem); }
+.project-narrative aside { position: sticky; top: 2rem; height: fit-content; }
+.project-narrative aside > span { color: var(--text-muted); font: 700 .68rem/1 var(--font-tech); letter-spacing: .1em; }
+.project-copy { padding-bottom: clamp(4rem, 8vw, 7rem); }
+.project-copy + .project-copy { padding-top: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--border); }
+.project-copy__number { color: var(--accent-600); font: 700 .75rem/1 var(--font-tech); }
+.project-copy h2 { font-size: clamp(2.2rem, 4vw, 3.7rem); }
+.project-copy > p:last-child { max-width: 48rem; color: var(--text-muted); font-size: clamp(1.05rem, 1.5vw, 1.25rem); }
+.project-body { padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); }
+.project-related { margin-top: clamp(1rem, 5vw, 4rem); padding: clamp(2rem, 5vw, 4rem); color: var(--white); background: var(--blue-700); }
+.project-related .eyebrow { color: rgb(255 255 255 / 58%); }
+.project-related > a { display: flex; padding-top: 1.25rem; align-items: center; justify-content: space-between; border-top: 1px solid rgb(255 255 255 / 22%); gap: 1rem; text-decoration: none; }
+.project-related > a span { color: rgb(255 255 255 / 68%); }
+.project-gallery { margin-top: clamp(5rem, 10vw, 9rem); }
+.project-gallery__grid { display: grid; margin-top: 2rem; grid-template-columns: 1.15fr .85fr; gap: 1rem; }
+.project-gallery__image { width: 100%; height: 100%; min-height: 22rem; object-fit: cover; }
+.project-gallery__image:nth-child(2) { margin-top: 4rem; }
+

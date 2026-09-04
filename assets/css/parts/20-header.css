@@ -1,0 +1,36 @@
+/* Site header, primary navigation, theme toggle. */
+.site-header { position: relative; z-index: 20; border-bottom: 1px solid var(--border); background: var(--header-bg); backdrop-filter: blur(1rem); transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.is-home .site-header { position: fixed; top: 0; right: 0; left: 0; color: var(--white); border-color: transparent; background: transparent; backdrop-filter: none; }
+.is-home .site-header.is-scrolled { border-color: var(--line-on-dark); background: rgb(13 21 56 / 90%); box-shadow: 0 .75rem 2rem rgb(0 0 0 / 12%); backdrop-filter: blur(1rem); }
+.is-home .site-header .brand__lockup small { color: var(--on-dark-quiet); }
+.is-home .site-header .site-nav a { color: var(--on-dark-strong); }
+.is-home .site-header .site-nav a:hover, .is-home .site-header .site-nav a[aria-current="page"] { color: var(--accent-600); }
+.is-home .site-header .theme-toggle { color: rgb(255 255 255 / 75%); border-color: rgb(255 255 255 / 18%); background: rgb(255 255 255 / 5%); }
+.is-home .site-header .nav-toggle > span:not(.sr-only) { background: var(--white); }
+.site-header__inner { display: flex; min-height: 5rem; align-items: center; justify-content: space-between; gap: 2rem; }
+.brand { display: inline-flex; align-items: center; gap: .7rem; font: 800 1.2rem/1 var(--font-display); text-decoration: none; }
+.brand__symbol { display: grid; width: 2.25rem; aspect-ratio: 1; place-items: center; border-radius: .65rem; color: var(--white); background: var(--blue-700); }
+.brand__at { color: var(--accent-600); }
+.brand__lockup { display: flex; flex-direction: column; gap: .25rem; }
+.brand__lockup strong { line-height: 1; }
+.brand__lockup small { color: var(--text-muted); font: 700 .58rem/1 var(--font-body); letter-spacing: .12em; }
+.site-nav { display: flex; align-items: center; gap: 1.75rem; }
+.site-nav ul { display: flex; margin: 0; padding: 0; align-items: center; gap: clamp(.8rem, 2vw, 1.6rem); list-style: none; }
+.site-nav a { font-size: .87rem; font-weight: 600; text-decoration: none; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--link-hover); }
+.site-nav .nav-parent { position: relative; }
+.nav-parent__mark { display: inline-block; margin-left: .2rem; font-size: .75em; transition: transform .2s ease; }
+.site-nav .nav-submenu { position: absolute; top: calc(100% + .65rem); right: 0; display: grid; width: max-content; min-width: 11rem; padding: .45rem; border: 1px solid var(--border); border-radius: .4rem; background: var(--surface); box-shadow: var(--shadow); gap: 0; opacity: 0; pointer-events: none; transform: translateY(-.35rem); transition: opacity .18s ease, transform .18s ease; }
+.site-nav .nav-submenu::before { position: absolute; right: 0; bottom: 100%; left: 0; height: .7rem; content: ""; }
+.site-nav .nav-submenu a { display: block; padding: .65rem .75rem; color: var(--text); white-space: nowrap; }
+.site-nav .nav-parent:hover .nav-submenu, .site-nav .nav-parent:focus-within .nav-submenu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.site-nav .nav-parent:hover .nav-parent__mark, .site-nav .nav-parent:focus-within .nav-parent__mark { transform: rotate(180deg); }
+.language-switcher { padding-left: 1.5rem; border-left: 1px solid var(--border); }
+.language-switcher a { color: var(--link); }
+.theme-toggle { display: grid; width: 2.25rem; aspect-ratio: 1; padding: .45rem; place-items: center; border: 1px solid var(--border); border-radius: .55rem; color: var(--text-muted); background: var(--surface); cursor: pointer; }
+.theme-toggle:hover { color: var(--accent-600); border-color: var(--accent-600); }
+.theme-toggle svg { width: 1.1rem; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+.theme-toggle__moon, html[data-theme="dark"] .theme-toggle__sun { display: none; }
+html[data-theme="dark"] .theme-toggle__moon { display: block; }
+.nav-toggle { display: none; padding: .5rem; border: 0; background: transparent; }
+.nav-toggle > span:not(.sr-only) { display: block; width: 1.5rem; height: 2px; margin: 4px 0; background: var(--text); }

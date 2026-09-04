@@ -1,0 +1,41 @@
+/* News article page. The index reuses the shared page hero and media cards.
+
+   The composition follows the reference structure: breadcrumb, then a title and
+   cover photograph at full container width, with the body set in a narrower
+   column centred beneath them. */
+
+.article-head { padding-block: clamp(1.5rem, 3vw, 2.5rem) 0; }
+
+.article-head h1 { max-width: none; font-size: clamp(1.9rem, 3.4vw, 3rem); line-height: 1.16; }
+
+.article-byline { display: flex; margin-top: clamp(1.25rem, 2.5vw, 1.75rem); flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4) var(--space-5); }
+.article-byline__facts { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; color: var(--text-muted); font-size: .85rem; }
+/* A middot separates the facts, in the manner of the reference byline. */
+.article-byline__facts > * + *:not(.draft-label)::before { margin-right: .9rem; content: "·"; opacity: .55; }
+.article-byline__pending { font-style: italic; }
+.article-byline time { font-weight: 600; }
+.article-byline .draft-label { padding: .3rem .5rem; }
+
+.article-share { display: flex; align-items: center; gap: .5rem; }
+.article-share__button { display: grid; width: 2.25rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--border); border-radius: 50%; color: var(--text-muted); background: transparent; cursor: pointer; transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
+.article-share__button:hover { color: var(--accent-600); border-color: var(--accent-600); }
+.article-share__button svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+.article-share__button[data-copy-link] svg { fill: none; }
+.article-share__button:not([data-copy-link]) svg { fill: currentColor; stroke: none; }
+.article-share__button.is-copied { color: var(--accent-600); border-color: var(--accent-600); }
+
+.article-cover { margin: clamp(1.75rem, 4vw, 2.75rem) auto clamp(2.5rem, 6vw, 4rem); }
+.article-cover__image { width: 100%; height: auto; aspect-ratio: 2.2; object-fit: cover; }
+
+/* The body is a narrow measure centred under the full-width title and cover. */
+.article-body { padding-bottom: clamp(3rem, 7vw, 6rem); }
+.article-body .prose { margin-inline: auto; }
+
+.article-tags { display: flex; max-width: 48rem; margin: clamp(2rem, 5vw, 3.5rem) auto 0; padding: 0; flex-wrap: wrap; gap: .5rem; list-style: none; }
+.article-tags li { padding: .4rem .7rem; border: 1px solid var(--border); color: var(--text-muted); font: 700 var(--text-2xs)/1.2 var(--font-tech); letter-spacing: .06em; text-transform: uppercase; }
+
+.article-gallery { padding-bottom: clamp(4rem, 8vw, 7rem); }
+.article-gallery__grid { display: grid; margin-top: var(--space-5); grid-template-columns: repeat(3, 1fr); gap: var(--grid-gap); }
+.article-gallery figure { margin: 0; }
+.article-gallery__image { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.article-gallery figcaption { margin-top: .6rem; color: var(--text-muted); font-size: .85rem; }

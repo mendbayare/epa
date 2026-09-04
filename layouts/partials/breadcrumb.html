@@ -1,0 +1,21 @@
+{{- /*
+  Breadcrumb trail. Takes a slice of dicts with "label" and an optional "url";
+  the entry without a url is treated as the current page.
+
+    {{ partial "breadcrumb.html" (slice
+         (dict "label" "Нүүр" "url" "/")
+         (dict "label" .Title)) }}
+*/ -}}
+{{- $items := . -}}
+{{- if $items -}}
+  <nav class="breadcrumb" aria-label="{{ if eq site.Language.Lang "mn" }}Замын мөр{{ else }}Breadcrumb{{ end }}">
+    {{- range $i, $item := $items -}}
+      {{- if $i }}<span aria-hidden="true">›</span>{{ end -}}
+      {{- with $item.url -}}
+        <a href="{{ . }}">{{ $item.label }}</a>
+      {{- else -}}
+        <span aria-current="page">{{ $item.label }}</span>
+      {{- end -}}
+    {{- end -}}
+  </nav>
+{{- end -}}

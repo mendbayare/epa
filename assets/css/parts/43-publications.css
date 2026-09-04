@@ -1,0 +1,10 @@
+/* Publications page. */
+.publications-index { padding-block: clamp(4rem, 9vw, 8rem); }
+.publications-index .publication-table th, .publications-index .publication-table td { padding: clamp(1.2rem, 2.5vw, 2rem); }
+.publications-index .publication-table tbody tr { transition: background-color .2s ease; }
+.publications-index .publication-table tbody tr:hover { background: var(--surface-soft); }
+.publication-draft { display: inline-flex; width: fit-content; margin-top: .8rem; padding: .3rem .5rem; border: 1px solid var(--border); color: var(--text-muted); font: 700 .58rem/1.2 var(--font-tech); letter-spacing: .06em; text-transform: uppercase; }
+.publication-action { display: flex !important; width: fit-content; align-items: center; gap: .5rem; color: var(--link); font-weight: 700; text-decoration: none; }
+.publication-action > span { margin: 0 !important; color: var(--accent-600) !important; }
+.publication-pending { color: var(--text-muted); font-size: .83rem; }
+

@@ -1,18 +1,17 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   <article class="project-page">
-    <header class="project-hero">
-      <div class="container project-hero__grid">
-        <div class="project-hero__copy">
-          <a class="project-back" href="{{ (site.GetPage "/projects").RelPermalink }}">← {{ if $isMn }}Бүх төсөл{{ else }}All projects{{ end }}</a>
-          <p class="eyebrow">{{ if $isMn }}Төслийн танилцуулга{{ else }}Project profile{{ end }}</p>
-          <h1>{{ .Title }}</h1>
-          {{ with .Params.summary }}<p class="project-hero__lead">{{ . }}</p>{{ end }}
-          {{ if .Params.provisional }}<span class="draft-label">{{ if $isMn }}Загварын түр агуулга{{ else }}Draft sample content{{ end }}</span>{{ end }}
-        </div>
-        {{ with .Params.cover }}<div class="project-hero__media">{{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "project-hero__image" "loading" "eager" "sizes" "(max-width: 900px) 100vw, 46vw") }}<span aria-hidden="true">EPA / PROJECT</span></div>{{ end }}
-      </div>
-    </header>
+    {{ partial "page-hero.html" (dict
+      "crumbs" (slice
+        (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL ""))
+        (dict "label" (site.GetPage "/projects").Title "url" (site.GetPage "/projects").RelPermalink)
+        (dict "label" .Title))
+      "title" .Title
+      "lead" .Params.summary
+      "image" .Params.cover
+      "sizes" "(max-width: 900px) 100vw, 46vw"
+      "mediaLabel" "EPA / PROJECT"
+      "badge" (cond .Params.provisional (cond $isMn "Загварын түр агуулга" "Draft sample content") "")) }}
     <div class="container project-detail">
       <dl class="project-facts">
         {{ with .Params.client }}<div><dt>{{ if $isMn }}Захиалагч{{ else }}Client{{ end }}</dt><dd>{{ . }}</dd></div>{{ end }}

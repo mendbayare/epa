@@ -1,0 +1,455 @@
+# Pages CMS configuration for EPA@Lab.
+#
+# Written against the schema in pages-cms/pages-cms (lib/config-schema.ts).
+# Two things about this site drive the shape of this file:
+#
+#   1. Content is bilingual as page bundles: every entry is a folder holding
+#      index.mn.md and index.en.md. Pages CMS filters a collection with
+#      `exclude`, which matches bare filenames across all subfolders, so each
+#      content type appears twice — once per language — and each collection
+#      excludes the other language's filename.
+#
+#   2. Front matter is TOML delimited by +++, hence `format: toml-frontmatter`.
+#
+# The Markdown body of a file is edited through a field named `body`.
+# Layout, configuration and template files are deliberately not exposed.
+
+media:
+  - name: images
+    label: Зураг / Images
+    input: assets/images
+    output: images
+    extensions: [jpg, jpeg, png, webp, avif]
+  - name: documents
+    label: Файл / Documents
+    input: static/files
+    output: /files
+    extensions: [pdf]
+
+content:
+  # ======================================================================
+  # Singleton pages
+  # ======================================================================
+  - name: home
+    label: Нүүр хуудас / Home
+    type: group
+    items:
+      - name: home_mn
+        label: Нүүр (Монгол)
+        type: file
+        path: content/_index.mn.md
+        format: toml-frontmatter
+        delimiters: "+++"
+        fields: &home_fields
+          - { name: title, label: Гарчиг, type: string, required: true }
+          - { name: description, label: Товч танилцуулга, type: text, required: true }
+          - name: hero_title_lines
+            label: Нүүр гарчгийн мөрүүд
+            type: string
+            list: true
+            description: Гарчгийг мөр мөрөөр нь бичнэ. Монгол нэр урт тул мөр таслалт гараар тохируулна.
+          - { name: hero_image, label: Нүүр зураг, type: image, required: true }
+          - { name: vision, label: Алсын хараа, type: text, required: true }
+          - { name: mission, label: Эрхэм зорилго, type: text, required: true }
+          - name: stats
+            label: Тоон үзүүлэлт
+            type: object
+            list: { min: 0, max: 3 }
+            fields:
+              - { name: key, label: Түлхүүр, type: string, required: true }
+              - { name: value, label: Утга, type: string, required: true }
+              - { name: label, label: Тайлбар, type: string, required: true }
+              - { name: suffix, label: Дагавар, type: string }
+              - { name: provisional, label: Түр утга, type: boolean, default: true }
+          - name: equipment
+            label: Тоног төхөөрөмж
+            type: string
+            list: true
+          - { name: mentor_name, label: Удирдагчийн нэр, type: string }
+          - { name: mentor_role, label: Удирдагчийн албан тушаал, type: string }
+          - { name: mentor_greeting, label: Мэндчилгээ, type: text }
+          - { name: mentor_image, label: Удирдагчийн зураг, type: image }
+          - { name: mentor_page, label: Удирдагчийн холбоос, type: string }
+          - name: partners
+            label: Хамтрагч байгууллага
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Нэр, type: string, required: true }
+              - { name: mark, label: Тэмдэг, type: string }
+              - { name: url, label: Вэб хаяг, type: string }
+              - { name: description, label: Тайлбар, type: text }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
+      - name: home_en
+        label: Home (English)
+        type: file
+        path: content/_index.en.md
+        format: toml-frontmatter
+        delimiters: "+++"
+        fields: *home_fields
+
+  - name: about
+    label: Бидний тухай / About
+    type: group
+    items:
+      - name: about_mn
+        label: Бидний тухай (Монгол)
+        type: file
+        path: content/about/_index.mn.md
+        format: toml-frontmatter
+        delimiters: "+++"
+        fields: &about_fields
+          - { name: title, label: Гарчиг, type: string, required: true }
+          - { name: description, label: Товч танилцуулга, type: text, required: true }
+          - { name: hero_image, label: Нүүр зураг, type: image, required: true }
+          - { name: founded_label, label: Байгуулагдсан (гарчиг), type: string }
+          - { name: founded_value, label: Байгуулагдсан (огноо), type: string }
+          - { name: history_intro, label: Түүхийн оршил, type: text }
+          - name: history
+            label: Түүхэн үе шатууд
+            type: object
+            list: true
+            fields:
+              - { name: year, label: Он, type: string, required: true }
+              - { name: title, label: Гарчиг, type: string, required: true }
+              - { name: description, label: Тайлбар, type: text }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
+          - name: achievements
+            label: Амжилтууд
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Гарчиг, type: string, required: true }
+              - { name: year, label: Он, type: string }
+              - { name: description, label: Тайлбар, type: text }
+              - { name: image, label: Зураг, type: image }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
+          - name: supervisor
+            label: Удирдагч багш
+            type: object
+            fields:
+              - { name: name, label: Нэр, type: string, required: true }
+              - { name: role, label: Албан тушаал, type: string }
+              - { name: portrait, label: Хөрөг, type: image }
+              - { name: summary, label: Товч танилцуулга, type: text }
+              - { name: bio, label: Намтар, type: text }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
+          - { name: provisional, label: Хуудас түр агуулгатай, type: boolean, default: true }
+          - { name: body, label: Нэмэлт агуулга, type: rich-text }
+      - name: about_en
+        label: About (English)
+        type: file
+        path: content/about/_index.en.md
+        format: toml-frontmatter
+        delimiters: "+++"
+        fields: *about_fields
+
+  - name: contact
+    label: Холбоо барих / Contact
+    type: group
+    items:
+      - name: contact_mn
+        label: Холбоо барих (Монгол)
+        type: file
+        path: content/contact/_index.mn.md
+        format: toml-frontmatter
+        delimiters: "+++"
+        fields: &contact_fields
+          - { name: title, label: Гарчиг, type: string, required: true }
+          - { name: description, label: Товч танилцуулга, type: text }
+          - { name: address, label: Хаяг, type: text, required: true }
+          - { name: email, label: Цахим шуудан, type: string }
+          - { name: supervisor_name, label: Удирдагчийн нэр, type: string }
+          - { name: supervisor_role, label: Удирдагчийн албан тушаал, type: string }
+          - { name: map_url, label: Газрын зургийн холбоос, type: string }
+          - { name: map_embed_url, label: Газрын зургийн embed хаяг, type: text }
+          - { name: source_note, label: Эх сурвалжийн тэмдэглэл, type: text }
+          - { name: provisional, label: Түр агуулгатай, type: boolean, default: true }
+      - name: contact_en
+        label: Contact (English)
+        type: file
+        path: content/contact/_index.en.md
+        format: toml-frontmatter
+        delimiters: "+++"
+        fields: *contact_fields
+
+  # ======================================================================
+  # Collections
+  # ======================================================================
+  - name: news
+    label: Мэдээ / News
+    type: group
+    items:
+      - name: news_mn
+        label: Мэдээ (Монгол)
+        type: collection
+        path: content/news
+        subfolders: true
+        filename: "{primary}/index.mn.md"
+        exclude: ["index.en.md", "_index.mn.md", "_index.en.md"]
+        format: toml-frontmatter
+        delimiters: "+++"
+        view:
+          fields: [title, date, featured]
+          primary: title
+          sort: [date, title]
+        fields: &news_fields
+          - { name: title, label: Гарчиг, type: string, required: true }
+          - { name: date, label: Нийтэлсэн огноо, type: date, options: { format: "yyyy-MM-dd" }, required: true }
+          - { name: summary, label: Товч агуулга, type: text, required: true }
+          - { name: cover, label: Нүүр зураг, type: image, required: true }
+          - name: gallery
+            label: Зургийн цомог
+            type: object
+            list: true
+            fields:
+              - { name: image, label: Зураг, type: image, required: true }
+              - { name: caption, label: Тайлбар, type: string }
+          - { name: tags, label: Түлхүүр үг, type: string, list: true }
+          - { name: featured, label: Нүүр хуудсанд харуулах, type: boolean, default: false }
+          - { name: provisional, label: Түр агуулга, type: boolean, default: true }
+          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
+          - { name: body, label: Агуулга, type: rich-text }
+      - name: news_en
+        label: News (English)
+        type: collection
+        path: content/news
+        subfolders: true
+        filename: "{primary}/index.en.md"
+        exclude: ["index.mn.md", "_index.mn.md", "_index.en.md"]
+        format: toml-frontmatter
+        delimiters: "+++"
+        view:
+          fields: [title, date, featured]
+          primary: title
+          sort: [date, title]
+        fields: *news_fields
+
+  - name: projects
+    label: Төсөл / Projects
+    type: group
+    items:
+      - name: projects_mn
+        label: Төсөл (Монгол)
+        type: collection
+        path: content/projects
+        subfolders: true
+        filename: "{primary}/index.mn.md"
+        exclude: ["index.en.md", "_index.mn.md", "_index.en.md"]
+        format: toml-frontmatter
+        delimiters: "+++"
+        view:
+          fields: [title, client, featured]
+          primary: title
+          sort: [weight, title]
+        fields: &project_fields
+          - { name: title, label: Төслийн нэр, type: string, required: true }
+          - { name: client, label: Захиалагч, type: string, required: true }
+          - { name: collaborators, label: Хамтран гүйцэтгэгч, type: string, list: true }
+          - { name: duration_text, label: Хугацаа, type: string, required: true }
+          - { name: objective, label: Зорилго, type: text, required: true }
+          - { name: implementation_site, label: Хэрэгжүүлэх байршил / объект, type: string, required: true }
+          - { name: summary, label: Товч агуулга, type: text, required: true }
+          - { name: results, label: Үр дүн, type: text, required: true }
+          - name: related_publications
+            label: Холбогдох бүтээл
+            type: string
+            list: true
+            description: "Бүтээлийн зам, жишээ нь: /publications/sample-publication"
+          - { name: cover, label: Нүүр зураг, type: image }
+          - name: gallery
+            label: Зургийн цомог
+            type: object
+            list: true
+            fields:
+              - { name: src, label: Зураг, type: image, required: true }
+              - { name: alt, label: Тайлбар, type: string }
+          - { name: featured, label: Нүүр хуудсанд харуулах, type: boolean, default: false }
+          - { name: weight, label: Эрэмбэ, type: number, default: 10 }
+          - { name: provisional, label: Түр агуулга, type: boolean, default: true }
+          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
+          - { name: body, label: Нэмэлт агуулга, type: rich-text }
+      - name: projects_en
+        label: Projects (English)
+        type: collection
+        path: content/projects
+        subfolders: true
+        filename: "{primary}/index.en.md"
+        exclude: ["index.mn.md", "_index.mn.md", "_index.en.md"]
+        format: toml-frontmatter
+        delimiters: "+++"
+        view:
+          fields: [title, client, featured]
+          primary: title
+          sort: [weight, title]
+        fields: *project_fields
+
+  - name: publications
+    label: Хэвлүүлсэн бүтээл / Publications
+    type: group
+    items:
+      - name: publications_mn
+        label: Бүтээл (Монгол)
+        type: collection
+        path: content/publications
+        subfolders: true
+        filename: "{primary}/index.mn.md"
+        exclude: ["index.en.md", "_index.mn.md", "_index.en.md"]
+        format: toml-frontmatter
+        delimiters: "+++"
+        view:
+          fields: [title, year, month]
+          primary: title
+          sort: [year, month, title]
+        fields: &publication_fields
+          - { name: title, label: Бүтээлийн нэр, type: string, required: true }
+          - { name: year, label: Он, type: number, required: true }
+          - { name: month, label: Сар (1–12), type: number, required: true }
+          - name: file
+            label: Файл
+            type: file
+            options: { media: documents }
+            description: Зөвхөн нийтлэхийг зөвшөөрсөн баримтыг оруулна.
+          - { name: external_url, label: Гадаад холбоос, type: string }
+          - { name: summary, label: Тайлбар, type: text }
+          - { name: provisional, label: Түр агуулга, type: boolean, default: true }
+          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
+          - { name: body, label: Нэмэлт агуулга, type: rich-text }
+      - name: publications_en
+        label: Publications (English)
+        type: collection
+        path: content/publications
+        subfolders: true
+        filename: "{primary}/index.en.md"
+        exclude: ["index.mn.md", "_index.mn.md", "_index.en.md"]
+        format: toml-frontmatter
+        delimiters: "+++"
+        view:
+          fields: [title, year, month]
+          primary: title
+          sort: [year, month, title]
+        fields: *publication_fields
+
+  - name: members
+    label: Гишүүд / Members
+    type: group
+    items:
+      - name: members_mn
+        label: Гишүүд (Монгол)
+        type: collection
+        path: content/members
+        subfolders: true
+        filename: "{primary}/index.mn.md"
+        exclude: ["index.en.md", "_index.mn.md", "_index.en.md"]
+        format: toml-frontmatter
+        delimiters: "+++"
+        view:
+          fields: [title, role, generation]
+          primary: title
+          sort: [weight, title]
+        fields: &member_fields
+          - { name: title, label: Бүтэн нэр, type: string, required: true }
+          - { name: role, label: Үүрэг, type: string, required: true }
+          - name: generation
+            label: Үе
+            type: select
+            required: true
+            options:
+              values:
+                - { label: "I үе", value: first-generation }
+                - { label: "II үе", value: second-generation }
+            description: Шинэ үе нэмэхэд data/generations.toml файлыг эхлээд шинэчилнэ.
+          - { name: program, label: Хөтөлбөр, type: string }
+          - { name: study_year, label: Курс, type: string }
+          - { name: portrait, label: Хөрөг, type: image, required: true }
+          - { name: summary, label: Товч танилцуулга, type: text, required: true }
+          - { name: yearbook_quote, label: Гишүүний эшлэл, type: text }
+          - { name: achievements, label: Амжилт, type: string, list: true }
+          - { name: alumni, label: Төгсөгч, type: boolean, default: false }
+          - { name: weight, label: Эрэмбэ, type: number, default: 10 }
+          - { name: provisional, label: Түр мэдээлэл, type: boolean, default: true }
+          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
+      - name: members_en
+        label: Members (English)
+        type: collection
+        path: content/members
+        subfolders: true
+        filename: "{primary}/index.en.md"
+        exclude: ["index.mn.md", "_index.mn.md", "_index.en.md"]
+        format: toml-frontmatter
+        delimiters: "+++"
+        view:
+          fields: [title, role, generation]
+          primary: title
+          sort: [weight, title]
+        fields: *member_fields
+
+  # ======================================================================
+  # Structured data and section headings
+  # ======================================================================
+  - name: data
+    label: Тохиргооны жагсаалт / Reference data
+    type: group
+    items:
+      - name: generations
+        label: Үеүүд / Generations
+        type: file
+        path: data/generations.toml
+        format: toml
+        fields:
+          - name: generations
+            label: Үеүүд
+            type: object
+            list: true
+            fields:
+              - { name: key, label: Түлхүүр, type: string, required: true }
+              - { name: order, label: Дараалал, type: number, required: true }
+              - { name: label_mn, label: Нэр (MN), type: string, required: true }
+              - { name: heading_mn, label: Гарчиг (MN), type: string, required: true }
+              - { name: label_en, label: Нэр (EN), type: string, required: true }
+              - { name: heading_en, label: Гарчиг (EN), type: string, required: true }
+      - name: leadership
+        label: Удирдлагын хугацаа / Leadership terms
+        type: file
+        path: data/leadership.toml
+        format: toml
+        fields:
+          - name: terms
+            label: Удирдлагын хугацаа
+            type: object
+            list: true
+            fields:
+              - name: member
+                label: Гишүүн
+                type: string
+                required: true
+                description: "Гишүүний фолдерын нэр, жишээ нь: sample-first"
+              - { name: role_key, label: Үүргийн түлхүүр, type: string }
+              - { name: role_mn, label: Үүрэг (MN), type: string, required: true }
+              - { name: role_en, label: Үүрэг (EN), type: string, required: true }
+              - { name: start_year, label: Эхэлсэн он, type: number, required: true }
+              - { name: end_year, label: Дууссан он, type: number }
+              - { name: current, label: Одоогийн, type: boolean, default: true }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
+
+  - name: section_headers
+    label: Хэсгийн гарчиг / Section headings
+    type: group
+    description: Жагсаалтын хуудсуудын гарчиг ба тайлбар.
+    items:
+      - name: news_index_mn
+        label: Мэдээ — гарчиг (MN)
+        type: file
+        path: content/news/_index.mn.md
+        format: toml-frontmatter
+        delimiters: "+++"
+        fields: &index_fields
+          - { name: title, label: Гарчиг, type: string, required: true }
+          - { name: description, label: Тайлбар, type: text }
+      - { name: news_index_en, label: "News — heading (EN)", type: file, path: content/news/_index.en.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }
+      - { name: projects_index_mn, label: "Төсөл — гарчиг (MN)", type: file, path: content/projects/_index.mn.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }
+      - { name: projects_index_en, label: "Projects — heading (EN)", type: file, path: content/projects/_index.en.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }
+      - { name: publications_index_mn, label: "Бүтээл — гарчиг (MN)", type: file, path: content/publications/_index.mn.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }
+      - { name: publications_index_en, label: "Publications — heading (EN)", type: file, path: content/publications/_index.en.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }
+      - { name: members_index_mn, label: "Гишүүд — гарчиг (MN)", type: file, path: content/members/_index.mn.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }
+      - { name: members_index_en, label: "Members — heading (EN)", type: file, path: content/members/_index.en.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }

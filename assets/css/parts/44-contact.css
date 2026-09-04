@@ -1,0 +1,20 @@
+/* Contact page. */
+.contact-content { padding-block: clamp(4rem, 9vw, 8rem); }
+.contact-details { display: grid; border-top: 1px solid var(--border); border-left: 1px solid var(--border); grid-template-columns: repeat(2, 1fr); }
+.contact-detail { position: relative; display: grid; min-height: 13rem; padding: clamp(1.5rem, 4vw, 3.5rem); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); grid-template-columns: 2rem minmax(0, 1fr); gap: clamp(1rem, 2vw, 2rem); }
+.contact-detail--wide { grid-column: 1 / -1; }
+.contact-detail > span { color: var(--accent-600); font: 700 .68rem/1.4 var(--font-tech); }
+.contact-detail address { max-width: 45rem; font-size: clamp(1.35rem, 3vw, 2.5rem); font-style: normal; font-weight: 700; line-height: 1.35; }
+.contact-detail a, .contact-detail strong { display: block; font-size: clamp(1.2rem, 2.3vw, 2rem); overflow-wrap: anywhere; text-decoration: none; }
+.contact-detail a:hover { color: var(--accent-600); }
+.contact-detail small { display: block; margin-top: .45rem; color: var(--text-muted); }
+.contact-pending { color: var(--text-muted); }
+.map-preview { display: grid; min-height: 32rem; margin-top: clamp(4rem, 8vw, 7rem); overflow: hidden; color: var(--white); background: var(--blue-700); grid-template-columns: 1.1fr .9fr; text-decoration: none; }
+.contact-map-frame { width: 100%; height: 100%; min-height: 25rem; border: 0; background: var(--blue-100); }
+.map-preview__copy { display: flex; padding: clamp(2rem, 5vw, 4.5rem); align-items: flex-end; justify-content: space-between; gap: 2rem; }
+.map-preview__copy { color: var(--white); text-decoration: none; }
+.map-preview__copy h2 { color: var(--white); }
+.map-preview__copy p:not(.eyebrow) { color: rgb(255 255 255 / 68%); }
+.map-preview__copy > span { color: var(--accent-600); font-size: 2rem; transition: transform .2s ease; }
+.map-preview:hover .map-preview__copy > span { transform: translate(4px, -4px); }
+.contact-source-note { margin: 2rem 0 0; padding-left: 1rem; border-left: 2px solid var(--accent-600); color: var(--text-muted); font-size: .83rem; }

@@ -1,11 +1,7 @@
 {{ define "main" }}
-  <header class="page-header">
-    <div class="container page-header__inner">
-      <p class="eyebrow">EPA@Lab</p>
-      <h1>{{ .Title }}</h1>
-      {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
-    </div>
-  </header>
+  {{ partial "page-hero.html" (dict
+    "crumbs" (slice (dict "label" (cond (eq site.Language.Lang "mn") "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
+    "title" .Title "lead" .Params.description) }}
   <div class="container section">
     {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
     {{ if .Pages }}

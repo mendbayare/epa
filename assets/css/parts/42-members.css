@@ -1,0 +1,7 @@
+/* Members page. */
+.members-leadership { padding-block: clamp(5rem, 9vw, 8rem); background: var(--surface-soft); }
+.leadership-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+.members-content { padding-block: clamp(4rem, 9vw, 8rem); }
+.members-content .generation-jump { position: sticky; z-index: 5; top: 0; margin-bottom: clamp(4rem, 8vw, 7rem); padding-block: 1rem; background: var(--background); }
+.members-content .generation-jump a:hover { color: var(--white); border-color: var(--accent-600); background: var(--accent-600); }
+

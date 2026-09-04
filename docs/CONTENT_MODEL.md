@@ -172,20 +172,23 @@ Location: `content/news/{slug}/index.{lang}.md`
 | `title` | string | Yes | Article title |
 | `date` | date/time | Yes | Publication date |
 | `summary` | string | Yes | Card and metadata summary |
-| `category` | controlled key | Yes | Activity type |
 | `cover` | image path | Yes | Card and social image |
 | `gallery` | image list | No | Additional approved images/captions |
 | `tags` | string list | No | Secondary topics |
 | `featured` | boolean | Yes | Eligible for Home display |
 | `draft` | boolean | Yes | Publication state |
 
-Baseline category keys:
+Confirmed: News records carry no category. The field and its label data were
+removed at the stakeholder's direction; article and card metadata show the
+publication date and reading time only. Reintroducing categories would mean
+restoring the field, its localized labels, and a filter worth the reader's
+attention, so it should be a deliberate decision rather than a leftover.
 
-- `training`
-- `experiment`
-- `achievement`
-- `conference`
-- `activity`
+Reading time is derived by Hugo from the body text and is not stored.
+
+Records are ordered newest-first by `date`. The templates still render a visible
+pending state for a record without one, and fall back to editorial `weight` for
+ordering while no record has a date.
 
 News is a confirmed primary section and may also supply featured cards to Home.
 The current records are provisional samples and must be replaced or approved

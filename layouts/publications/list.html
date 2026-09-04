@@ -1,12 +1,10 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $publications := sort (sort .Pages "Params.month" "desc") "Params.year" "desc" }}
-  <header class="publications-hero">
-    <div class="container publications-hero__grid">
-      <div><p class="eyebrow">EPA@Lab / {{ if $isMn }}Бүтээлийн сан{{ else }}Published work{{ end }}</p><h1>{{ .Title }}</h1></div>
-      <div><p>{{ .Params.description }}</p><span class="publications-count">{{ len $publications }} <small>{{ if $isMn }}түр бүртгэл{{ else }}draft records{{ end }}</small></span></div>
-    </div>
-  </header>
+  {{ partial "page-hero.html" (dict
+    "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
+    "title" .Title
+    "lead" .Params.description) }}
   <section class="container publications-index">
     <div class="publication-table-wrap">
       <table class="publication-table">

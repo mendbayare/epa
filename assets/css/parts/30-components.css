@@ -1,0 +1,198 @@
+/* Shared components used by more than one page. */
+.publication-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-card); }
+.publication-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.publication-table th, .publication-table td { padding: 1rem 1.15rem; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.publication-table th { color: var(--text-muted); font: 700 .72rem/1.3 var(--font-tech); letter-spacing: .08em; text-transform: uppercase; }
+.publication-table th:first-child { width: 58%; }
+.publication-table th:nth-child(2) { width: 15%; }
+.publication-table td strong, .publication-table td span, .publication-table td a { display: block; }
+.publication-table td span { margin-top: .35rem; color: var(--text-muted); }
+.publication-table td a + a { margin-top: .4rem; }
+.publication-table tbody tr:last-child td { border-bottom: 0; }
+.provisional-badge { position: absolute; top: 1rem; right: 1rem; padding: .35rem .55rem; color: var(--white); background: rgb(13 21 56 / 82%); font-size: var(--text-2xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; backdrop-filter: blur(.5rem); }
+.generation-jump { display: flex; margin-bottom: 2.5rem; flex-wrap: wrap; gap: .65rem; }
+.generation-jump a { padding: .65rem 1rem; border: 1px solid var(--border); border-radius: 999px; text-decoration: none; }
+.generation-section { scroll-margin-top: 6rem; }
+.generation-section + .generation-section { margin-top: 4rem; }
+.generation-section > h2 { margin-bottom: 1.5rem; }
+.project-facts { display: grid; margin: 0 0 3rem; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+.project-facts > div { padding: 1.2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.project-facts dt { margin-bottom: .45rem; color: var(--text-muted); font: 700 .7rem/1.3 var(--font-tech); letter-spacing: .08em; text-transform: uppercase; }
+.project-facts dd { margin: 0; overflow-wrap: anywhere; }
+.project-detail > .prose + .prose { margin-top: 2.5rem; }
+
+.button { display: inline-flex; min-height: 3.25rem; padding: .8rem 1.25rem; align-items: center; justify-content: center; border-radius: .75rem; color: var(--white); background: var(--blue-700); font-weight: 700; text-decoration: none; box-shadow: 0 .75rem 2rem rgb(7 89 184 / 22%); }
+.button:hover { background: var(--blue-600); }
+.text-link { color: var(--link); font-weight: 700; text-decoration: none; }
+.text-link:hover { color: var(--link-hover); }
+
+.card-grid { display: grid; margin-top: 3rem; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.card { min-height: 17rem; padding: clamp(1.5rem, 3vw, 2.25rem); border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.card p { color: var(--text-muted); }
+.card a { text-decoration: none; }
+
+.prose { max-width: 48rem; }
+.prose h2 { margin-top: 2.5rem; font-size: 2rem; }
+.prose a { color: var(--link); }
+.prose a:hover { color: var(--link-hover); }
+.empty-state { padding: 2rem; border: 1px dashed var(--border); border-radius: var(--radius-card); color: var(--text-muted); }
+
+/* --- Section head -----------------------------------------------------
+   The single heading pattern for every section. The short orange rule
+   below the title is the device borrowed from the SICT reference; the
+   eyebrow is muted here so the rule is the only accent in the block.
+   Owns the space beneath itself, so the grid or list that follows must
+   not add its own margin-top. */
+.section-head { display: grid; margin-bottom: clamp(2.5rem, 5vw, 4rem); align-items: end; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(1rem, 2.5vw, 2rem) clamp(2rem, 6vw, 6rem); }
+.section-head__main { min-width: 0; }
+.section-head .eyebrow { margin-bottom: var(--space-3); color: var(--text-muted); }
+.section-head h2 { max-width: 24ch; margin: 0; }
+.section-head h2::after { display: block; width: 3.5rem; height: 3px; margin-top: var(--space-4); background: var(--accent-600); content: ""; }
+.section-head__aside { display: flex; align-items: baseline; justify-content: flex-end; flex-wrap: wrap; gap: var(--space-3) clamp(1rem, 2.5vw, 2rem); }
+.section-head__support { max-width: 34rem; margin: 0; color: var(--text-muted); font-size: var(--text-base); }
+.section-head__meta { color: var(--text-muted); font: 700 var(--text-xs)/1 var(--font-tech); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+.section-head--split { grid-template-columns: minmax(0, 1fr) minmax(18rem, .62fr); }
+.section-head--split .section-head__aside { display: block; }
+.section-head--on-dark .eyebrow, .section-head--on-dark .section-head__support, .section-head--on-dark .section-head__meta { color: var(--on-dark-muted); }
+.section-head--on-dark h2 { color: var(--on-dark); }
+.section-head--on-dark .text-link { color: var(--on-dark); }
+.section-head--on-dark .text-link:hover { color: var(--accent-600); }
+
+/* --- Card grid --------------------------------------------------------
+   The one grid used by media cards and person cards. */
+.card-grid--3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gap); }
+.card-grid--2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 3vw, 3rem); }
+/* Person cards survive a narrow column — portrait, role, name — so they stay
+   two-up on phones. Media cards carry a summary and drop to one. */
+.card-grid--people { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gap); }
+
+/* --- Media card -------------------------------------------------------
+   Image on top, technical metadata, title, summary. Replaces project-card,
+   news-card, and achievement-card. */
+.media-card { display: flex; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); flex-direction: column; transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.media-card:hover { border-color: var(--accent-600); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.media-card__media { position: relative; display: block; overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface-soft); }
+.media-card__image { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease); }
+.media-card:hover .media-card__image { transform: scale(1.035); }
+.media-card__stamp { position: absolute; right: 0; bottom: 0; padding: .7rem 1rem; color: var(--white); background: var(--accent-600); font: 800 var(--text-xs)/1 var(--font-tech); }
+.media-card__body { position: relative; display: flex; min-height: 14rem; padding: var(--space-5) 4rem var(--space-5) var(--space-5); flex: 1; flex-direction: column; }
+.media-card__meta { display: flex; margin-bottom: 1.1rem; justify-content: space-between; gap: var(--space-4); color: var(--accent-600); font: 700 .66rem/1.4 var(--font-tech); letter-spacing: .06em; text-transform: uppercase; }
+.media-card__meta span { display: inline-flex; align-items: center; gap: .5rem; }
+.media-card h3 { font-size: clamp(1.2rem, 2vw, 1.55rem); }
+.media-card h3 a { text-decoration: none; }
+.media-card__summary { display: -webkit-box; overflow: hidden; margin: 0; color: var(--text-muted); font-size: .9rem; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.card-arrow { position: absolute; right: var(--space-5); bottom: var(--space-5); display: grid; width: 2.5rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--border); border-radius: 50%; color: var(--link); transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+.media-card:hover .card-arrow { color: var(--white); border-color: var(--accent-600); background: var(--accent-600); transform: translate(2px, -2px); }
+/* Inverted navy card, the news treatment borrowed from the reference.
+   The orange signal dot before the first metadata item is its signature. */
+.media-card--invert { color: var(--on-dark); border-color: transparent; background: var(--navy-900); }
+.media-card--invert:hover { border-color: var(--accent-600); }
+.media-card--invert .media-card__media { background: var(--navy-950); }
+.media-card--invert .media-card__meta span:first-child::before { width: .45rem; height: .45rem; border-radius: 50%; background: var(--accent-600); content: ""; }
+.media-card--invert h3 { color: var(--on-dark); }
+.media-card--invert .media-card__summary { color: var(--on-dark-muted); }
+.media-card--invert .card-arrow { color: var(--on-dark); border-color: var(--line-on-dark); }
+.media-card--feature { border: 0; }
+.media-card--feature:hover { box-shadow: none; transform: none; }
+.media-card--feature .media-card__media { aspect-ratio: 16 / 10; }
+.media-card--feature .media-card__image { filter: saturate(.78); transition: filter var(--dur) var(--ease), transform var(--dur-slow) var(--ease); }
+.media-card--feature:hover .media-card__image { filter: saturate(1); transform: scale(1.02); }
+.media-card--feature .media-card__body { min-height: 0; padding: clamp(1.5rem, 4vw, 3rem); }
+.media-card--feature h3 { font-size: var(--text-2xl); }
+.media-card--feature .media-card__summary { display: block; overflow: visible; font-size: var(--text-base); }
+
+/* --- Person card ------------------------------------------------------
+   Portrait, role, name, optional quote and achievements. Replaces
+   member-card and home-member-card. */
+.person-card { overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.person-card__portrait { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: var(--surface-soft); }
+.person-card__image { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); transition: filter var(--dur) var(--ease), transform var(--dur-slow) var(--ease); }
+.person-card:hover .person-card__image { filter: saturate(1); transform: scale(1.02); }
+.person-card__placeholder { display: grid; height: 100%; place-items: center; color: var(--blue-700); font: 800 2rem/1 var(--font-display); }
+.person-card__portrait .provisional-badge { top: auto; right: .8rem; bottom: .8rem; }
+.person-card__copy { padding: clamp(1.4rem, 3vw, 2.25rem); }
+.person-card h3 { font-size: clamp(1.45rem, 2.3vw, 2rem); }
+.person-card__study { display: flex; min-height: 3rem; color: var(--text-muted); flex-direction: column; font-size: .88rem; }
+.person-card blockquote { margin: var(--space-5) 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border); color: var(--text); font-size: var(--text-base); font-style: italic; line-height: 1.65; }
+.person-card ul { margin: 1.25rem 0 0; padding: var(--space-4) 0 0 1.15rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .85rem; }
+
+/* --- List row ---------------------------------------------------------
+   Full-width picture beside copy, alternating sides. Replaces
+   project-list-card, teacher-card, and leadership-card. */
+.list-row { display: grid; min-height: 29rem; border-top: 1px solid var(--border); grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+.list-row:last-of-type { border-bottom: 1px solid var(--border); }
+.list-row:nth-of-type(even) .list-row__media { order: 2; }
+.list-row__media { position: relative; display: block; min-height: 25rem; overflow: hidden; background: var(--surface-soft); }
+.list-row__image { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) contrast(1.04); transition: filter var(--dur) var(--ease), transform var(--dur-slow) var(--ease); }
+.list-row:hover .list-row__image { filter: saturate(1); transform: scale(1.025); }
+.list-row__media .draft-label { position: absolute; top: var(--space-4); right: var(--space-4); }
+.list-row__mark { position: absolute; right: var(--space-4); bottom: var(--space-4); display: grid; width: 3rem; aspect-ratio: 1; place-items: center; color: var(--white); background: var(--blue-700); font: 800 .7rem/1 var(--font-tech); }
+.list-row__copy { display: flex; padding: var(--block-space); justify-content: center; flex-direction: column; }
+.list-row__number { color: var(--accent-600); font: 700 var(--text-xs)/1 var(--font-tech); letter-spacing: .12em; }
+.list-row h2 { font-size: var(--text-3xl); }
+.list-row h3 { max-width: 18ch; font-size: clamp(2rem, 4vw, 3.5rem); }
+.list-row h2 a, .list-row h3 a { text-decoration: none; }
+.list-row__lead { max-width: 43rem; font-size: var(--text-lg); }
+.list-row__body, .list-row__copy > p:not(.list-row__number):not(.eyebrow):not(.list-row__lead) { max-width: 43rem; color: var(--text-muted); }
+.list-row__facts { display: grid; margin: var(--space-5) 0 var(--space-6); gap: .7rem; }
+.list-row__facts > div { display: grid; padding-top: .7rem; border-top: 1px solid var(--border); grid-template-columns: 8rem minmax(0, 1fr); gap: var(--space-4); }
+.list-row__facts dt { color: var(--text-muted); font: 700 .65rem/1.5 var(--font-tech); letter-spacing: .07em; text-transform: uppercase; }
+.list-row__facts dd { margin: 0; overflow-wrap: anywhere; font-size: .9rem; }
+.list-row__meta { color: var(--accent-600); font: 700 .7rem/1.4 var(--font-tech); letter-spacing: .07em; text-transform: uppercase; }
+.list-row__link { display: inline-flex; width: fit-content; align-items: center; gap: .65rem; color: var(--link); font-weight: 750; text-decoration: none; }
+.list-row__link span { color: var(--accent-600); transition: transform var(--dur-fast) var(--ease); }
+.list-row__link:hover span { transform: translate(3px, -3px); }
+.list-row--portrait { min-height: 0; padding-block: clamp(3rem, 7vw, 6rem); grid-template-columns: minmax(16rem, .38fr) minmax(0, .62fr); gap: clamp(2rem, 8vw, 8rem); }
+.list-row--portrait .list-row__media { min-height: 0; aspect-ratio: 4 / 5; }
+.list-row--portrait .list-row__image { filter: saturate(.72); }
+.list-row--portrait .list-row__copy { padding: 0; }
+.list-row--compact { min-height: 24rem; overflow: hidden; border: 0; border-radius: var(--radius-card); background: var(--surface); grid-template-columns: minmax(12rem, .75fr) 1.25fr; }
+.list-row--compact:last-of-type { border: 0; }
+.list-row--compact:nth-of-type(even) .list-row__media { order: 0; }
+.list-row--compact .list-row__media { min-height: 0; }
+.list-row--compact .list-row__copy { padding: clamp(1.5rem, 4vw, 3rem); }
+.list-row--compact h3 { max-width: none; font-size: clamp(1.7rem, 3vw, 2.6rem); }
+
+/* --- Breadcrumb -------------------------------------------------------
+   Shared by the page hero and the news article header. */
+.breadcrumb { display: flex; margin-bottom: clamp(1.25rem, 3vw, 2rem); flex-wrap: nowrap; align-items: center; gap: .5rem; color: var(--text-muted); font-size: .82rem; }
+.breadcrumb a { flex: none; font-weight: 600; text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent-600); }
+.breadcrumb > span[aria-hidden] { flex: none; opacity: .55; }
+.breadcrumb > [aria-current] { overflow: hidden; min-width: 0; max-width: 42ch; flex: 1; text-overflow: ellipsis; white-space: nowrap; }
+
+/* --- Page hero --------------------------------------------------------
+   Every page except Home. Replaces projects-hero, project-hero, about-hero,
+   members-hero, publications-hero, contact-hero, and page-header. */
+.page-hero { position: relative; overflow: hidden; padding-block: clamp(1.75rem, 3.5vw, 3rem); color: var(--on-dark); background: var(--navy-950); }
+.page-hero::after { position: absolute; top: -13rem; right: -9rem; width: 36rem; aspect-ratio: 1; border: 1px solid rgb(109 145 255 / 18%); border-radius: 50%; box-shadow: 0 0 0 5rem rgb(109 145 255 / 4%), 0 0 0 10rem rgb(109 145 255 / 2%); content: ""; }
+.page-hero > .container { position: relative; z-index: 1; }
+.page-hero h1 { margin: 0; color: var(--on-dark); font-size: clamp(1.9rem, 3.4vw, 2.9rem); }
+/* The same short orange rule the section headings carry. */
+.page-hero h1::after { display: block; width: 3.5rem; height: 3px; margin-top: var(--space-4); background: var(--accent-600); content: ""; }
+.page-hero__lead { max-width: 42rem; margin: var(--space-4) 0 0; color: var(--on-dark-muted); font-size: clamp(1rem, 1.4vw, 1.12rem); }
+.page-hero .breadcrumb { margin-bottom: var(--space-4); color: var(--on-dark-quiet); }
+.page-hero .breadcrumb a:hover { color: var(--accent-600); }
+.page-hero .draft-label { margin-top: var(--space-5); }
+.page-hero .button { margin-top: var(--space-6); }
+
+/* The block after a page header already reads as a fresh section, so it does
+   not need the full inter-section rhythm stacked on the header's own padding.
+   The split hero is an editorial composition and keeps more breathing room. */
+.page-hero + * { padding-top: clamp(2.5rem, 5vw, 3.5rem); }
+.page-hero--split + * { padding-top: clamp(4rem, 8vw, 6rem); }
+
+.page-hero--split { padding-block: 0; }
+.page-hero--split::after { content: none; }
+.page-hero--split .page-hero__grid { position: relative; z-index: 1; display: grid; min-height: clamp(38rem, 74vh, 54rem); align-items: stretch; grid-template-columns: minmax(0, 1fr) minmax(24rem, 1fr); gap: 0; }
+.page-hero__copy { display: flex; padding: clamp(4rem, 8vw, 8rem) clamp(2rem, 7vw, 7rem) clamp(4rem, 8vw, 8rem) 0; justify-content: center; flex-direction: column; }
+.page-hero--split h1 { max-width: 14ch; font-size: clamp(2.8rem, 5.6vw, 5.6rem); }
+.page-hero--split .page-hero__lead { max-width: 42rem; margin-block: var(--space-5) var(--space-6); }
+.page-hero--split .breadcrumb { margin-bottom: clamp(2rem, 5vw, 4rem); }
+.page-hero__media { position: relative; min-height: 100%; overflow: hidden; }
+.page-hero__media::after { position: absolute; inset: 0; background: linear-gradient(135deg, rgb(13 21 56 / 32%), transparent 59%); content: ""; }
+.page-hero__image { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72) contrast(1.08); }
+.page-hero__media-label { position: absolute; z-index: 1; right: var(--space-6); bottom: var(--space-6); color: var(--on-dark-quiet); font: 700 var(--text-2xs)/1 var(--font-tech); letter-spacing: .12em; writing-mode: vertical-rl; }
+.page-hero__stamp { position: absolute; z-index: 1; right: 0; bottom: 0; display: flex; min-width: min(18rem, 70%); padding: var(--space-5) var(--space-6); background: var(--accent-600); flex-direction: column; }
+.page-hero__stamp small { font: 700 var(--text-2xs)/1 var(--font-tech); letter-spacing: .1em; text-transform: uppercase; }
+.page-hero__stamp strong { margin-top: .55rem; font-size: 1.35rem; }

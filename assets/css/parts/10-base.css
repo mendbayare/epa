@@ -1,0 +1,25 @@
+/* Reset, element defaults, layout primitives, motion. */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+::selection { color: var(--white); background: var(--accent-600); }
+body { margin: 0; color: var(--text); background: var(--background); font: 400 1rem/1.7 var(--font-body); }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; }
+h1, h2, h3 { margin: 0 0 1rem; font-family: var(--font-display); line-height: 1.08; letter-spacing: -.035em; }
+h1 { max-width: 17ch; font-size: clamp(2.7rem, 7vw, 6rem); }
+h2 { max-width: 22ch; font-size: clamp(2rem, 4vw, 3.7rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); }
+p { margin: 0 0 1rem; }
+.container { width: min(100% - 2 * var(--page-space), var(--container)); margin-inline: auto; }
+.section { padding-block: var(--section-space); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.skip-link { position: fixed; z-index: 100; top: .75rem; left: .75rem; padding: .75rem 1rem; color: var(--white); background: var(--ink-950); transform: translateY(-150%); }
+.skip-link:focus { transform: none; }
+.eyebrow { margin-bottom: 1rem; color: var(--accent-600); font: 700 .75rem/1.4 var(--font-tech); letter-spacing: .14em; text-transform: uppercase; }
+
+@keyframes network-flow { to { stroke-dashoffset: -1; } }
+@keyframes node-pulse { 50% { transform: scale(1.55); filter: drop-shadow(0 0 .65rem var(--accent-600)); } }
+@keyframes scroll-cue { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 75% { opacity: 1; } 100% { transform: translateY(3.6rem); opacity: 0; } }
+
+:focus-visible { outline: 3px solid var(--accent-600); outline-offset: 3px; }

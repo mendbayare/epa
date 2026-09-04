@@ -1,0 +1,33 @@
+{{- /*
+  Portrait card for a laboratory member. Covers the Members grid and the
+  newest-generation strip on Home.
+
+  Parameters:
+    name         required  member's public name
+    role                   role label shown above the name
+    portrait, sizes        portrait image path and responsive sizes
+    study, studyYear       programme and study year, stacked under the name
+    quote                  short member-approved yearbook quote
+    achievements           list of achievement strings
+    badge                  overlay label on the portrait, e.g. a draft marker
+*/ -}}
+{{- $sizes := default "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" .sizes -}}
+<article class="person-card">
+  <div class="person-card__portrait">
+    {{ with .portrait }}
+      {{ partial "responsive-image.html" (dict "src" . "alt" $.name "class" "person-card__image" "sizes" $sizes) }}
+    {{ else }}
+      <span class="person-card__placeholder" aria-hidden="true">EPA</span>
+    {{ end }}
+    {{ with .badge }}<span class="provisional-badge">{{ . }}</span>{{ end }}
+  </div>
+  <div class="person-card__copy">
+    {{ with .role }}<p class="eyebrow">{{ . }}</p>{{ end }}
+    <h3>{{ .name }}</h3>
+    {{ if or .study .studyYear }}
+      <p class="person-card__study">{{ with .study }}{{ . }}{{ end }}{{ with .studyYear }}<span>{{ . }}</span>{{ end }}</p>
+    {{ end }}
+    {{ with .quote }}<blockquote>“{{ . }}”</blockquote>{{ end }}
+    {{ with .achievements }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+  </div>
+</article>

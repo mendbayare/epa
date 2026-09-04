@@ -2,21 +2,36 @@
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $generations := sort hugo.Data.generations.generations "order" "desc" }}
   {{ $currentTerms := where hugo.Data.leadership.terms "current" true }}
-  <header class="members-hero">
-    <div class="container members-hero__grid">
-      <div><p class="eyebrow">EPA@Lab / {{ if $isMn }}Гишүүд{{ else }}Members{{ end }}</p><h1>{{ .Title }}</h1></div>
-      <div><p>{{ .Params.description }}</p><span class="members-total">{{ len .Pages }} <small>{{ if $isMn }}түр бүртгэл{{ else }}draft profiles{{ end }}</small></span></div>
-    </div>
-  </header>
+  {{ partial "page-hero.html" (dict
+    "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
+    "title" .Title
+    "lead" .Params.description) }}
 
   {{ if $currentTerms }}
     <section class="members-leadership">
       <div class="container">
-        <div class="members-section-heading"><div><p class="eyebrow">{{ if $isMn }}Одоогийн удирдлага{{ else }}Current leadership{{ end }}</p><h2>{{ if $isMn }}Лабораторийн үйл ажиллагааг чиглүүлэгчид{{ else }}Leading the laboratory today{{ end }}</h2></div><p>{{ if $isMn }}Удирдлагын хугацааг гишүүний мэдээллээс тусад нь хадгалдаг тул жил бүр түүхийг алдагдуулахгүй шинэчилнэ.{{ else }}Leadership terms are stored separately from profiles, allowing annual updates without losing history.{{ end }}</p></div>
+        {{ partial "section-head.html" (dict
+          "eyebrow" (cond $isMn "Одоогийн удирдлага" "Current leadership")
+          "title" (cond $isMn "Лабораторийн үйл ажиллагааг чиглүүлэгчид" "Leading the laboratory today")
+          "support" (cond $isMn "Удирдлагын хугацааг гишүүний мэдээллээс тусад нь хадгалдаг тул жил бүр түүхийг алдагдуулахгүй шинэчилнэ." "Leadership terms are stored separately from profiles, allowing annual updates without losing history.")) }}
         <div class="leadership-grid">
           {{ range $term := $currentTerms }}
             {{ $member := site.GetPage (printf "/members/%s" $term.member) }}
-            {{ with $member }}<article class="leadership-card">{{ with .Params.portrait }}{{ partial "responsive-image.html" (dict "src" . "alt" $member.Title "class" "leadership-card__image" "sizes" "(max-width: 700px) 100vw, 34vw") }}{{ end }}<div><p class="eyebrow">{{ cond $isMn $term.role_mn $term.role_en }}</p><h3>{{ .Title }}</h3><p>{{ .Params.summary }}</p><span>{{ $term.start_year }} — {{ if $term.end_year }}{{ $term.end_year }}{{ else }}{{ if $isMn }}одоо{{ else }}present{{ end }}{{ end }}</span>{{ if $term.provisional }}<small class="sample-note">{{ if $isMn }}Түр удирдлагын бүртгэл{{ else }}Draft leadership term{{ end }}</small>{{ end }}</div></article>{{ end }}
+            {{ $endYear := cond $isMn "одоо" "present" }}
+            {{ with $term.end_year }}{{ $endYear = printf "%v" . }}{{ end }}
+            {{ with $member }}
+              {{ partial "list-row.html" (dict
+                "compact" true
+                "level" "h3"
+                "title" .Title
+                "image" .Params.portrait
+                "imageAlt" $member.Title
+                "sizes" "(max-width: 700px) 100vw, 34vw"
+                "eyebrow" (cond $isMn $term.role_mn $term.role_en)
+                "body" .Params.summary
+                "meta" (printf "%v — %s" $term.start_year $endYear)
+                "note" (cond $term.provisional (cond $isMn "Түр удирдлагын бүртгэл" "Draft leadership term") "")) }}
+            {{ end }}
           {{ end }}
         </div>
       </div>
@@ -30,13 +45,21 @@
       {{ if $items }}
         {{ $heading := cond $isMn $generation.heading_mn $generation.heading_en }}
         <section class="generation-section" id="{{ $generation.key }}">
-          <div class="generation-heading"><p class="eyebrow">{{ cond $isMn "Үе" "Generation" }} / {{ printf "%02d" (div $generation.order 10) }}</p><h2>{{ $heading }}</h2><span>{{ len $items }} {{ if $isMn }}гишүүн{{ else }}members{{ end }}</span></div>
-          <div class="member-grid">
+          {{ partial "section-head.html" (dict
+            "eyebrow" (printf "%s / %02d" (cond $isMn "Үе" "Generation") (div $generation.order 10))
+            "title" $heading
+            "meta" (printf "%d %s" (len $items) (cond $isMn "гишүүн" "members"))) }}
+          <div class="card-grid--people">
             {{ range $member := $items.ByWeight }}
-              <article class="member-card">
-                <div class="member-card__portrait">{{ with .Params.portrait }}{{ partial "responsive-image.html" (dict "src" . "alt" $member.Title "class" "member-card__image" "sizes" "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw") }}{{ else }}<span class="member-card__placeholder">EPA</span>{{ end }}{{ if .Params.provisional }}<small>{{ if $isMn }}Түр мэдээлэл{{ else }}Draft profile{{ end }}</small>{{ end }}</div>
-                <div class="member-card__copy"><p class="eyebrow">{{ .Params.role }}</p><h3>{{ .Title }}</h3><p class="member-card__study">{{ .Params.program }}{{ with .Params.study_year }}<span>{{ . }}</span>{{ end }}</p>{{ with .Params.yearbook_quote }}<blockquote>“{{ . }}”</blockquote>{{ end }}{{ with .Params.achievements }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}</div>
-              </article>
+              {{ partial "person-card.html" (dict
+                "name" .Title
+                "role" .Params.role
+                "portrait" .Params.portrait
+                "study" .Params.program
+                "studyYear" .Params.study_year
+                "quote" .Params.yearbook_quote
+                "achievements" .Params.achievements
+                "badge" (cond .Params.provisional (cond $isMn "Түр мэдээлэл" "Draft profile") "")) }}
             {{ end }}
           </div>
         </section>

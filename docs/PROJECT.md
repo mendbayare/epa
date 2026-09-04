@@ -5,8 +5,8 @@
 > implementation progress, problems and fixes, verification performed,
 > unresolved questions, and the clearest next action.
 
-**Project status:** Confirmed structure; design QA and CMS configuration next
-**Last updated:** 2026-09-02
+**Project status:** Confirmed structure; design-system consolidation in progress
+**Last updated:** 2026-09-04
 **Institution:** Mongolian University of Science and Technology (MUST), School
 of Power and Electrical Engineering  
 **Laboratory:** Electrical Power Automation Lab (EPA)
@@ -398,7 +398,7 @@ content entry, launch QA, deployment, and handover.
 - [x] Finalize the seven-section navigation and footer structure.
 - [x] Produce page layouts and an initial visual direction.
 - [x] Establish colors, typography, components, and image treatment.
-- [ ] Define the final content schemas for Pages CMS.
+- [x] Define the final content schemas for Pages CMS.
 - [ ] Review the proposed experience with the non-technical editor.
 
 ### Phase 3 — Hugo implementation
@@ -411,7 +411,7 @@ content entry, launch QA, deployment, and handover.
 - [x] Add dynamic generation sections to the Members page.
 - [x] Add project/publication relationships, metadata, sitemap, and 404 support.
 - [x] Configure responsive image processing and publication file handling.
-- [ ] Add Pages CMS configuration and safe editor forms.
+- [x] Add Pages CMS configuration and safe editor forms.
 
 ### Phase 4 — Content migration
 
@@ -537,6 +537,14 @@ Record meaningful changes here; do not use this section for every code commit.
 | 2026-09-02 | Removed project categories and category filtering from the confirmed model. | The stakeholder clarified that projects are not classified as automation, relay protection, SCADA/HMI, or similar research categories. |
 | 2026-09-02 | Confirmed seven primary sections and the final header/footer order. | News remains a primary section; Members is a single navigation link, with generations grouped inside its page. |
 | 2026-09-02 | Removed the supervising teacher's telephone number from public content. | The laboratory will expose only its official public email as a direct contact method. |
+| 2026-09-04 | Adopted a hybrid visual direction: SICT's institutional shell with EPA@Lab's own signature Home hero. | The reference site's consistency is worth borrowing, but EPA@Lab must read as its own laboratory rather than a school sub-site. |
+| 2026-09-04 | Split `main.css` into ordered parts and extended tokens beyond color. | Styling had been written page by page with no shared layer, producing nine hero variants, ten card variants, and five section-heading patterns. |
+| 2026-09-04 | Created `docs/DESIGN_SYSTEM.md` as the canonical design reference. | `docs/PROJECT.md` records decisions; implementation rules needed their own home. |
+| 2026-09-04 | Removed the full-viewport rule from the Mentor and Projects sections. | Pinning them to `100svh` left a large empty band whenever their content did not fill a screen; the normal section rhythm reads better. |
+| 2026-09-04 | Reversed the earlier decision to justify the mentor greeting. | Justification opened wide rivers of white space: Mongolian words are long and do not hyphenate, so each line offered too few break opportunities at that measure. |
+| 2026-09-04 | Added an institutional utility strip, hidden on Home. | It carries the laboratory location on inner pages and is ready for the pending email and social accounts, while leaving the Home hero uninterrupted. |
+| 2026-09-04 | Removed the utility strip again at the stakeholder's direction. | With no confirmed email or social accounts it carried only the address, which the footer and the Contact page already provide; the header is simpler without it. |
+| 2026-09-04 | Rounded every card surface, departing from the reference. | The stakeholder asked for roundness. SICT keeps its cards square, so this is a deliberate divergence rather than an oversight, applied through one `--radius-card` token. |
 
 ## 17. How to maintain this document
 
@@ -1579,3 +1587,684 @@ At the end of every working session:
   bilingual-page field that can be replaced with approved values later.
 - Replaced About's repeatable teacher list with one supervising-teacher object
   and removed the provisional additional lecturer/researcher.
+
+### 2026-09-04 — Design system Phase A: tokens and stylesheet structure
+
+**Decisions**
+
+- Adopted a hybrid visual direction. The SICT reference supplies the
+  institutional shell — one section-heading pattern, flat cards in even grids,
+  disciplined color, predictable rhythm. EPA@Lab keeps its own signature: the
+  full-screen photographic Home hero with the animated power network, the
+  technical SVG motifs, and monospace technical labels.
+- Retired the `01`–`08` section numbering on inner pages; it remains on Home
+  only, where the sequence is a genuine navigational aid.
+- Established `docs/DESIGN_SYSTEM.md` as the canonical design reference. The
+  handbook keeps decisions; the design document keeps implementation rules.
+
+**Problem**
+
+- Styling had been written page by page with no shared layer. One 63 KB
+  `main.css` held nine hero variants, ten card variants, and five
+  section-heading patterns doing the same job, with breakpoints at 350, 600,
+  601, 900, and 901 px plus three height-based queries. Tokens covered color
+  only, so every component restated its own `clamp()` values.
+
+**Implemented**
+
+- Split `assets/css/main.css` into twelve ordered parts under
+  `assets/css/parts/`, concatenated by `head.html` into the same single
+  fingerprinted stylesheet. The numeric prefixes define the cascade: tokens,
+  base, header, components, page files, home, footer, responsive.
+- Extended the token set beyond color to typography, space, shape, elevation,
+  and motion, and added an `--on-dark-*` group to replace the roughly 48 inline
+  `rgb(255 255 255 / x%)` literals as components are migrated.
+- Removed dead rules: the unused legacy `hero` block, `signal`, `intro-copy`,
+  `card__index`, the research `filter-pill` controls left over from the removed
+  category filter, and the decorative fake-map elements superseded by the
+  Google Maps embed.
+
+**Problems and fixes**
+
+- `var(--muted)` was used three times but never defined, so the declaration was
+  invalid and dropped. Publication-table headings, publication summaries, and
+  project-fact labels were inheriting their parent color instead of the muted
+  slate. Corrected to `var(--text-muted)`.
+
+**Verification**
+
+- Diffed every declaration in the original stylesheet against the concatenated
+  parts. The only differences are the intended deletions and the one rewrite of
+  a rule that referenced the unused `.stats__intro` selector.
+- Confirmed the built stylesheet's byte offsets follow the intended cascade
+  order, and that all brace counts balance per part.
+- `hugo --minify --printPathWarnings` succeeds: 28 Mongolian pages, 26 English
+  pages, 24 processed images.
+- Rendered Home and Publications at 1440 px and confirmed no visual regression
+  from the restructure.
+
+**Next recommended action**
+
+- Phase B: reduce nine heroes to two, ten cards to three, and five
+  section-heading patterns to one; migrate the on-dark literals to tokens and
+  standardise the breakpoints.
+
+### 2026-09-04 — Design system Phase B: one section-heading pattern
+
+**Implemented**
+
+- Added `layouts/partials/section-head.html`, a single heading component
+  replacing `section-heading`, `about-section-heading`,
+  `members-section-heading`, `home-overview__heading`, and
+  `generation-heading`. It takes a required title plus optional eyebrow,
+  supporting paragraph, Home sequence index, short technical meta note,
+  "view all" link, and an on-dark flag.
+- Adopted the reference site's short orange rule beneath the section title. The
+  eyebrow is muted inside a section head so the rule is the only accent there;
+  `.eyebrow` remains orange in every other context.
+- Applied the component to all five Home section heads, all three About heads,
+  and both the Members leadership head and the repeating generation heads.
+- Made the section head own the space beneath itself and removed the now
+  duplicated `margin-top` from the grids and lists that follow one.
+
+**Verification**
+
+- Confirmed the rendered page counts: five heads on Home in both languages,
+  three on About, three on Members.
+- Reviewed Home, About, and Members at 1440 px in both the light and the
+  navy-surface contexts; corrected the sequence index and "view all" link to
+  share one baseline-aligned row after the first render stacked them awkwardly.
+- Confirmed the breakpoint rules land in the correct media blocks in the built
+  stylesheet: split heads stack at tablet, all heads stack and left-align at
+  mobile.
+- `hugo --minify --printPathWarnings` succeeds and no layout or stylesheet still
+  references the five removed heading classes.
+
+**Not verified**
+
+- Visual checks at mobile and tablet widths could not be performed in this
+  session. The window manager on this machine tiles browser windows and ignores
+  programmatic resize requests, so every screenshot returned at desktop width.
+  The mobile rules were verified in the built CSS rather than on screen and
+  should be confirmed in a browser before this step is considered closed.
+
+**Known issue, deferred**
+
+- On desktop the Mentor and Projects sections are forced to `min-height:
+  100svh`, leaving a large empty band beneath their content when it does not
+  fill a viewport. This predates the section-head work and belongs to Phase C.
+
+**Next recommended action**
+
+- Continue Phase B with the card consolidation: ten card variants down to
+  `media-card`, `list-row`, and `person-card`.
+
+### 2026-09-04 — Design system Phase B: three card components
+
+**Implemented**
+
+- Replaced eight near-duplicate card variants with three components, each
+  driven by its own partial. `media-card` covers Home project cards, Home news
+  cards, and — through a feature modifier — the About achievement cards.
+  `person-card` covers the Members grid and the Home newest-generation strip.
+  `list-row` covers the Projects index rows, the About supervising-lecturer
+  entry, and the Members leadership cards.
+- Added shared `card-grid--3` and `card-grid--2` helpers, replacing five
+  near-identical grid declarations, and made `provisional-badge` the single
+  overlay label for draft content on any card media.
+- Kept `partner-card` separate because it is a text row with no media, and kept
+  the generic `card` used by the default list template.
+- Made the card arrow decorative markup rather than a second link. The card
+  title already links to the same destination, so the previous arrow duplicated
+  it for keyboard and screen-reader users.
+- Removed the dead `project-card__media--*` category gradients, left over from
+  the removed research-category cards, and the provisional-badge override whose
+  selector was no longer reachable.
+
+**Problems and fixes**
+
+- The first version of the supervising-lecturer row inherited the full-width
+  project-row proportions, so the portrait filled more than half the row and
+  pushed the biography out of view. Added a portrait variant that restores the
+  narrow image column and its own spacing.
+- `teacher-list` and the new row component both drew a top border, producing a
+  doubled rule. The container's border was removed; the row now owns it.
+
+**Verification**
+
+- Component counts in the built pages match the content: six media cards and
+  one person card on Home in both languages, two achievements and one lecturer
+  row on About, two person cards and one leadership row on Members, three rows
+  on Projects.
+- Reviewed Home, About, Members, and Projects at desktop width in both
+  languages, confirming alternating project rows, the achievement year stamp,
+  the leadership term range, portrait proportions, badge placement, and card
+  hover behaviour.
+- Confirmed the shared badge rule now precedes its overrides in the built
+  stylesheet and that all stylesheet parts remain brace-balanced.
+- `hugo --minify --printPathWarnings` succeeds and no layout or stylesheet
+  references any of the eight removed card classes.
+
+**Not verified**
+
+- As in the previous step, mobile and tablet widths could not be checked
+  visually because the window manager on this machine ignores programmatic
+  browser resizing. The breakpoint rules were updated and read back from the
+  built stylesheet, but they need confirmation in a real browser.
+
+**Noted**
+
+- `layouts/partials/research-motif.html` and its stylesheet rules are not called
+  by any layout. They are the technical SVG diagrams named in the design
+  direction, so they were left in place rather than deleted; they should be
+  either reinstated somewhere or removed deliberately.
+
+**Next recommended action**
+
+- Finish Phase B by consolidating the seven remaining hero variants into
+  `home-hero` and a single `page-hero`.
+
+### 2026-09-04 — Design system Phase B complete: one page hero
+
+**Implemented**
+
+- Replaced seven hero variants with a single `page-hero` partial and component.
+  Home keeps its own signature hero unchanged. Supplying an image selects the
+  split navy/photograph shape used by About and the project detail pages;
+  otherwise the component renders the navy band with the title left and
+  supporting text plus an optional count right.
+- Replaced page-specific hero decorations with generic slots: a labelled stamp
+  for the About founding date, a vertical media label for project detail pages,
+  and a back link.
+- Extended the band hero to the News list, the generic single-page template,
+  and the 404 page, which previously used a lighter separate header. Those
+  three pages now match the rest of the site.
+- Deleted the unused research-motif partial and its stylesheet rules at the
+  stakeholder's direction.
+
+**Verification**
+
+- Every page renders exactly one hero, and the split variant appears only on
+  About and the three project detail pages.
+- Reviewed About, a project detail page, Publications, News, Contact in English,
+  and the 404 page at desktop width; confirmed the founding stamp, back link,
+  count figure, decorative circle, and draft label all render in the unified
+  component.
+- Audited every class selector in the stylesheet against the built HTML. No
+  orphaned rules remain; the eight unmatched selectors are conditional-render
+  states their templates still emit, such as the missing-portrait placeholder
+  and the empty-section message. Removed one genuinely dead selector found this
+  way.
+- `hugo --minify --printPathWarnings` succeeds and all stylesheet parts remain
+  brace-balanced.
+
+**Result of Phases A and B**
+
+- One 63 KB stylesheet became twelve ordered parts totalling 48 KB minified.
+- Nine hero variants became two, ten card variants became three, and five
+  section-heading patterns became one, each with a documented partial.
+
+**Not verified**
+
+- Mobile and tablet widths still have not been checked visually; the window
+  manager on this machine ignores programmatic browser resizing. Every
+  breakpoint rule was updated and read back from the built stylesheet, but the
+  responsive behaviour of the new section-head, card, and hero components needs
+  confirmation in a real browser before Phase D.
+
+**Next recommended action**
+
+- Phase C: apply the remaining institutional details from the reference — the
+  header utility strip, the navy news-card variant, and the statistics
+  treatment — and fix the desktop full-viewport rule that leaves a large empty
+  band beneath the Mentor and Projects sections.
+
+### 2026-09-04 — Design system Phase C: institutional language
+
+**Implemented**
+
+- Added a utility strip above the primary navigation, carrying the laboratory's
+  location and, once their site parameters are set, its email address and
+  social accounts. It is hidden on Home so the full-bleed hero still opens the
+  page uninterrupted. The theme toggle and language switcher deliberately
+  remain in the main navigation row, so no function depends on the strip.
+- Added the solid navy News card treatment, including the reference site's
+  orange signal dot before the first metadata item. Projects keep the light
+  card, so the two Home sections now read as distinct kinds of content.
+- Migrated 24 on-dark opacity literals to the `--on-dark-*` and
+  `--line-on-dark` tokens. Only values within three percentage points of a
+  token were converted, so no visible change results; genuinely distinct
+  values were left as literals rather than flattened into the wrong bucket.
+
+**Problems and fixes**
+
+- The Mentor and Projects sections were pinned to `100svh` on desktop, leaving
+  a large empty band beneath their content. Removed that rule together with the
+  shrink-to-fit compensations that existed only to squeeze content into a
+  viewport. Both sections now use the normal section rhythm, and height-based
+  media queries are confined to the Home hero and overview.
+- With that empty band gone, the mentor greeting's justified setting became
+  clearly visible and clearly wrong: it opened wide rivers of white space
+  because Mongolian words are long and do not hyphenate, leaving too few break
+  opportunities per line. This reverses the earlier decision to justify that
+  quote; it is now ragged-right with balanced wrapping.
+
+**Deliberately not changed**
+
+- The Home statistics. The reference draws its figures as circular progress
+  rings, but EPA's large numerals with vertical rules already read well and are
+  more honest about values that remain provisional. Copying the rings would
+  have been mimicry without benefit.
+
+**Verification**
+
+- Reviewed Home, About, and Members at desktop width in both the dark and light
+  themes. Confirmed the utility strip renders the correct localized address in
+  each language, is absent on Home, and stacks correctly with the navy hero
+  beneath the white navigation row.
+- Confirmed the Mentor to Projects transition now flows with normal spacing and
+  that the mentor greeting sets cleanly without justification rivers.
+- Re-ran the selector audit: no new orphaned rules: the same seven
+  conditional-render selectors remain, all still emitted by their templates.
+- `hugo --minify --printPathWarnings` succeeds and all parts remain
+  brace-balanced.
+
+**Not verified**
+
+- Mobile and tablet widths, for the third time. The window manager on this
+  machine ignores programmatic browser resizing, so all verification has been
+  at desktop width. This is now the single largest gap in the design work and
+  is the first task of Phase D.
+
+**Next recommended action**
+
+- Phase D quality assurance, starting with a real-browser pass at 360, 768, and
+  1440 px in both languages and both themes, then contrast, reduced motion, and
+  keyboard navigation.
+
+### 2026-09-04 — Grid and hero scales, then the News section
+
+**Two global fixes, applied before page work so it would not be redone**
+
+- Split the card grid by what the card carries. Media cards still drop to one
+  column on phones, because their metadata, title and three-line summary become
+  unreadable in a 150 px column. Person cards now hold two columns down to
+  340 px, with reduced padding and type, which halves the scroll on a long
+  members page. The one-column threshold is deliberately 340 px rather than
+  380 px, because 360, 375 and 390 are the most common phone widths.
+- Rebalanced the page hero into three scales. The split photograph hero on
+  About and project detail is unchanged. The band hero used by the section
+  indexes lost half its padding and had its title capped at 4rem: at 1440x900 a
+  two-line title previously consumed about 69% of the first screen. News
+  articles get a distinct light article header instead.
+
+**News section built**
+
+- News previously had no templates of its own and fell back to the generic
+  ones, so its index rendered articles as plain bordered boxes with no image
+  while Home showed the same three articles as rich navy cards, and the article
+  page was a hero plus prose. Added `news/list.html` and `news/single.html`.
+- The index now uses the same inverted navy media cards as Home, showing
+  category and date. The article page has a back link, category, title,
+  summary, date, cover photograph, body, optional tags and optional gallery.
+- Added `data/news_categories.toml` with the five baseline keys from the content
+  model and their localized labels, following the generations pattern, plus a
+  `news-category.html` partial that resolves a key and falls back to showing the
+  raw key so an unexpected value is visible rather than blank.
+- The content model marks `date` required, but all three sample records omit it
+  and say in their body text that the date awaits laboratory review. Rather than
+  invent dates, the templates render a visible pending state and sort by
+  editorial weight until real dates arrive, at which point they switch to
+  newest-first automatically.
+
+**Verification**
+
+- Verified at real mobile and tablet widths for the first time, by rendering
+  pages inside sized iframes: media queries respond to iframe width, which works
+  around this machine's window manager refusing programmatic browser resizing.
+- Confirmed by computed style that the people grid resolves to two columns at
+  360 px and one at 320 px, and inspected the rendered cards at both.
+- Reviewed the News index and article at 360 px and 768 px and the article at
+  desktop width, in both languages. Category labels and the pending-date state
+  resolve correctly in Mongolian and English.
+- `hugo --minify --printPathWarnings` succeeds; all parts remain
+  brace-balanced. The selector audit reports eleven unmatched selectors, all
+  conditional-render states, four of them the new gallery and tag rules that
+  appear once a record carries those fields.
+
+**Problems and fixes**
+
+- The first people-grid threshold of 380 px meant almost every real phone fell
+  back to one column, defeating the change. Lowered to 340 px after measuring
+  the rendered column width.
+- The new article rules were first appended as a second `max-width: 600px`
+  block at the end of the responsive file, breaking the one-block-per-breakpoint
+  rule this project documents. Folded into the existing block.
+
+**Next recommended action**
+
+- Continue the page-by-page pass with Publications, then Contact, Members,
+  Projects, About and Home, checking each at 360, 768 and 1440 px as it is done.
+
+### 2026-09-04 — News and index header scale reduced
+
+**Problem**
+
+- Both the News index and the News article rendered their title at 64 px, and
+  the article's lead, cover height and internal spacing were scaled to match a
+  title that large. A one-word index title such as "Мэдээ" read as a billboard.
+
+**Fixes**
+
+- Reduced the band-hero title to a 2.9 rem maximum and its lead to 1.12 rem. An
+  index title is a label rather than a statement. This applies to every index
+  page, not just News, because they share the one hero component.
+- Reduced the article title to a 3.2 rem maximum, one step above an index label
+  because there the title is the content, and brought the lead, header padding,
+  back-link spacing, meta spacing and cover height down with it. The cover
+  maximum fell from 34 rem to 26 rem.
+- Added a reduced top padding for the block that follows any page header. The
+  standard section rhythm is tuned for the gap between sections; stacked on the
+  header's own bottom padding it produced 208 px of dead space before the first
+  content on every index page. Measured on News, the gap is now 56 px. Split
+  heroes keep more breathing room, since About and project detail are editorial
+  compositions.
+
+**Verification**
+
+- Measured the gap in the browser before and after rather than estimating, and
+  confirmed the new rule resolves to the correct next sibling on all seven pages
+  that use a hero.
+- Reviewed the News index, News article and Publications at desktop width, and
+  at 360 px and 768 px through sized iframes.
+- `hugo --minify --printPathWarnings` succeeds.
+
+**Next recommended action**
+
+- Continue the page-by-page pass with Publications, then Contact, Members,
+  Projects, About and Home.
+
+### 2026-09-04 — News article restructured to the stakeholder's reference
+
+**Reference**
+
+- `dev.zuttomongolia.com/en/news/nomadic-culture`, supplied by the stakeholder
+  as the structure to follow for News. Measured rather than eyeballed: at a
+  1680 px viewport its container is 1312 px, the title and cover span it fully,
+  and the body is a 768 px column centred beneath them.
+
+**Implemented**
+
+- Replaced the article header with that structure: a breadcrumb, then the title
+  and cover photograph at full container width, then a byline row with category,
+  date and reading time on the left and share controls on the right. The body is
+  a 48 rem column centred under them. EPA's container is 1216 px, so the body
+  measure matches the reference's 768 px exactly.
+- Dropped the summary paragraph from the article page. `summary` is defined in
+  the content model as a card and metadata field, and the reference shows no
+  such lead; repeating it under the title duplicated the card the reader just
+  clicked.
+- Added reading time from Hugo's built-in count, localized in both languages.
+- Added two share controls: a copy-link button and a Facebook share link. No
+  third-party script is loaded; the Facebook control is a plain outbound URL and
+  the copy button uses the clipboard API with a silent fallback, which keeps the
+  no-tracker requirement intact.
+- The article gallery moved to three columns to sit under the wider layout.
+
+**Problems and fixes**
+
+- The cover ignored its CSS `aspect-ratio` and rendered at a fixed 562 px at
+  every width. The responsive-image partial emits `width` and `height`
+  attributes, and the height attribute wins unless the rule also sets
+  `height: auto`. Fixed on both the cover and the gallery images, which were the
+  only two rules setting a ratio directly on an `img`; the card components set
+  theirs on a wrapper and were unaffected. Recorded in the design document so the
+  trap is not repeated.
+- The breadcrumb wrapped to two lines on a phone. It is now a single
+  non-wrapping row whose current-page label truncates with an ellipsis.
+- The byline separators stranded a middot at the start of the second line when
+  the facts wrapped on a phone. The separators are now suppressed at that width
+  and spacing carries the rhythm instead.
+- An intermediate edit left two `flex-wrap` declarations in the breadcrumb rule,
+  so the intended `nowrap` was overridden by the later `wrap`. Corrected.
+
+**Verification**
+
+- Confirmed by measurement that the title, cover and byline span the 1216 px
+  container while the body is 768 px and centred, matching the reference's
+  proportions.
+- Confirmed the cover now resolves to 2.2:1 on desktop and 3:2 on a phone.
+- Reviewed the article at 360 px, 768 px and desktop width, and confirmed the
+  localized category, reading time and pending-date strings in both languages.
+- `hugo --minify --printPathWarnings` succeeds; all stylesheet parts remain
+  brace-balanced.
+
+**Open question for the stakeholder**
+
+- The reference shows an author byline. EPA articles are laboratory-authored and
+  the content model has no author field, so the byline carries category, date and
+  reading time instead. Add an author field only if the laboratory wants
+  individual attribution.
+
+**Next recommended action**
+
+- Confirm this article structure, then continue the page-by-page pass with
+  Publications, Contact, Members, Projects, About and Home.
+
+### 2026-09-04 — News category removed and sample set expanded
+
+**Decisions**
+
+- News records carry no category. The stakeholder asked for date and reading
+  time only, so the field, the `data/news_categories.toml` label file and the
+  `news-category.html` partial added earlier the same day were all removed
+  rather than left as unused machinery, and the content model was updated.
+- Sample News records now carry invented publication dates. Every record is
+  still marked `provisional = true` and renders a visible draft badge, and this
+  matches how the Projects and Publications samples already work: those carry
+  invented clients, durations and years. Without dates the newest-first ordering
+  and the date display could not be evaluated at all.
+
+**Implemented**
+
+- Removed the category from the article byline and from the index card
+  metadata. Cards now show date on the left and reading time on the right; the
+  article byline shows date, reading time and the draft badge.
+- Expanded the sample set from three records to seven bilingual records, each
+  with a date, a cover drawn from the existing approved image set, and three
+  paragraphs of body text so that reading time and the centred body column are
+  exercised. Three are flagged `featured` for the Home strip.
+- Replaced the former body text of the three original records, which said the
+  publication date was pending, since those records now carry dates.
+
+**Verification**
+
+- Confirmed the index lists seven records newest-first in both languages, that
+  Home shows exactly the three featured records, and that no category string
+  remains anywhere in the layouts, data, archetypes, content or stylesheets.
+- Reviewed the index and an article at 360 px, 768 px and desktop width.
+- `hugo --minify --printPathWarnings` succeeds. The selector audit reports
+  twelve unmatched selectors, all conditional-render states; the pending-date
+  style is now among them precisely because every sample record has a date.
+
+**Still to confirm with the laboratory**
+
+- All seven records are invented for layout evaluation. Titles, summaries, body
+  text, dates and the pairing of photographs to stories must all be replaced or
+  approved before launch, and the Mongolian copy should be read by a native
+  speaker familiar with the subject.
+- Reading time renders as one minute for every sample because the bodies are
+  short and similar in length; real articles will vary.
+
+**Next recommended action**
+
+- Continue the page-by-page pass with Publications, then Contact, Members,
+  Projects, About and Home.
+
+### 2026-09-04 — Index page header reworked
+
+**Assessment**
+
+- Reviewed the band hero against the reference's own inner pages. SICT's News
+  index uses a band roughly 180 px tall carrying a title and one line of
+  description and no count; its About page adds a photograph behind the band, a
+  breadcrumb, and the orange rule beneath the title.
+
+**Problems identified**
+
+- The count was actively counterproductive. It rendered "3 draft projects",
+  "2 draft records" and "2 draft profiles" in large orange numerals, advertising
+  how little approved content exists. Counts suit the reference's home page,
+  where the figures are large; the reference uses none on inner pages.
+- At 317 px the band was taller than the reference's while saying less.
+- The eyebrow, "EPA@Lab / Мэдээ", repeated the highlighted navigation item and
+  the title directly beneath it.
+- Section headings carried the reference's orange rule but page heroes did not,
+  so the same role had two treatments within EPA's own system.
+
+**Implemented**
+
+- Removed the count from the component and every call site.
+- Replaced the eyebrow with a breadcrumb, extracted into a shared
+  `breadcrumb.html` partial now used by both the page hero and the news article
+  header, and moved its styles into the shared components file.
+- Added the orange rule beneath the hero title, matching `section-head`.
+- Reduced the band to roughly 250 px and made it a single column, with the
+  supporting line beneath the title rather than in a right-hand column.
+- Replaced the project detail back link with a three-level breadcrumb, which
+  gives the same escape route and more context.
+
+**Verification**
+
+- Confirmed the breadcrumb renders the correct trail on all seven pages that use
+  a hero, including the three-level project detail trail, and that no count
+  markup remains anywhere in the built output.
+- Measured the News hero at 250 px, down from 317 px.
+- Reviewed the index, split hero and 404 at desktop, and the index, project
+  detail and Publications at 360 px and 768 px. Breadcrumbs hold a single line at
+  every width. Confirmed the orange rule by computed style after it proved too
+  small to read in a compressed screenshot.
+- `hugo --minify --printPathWarnings` succeeds; parts remain brace-balanced.
+
+**Deferred**
+
+- The reference places a photograph behind the band on its About page. EPA could
+  do the same on Projects and Members, but it would start competing with the
+  split hero those pages' siblings already use, so it is left as a separate
+  decision.
+
+**Next recommended action**
+
+- Continue the page-by-page pass with Publications, then Contact, Members,
+  Projects, About and Home.
+
+### 2026-09-04 — Utility strip removed
+
+- Removed the thin address strip above the navigation, added earlier the same
+  day, at the stakeholder's direction. Its markup, styles and breakpoint rules
+  are all gone, and the design document no longer lists it among the borrowed
+  reference patterns.
+- Nothing is lost by it. With no confirmed public email or social accounts the
+  strip carried only the laboratory address, which the footer shows on every
+  page and the Contact page shows in full. The header is now a single
+  navigation row.
+- The theme toggle and language switcher were deliberately kept in the
+  navigation row when the strip was built, so no function depended on it.
+- `hugo --minify --printPathWarnings` succeeds; the stylesheet is 51.7 KB.
+
+### 2026-09-04 — Cards rounded
+
+**Implemented**
+
+- Added a `--radius-card` token, set to 12 px, and applied it to every card
+  surface: media cards, person cards, the leadership panel, the generic list
+  card, the empty state and the publications table wrapper. Each already clipped
+  its children, or was given `overflow: hidden`, so photographs follow the
+  corner rather than poking through it.
+- Removed the rule that had squared off the publications table, so it now
+  matches the cards elsewhere.
+- Left full-width `list-row` records square. They are separated by rules running
+  the width of the container rather than being panels, so a corner radius would
+  have nothing to sit on. Page heroes and the news cover stay square for the
+  same reason.
+
+**Note on direction**
+
+- This departs from the reference, which keeps its cards square, and from the
+  design document's previous wording. The document now records the divergence as
+  deliberate. Changing the single token adjusts every card at once.
+
+**Verification**
+
+- Confirmed by computed style that the person card and leadership panel resolve
+  to a 12 px radius with clipping active, that the portrait is clipped by its
+  card, and that the page hero remains square.
+- Confirmed by fetching each page that the token reaches every card surface in
+  use across Home, News, About, Publications and Members, and that the Projects
+  index correctly has none.
+- `hugo --minify --printPathWarnings` succeeds; parts remain brace-balanced.
+
+**Not verified**
+
+- No screenshot. The browser extension's screenshot capture began timing out
+  partway through this change and did not recover across a fresh tab, so the
+  rounding has been confirmed only through computed styles and the built markup,
+  not seen. It should be eyeballed before the next change.
+
+### 2026-09-04 — Pages CMS configuration
+
+**Implemented**
+
+- Added `.pages.yml`, covering every content type the site has: Home, About and
+  Contact as single files; News, Projects, Publications and Members as
+  collections; the two reference-data files; and the section heading files.
+  Twenty-four entries in nine labelled groups. Layout, configuration and
+  template files are deliberately not exposed to the editor.
+- Every content type appears twice, once per language. Content is stored as
+  bilingual page bundles, and a Pages CMS collection filters files with
+  `exclude`, which matches bare filenames across all subfolders. Because every
+  bundle uses the same two filenames, the Mongolian collection excludes
+  `index.en.md` and the English one excludes `index.mn.md`. Field definitions
+  are shared between the two through YAML anchors, so a change is made once.
+- Configured two media stores: images under `assets/images`, written into
+  content as `images/...` to match how the responsive-image partial resolves
+  them; and documents under `static/files`, written as `/files/...` because the
+  publications template renders that value through `relURL`. Added
+  `static/files` with a `.gitkeep`.
+- Field labels are Mongolian first, matching the editor's working language.
+
+**How this was verified**
+
+- The configuration schema was read from the Pages CMS source
+  (`lib/config-schema.ts`, `types/field.ts`, and the collection API route)
+  rather than written from memory, because the published documentation's
+  subpages returned 404.
+- Two findings shaped the file. First, the content entry schema is `.strict()`,
+  so any invented key rejects the whole configuration. Second, `extension` is
+  **not** a valid key even though the collection route reads `schema.extension`;
+  that read therefore always yields an empty string and performs no filtering,
+  which is why language separation uses `exclude` instead.
+- Wrote a checker that walks the parsed YAML and validates every entry, view,
+  media and field key, plus every field type, against the key sets taken from
+  the Zod schema. It reports no invalid keys or types.
+- Wrote a second checker that parses each content type's TOML front matter and
+  compares it against the configured field shape, including nested objects and
+  object lists. Every existing key in all seven content types is editable.
+
+**Still to do before the editor can use it**
+
+- Pages CMS must be connected to the repository, which requires the GitHub
+  organisation and owner to be settled first.
+- Review the forms with the actual editor. Labels, field order and which fields
+  are required should be adjusted to how that person actually works; this is the
+  Phase 2 item "Review the proposed experience with the non-technical editor".
+- `gallery` and `tags` on News, and `gallery` on Projects, are offered by the
+  form but absent from every current record. They come from the content model
+  and will populate when real content arrives.
+- The configuration has not been exercised against a live Pages CMS instance.
+  It is validated structurally, not end to end.
+
+**Next recommended action**
+
+- Settle the GitHub organisation so Pages CMS can be connected, then walk the
+  editor through the forms.

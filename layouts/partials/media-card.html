@@ -1,0 +1,34 @@
+{{- /*
+  Image-on-top card. Covers project cards, news cards, and achievement cards.
+
+  Parameters:
+    title      required  card title
+    url                  makes the media and title a link, and shows the arrow
+    image, imageAlt      cover image path and alternative text
+    sizes                responsive sizes attribute; defaults to a 3-up grid
+    badge                overlay label on the media, e.g. a provisional marker
+    stamp                overlay stamp on the media, e.g. an achievement year
+    metaLeft, metaRight  short technical metadata above the title
+    summary              card body text, clamped to three lines
+    note                 pending/sample note below the summary
+    feature              true for the larger, borderless achievement variant
+    invert               true for the navy news treatment
+*/ -}}
+{{- $sizes := default "(max-width: 760px) 100vw, 33vw" .sizes -}}
+<article class="media-card{{ if .feature }} media-card--feature{{ end }}{{ if .invert }} media-card--invert{{ end }}">
+  {{ if .url }}<a class="media-card__media" href="{{ .url }}" aria-label="{{ .title }}">{{ else }}<div class="media-card__media">{{ end }}
+    {{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" (default "" $.imageAlt) "class" "media-card__image" "sizes" $sizes) }}{{ end }}
+    {{ with .badge }}<span class="provisional-badge">{{ . }}</span>{{ end }}
+    {{ with .stamp }}<time class="media-card__stamp">{{ . }}</time>{{ end }}
+  {{ if .url }}</a>{{ else }}</div>{{ end }}
+  <div class="media-card__body">
+    {{ if or .metaLeft .metaRight }}
+      <p class="media-card__meta">{{ with .metaLeft }}<span>{{ . }}</span>{{ end }}{{ with .metaRight }}<span>{{ . }}</span>{{ end }}</p>
+    {{ end }}
+    <h3>{{ if .url }}<a href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h3>
+    {{ with .summary }}<p class="media-card__summary">{{ . }}</p>{{ end }}
+    {{ with .note }}<span class="sample-note">{{ . }}</span>{{ end }}
+    {{/* Decorative: the title link above already reaches the same destination. */}}
+    {{ if .url }}<span class="card-arrow" aria-hidden="true">↗</span>{{ end }}
+  </div>
+</article>

@@ -1,0 +1,54 @@
+{{- /*
+  Full-width row pairing a picture with a block of copy. Covers the Projects
+  index rows, the About supervising-lecturer entry, and — with the compact
+  modifier — the Members leadership cards.
+
+  Rows alternate their media side automatically; the compact variant does not.
+
+  Parameters:
+    title      required  row title
+    url                  makes the media and title a link, and shows the action
+    level                heading element for the title, "h2" (default) or "h3"
+    image, imageAlt      image path and alternative text
+    sizes                responsive sizes attribute
+    portrait             true for a narrow 4:5 portrait column instead of a filled panel
+    badge                overlay label on the media, e.g. a draft marker
+    mark                 small square marker in the media corner, e.g. "01"
+    number               technical sequence number above the title
+    eyebrow              small label above the title
+    lead                 leading paragraph, set slightly larger
+    body                 secondary paragraph in muted text
+    facts                list of dicts with "label" and "value"
+    meta                 short accent line below the copy, e.g. a term range
+    note                 pending/sample note at the end of the copy
+    linkURL, linkText    action link at the end of the copy
+    compact              true for the half-width leadership variant
+*/ -}}
+{{- $level := default "h2" .level -}}
+{{- $sizes := default "(max-width: 700px) 100vw, 48vw" .sizes -}}
+<article class="list-row{{ if .compact }} list-row--compact{{ end }}{{ if .portrait }} list-row--portrait{{ end }}">
+  {{ if .url }}<a class="list-row__media" href="{{ .url }}">{{ else }}<div class="list-row__media">{{ end }}
+    {{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" (default "" $.imageAlt) "class" "list-row__image" "sizes" $sizes) }}{{ end }}
+    {{ with .badge }}<span class="draft-label">{{ . }}</span>{{ end }}
+    {{ with .mark }}<span class="list-row__mark" aria-hidden="true">{{ . }}</span>{{ end }}
+  {{ if .url }}</a>{{ else }}</div>{{ end }}
+  <div class="list-row__copy">
+    {{ with .number }}<p class="list-row__number">{{ . }}</p>{{ end }}
+    {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+    {{ if eq $level "h3" }}
+      <h3>{{ if .url }}<a href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h3>
+    {{ else }}
+      <h2>{{ if .url }}<a href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h2>
+    {{ end }}
+    {{ with .lead }}<p class="list-row__lead">{{ . }}</p>{{ end }}
+    {{ with .body }}<p class="list-row__body">{{ . }}</p>{{ end }}
+    {{ with .facts }}
+      <dl class="list-row__facts">
+        {{ range . }}<div><dt>{{ .label }}</dt><dd>{{ default "—" .value }}</dd></div>{{ end }}
+      </dl>
+    {{ end }}
+    {{ with .meta }}<span class="list-row__meta">{{ . }}</span>{{ end }}
+    {{ with .note }}<span class="sample-note">{{ . }}</span>{{ end }}
+    {{ with .linkURL }}<a class="list-row__link" href="{{ . }}">{{ $.linkText }} <span aria-hidden="true">↗</span></a>{{ end }}
+  </div>
+</article>

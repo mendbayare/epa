@@ -1,10 +1,6 @@
 {{ define "main" }}
-  <section class="page-header">
-    <div class="container page-header__inner">
-      <p class="eyebrow">404</p>
-      <h1>{{ if eq site.Language.Lang "mn" }}Хуудас олдсонгүй{{ else }}Page not found{{ end }}</h1>
-      <a class="button" href="{{ site.Home.RelPermalink }}">{{ if eq site.Language.Lang "mn" }}Нүүр хуудас{{ else }}Go home{{ end }}</a>
-    </div>
-  </section>
+  {{ partial "page-hero.html" (dict
+    "title" (cond (eq site.Language.Lang "mn") "Хуудас олдсонгүй" "Page not found")
+    "action" (dict "url" site.Home.RelPermalink "text" (cond (eq site.Language.Lang "mn") "Нүүр хуудас" "Go home"))) }}
 {{ end }}
 
