@@ -54,7 +54,7 @@ content:
           - name: stats
             label: Тоон үзүүлэлт
             type: object
-            list: { min: 0, max: 3 }
+            list: { min: 0, max: 3, collapsible: false }
             fields:
               - { name: key, label: Түлхүүр, type: string, required: true }
               - { name: value, label: Утга, type: string, required: true }

@@ -2251,6 +2251,26 @@ At the end of every working session:
   compares it against the configured field shape, including nested objects and
   object lists. Every existing key in all seven content types is editable.
 
+**Validating the configuration**
+
+The configuration can be checked without connecting Pages CMS, by running the
+project's own Zod schema against it. Do this in a scratch directory, never in
+this repository, which is deliberately free of Node dependencies:
+
+1. Download `lib/config-schema.ts` from `pages-cms/pages-cms`.
+2. Replace its `@/fields/registry` import with a stub exporting
+   `fieldTypes` as a Set of the field type names.
+3. `npm install zod@3 tsx yaml`. Zod 4 overflows the stack on the schema's
+   recursive definitions, so version 3 is required.
+4. Parse `.pages.yml` with `yaml` and run `ConfigSchema.safeParse` on it,
+   printing `error.issues` and recursing into `unionErrors`, which is where
+   the useful messages live.
+
+This caught a real defect that a key-by-key check had missed: in the object
+form of `list`, `collapsible` is not optional in the schema even though the
+error message mentions only `min` and `max`. `list: { min: 0, max: 3 }` was
+rejected until `collapsible: false` was added.
+
 **Still to do before the editor can use it**
 
 - Pages CMS must be connected to the repository, which requires the GitHub
