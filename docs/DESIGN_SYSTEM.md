@@ -207,6 +207,10 @@ block applies. The one-column threshold is 340 px, not 380 px: 360, 375 and 390
 are the most common phone widths and must keep two columns.
 
 `provisional-badge` is the one overlay label for draft content on any card media.
+Its counterpart `draft-label` is the same marker set inline in text flow rather
+than laid over a photograph, and is used by the page hero and the news byline.
+Both live in `30-components.css`. Do not use `draft-label` as an overlay: the
+solid accent fill is meant to be read against the page, not against an image.
 
 Conventions:
 

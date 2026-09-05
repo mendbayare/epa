@@ -1,6 +1,5 @@
 /* Projects index and project detail. */
 .projects-index { padding-block: clamp(4rem, 9vw, 8rem); }
-.draft-label { display: inline-flex; width: fit-content; padding: .45rem .65rem; color: var(--white); background: var(--accent-600); font: 700 .63rem/1.2 var(--font-tech); letter-spacing: .07em; text-transform: uppercase; }
 
 .project-detail { padding-block: clamp(4rem, 9vw, 8rem); }
 .project-detail .project-facts { margin-bottom: clamp(5rem, 10vw, 9rem); grid-template-columns: repeat(4, 1fr); }

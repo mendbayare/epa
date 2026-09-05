@@ -29,7 +29,7 @@
 <article class="list-row{{ if .compact }} list-row--compact{{ end }}{{ if .portrait }} list-row--portrait{{ end }}">
   {{ if .url }}<a class="list-row__media" href="{{ .url }}">{{ else }}<div class="list-row__media">{{ end }}
     {{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" (default "" $.imageAlt) "class" "list-row__image" "sizes" $sizes) }}{{ end }}
-    {{ with .badge }}<span class="draft-label">{{ . }}</span>{{ end }}
+    {{ with .badge }}<span class="provisional-badge">{{ . }}</span>{{ end }}
     {{ with .mark }}<span class="list-row__mark" aria-hidden="true">{{ . }}</span>{{ end }}
   {{ if .url }}</a>{{ else }}</div>{{ end }}
   <div class="list-row__copy">
