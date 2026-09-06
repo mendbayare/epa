@@ -32,13 +32,18 @@
 
 {{- if .invert -}}
   {{/* The solid navy news treatment, with the reference's orange signal dot
-       before the first metadata item. */}}
-  {{- $card = "group flex flex-col overflow-hidden rounded-card border border-transparent bg-navy-900 text-on-dark transition-[border-color,box-shadow,transform] duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-600 hover:shadow-md" -}}
+       before the first metadata item. It uses the deep brand navy rather than
+       a lighter indigo, which means that in the dark theme the card sits on
+       its own color — hence the hairline edge, which is the only thing
+       separating it from the page there. Its arrow is smaller and its ring
+       brighter than the default card's: at 12% white on this ground the
+       border all but disappeared and left a large empty circle. */}}
+  {{- $card = "group flex flex-col overflow-hidden rounded-card border border-line-on-dark bg-navy-950 text-on-dark transition-[border-color,box-shadow,transform] duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-600 hover:shadow-md" -}}
   {{- $media = "relative block aspect-video overflow-hidden bg-navy-950" -}}
   {{- $metaFirst = "inline-flex items-center gap-2 before:size-[.45rem] before:rounded-full before:bg-accent-600 before:content-['']" -}}
   {{- $heading = "m-0 text-xl text-on-dark" -}}
   {{- $summary = "m-0 line-clamp-3 text-[.9rem] text-on-dark-muted" -}}
-  {{- $arrow = "mt-auto grid aspect-square w-10 place-items-center self-end rounded-full border border-line-on-dark text-on-dark transition-[color,border-color,background-color,transform] duration-[180ms] ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-accent-600 group-hover:bg-accent-600 group-hover:text-white" -}}
+  {{- $arrow = "mt-auto grid aspect-square w-8 place-items-center self-end rounded-full border border-on-dark-faint text-[.875rem] text-on-dark transition-[color,border-color,background-color,transform] duration-[180ms] ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-accent-600 group-hover:bg-accent-600 group-hover:text-white" -}}
 {{- else if .feature -}}
   {{/* The borderless About achievement card: wider media, no lift, and a
        summary that runs to its natural length instead of clamping. */}}
