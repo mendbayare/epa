@@ -1,6 +1,9 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
-  <article class="project-page">
+  {{ $fact := "min-h-36 border-r border-b border-line p-[1.2rem] max-sm:min-h-0" }}
+  {{ $factLabel := "mb-[.45rem] font-tech text-[.7rem] leading-[1.3] font-bold tracking-wide text-muted uppercase" }}
+  {{ $copy := "pb-[clamp(4rem,8vw,7rem)] [section+&]:border-t [section+&]:border-line [section+&]:pt-[clamp(4rem,8vw,7rem)]" }}
+  <article>
     {{ partial "page-hero.html" (dict
       "crumbs" (slice
         (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL ""))
@@ -12,23 +15,23 @@
       "sizes" "(max-width: 900px) 100vw, 46vw"
       "mediaLabel" "EPA / PROJECT"
       "badge" (cond .Params.provisional (cond $isMn "Загварын түр агуулга" "Draft sample content") "")) }}
-    <div class="container project-detail">
-      <dl class="project-facts">
-        {{ with .Params.client }}<div><dt>{{ if $isMn }}Захиалагч{{ else }}Client{{ end }}</dt><dd>{{ . }}</dd></div>{{ end }}
-        {{ with .Params.collaborators }}<div><dt>{{ if $isMn }}Хамтран гүйцэтгэгч{{ else }}Collaborators{{ end }}</dt><dd>{{ delimit . ", " }}</dd></div>{{ end }}
-        {{ with .Params.duration_text }}<div><dt>{{ if $isMn }}Хугацаа{{ else }}Duration{{ end }}</dt><dd>{{ . }}</dd></div>{{ end }}
-        {{ with .Params.implementation_site }}<div><dt>{{ if $isMn }}Хэрэгжүүлсэн газар / объект{{ else }}Location / site{{ end }}</dt><dd>{{ . }}</dd></div>{{ end }}
+    <div class="container py-[clamp(4rem,9vw,8rem)]">
+      <dl class="mb-[clamp(5rem,10vw,9rem)] grid grid-cols-4 border-t border-l border-line max-md:grid-cols-2 max-sm:grid-cols-1">
+        {{ with .Params.client }}<div class="{{ $fact }}"><dt class="{{ $factLabel }}">{{ if $isMn }}Захиалагч{{ else }}Client{{ end }}</dt><dd class="m-0 [overflow-wrap:anywhere]">{{ . }}</dd></div>{{ end }}
+        {{ with .Params.collaborators }}<div class="{{ $fact }}"><dt class="{{ $factLabel }}">{{ if $isMn }}Хамтран гүйцэтгэгч{{ else }}Collaborators{{ end }}</dt><dd class="m-0 [overflow-wrap:anywhere]">{{ delimit . ", " }}</dd></div>{{ end }}
+        {{ with .Params.duration_text }}<div class="{{ $fact }}"><dt class="{{ $factLabel }}">{{ if $isMn }}Хугацаа{{ else }}Duration{{ end }}</dt><dd class="m-0 [overflow-wrap:anywhere]">{{ . }}</dd></div>{{ end }}
+        {{ with .Params.implementation_site }}<div class="{{ $fact }}"><dt class="{{ $factLabel }}">{{ if $isMn }}Хэрэгжүүлсэн газар / объект{{ else }}Location / site{{ end }}</dt><dd class="m-0 [overflow-wrap:anywhere]">{{ . }}</dd></div>{{ end }}
       </dl>
-      <div class="project-narrative">
-        <aside><p class="eyebrow">{{ if $isMn }}Төслийн мэдээлэл{{ else }}Project information{{ end }}</p><span>01 — 02</span></aside>
+      <div class="grid grid-cols-[minmax(10rem,.32fr)_minmax(0,.68fr)] gap-[clamp(2rem,8vw,8rem)] max-md:grid-cols-1 max-md:gap-8">
+        <aside class="sticky top-8 h-fit max-md:static"><p class="eyebrow mb-4 text-accent-600">{{ if $isMn }}Төслийн мэдээлэл{{ else }}Project information{{ end }}</p><span class="font-tech text-[.68rem] leading-none font-bold tracking-[.1em] text-muted">01 — 02</span></aside>
         <div>
-          {{ with .Params.objective }}<section class="project-copy"><p class="project-copy__number">01</p><h2>{{ if $isMn }}Зорилго{{ else }}Objective{{ end }}</h2><p>{{ . }}</p></section>{{ end }}
-          {{ with .Params.results }}<section class="project-copy"><p class="project-copy__number">02</p><h2>{{ if $isMn }}Үр дүн, хийсэн ажил{{ else }}Results and completed work{{ end }}</h2><p>{{ . }}</p></section>{{ end }}
-          {{ with .Content }}<div class="prose project-body">{{ . }}</div>{{ end }}
+          {{ with .Params.objective }}<section class="{{ $copy }}"><p class="font-tech text-[.75rem] leading-none font-bold text-accent-600">01</p><h2 class="text-3xl">{{ if $isMn }}Зорилго{{ else }}Objective{{ end }}</h2><p class="max-w-measure text-lg text-muted">{{ . }}</p></section>{{ end }}
+          {{ with .Params.results }}<section class="{{ $copy }}"><p class="font-tech text-[.75rem] leading-none font-bold text-accent-600">02</p><h2 class="text-3xl">{{ if $isMn }}Үр дүн, хийсэн ажил{{ else }}Results and completed work{{ end }}</h2><p class="max-w-measure text-lg text-muted">{{ . }}</p></section>{{ end }}
+          {{ with .Content }}<div class="prose border-t border-line pt-8 text-muted">{{ . }}</div>{{ end }}
         </div>
       </div>
-      {{ with .Params.related_publications }}<section class="project-related"><p class="eyebrow">{{ if $isMn }}Холбогдох бүтээл{{ else }}Related publications{{ end }}</p>{{ range . }}{{ with site.GetPage . }}<a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong><span>{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }} ↗</span></a>{{ end }}{{ end }}</section>{{ end }}
-      {{ with .Params.gallery }}<section class="project-gallery"><div><p class="eyebrow">{{ if $isMn }}Зургийн цомог{{ else }}Gallery{{ end }}</p><h2>{{ if $isMn }}Төслийн явц, үр дүн{{ else }}Process and outcomes{{ end }}</h2></div><div class="project-gallery__grid">{{ range . }}{{ partial "responsive-image.html" (dict "src" .src "alt" .alt "class" "project-gallery__image" "sizes" "(max-width: 700px) 100vw, 50vw") }}{{ end }}</div></section>{{ end }}
+      {{ with .Params.related_publications }}<section class="mt-[clamp(1rem,5vw,4rem)] bg-blue-700 p-[clamp(2rem,5vw,4rem)] text-white"><p class="eyebrow mb-4 text-white/58">{{ if $isMn }}Холбогдох бүтээл{{ else }}Related publications{{ end }}</p>{{ range . }}{{ with site.GetPage . }}<a class="flex items-center justify-between gap-4 border-t border-white/22 pt-5 no-underline" href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong><span class="text-white/68">{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }} ↗</span></a>{{ end }}{{ end }}</section>{{ end }}
+      {{ with .Params.gallery }}<section class="mt-[clamp(5rem,10vw,9rem)]"><div><p class="eyebrow mb-4 text-accent-600">{{ if $isMn }}Зургийн цомог{{ else }}Gallery{{ end }}</p><h2>{{ if $isMn }}Төслийн явц, үр дүн{{ else }}Process and outcomes{{ end }}</h2></div><div class="mt-8 grid grid-cols-[1.15fr_.85fr] gap-4 max-sm:grid-cols-1">{{ range $i, $item := . }}{{ partial "responsive-image.html" (dict "src" .src "alt" .alt "class" (cond (eq $i 1) "h-full min-h-88 w-full object-cover mt-16 max-sm:mt-0 max-sm:min-h-60" "h-full min-h-88 w-full object-cover max-sm:min-h-60") "sizes" "(max-width: 700px) 100vw, 50vw") }}{{ end }}</div></section>{{ end }}
     </div>
   </article>
 {{ end }}

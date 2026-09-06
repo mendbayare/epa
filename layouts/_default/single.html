@@ -3,7 +3,11 @@
     {{ partial "page-hero.html" (dict
       "crumbs" (slice (dict "label" (cond (eq site.Language.Lang "mn") "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
       "title" .Title "lead" .Params.summary) }}
-    <div class="container section prose">{{ .Content }}</div>
+    {{/* The hero's own bottom padding already separates it from what follows,
+         so the block beneath takes a reduced top step rather than the full
+         inter-section rhythm. */}}
+    {{/* `container` clears max-width, so it cannot share an element with
+         `prose` — the measure would be lost. */}}
+    <div class="container pt-[clamp(2.5rem,5vw,3.5rem)] pb-section"><div class="prose">{{ .Content }}</div></div>
   </article>
 {{ end }}
-

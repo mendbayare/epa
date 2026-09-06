@@ -28,6 +28,17 @@ jobs:
         id: pages
         uses: actions/configure-pages@v6
 
+      - name: Install Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      # Hugo shells out to the Tailwind CLI from node_modules to build the
+      # stylesheet, so the dependencies have to be present before the build.
+      - name: Install build dependencies
+        run: npm ci
+
       - name: Install Hugo
         run: |
           curl -fsSL -o "${{ runner.temp }}/hugo.tar.gz" \

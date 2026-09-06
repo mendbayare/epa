@@ -16,11 +16,11 @@
   {{ $font := . | fingerprint }}
   <style>@font-face{font-family:"Noto Sans";font-style:normal;font-weight:100 900;font-display:swap;src:url("{{ $font.RelPermalink }}") format("woff2")}</style>
 {{ end }}
-{{/* Stylesheet parts are concatenated in filename order; the numeric prefixes
-     define the cascade (tokens → base → layout → components → pages →
-     breakpoints). See docs/DESIGN_SYSTEM.md before adding a part. */}}
-{{ $parts := sort (resources.Match "css/parts/*.css") "Name" }}
-{{ with $parts | resources.Concat "css/main.css" }}
-  {{ $style := . | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+{{/* Tailwind builds assets/css/main.css, scanning layouts/ for the classes
+     the templates actually use. Hugo drives the CLI from node_modules, which
+     is why the repository has a package.json and the workflow installs Node.
+     See docs/DESIGN_SYSTEM.md. */}}
+{{ with resources.Get "css/main.css" }}
+  {{ $css := . | css.TailwindCSS (dict "minify" hugo.IsProduction) | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 {{ end }}

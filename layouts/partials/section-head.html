@@ -1,7 +1,5 @@
 {{- /*
   The one section-heading pattern used by every section on the site.
-  Replaces section-heading, about-section-heading, members-section-heading,
-  home-overview__heading, and generation-heading.
 
   Parameters (all optional except title):
     title     required  heading text
@@ -12,18 +10,45 @@
     linkURL, linkText   right-aligned "view all" link
     onDark              true when the section sits on a navy surface
     id                  id for the heading element, for aria-labelledby
+
+  The eyebrow is muted here rather than orange, so the short rule beneath the
+  title is the only accent in the block. This owns the space beneath itself:
+  whatever grid or list follows must not add its own top margin.
 */ -}}
-<div class="section-head{{ if .support }} section-head--split{{ end }}{{ if .onDark }} section-head--on-dark{{ end }}">
-  <div class="section-head__main">
-    {{ with .eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
-    <h2{{ with .id }} id="{{ . }}"{{ end }}>{{ .title }}</h2>
+{{- $split := cond (ne (default "" .support) "") true false -}}
+
+{{- $grid := "mb-[clamp(2.5rem,5vw,4rem)] grid grid-cols-[minmax(0,1fr)_auto] items-end gap-x-[clamp(2rem,6vw,6rem)] gap-y-[clamp(1rem,2.5vw,2rem)] max-sm:grid-cols-1 max-sm:gap-4" -}}
+{{- if $split -}}
+  {{- $grid = "mb-[clamp(2.5rem,5vw,4rem)] grid grid-cols-[minmax(0,1fr)_minmax(18rem,.62fr)] items-end gap-x-[clamp(2rem,6vw,6rem)] gap-y-[clamp(1rem,2.5vw,2rem)] max-md:grid-cols-1 max-md:gap-6 max-sm:gap-4" -}}
+{{- end -}}
+
+{{- $aside := "flex flex-wrap items-baseline justify-end gap-x-[clamp(1rem,2.5vw,2rem)] gap-y-3 max-sm:justify-start" -}}
+{{- if $split }}{{ $aside = "block" }}{{ end -}}
+
+{{- $eyebrow := "eyebrow mb-3 text-muted" -}}
+{{- $title := "m-0 max-w-[24ch] title-rule" -}}
+{{- $support := "m-0 max-w-[34rem] text-base text-muted" -}}
+{{- $meta := "font-tech text-xs leading-none font-bold tracking-wide text-muted uppercase" -}}
+{{- $link := "font-bold text-link no-underline hover:text-link-hover" -}}
+{{- if .onDark -}}
+  {{- $eyebrow = "eyebrow mb-3 text-on-dark-muted" -}}
+  {{- $title = "m-0 max-w-[24ch] title-rule text-on-dark" -}}
+  {{- $support = "m-0 max-w-[34rem] text-base text-on-dark-muted" -}}
+  {{- $meta = "font-tech text-xs leading-none font-bold tracking-wide text-on-dark-muted uppercase" -}}
+  {{- $link = "font-bold text-on-dark no-underline hover:text-accent-600" -}}
+{{- end -}}
+
+<div class="{{ $grid }}">
+  <div class="min-w-0">
+    {{ with .eyebrow }}<p class="{{ $eyebrow }}">{{ . }}</p>{{ end }}
+    <h2 class="{{ $title }}"{{ with .id }} id="{{ . }}"{{ end }}>{{ .title }}</h2>
   </div>
   {{ if or .support .index .meta .linkURL }}
-    <div class="section-head__aside">
-      {{ with .index }}<span class="section-index">{{ . }}</span>{{ end }}
-      {{ with .support }}<p class="section-head__support">{{ . }}</p>{{ end }}
-      {{ with .meta }}<span class="section-head__meta">{{ . }}</span>{{ end }}
-      {{ with .linkURL }}<a class="text-link" href="{{ . }}">{{ $.linkText }} <span aria-hidden="true">→</span></a>{{ end }}
+    <div class="{{ $aside }}">
+      {{ with .index }}<span class="inline-flex items-center gap-[.65rem] font-tech text-[.68rem] leading-none font-bold tracking-[.12em] text-accent-600 after:h-px after:w-8 after:bg-current after:opacity-65 after:content-['']">{{ . }}</span>{{ end }}
+      {{ with .support }}<p class="{{ $support }}">{{ . }}</p>{{ end }}
+      {{ with .meta }}<span class="{{ $meta }}">{{ . }}</span>{{ end }}
+      {{ with .linkURL }}<a class="{{ $link }}" href="{{ . }}">{{ $.linkText }} <span aria-hidden="true">→</span></a>{{ end }}
     </div>
   {{ end }}
 </div>

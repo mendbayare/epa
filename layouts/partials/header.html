@@ -1,34 +1,71 @@
-<header class="site-header" data-header>
-  <div class="container site-header__inner">
-    <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="EPA@Lab">
-      <span class="brand__symbol">E</span>
-      <span class="brand__lockup"><strong>EPA<span class="brand__at">@</span>Lab</strong><small>{{ if eq site.Language.Lang "mn" }}ШУТИС · ЭХИС{{ else }}MUST · PES{{ end }}</small></span>
+{{- /*
+  Site header. On Home it sits fixed over the full-bleed hero, transparent
+  until the hero scrolls out of view, at which point site.js sets
+  data-scrolled and the navy ground fades in. Every other page gets the
+  ordinary bordered bar.
+
+  The two treatments differ in color, not structure, so the templates pick
+  between complete class strings rather than composing them — Tailwind reads
+  the literal strings out of this file and never sees a concatenation.
+*/ -}}
+{{- $isMn := eq site.Language.Lang "mn" -}}
+{{- $home := .IsHome -}}
+
+{{- $header := "relative z-20 border-b border-line bg-header backdrop-blur-[1rem] transition-[background-color,border-color,box-shadow] duration-300 ease-in-out" -}}
+{{- $navPanel := "flex items-center gap-7 max-md:absolute max-md:inset-x-0 max-md:top-full max-md:hidden max-md:border-b max-md:border-line max-md:bg-surface max-md:px-page max-md:py-6 max-md:shadow-lg data-open:max-md:block" -}}
+{{- $navLink := "text-sm font-semibold hover:text-link-hover aria-[current=page]:text-link-hover" -}}
+{{- $toggle := "grid aspect-square w-9 cursor-pointer place-items-center rounded-[.55rem] border border-line bg-surface p-[.45rem] text-muted hover:border-accent-600 hover:text-accent-600 max-md:mt-4" -}}
+{{- $bar := "block h-0.5 w-6 my-1 bg-body" -}}
+{{- $lockup := "font-body text-[.58rem] leading-none font-bold tracking-[.12em] text-muted max-sm:hidden" -}}
+{{- $langLink := "text-sm font-semibold text-link no-underline hover:text-link-hover" -}}
+
+{{- if $home -}}
+  {{- $header = "fixed inset-x-0 top-0 z-20 border-b border-transparent bg-transparent text-white transition-[background-color,border-color,box-shadow] duration-300 ease-in-out data-scrolled:border-line-on-dark data-scrolled:bg-navy-950/90 data-scrolled:shadow-[0_.75rem_2rem_rgb(0_0_0/12%)] data-scrolled:backdrop-blur-[1rem]" -}}
+  {{- $navPanel = "flex items-center gap-7 max-md:absolute max-md:inset-x-0 max-md:top-full max-md:hidden max-md:border-b max-md:border-line max-md:bg-navy-950/97 max-md:px-page max-md:py-6 max-md:text-white max-md:shadow-lg data-open:max-md:block" -}}
+  {{- $navLink = "text-sm font-semibold text-on-dark-strong hover:text-accent-600 aria-[current=page]:text-accent-600" -}}
+  {{- $toggle = "grid aspect-square w-9 cursor-pointer place-items-center rounded-[.55rem] border border-white/20 bg-white/5 p-[.45rem] text-white/75 hover:border-accent-600 hover:text-accent-600 max-md:mt-4" -}}
+  {{- $bar = "block h-0.5 w-6 my-1 bg-white" -}}
+  {{- $lockup = "font-body text-[.58rem] leading-none font-bold tracking-[.12em] text-on-dark-quiet max-sm:hidden" -}}
+  {{- $langLink = "text-sm font-semibold text-on-dark-strong no-underline hover:text-accent-600" -}}
+{{- end -}}
+
+<header class="{{ $header }}" data-header>
+  <div class="container flex min-h-20 items-center justify-between gap-8">
+    <a class="inline-flex items-center gap-[.7rem] font-display text-[1.2rem] leading-none font-extrabold no-underline" href="{{ site.Home.RelPermalink }}" aria-label="EPA@Lab">
+      <span class="grid aspect-square w-9 place-items-center rounded-md bg-blue-700 text-white">E</span>
+      <span class="flex flex-col gap-1"><strong class="leading-none">EPA<span class="text-accent-600">@</span>Lab</strong><small class="{{ $lockup }}">{{ if $isMn }}ШУТИС · ЭХИС{{ else }}MUST · PES{{ end }}</small></span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" data-nav-toggle>
-      <span class="sr-only">{{ if eq site.Language.Lang "mn" }}Цэс нээх{{ else }}Open menu{{ end }}</span>
-      <span></span><span></span><span></span>
+
+    <button class="hidden border-0 bg-transparent p-2 max-md:block" type="button" aria-expanded="false" aria-controls="main-navigation" data-nav-toggle>
+      <span class="sr-only">{{ if $isMn }}Цэс нээх{{ else }}Open menu{{ end }}</span>
+      <span class="{{ $bar }}"></span><span class="{{ $bar }}"></span><span class="{{ $bar }}"></span>
     </button>
-    <nav class="site-nav" id="main-navigation" aria-label="{{ if eq site.Language.Lang "mn" }}Үндсэн цэс{{ else }}Main navigation{{ end }}" data-nav>
-      <ul>
+
+    <nav class="{{ $navPanel }}" id="main-navigation" aria-label="{{ if $isMn }}Үндсэн цэс{{ else }}Main navigation{{ end }}" data-nav>
+      <ul class="flex items-center gap-[clamp(.8rem,2vw,1.6rem)] max-md:flex-col max-md:items-stretch max-md:gap-0">
         {{ range site.Menus.main }}
-          <li{{ if .HasChildren }} class="nav-parent"{{ end }}>
-            <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}{{ if .HasChildren }} <span class="nav-parent__mark" aria-hidden="true">⌄</span>{{ end }}</a>
+          <li class="{{ if .HasChildren }}group relative{{ end }}">
+            <a class="{{ $navLink }} max-md:block max-md:py-[.65rem]" href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}{{ if .HasChildren }} <span class="ml-[.2rem] inline-block text-[.75em] transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true">⌄</span>{{ end }}</a>
             {{ if .HasChildren }}
-              <ul class="nav-submenu" aria-label="{{ .Name }}">
-                {{ range .Children }}<li><a href="{{ .URL }}">{{ .Name }}</a></li>{{ end }}
+              {{/* The ::before strip bridges the gap between the parent and the
+                   panel, so the pointer can cross it without closing the menu. */}}
+              <ul class="pointer-events-none absolute top-[calc(100%+.65rem)] right-0 grid w-max min-w-44 -translate-y-[.35rem] rounded-sm border border-line bg-surface p-[.45rem] opacity-0 shadow-lg transition-[opacity,transform] duration-[180ms] ease-in-out before:absolute before:inset-x-0 before:bottom-full before:h-[.7rem] before:content-[''] group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100 max-md:static max-md:w-auto max-md:min-w-0 max-md:translate-y-0 max-md:border-0 max-md:bg-transparent max-md:p-0 max-md:pb-[.35rem] max-md:pl-4 max-md:opacity-100 max-md:shadow-none" aria-label="{{ .Name }}">
+                {{ range .Children }}<li><a class="block px-3 py-[.65rem] whitespace-nowrap text-body max-md:px-0 max-md:py-2 max-md:text-[.8rem] max-md:text-inherit" href="{{ .URL }}">{{ .Name }}</a></li>{{ end }}
               </ul>
             {{ end }}
           </li>
         {{ end }}
       </ul>
-      <button class="theme-toggle" type="button" data-theme-toggle>
-        <span class="sr-only" data-theme-label>{{ if eq site.Language.Lang "mn" }}Өнгийн горим солих{{ else }}Change color theme{{ end }}</span>
-        <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
-        <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path></svg>
+
+      <button class="{{ $toggle }}" type="button" data-theme-toggle>
+        <span class="sr-only" data-theme-label>{{ if $isMn }}Өнгийн горим солих{{ else }}Change color theme{{ end }}</span>
+        <svg class="w-[1.1rem] fill-none stroke-current stroke-[1.8] [stroke-linecap:round] [stroke-linejoin:round] dark:hidden" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="hidden w-[1.1rem] fill-none stroke-current stroke-[1.8] [stroke-linecap:round] [stroke-linejoin:round] dark:block" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path></svg>
       </button>
-      <div class="language-switcher">
+
+      <div class="border-l border-line pl-6 max-md:mt-4 max-md:border-t max-md:border-l-0 max-md:px-0 max-md:pt-4">
         {{ range .AllTranslations }}
-          {{ if ne .Language.Lang site.Language.Lang }}<a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}">{{ .Language.Label }}</a>{{ end }}
+          {{ if ne .Language.Lang site.Language.Lang }}<a class="{{ $langLink }}" href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}">{{ .Language.Label }}</a>{{ end }}
         {{ end }}
       </div>
     </nav>

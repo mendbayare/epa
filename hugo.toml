@@ -105,3 +105,9 @@ disableKinds = ["taxonomy", "term"]
 
 [minify]
   minifyOutput = true
+
+# Hugo shells out to the Tailwind CLI from node_modules to build the
+# stylesheet, and its exec policy denies anything not listed here.
+[security]
+  [security.exec]
+    allow = ["^(dart-)?sass$", "^go$", "^git$", "^node$", "^npx$", "^postcss$", "^tailwindcss$"]

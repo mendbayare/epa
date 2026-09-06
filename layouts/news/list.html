@@ -11,10 +11,10 @@
     "title" .Title
     "lead" .Params.description) }}
 
-  <div class="container section">
+  <div class="container pt-[clamp(2.5rem,5vw,3.5rem)] pb-section">
     {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
     {{ if $items }}
-      <div class="card-grid--3">
+      <div class="grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:grid-cols-1">
         {{ range $item := $items }}
           {{ $date := "" }}
           {{ if not .Date.IsZero }}{{ $date = .Date.Format "2006.01.02" }}{{ else }}{{ $date = cond $isMn "Огноо хүлээгдэж байна" "Date pending" }}{{ end }}
@@ -31,7 +31,7 @@
         {{ end }}
       </div>
     {{ else }}
-      <p class="empty-state">{{ if $isMn }}Мэдээ удахгүй нэмэгдэнэ.{{ else }}News will be added soon.{{ end }}</p>
+      <p class="rounded-card border border-dashed border-line p-8 text-muted">{{ if $isMn }}Мэдээ удахгүй нэмэгдэнэ.{{ else }}News will be added soon.{{ end }}</p>
     {{ end }}
   </div>
 {{ end }}

@@ -1,0 +1,9 @@
+{
+  "name": "epa-lab",
+  "private": true,
+  "description": "Build dependencies for the EPA@Lab Hugo site. Hugo drives the Tailwind CLI through css.TailwindCSS; there is no separate build script to run.",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

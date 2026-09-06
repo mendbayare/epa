@@ -3,8 +3,8 @@
   <head>
     {{ partial "head.html" . }}
   </head>
-  <body{{ if .IsHome }} class="is-home"{{ end }}>
-    <a class="skip-link" href="#main">{{ if eq site.Language.Lang "mn" }}Үндсэн агуулга руу очих{{ else }}Skip to content{{ end }}</a>
+  <body>
+    <a class="fixed top-3 left-3 z-100 underline -translate-y-[150%] bg-navy-950 px-4 py-3 text-white focus:translate-y-0" href="#main">{{ if eq site.Language.Lang "mn" }}Үндсэн агуулга руу очих{{ else }}Skip to content{{ end }}</a>
     {{ partial "header.html" . }}
     <main id="main">
       {{ block "main" . }}{{ end }}

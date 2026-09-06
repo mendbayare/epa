@@ -4,13 +4,16 @@
     "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
     "title" .Title
     "lead" .Params.description) }}
-  <div class="container projects-index">
+  <div class="container py-[clamp(4rem,9vw,8rem)]">
     {{ range $index, $project := .Pages.ByWeight }}
+      {{/* Rows alternate their media side. The index drives it, so the row
+           does not have to work out its own position in the document. */}}
       {{ partial "list-row.html" (dict
         "title" .Title
         "url" .RelPermalink
         "image" .Params.cover
         "imageAlt" $project.Title
+        "flip" (eq (mod $index 2) 1)
         "number" (printf "%02d" (add $index 1))
         "body" .Params.summary
         "facts" (slice

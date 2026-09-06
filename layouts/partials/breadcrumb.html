@@ -1,20 +1,25 @@
 {{- /*
-  Breadcrumb trail. Takes a slice of dicts with "label" and an optional "url";
-  the entry without a url is treated as the current page.
+  Breadcrumb trail, shared by the page hero and the news article header.
 
-    {{ partial "breadcrumb.html" (slice
+  Parameters:
+    items   required  slice of dicts with "label" and an optional "url";
+                      the entry without a url is the current page
+    class             wrapper classes, so each caller sets its own spacing
+                      and the tone that suits its ground
+
+    {{ partial "breadcrumb.html" (dict "items" (slice
          (dict "label" "Нүүр" "url" "/")
-         (dict "label" .Title)) }}
+         (dict "label" .Title)) "class" "mb-4 text-on-dark-quiet") }}
 */ -}}
-{{- $items := . -}}
+{{- $items := .items -}}
 {{- if $items -}}
-  <nav class="breadcrumb" aria-label="{{ if eq site.Language.Lang "mn" }}Замын мөр{{ else }}Breadcrumb{{ end }}">
+  <nav class="flex flex-nowrap items-center gap-2 text-[.82rem] {{ default "mb-[clamp(1.25rem,3vw,2rem)] text-muted" .class }}" aria-label="{{ if eq site.Language.Lang "mn" }}Замын мөр{{ else }}Breadcrumb{{ end }}">
     {{- range $i, $item := $items -}}
-      {{- if $i }}<span aria-hidden="true">›</span>{{ end -}}
+      {{- if $i }}<span class="flex-none opacity-55" aria-hidden="true">›</span>{{ end -}}
       {{- with $item.url -}}
-        <a href="{{ . }}">{{ $item.label }}</a>
+        <a class="flex-none font-semibold no-underline hover:text-accent-600" href="{{ . }}">{{ $item.label }}</a>
       {{- else -}}
-        <span aria-current="page">{{ $item.label }}</span>
+        <span class="min-w-0 max-w-[42ch] flex-1 overflow-hidden text-ellipsis whitespace-nowrap" aria-current="page">{{ $item.label }}</span>
       {{- end -}}
     {{- end -}}
   </nav>

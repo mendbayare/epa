@@ -18,31 +18,37 @@
     action               dict of "url" and "text" for a button below the copy
 */ -}}
 {{- $sizes := default "(max-width: 900px) 100vw, 48vw" .sizes -}}
+{{- $badge := "mt-6 inline-flex w-fit bg-accent-600 px-[.65rem] py-[.45rem] font-tech text-[.63rem] leading-[1.2] font-bold tracking-[.07em] text-white uppercase" -}}
+{{- $button := "mt-8 inline-flex min-h-13 items-center justify-center rounded-card bg-blue-700 px-5 py-[.8rem] font-bold text-white no-underline shadow-[0_.75rem_2rem_rgb(7_89_184/22%)] hover:bg-blue-600" -}}
+
 {{ if .image }}
-  <header class="page-hero page-hero--split">
-    <div class="container page-hero__grid">
-      <div class="page-hero__copy">
-        {{ partial "breadcrumb.html" .crumbs }}
-        <h1>{{ .title }}</h1>
-        {{ with .lead }}<p class="page-hero__lead">{{ . }}</p>{{ end }}
-        {{ with .badge }}<span class="draft-label">{{ . }}</span>{{ end }}
-        {{ with .action }}<a class="button" href="{{ .url }}">{{ .text }}</a>{{ end }}
+  <header class="relative overflow-hidden bg-navy-950 text-on-dark max-sm:py-18">
+    <div class="container relative z-1 grid min-h-[clamp(38rem,74vh,54rem)] grid-cols-[minmax(0,1fr)_minmax(24rem,1fr)] items-stretch max-md:min-h-0 max-md:grid-cols-1">
+      <div class="flex flex-col justify-center pt-[clamp(4rem,8vw,8rem)] pr-[clamp(2rem,7vw,7rem)] pb-[clamp(4rem,8vw,8rem)] pl-0 max-md:pr-0 max-sm:pt-12 max-sm:pb-16">
+        {{ partial "breadcrumb.html" (dict "items" .crumbs "class" "mb-[clamp(2rem,5vw,4rem)] text-on-dark-quiet") }}
+        <h1 class="title-rule m-0 max-w-[14ch] text-4xl text-on-dark max-sm:max-w-none">{{ .title }}</h1>
+        {{ with .lead }}<p class="mt-6 mb-8 max-w-[42rem] text-lg text-on-dark-muted">{{ . }}</p>{{ end }}
+        {{ with .badge }}<span class="{{ $badge }}">{{ . }}</span>{{ end }}
+        {{ with .action }}<a class="{{ $button }}" href="{{ .url }}">{{ .text }}</a>{{ end }}
       </div>
-      <div class="page-hero__media">
-        {{ partial "responsive-image.html" (dict "src" .image "alt" (default .title .imageAlt) "class" "page-hero__image" "loading" "eager" "sizes" $sizes) }}
-        {{ with .mediaLabel }}<span class="page-hero__media-label">{{ . }}</span>{{ end }}
-        {{ with .stampValue }}<div class="page-hero__stamp"><small>{{ $.stampLabel }}</small><strong>{{ . }}</strong></div>{{ end }}
+      {{/* The scrim tips the photograph towards the copy so the title keeps
+           its contrast wherever the image happens to be light. */}}
+      <div class="relative min-h-full overflow-hidden after:absolute after:inset-0 after:bg-[linear-gradient(135deg,rgb(13_21_56/32%),transparent_59%)] after:content-[''] max-md:min-h-120 max-sm:min-h-72">
+        {{ partial "responsive-image.html" (dict "src" .image "alt" (default .title .imageAlt) "class" "h-full w-full object-cover [filter:saturate(.72)_contrast(1.08)]" "loading" "eager" "sizes" $sizes) }}
+        {{ with .mediaLabel }}<span class="absolute right-8 bottom-8 z-1 font-tech text-2xs leading-none font-bold tracking-[.12em] text-on-dark-quiet [writing-mode:vertical-rl]">{{ . }}</span>{{ end }}
+        {{ with .stampValue }}<div class="absolute right-0 bottom-0 z-1 flex min-w-[min(18rem,70%)] flex-col bg-accent-600 px-8 py-6 max-sm:px-5 max-sm:py-4"><small class="font-tech text-2xs leading-none font-bold tracking-[.1em] uppercase">{{ $.stampLabel }}</small><strong class="mt-[.55rem] text-[1.35rem]">{{ . }}</strong></div>{{ end }}
       </div>
     </div>
   </header>
 {{ else }}
-  <header class="page-hero">
-    <div class="container">
-      {{ partial "breadcrumb.html" .crumbs }}
-      <h1>{{ .title }}</h1>
-      {{ with .lead }}<p class="page-hero__lead">{{ . }}</p>{{ end }}
-      {{ with .badge }}<span class="draft-label">{{ . }}</span>{{ end }}
-      {{ with .action }}<a class="button" href="{{ .url }}">{{ .text }}</a>{{ end }}
+  <header class="relative overflow-hidden bg-navy-950 py-[clamp(1.75rem,3.5vw,3rem)] text-on-dark max-sm:py-18">
+    <span class="decor-ring -top-52 -right-36 w-144" aria-hidden="true"></span>
+    <div class="container relative z-1">
+      {{ partial "breadcrumb.html" (dict "items" .crumbs "class" "mb-4 text-on-dark-quiet") }}
+      <h1 class="title-rule m-0 text-3xl text-on-dark">{{ .title }}</h1>
+      {{ with .lead }}<p class="mt-4 mb-0 max-w-[42rem] text-lg text-on-dark-muted">{{ . }}</p>{{ end }}
+      {{ with .badge }}<span class="{{ $badge }}">{{ . }}</span>{{ end }}
+      {{ with .action }}<a class="{{ $button }}" href="{{ .url }}">{{ .text }}</a>{{ end }}
     </div>
   </header>
 {{ end }}

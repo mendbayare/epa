@@ -1,23 +1,36 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $publications := sort (sort .Pages "Params.month" "desc") "Params.year" "desc" }}
+  {{ $cell := "text-left align-top [overflow-wrap:anywhere] sm:border-b sm:border-line sm:p-[clamp(1.2rem,2.5vw,2rem)]" }}
+  {{ $action := "flex w-fit items-center gap-2 font-bold text-link no-underline" }}
   {{ partial "page-hero.html" (dict
     "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
     "title" .Title
     "lead" .Params.description) }}
-  <section class="container publications-index">
-    <div class="publication-table-wrap">
-      <table class="publication-table">
-        <thead><tr><th>{{ if $isMn }}Нэр, тайлбар{{ else }}Name and description{{ end }}</th><th>{{ if $isMn }}Он, сар{{ else }}Year, month{{ end }}</th><th>{{ if $isMn }}Файл / холбоос{{ else }}File / link{{ end }}</th></tr></thead>
+  <section class="container py-[clamp(4rem,9vw,8rem)]">
+    <div class="overflow-x-auto rounded-card border border-line">
+      {{/* The publication-table class is the one hook the stylesheet keeps:
+           below 600px each row becomes a stack of labelled cells, and the
+           label is generated from the cell's own data-label. */}}
+      <table class="publication-table w-full table-fixed">
+        <thead>
+          <tr>
+            <th class="{{ $cell }} sm:w-[58%] font-tech text-xs leading-[1.3] font-bold tracking-wide text-muted uppercase">{{ if $isMn }}Нэр, тайлбар{{ else }}Name and description{{ end }}</th>
+            <th class="{{ $cell }} sm:w-[15%] font-tech text-xs leading-[1.3] font-bold tracking-wide text-muted uppercase">{{ if $isMn }}Он, сар{{ else }}Year, month{{ end }}</th>
+            <th class="{{ $cell }} font-tech text-xs leading-[1.3] font-bold tracking-wide text-muted uppercase">{{ if $isMn }}Файл / холбоос{{ else }}File / link{{ end }}</th>
+          </tr>
+        </thead>
         <tbody>
           {{ range $publications }}
-            <tr>
-              <td data-label="{{ if $isMn }}Нэр{{ else }}Name{{ end }}"><strong>{{ .Title }}</strong>{{ with .Params.summary }}<span>{{ . }}</span>{{ end }}{{ if .Params.provisional }}<small class="publication-draft">{{ if $isMn }}Түр агуулга{{ else }}Draft sample{{ end }}</small>{{ end }}</td>
-              <td data-label="{{ if $isMn }}Он, сар{{ else }}Year, month{{ end }}"><time datetime="{{ .Params.year }}-{{ printf "%02d" (int .Params.month) }}">{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }}</time></td>
-              <td data-label="{{ if $isMn }}Файл / холбоос{{ else }}File / link{{ end }}" class="publication-actions">
-                {{ with .Params.file }}<a class="publication-action" href="{{ . | relURL }}" download>{{ if $isMn }}Файл татах{{ else }}Download file{{ end }} <span>↓</span></a>{{ end }}
-                {{ with .Params.external_url }}<a class="publication-action" href="{{ . }}" target="_blank" rel="noopener">{{ if $isMn }}Гадаад холбоос{{ else }}External link{{ end }} <span>↗</span></a>{{ end }}
-                {{ if and (not .Params.file) (not .Params.external_url) }}<span class="publication-pending">{{ if $isMn }}Холбоос хүлээгдэж байна{{ else }}Link pending{{ end }}</span>{{ end }}
+            <tr class="transition-[background-color] duration-200 ease-in-out last:*:border-b-0 hover:bg-surface-soft">
+              <td class="{{ $cell }}" data-label="{{ if $isMn }}Нэр{{ else }}Name{{ end }}"><strong class="block">{{ .Title }}</strong>{{ with .Params.summary }}<span class="mt-[.35rem] block text-muted">{{ . }}</span>{{ end }}{{ if .Params.provisional }}<small class="mt-[.8rem] inline-flex w-fit border border-line px-2 py-[.3rem] font-tech text-[.58rem] leading-[1.2] font-bold tracking-[.06em] text-muted uppercase">{{ if $isMn }}Түр агуулга{{ else }}Draft sample{{ end }}</small>{{ end }}</td>
+              <td class="{{ $cell }}" data-label="{{ if $isMn }}Он, сар{{ else }}Year, month{{ end }}"><time datetime="{{ .Params.year }}-{{ printf "%02d" (int .Params.month) }}">{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }}</time></td>
+              <td class="{{ $cell }}" data-label="{{ if $isMn }}Файл / холбоос{{ else }}File / link{{ end }}">
+                <div class="flex flex-col items-start gap-[.4rem]">
+                  {{ with .Params.file }}<a class="{{ $action }}" href="{{ . | relURL }}" download>{{ if $isMn }}Файл татах{{ else }}Download file{{ end }} <span class="text-accent-600">↓</span></a>{{ end }}
+                  {{ with .Params.external_url }}<a class="{{ $action }}" href="{{ . }}" target="_blank" rel="noopener">{{ if $isMn }}Гадаад холбоос{{ else }}External link{{ end }} <span class="text-accent-600">↗</span></a>{{ end }}
+                  {{ if and (not .Params.file) (not .Params.external_url) }}<span class="mt-[.35rem] text-[.83rem] text-muted">{{ if $isMn }}Холбоос хүлээгдэж байна{{ else }}Link pending{{ end }}</span>{{ end }}
+                </div>
               </td>
             </tr>
           {{ end }}

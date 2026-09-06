@@ -1,6 +1,6 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
-  <article class="about-page">
+  <article>
     {{ partial "page-hero.html" (dict
       "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
       "title" .Title
@@ -10,27 +10,34 @@
       "stampValue" .Params.founded_value
       "badge" (cond .Params.provisional (cond $isMn "Загварын түр агуулгатай" "Contains draft sample content") "")) }}
 
-    <section class="about-history">
+    <section class="py-[clamp(5rem,10vw,9rem)]">
       <div class="container">
         {{ partial "section-head.html" (dict
           "eyebrow" (cond $isMn "Лабораторийн түүх" "Our history")
           "title" (cond $isMn "Санаанаас инженерийн орчин хүртэл" "From an idea to an engineering environment")
           "support" .Params.history_intro) }}
       </div>
-      <div class="container about-timeline">
+      <div class="container border-t border-line">
         {{ range .Params.history }}
-          <article><time>{{ .year }}</time><div><h3>{{ .title }}</h3><p>{{ .description }}</p>{{ if .provisional }}<span class="sample-note">{{ if $isMn }}Жишээ мэдээлэл{{ else }}Sample record{{ end }}</span>{{ end }}</div></article>
+          <article class="grid grid-cols-[minmax(5rem,8rem)_minmax(0,1fr)] gap-[clamp(1.5rem,4vw,4rem)] border-b border-line py-[clamp(2rem,5vw,4rem)] max-sm:grid-cols-1 max-sm:gap-3">
+            <time class="font-tech text-[.78rem] leading-[1.5] font-bold tracking-wide text-accent-600">{{ .year }}</time>
+            <div>
+              <h3 class="max-w-[34ch] text-2xl">{{ .title }}</h3>
+              <p class="max-w-[48rem] text-muted">{{ .description }}</p>
+              {{ if .provisional }}<span class="mt-3 inline-flex w-fit border border-line px-[.55rem] py-[.35rem] font-tech text-[.61rem] leading-[1.2] font-bold tracking-[.06em] text-muted uppercase">{{ if $isMn }}Жишээ мэдээлэл{{ else }}Sample record{{ end }}</span>{{ end }}
+            </div>
+          </article>
         {{ end }}
       </div>
     </section>
 
-    <section class="about-achievements">
+    <section class="bg-surface-soft py-[clamp(5rem,10vw,9rem)]">
       <div class="container">
         {{ partial "section-head.html" (dict
           "eyebrow" (cond $isMn "Амжилт" "Achievements")
           "title" (cond $isMn "Хийсэн ажлын үнэ цэн" "The value of work completed")
           "support" (cond $isMn "Бодит мэдээлэл ирэхэд амжилтын картууд он, зураг, тайлбараар шинэчлэгдэнэ." "When approved information arrives, each card can be replaced with its real year, image, and description.")) }}
-        <div class="card-grid--2">
+        <div class="grid grid-cols-2 gap-[clamp(1.5rem,3vw,3rem)] max-sm:grid-cols-1">
           {{ range $achievement := .Params.achievements }}
             {{ partial "media-card.html" (dict
               "feature" true
@@ -46,12 +53,12 @@
       </div>
     </section>
 
-    <section class="about-teachers">
+    <section class="py-[clamp(5rem,10vw,9rem)]">
       <div class="container">
         {{ partial "section-head.html" (dict
           "eyebrow" (cond $isMn "Удирдагч багш" "Supervising lecturer")
           "title" (cond $isMn "Мэдлэг, туршлагыг чиглүүлэгч" "Guiding knowledge and practice")) }}
-        <div class="teacher-list">
+        <div>
           {{ with .Params.supervisor }}
             {{ partial "list-row.html" (dict
               "level" "h3"
@@ -70,6 +77,8 @@
       </div>
     </section>
 
-    {{ with .Content }}<footer class="container about-editor-note prose">{{ . }}</footer>{{ end }}
+    {{/* `container` clears max-width, so it cannot share an element with
+         `prose` — the measure would be lost. */}}
+    {{ with .Content }}<footer class="container mb-[clamp(4rem,8vw,7rem)]"><div class="prose mx-auto border-l-[3px] border-accent-600 px-5 py-4 text-[.9rem] text-muted">{{ . }}</div></footer>{{ end }}
   </article>
 {{ end }}

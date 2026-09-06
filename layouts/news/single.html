@@ -1,67 +1,72 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $newsPage := site.GetPage "/news" }}
-  <article class="news-article">
-    <div class="container article-head">
-      <nav class="breadcrumb" aria-label="{{ if $isMn }}Замын мөр{{ else }}Breadcrumb{{ end }}">
-        <a href="{{ $newsPage.RelPermalink }}">{{ $newsPage.Title }}</a>
-        <span aria-hidden="true">›</span>
-        <span aria-current="page">{{ .Title }}</span>
-      </nav>
+  {{ $share := "grid aspect-square w-9 cursor-pointer place-items-center rounded-full border border-line bg-transparent text-muted transition-[color,border-color] duration-[180ms] ease-in-out hover:border-accent-600 hover:text-accent-600 data-copied-state:border-accent-600 data-copied-state:text-accent-600" }}
+  {{/* A marketing band in front of a news story is the wrong instrument, so
+       this follows an editorial article structure instead: breadcrumb, then
+       the title and cover at full container width, then a byline row, with
+       the body set in a narrower column centred beneath them. */}}
+  <article>
+    <div class="container pt-[clamp(1.5rem,3vw,2.5rem)] pb-0">
+      {{ partial "breadcrumb.html" (dict "items" (slice
+        (dict "label" $newsPage.Title "url" $newsPage.RelPermalink)
+        (dict "label" .Title))) }}
 
-      <h1>{{ .Title }}</h1>
+      <h1 class="max-w-none text-3xl leading-[1.16]">{{ .Title }}</h1>
 
-      <div class="article-byline">
-        <div class="article-byline__facts">
+      <div class="mt-[clamp(1.25rem,2.5vw,1.75rem)] flex flex-wrap items-center justify-between gap-x-6 gap-y-4 max-sm:items-start">
+        <div class="byline-facts flex flex-wrap items-center gap-x-[.9rem] gap-y-2 text-[.85rem] text-muted max-sm:gap-x-[.8rem] max-sm:gap-y-[.4rem]">
           {{ if not .Date.IsZero }}
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
+            <time class="font-semibold" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
           {{ else }}
-            <span class="article-byline__pending">{{ if $isMn }}Огноо баталгаажаагүй{{ else }}Date not confirmed{{ end }}</span>
+            <span class="italic">{{ if $isMn }}Огноо баталгаажаагүй{{ else }}Date not confirmed{{ end }}</span>
           {{ end }}
           {{ with .ReadingTime }}
             <span>{{ . }} {{ if $isMn }}мин унших{{ else }}min read{{ end }}</span>
           {{ end }}
-          {{ if .Params.provisional }}<span class="draft-label">{{ if $isMn }}Түр агуулга{{ else }}Provisional{{ end }}</span>{{ end }}
+          {{/* data-draft keeps the middot separator off the marker, which is a
+               label rather than another fact in the run. */}}
+          {{ if .Params.provisional }}<span class="inline-flex w-fit bg-accent-600 px-2 py-[.3rem] font-tech text-[.63rem] leading-[1.2] font-bold tracking-[.07em] text-white uppercase" data-draft>{{ if $isMn }}Түр агуулга{{ else }}Provisional{{ end }}</span>{{ end }}
         </div>
-        <div class="article-share">
-          <button class="article-share__button" type="button" data-copy-link
+        <div class="flex items-center gap-2">
+          <button class="{{ $share }}" type="button" data-copy-link
             data-copied="{{ if $isMn }}Хуулагдлаа{{ else }}Copied{{ end }}"
             aria-label="{{ if $isMn }}Холбоосыг хуулах{{ else }}Copy link{{ end }}">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"></path></svg>
+            <svg class="h-4 w-4 fill-none stroke-current stroke-[1.8] [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"></path></svg>
           </button>
-          <a class="article-share__button" href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}"
+          <a class="{{ $share }}" href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}"
             target="_blank" rel="noopener" aria-label="{{ if $isMn }}Facebook дээр хуваалцах{{ else }}Share on Facebook{{ end }}">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.7.3-1 1-1Z"></path></svg>
+            <svg class="h-4 w-4 fill-current stroke-none" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.7.3-1 1-1Z"></path></svg>
           </a>
         </div>
       </div>
     </div>
 
     {{ with .Params.cover }}
-      <figure class="container article-cover">
-        {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "article-cover__image" "loading" "eager" "sizes" "(max-width: 900px) 100vw, 76rem") }}
+      <figure class="container mx-auto mt-[clamp(1.75rem,4vw,2.75rem)] mb-[clamp(2.5rem,6vw,4rem)]">
+        {{ partial "responsive-image.html" (dict "src" . "alt" $.Title "class" "aspect-[2.2] h-auto w-full object-cover max-sm:aspect-[3/2]" "loading" "eager" "sizes" "(max-width: 900px) 100vw, 76rem") }}
       </figure>
     {{ end }}
 
-    <div class="container article-body">
-      <div class="prose">{{ .Content }}</div>
+    <div class="container pb-[clamp(3rem,7vw,6rem)]">
+      <div class="prose mx-auto">{{ .Content }}</div>
       {{ with .Params.tags }}
-        <ul class="article-tags" aria-label="{{ if $isMn }}Сэдэв{{ else }}Topics{{ end }}">
-          {{ range . }}<li>{{ . }}</li>{{ end }}
+        <ul class="mx-auto mt-[clamp(2rem,5vw,3.5rem)] flex max-w-measure flex-wrap gap-2" aria-label="{{ if $isMn }}Сэдэв{{ else }}Topics{{ end }}">
+          {{ range . }}<li class="border border-line px-[.7rem] py-[.4rem] font-tech text-2xs leading-[1.2] font-bold tracking-[.06em] text-muted uppercase">{{ . }}</li>{{ end }}
         </ul>
       {{ end }}
     </div>
 
     {{ with .Params.gallery }}
-      <section class="container article-gallery" aria-label="{{ if $isMn }}Зургийн цомог{{ else }}Image gallery{{ end }}">
-        <p class="eyebrow">{{ if $isMn }}Зургууд{{ else }}Gallery{{ end }}</p>
-        <div class="article-gallery__grid">
+      <section class="container pb-[clamp(4rem,8vw,7rem)]" aria-label="{{ if $isMn }}Зургийн цомог{{ else }}Image gallery{{ end }}">
+        <p class="eyebrow mb-4 text-accent-600">{{ if $isMn }}Зургууд{{ else }}Gallery{{ end }}</p>
+        <div class="mt-6 grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:grid-cols-1">
           {{ range . }}
             {{ $src := . }}{{ $caption := "" }}
             {{ if reflect.IsMap . }}{{ $src = .image }}{{ $caption = .caption }}{{ end }}
             <figure>
-              {{ partial "responsive-image.html" (dict "src" $src "alt" (default $.Title $caption) "class" "article-gallery__image" "sizes" "(max-width: 700px) 100vw, 33vw") }}
-              {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+              {{ partial "responsive-image.html" (dict "src" $src "alt" (default $.Title $caption) "class" "aspect-[4/3] h-auto w-full object-cover" "sizes" "(max-width: 700px) 100vw, 33vw") }}
+              {{ with $caption }}<figcaption class="mt-[.6rem] text-[.85rem] text-muted">{{ . }}</figcaption>{{ end }}
             </figure>
           {{ end }}
         </div>

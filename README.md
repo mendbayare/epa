@@ -8,6 +8,13 @@ at the end of every working session.
 
 ## Local development
 
+The stylesheet is built with Tailwind, which Hugo runs from `node_modules`, so
+install the build dependencies once before the first build:
+
+```sh
+npm ci
+```
+
 ```sh
 hugo server --buildDrafts
 ```
@@ -20,7 +27,9 @@ Open `http://localhost:1313/`. Mongolian is the default language and English is 
 hugo --minify
 ```
 
-Generated files are written to `public/` and are not committed.
+Generated files are written to `public/` and are not committed. Styling is
+documented in [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md); read it before
+adding a component.
 
 ## Content
 

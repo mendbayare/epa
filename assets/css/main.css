@@ -1,0 +1,514 @@
+/* ==========================================================================
+   EPA@Lab stylesheet
+
+   Tailwind v4 is the whole system. This file holds the three things a
+   utility class cannot express on its own:
+
+     @theme       the design tokens, which become the utility scales
+     @layer base  element defaults, so rendered Markdown and headings work
+     @layer components  the handful of compositions no utility can reach
+
+   Everything else lives on the elements, in the templates. See
+   docs/DESIGN_SYSTEM.md before adding anything here.
+   ========================================================================== */
+
+@import "tailwindcss" source(none);
+
+/* Class names come from the templates and from nowhere else: Goldmark runs
+   with unsafe HTML disabled, so content files cannot introduce markup.
+   Hugo pipes this file to the Tailwind CLI on stdin, so the path is resolved
+   from the project root rather than from this file's own directory. */
+@source "layouts";
+
+/* --------------------------------------------------------------------------
+   Variants
+   -------------------------------------------------------------------------- */
+
+/* The theme is an attribute on <html>, set by the inline script in head.html
+   before first paint. Most of the site does not need this variant at all —
+   the semantic color tokens below are redefined for dark, so `bg-surface`
+   and `text-body` follow the theme on their own. Reach for `dark:` only when
+   an element changes in some way other than color. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Height-based queries are permitted only for the full-viewport Home hero,
+   where the composition genuinely depends on available height. */
+@custom-variant desk-short (@media (width >= 901px) and (height <= 850px));
+@custom-variant phone-short (@media (width <= 600px) and (height <= 700px));
+
+@theme static {
+  /* --- Breakpoints ---------------------------------------------------
+     The design system fixes two, and they must not be invented per
+     component. `sm:` is desktop-and-tablet (min 601px), `md:` is desktop
+     (min 901px); `max-sm:` is mobile and `max-md:` is tablet-and-below. */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 601px;
+  --breakpoint-md: 901px;
+
+  /* --- Brand palette --------------------------------------------------
+     The default Tailwind palette is cleared. Components consume these
+     tokens; a color that is not here is not in the design system. */
+  --color-*: initial;
+  --color-inherit: inherit;
+  --color-current: currentColor;
+  --color-transparent: transparent;
+  --color-white: #fff;
+
+  --color-navy-950: #0d1538;   /* footer, dark sections, strongest text */
+  --color-navy-900: #1b2a6b;   /* major headings, prominent brand surfaces */
+  --color-blue-700: #1b3faa;   /* primary actions, links, active navigation */
+  --color-blue-600: #2241a8;   /* hover states, gradients */
+  --color-blue-100: #e1e7f8;   /* pale borders and selected pale elements */
+  --color-blue-50: #f5f7fc;    /* alternating section backgrounds */
+  --color-accent-600: #d4712a; /* eyebrows, rules, metadata, small highlights */
+  --color-accent-700: #c0601e; /* accent hover/pressed */
+  --color-signal-500: #6d91ff; /* technical line work in diagrams and overlays */
+
+  /* --- Semantic surfaces and text --------------------------------------
+     These are the ones that flip with the theme; see the dark block below
+     the @theme. Prefer them over the palette for anything that must read
+     in both themes. */
+  --color-page: #fff;
+  --color-surface: #fff;
+  --color-surface-soft: #f5f7fc;
+  --color-body: #0d1538;
+  --color-muted: #475569;
+  --color-line: #dde3ee;
+  --color-header: rgb(255 255 255 / 92%);
+  --color-link: #1b3faa;
+  --color-link-hover: #d4712a;
+
+  /* --- Text and rules over dark surfaces -------------------------------
+     Navy sections exist in both themes, so these do not flip. Use them
+     instead of writing rgb(255 255 255 / x%) by hand. */
+  --color-on-dark: #fff;
+  --color-on-dark-strong: rgb(255 255 255 / 88%);
+  --color-on-dark-muted: rgb(255 255 255 / 72%);
+  --color-on-dark-quiet: rgb(255 255 255 / 62%);
+  --color-on-dark-faint: rgb(255 255 255 / 35%);
+  --color-line-on-dark: rgb(255 255 255 / 12%);
+
+  /* --- Typography ------------------------------------------------------ */
+  --font-body: "Noto Sans", system-ui, sans-serif;
+  --font-display: "Noto Sans", system-ui, sans-serif;
+  --font-tech: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --default-font-family: var(--font-body);
+  --default-mono-font-family: var(--font-tech);
+
+  /* Most steps use clamp(), so they are responsive without a breakpoint.
+     Mongolian Cyrillic sets wider than Latin at the same size, so any new
+     heading must be checked in both languages before its step is final. */
+  --text-*: initial;
+  --text-2xs: .65rem;                          /* vertical cues, tiny markers */
+  --text-xs: .72rem;                           /* eyebrows, table headings */
+  --text-sm: .87rem;                           /* navigation, card metadata */
+  --text-base: 1rem;
+  --text-lg: clamp(1rem, 1.2vw, 1.125rem);     /* lead paragraphs */
+  --text-xl: clamp(1.15rem, 1.5vw, 1.375rem);  /* h3 */
+  --text-2xl: clamp(1.35rem, 2.1vw, 1.8rem);   /* card and item titles */
+  --text-3xl: clamp(1.75rem, 2.8vw, 2.5rem);   /* section headings */
+  --text-4xl: clamp(2.2rem, 4vw, 3.75rem);     /* page titles */
+
+  --leading-*: initial;
+  --leading-none: 1;
+  --leading-tight: 1.08;
+  --leading-snug: 1.35;
+  --leading-body: 1.7;
+
+  --tracking-*: initial;
+  --tracking-tight: -.035em;
+  --tracking-wide: .08em;
+  --tracking-wider: .14em;
+
+  /* --- Space -----------------------------------------------------------
+     Fixed steps come from Tailwind's numeric scale (p-4 is 1rem). These
+     are the fluid ones the numeric scale cannot express. */
+  --spacing-page: clamp(1.25rem, 4vw, 3rem);        /* container side gutter */
+  --spacing-section: clamp(3rem, 6vw, 5.5rem);      /* vertical section rhythm */
+  --spacing-block: clamp(1.75rem, 3.5vw, 3.25rem);  /* padding inside large panels */
+  --spacing-grid: 1.25rem;                          /* standard card-grid gap */
+
+  --container-page: 76rem;     /* the one container width */
+  /* Not --container-prose: Tailwind ships a static `max-w-prose` of 65ch that
+     a theme value in this namespace does not override, so the measure would
+     silently become 65ch. */
+  --container-measure: 48rem;  /* the readable measure for body copy */
+
+  /* --- Shape ------------------------------------------------------------ */
+  --radius-*: initial;
+  --radius-sm: .4rem;
+  --radius-md: .65rem;
+  --radius-lg: 1.25rem;
+  --radius-card: .75rem;     /* every card and panel surface */
+
+  /* --- Elevation -------------------------------------------------------- */
+  --shadow-*: initial;
+  --shadow-sm: 0 .75rem 2rem rgb(7 24 45 / 8%);
+  --shadow-md: 0 1.25rem 2.5rem rgb(13 21 56 / 12%);
+  --shadow-lg: 0 1.5rem 4rem rgb(7 24 45 / 10%);
+
+  /* --- Motion ------------------------------------------------------------
+     Tailwind's own ease-in-out is the curve this site already used. All of
+     these are neutralised by the reduced-motion block in the base layer. */
+  --animate-*: initial;
+  --animate-network-flow: network-flow 12s linear infinite;
+  --animate-node-pulse: node-pulse 2.8s ease-in-out infinite;
+  --animate-scroll-cue: scroll-cue 2s ease-in-out infinite;
+
+  @keyframes network-flow {
+    to { stroke-dashoffset: -1; }
+  }
+  @keyframes node-pulse {
+    50% { transform: scale(1.55); filter: drop-shadow(0 0 .65rem var(--color-accent-600)); }
+  }
+  @keyframes scroll-cue {
+    0% { transform: translateY(0); opacity: 0; }
+    20% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { transform: translateY(3.6rem); opacity: 0; }
+  }
+}
+
+/* The dark theme redefines the semantic tokens and nothing else, so every
+   utility built on them follows without a `dark:` variant at the call site. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-page: #0d1538;
+  --color-surface: #111d4a;
+  --color-surface-soft: #0a0f2e;
+  --color-body: #f8fafc;
+  --color-muted: #cbd5e1;
+  --color-line: rgb(255 255 255 / 10%);
+  --color-header: rgb(13 21 56 / 92%);
+  --color-link: #f8fafc;
+  --color-link-hover: #d4712a;
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+
+/* The single container width. This deliberately reuses Tailwind's own
+   `container` name, so the built-in breakpoint-stepped rules are emitted
+   too — `max-width: 601px` at sm and `901px` at md, which would clamp the
+   page to a third of its width. Custom @utility rules are emitted after the
+   built-ins in the utilities layer, so resetting max-width here neutralises
+   them. The build asserts this; see the container check in the layout test. */
+@utility container {
+  width: min(100% - 2 * var(--spacing-page), var(--container-page));
+  max-width: none;
+  margin-inline: auto;
+}
+
+/* The small monospace label above a heading. It is a named part of the
+   design system rather than an ad-hoc stack, and it appears on nearly every
+   template, so it earns a utility instead of nineteen copies of one string.
+
+   It deliberately sets neither color nor margin. Custom utilities are
+   emitted after the built-in ones, so either would outrank the `text-*` or
+   `mb-*` beside it — the muted eyebrow in a section head and the flush one
+   in the Home hero kicker could not be written at all. Every call site
+   states its own color and spacing. */
+@utility eyebrow {
+  font-family: var(--font-tech);
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+/* The short orange rule under a section heading or page title — the one
+   device borrowed from the reference site, used in exactly two places. */
+@utility title-rule {
+  &::after {
+    display: block;
+    width: 3.5rem;
+    height: 3px;
+    margin-top: --spacing(4);
+    background: var(--color-accent-600);
+    content: "";
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: var(--color-body);
+    background: var(--color-page);
+    font: 400 1rem/1.7 var(--font-body);
+  }
+
+  ::selection {
+    color: var(--color-white);
+    background: var(--color-accent-600);
+  }
+
+  /* Headings and paragraphs keep element defaults because rendered Markdown
+     carries no classes. Utilities sit in a later cascade layer, so any
+     template that wants something else simply says so on the element. */
+  /* Preflight resets heading font-size and font-weight to inherit, so both
+     have to be stated here. Without the weight every heading on the site
+     silently drops to regular. */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+  }
+  h1, h2, h3 {
+    margin: 0 0 1rem;
+    font-family: var(--font-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+  h1 { max-width: 17ch; font-size: var(--text-4xl); }
+  h2 { max-width: 22ch; font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-xl); }
+  p { margin: 0 0 1rem; }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent-600);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Components
+
+   Every rule here exists because a utility class cannot reach what it
+   styles: a pseudo-element carrying generated content, a child that the
+   template does not own, or a layered composition that would be unreadable
+   inlined. Nothing goes here for brevity's sake alone.
+   -------------------------------------------------------------------------- */
+
+@layer components {
+  /* Rendered Markdown. The only styling hook the content pipeline has, and
+     the one place that cannot carry utility classes, so the element defaults
+     Tailwind's preflight strips — list markers and indent, link underlines,
+     heading sizes — are restored here rather than left to the editor. */
+  .prose {
+    max-width: var(--container-measure);
+
+    & h2 { margin-top: 2.5rem; font-size: var(--text-3xl); }
+    & h3 { margin-top: 2rem; }
+    & h4 { margin: 1.75rem 0 .75rem; font-size: var(--text-base); }
+    & a { color: var(--color-link); text-decoration: underline; }
+    & a:hover { color: var(--color-link-hover); }
+    & ul, & ol { margin: 0 0 1rem; padding-left: 1.5rem; }
+    & ul { list-style: disc; }
+    & ol { list-style: decimal; }
+    & li { margin-bottom: .35rem; }
+    & blockquote {
+      margin: 1.5rem 0;
+      padding-left: 1.25rem;
+      border-left: 2px solid var(--color-accent-600);
+      color: var(--color-muted);
+      font-style: italic;
+    }
+    & code {
+      padding: .15em .4em;
+      border-radius: var(--radius-sm);
+      background: var(--color-surface-soft);
+      font-size: .9em;
+    }
+    & pre {
+      overflow-x: auto;
+      margin: 0 0 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-card);
+      background: var(--color-surface-soft);
+    }
+    & pre code { padding: 0; background: none; }
+    & table { width: 100%; margin: 0 0 1rem; }
+    & th, & td { padding: .6rem .75rem; border-bottom: 1px solid var(--color-line); text-align: left; }
+    & hr { margin: 2rem 0; border-top: 1px solid var(--color-line); }
+    & img { margin: 1.5rem 0; border-radius: var(--radius-card); }
+  }
+
+  /* The faint concentric ring behind the page hero and the footer. Two
+     spread shadows on a circle, which no utility expresses legibly. */
+  .decor-ring {
+    position: absolute;
+    aspect-ratio: 1;
+    border: 1px solid rgb(109 145 255 / 18%);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5rem rgb(109 145 255 / 4%), 0 0 0 10rem rgb(109 145 255 / 2%);
+    pointer-events: none;
+  }
+  .decor-ring--footer {
+    border-color: rgb(109 145 255 / 12%);
+    box-shadow: 0 0 0 5rem rgb(109 145 255 / 3%), 0 0 0 10rem rgb(109 145 255 / 2%);
+  }
+
+  /* --- Home hero -------------------------------------------------------
+     The site's one signature composition: a photograph under a scrim, a
+     screen-blended dot grid, and a multiplied color wash. The blend modes
+     have to stack in a fixed order, so they stay together here. */
+  .hero-scrim {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(13 21 56 / 99%) 0%, rgb(13 21 56 / 94%) 36%, rgb(13 21 56 / 48%) 66%, rgb(13 21 56 / 16%) 100%);
+  }
+
+  .hero-backdrop::before {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, var(--color-line-on-dark) .65px, transparent .8px),
+      radial-gradient(circle at 78% 28%, rgb(212 113 42 / 23%), transparent 28%);
+    background-position: 0 0;
+    background-size: 5px 5px, auto;
+    content: "";
+    mix-blend-mode: screen;
+    opacity: .55;
+  }
+  .hero-backdrop::after {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background:
+      linear-gradient(0deg, rgb(13 21 56 / 72%), transparent 52%),
+      linear-gradient(110deg, rgb(27 42 107 / 32%), rgb(212 113 42 / 8%));
+    content: "";
+    mix-blend-mode: multiply;
+  }
+
+  /* On a phone the photograph reads top-down rather than left-right, so the
+     scrim turns with it and the dot grid all but disappears. */
+  @media (width <= 600px) {
+    .hero-scrim {
+      background: linear-gradient(180deg, rgb(13 21 56 / 36%) 0%, rgb(13 21 56 / 18%) 36%, rgb(13 21 56 / 72%) 68%, rgb(7 12 34 / 98%) 100%);
+    }
+    .hero-backdrop::before { opacity: .18; }
+    .hero-backdrop::after {
+      background: linear-gradient(90deg, rgb(13 21 56 / 25%), transparent 72%);
+      mix-blend-mode: normal;
+    }
+  }
+
+  /* The animated power-network overlay. Its targets are SVG children the
+     template does not put classes on individually. */
+  .power-network svg { width: 100%; height: 100%; overflow: visible; }
+  .power-network__line {
+    fill: none;
+    stroke: var(--color-signal-500);
+    stroke-width: 1.5;
+    stroke-dasharray: .08 .04;
+    animation: var(--animate-network-flow);
+  }
+  .power-network__line:nth-of-type(2) { animation-duration: 16s; animation-direction: reverse; }
+  .power-network__line:nth-of-type(3) { animation-duration: 20s; }
+  .power-network__node {
+    fill: var(--color-accent-600);
+    stroke: var(--color-on-dark-faint);
+    stroke-width: 2;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: var(--animate-node-pulse);
+  }
+  .power-network__node:nth-of-type(2) { animation-delay: -.7s; }
+  .power-network__node:nth-of-type(3) { animation-delay: -1.4s; }
+  .power-network__node:nth-of-type(4) { animation-delay: -2.1s; }
+
+  /* The scroll cue's travelling dot, which rides inside a 1px rule. */
+  .scroll-cue-line {
+    position: relative;
+    display: block;
+    width: 1px;
+    height: 3rem;
+    overflow: hidden;
+    background: rgb(255 255 255 / 25%);
+
+    &::after {
+      position: absolute;
+      top: -.65rem;
+      left: -2px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-accent-600);
+      content: "";
+      animation: var(--animate-scroll-cue);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue-line::after { top: 1.35rem; opacity: 1; }
+  }
+
+  /* The faint technical grid over the Home overview, faded out along the
+     diagonal by a mask. */
+  .overview-grid::before {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(109 145 255 / 5%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(109 145 255 / 5%) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    content: "";
+    mask-image: linear-gradient(135deg, #000, transparent 72%);
+    pointer-events: none;
+  }
+
+  /* A middot between the news byline facts, in the manner of the reference.
+     They wrap on a phone, which would strand a separator at the start of a
+     line, so spacing alone carries them there. */
+  .byline-facts > * + *:not([data-draft])::before {
+    margin-right: .9rem;
+    content: "\00B7";
+    opacity: .55;
+  }
+  @media (width <= 600px) {
+    .byline-facts > * + *:not([data-draft])::before { content: none; }
+  }
+
+  /* --- Publications table ----------------------------------------------
+     On a phone the table becomes a stack of records, each cell labelled by
+     its column heading. The label is generated content pulled from the
+     cell's own data-label, which no utility can produce. */
+  @media (width <= 600px) {
+    .publication-table { table-layout: auto; }
+    .publication-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    .publication-table,
+    .publication-table tbody,
+    .publication-table tr,
+    .publication-table td { display: block; width: 100%; }
+    .publication-table tr + tr { border-top: 1px solid var(--color-line); }
+    .publication-table td { padding: .9rem 1rem; border: 0; }
+    .publication-table td + td { padding-top: 0; }
+    .publication-table td:first-child { padding-top: 1.35rem; }
+    .publication-table td:last-child { padding-bottom: 1.35rem; }
+    .publication-table td::before {
+      display: block;
+      margin-bottom: .25rem;
+      color: var(--color-muted);
+      content: attr(data-label);
+      font: 700 .58rem/1.3 var(--font-tech);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+  }
+}

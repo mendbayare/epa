@@ -543,6 +543,8 @@ Record meaningful changes here; do not use this section for every code commit.
 | 2026-09-04 | Removed the full-viewport rule from the Mentor and Projects sections. | Pinning them to `100svh` left a large empty band whenever their content did not fill a screen; the normal section rhythm reads better. |
 | 2026-09-04 | Reversed the earlier decision to justify the mentor greeting. | Justification opened wide rivers of white space: Mongolian words are long and do not hyphenate, so each line offered too few break opportunities at that measure. |
 | 2026-09-04 | Added an institutional utility strip, hidden on Home. | It carries the laboratory location on inner pages and is ready for the pending email and social accounts, while leaving the Home hero uninterrupted. |
+| 2026-09-07 | Moved the site to Tailwind v4, built by Hugo's `css.TailwindCSS`. | The hand-written parts had grown a cascade that depended on file order, where a page file could silently override a shared rule; utilities put the styling on the element that uses it. The repository now needs Node to build. |
+| 2026-09-07 | Kept the Mentor portrait's corrected aspect ratio rather than restoring the old rendering. | The old CSS asked for `aspect-ratio: .9` and never got it, because the image partial's `height` attribute won without `height: auto`. Preflight supplies that, so the portrait finally matches its intent; reverting would mean reproducing a bug the design system already documents. |
 | 2026-09-04 | Removed the utility strip again at the stakeholder's direction. | With no confirmed email or social accounts it carried only the address, which the footer and the Contact page already provide; the header is simpler without it. |
 | 2026-09-04 | Rounded every card surface, departing from the reference. | The stakeholder asked for roundness. SICT keeps its cards square, so this is a deliberate divergence rather than an oversight, applied through one `--radius-card` token. |
 
@@ -2286,5 +2288,9 @@ rejected until `collapsible: false` was added.
 
 **Next recommended action**
 
+- Verify the Tailwind build at 768 and 360 px. Desktop is diffed against the
+  previous build and clean; tablet and mobile were deliberately deferred.
+- Decide whether the split page hero should keep the 144 px of navy that the
+  old mobile cascade gave it back — see `docs/DESIGN_SYSTEM.md` §6.
 - Settle the GitHub organisation so Pages CMS can be connected, then walk the
   editor through the forms.
