@@ -9,6 +9,9 @@
   {{ $latestGeneration := index $generations 0 }}
   {{ $latestMembers := where $membersPage.RegularPages "Params.generation" $latestGeneration.key }}
   {{ $latestGenerationLabel := cond $isMn $latestGeneration.heading_mn $latestGeneration.heading_en }}
+  {{/* Partners is the only section that may be absent, so the closing
+       section keeps the sequence unbroken when there are none. */}}
+  {{ $ctaIndex := cond .Params.partners "08" "07" }}
 
   <section class="home-hero">
     <div class="home-hero__backdrop">
@@ -160,15 +163,15 @@
           "index" "07"
           "onDark" true) }}
         <div class="partner-grid">
-          {{ range . }}
+          {{ range $i, $partner := . }}
             <article class="partner-card">
-              <span>{{ .mark }}</span>
+              <span>{{ printf "%02d" (add $i 1) }}</span>
               <div>
                 <h3>
-                  {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }} ↗</a>{{ else }}{{ .name }}{{ end }}
+                  {{ if $partner.url }}<a href="{{ $partner.url }}" target="_blank" rel="noopener">{{ $partner.name }} ↗</a>{{ else }}{{ $partner.name }}{{ end }}
                 </h3>
-                <p>{{ .description }}</p>
-                {{ if .provisional }}<small>{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}
+                {{ with $partner.description }}<p>{{ . }}</p>{{ end }}
+                {{ if $partner.provisional }}<small>{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}
               </div>
             </article>
           {{ end }}
@@ -183,7 +186,7 @@
         <p class="eyebrow">EPA@Lab</p>
         <h2>{{ if $isMn }}Санаагаа бодит ажил болгоё{{ else }}Turn your idea into practical work{{ end }}</h2>
       </div>
-      <span class="section-index">08</span>
+      <span class="section-index">{{ $ctaIndex }}</span>
       <a class="button button--light" href="{{ relLangURL "contact/" }}">
         {{ if $isMn }}Холбоо барих{{ else }}Contact us{{ end }} <span aria-hidden="true">→</span>
       </a>

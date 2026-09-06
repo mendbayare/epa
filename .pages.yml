@@ -76,7 +76,6 @@ content:
             list: true
             fields:
               - { name: name, label: Нэр, type: string, required: true }
-              - { name: mark, label: Тэмдэг, type: string }
               - { name: url, label: Вэб хаяг, type: string }
               - { name: description, label: Тайлбар, type: text }
               - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }

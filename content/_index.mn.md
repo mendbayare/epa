@@ -37,21 +37,18 @@ provisional = true
 name = "Жишээ хамтрагч байгууллага"
 url = ""
 description = "Хамтын ажиллагааны чиглэлийн түр тайлбар."
-mark = "01"
 provisional = true
 
 [[partners]]
 name = "Жишээ технологийн түнш"
 url = ""
 description = "Тоног төхөөрөмж, инженерийн дэмжлэгийн түр мэдээлэл."
-mark = "02"
 provisional = true
 
 [[partners]]
 name = "Жишээ судалгааны байгууллага"
 url = ""
 description = "Судалгаа, сургалтын хамтын ажиллагааны түр мэдээлэл."
-mark = "03"
 provisional = true
 +++
 

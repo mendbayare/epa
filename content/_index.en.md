@@ -37,21 +37,18 @@ provisional = true
 name = "Sample partner organization"
 url = ""
 description = "Provisional description of the collaboration."
-mark = "01"
 provisional = true
 
 [[partners]]
 name = "Sample technology partner"
 url = ""
 description = "Provisional equipment and engineering-support information."
-mark = "02"
 provisional = true
 
 [[partners]]
 name = "Sample research organization"
 url = ""
 description = "Provisional research and teaching collaboration information."
-mark = "03"
 provisional = true
 +++
 
