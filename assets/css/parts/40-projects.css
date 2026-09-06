@@ -10,8 +10,8 @@
 .project-copy { padding-bottom: clamp(4rem, 8vw, 7rem); }
 .project-copy + .project-copy { padding-top: clamp(4rem, 8vw, 7rem); border-top: 1px solid var(--border); }
 .project-copy__number { color: var(--accent-600); font: 700 .75rem/1 var(--font-tech); }
-.project-copy h2 { font-size: clamp(2.2rem, 4vw, 3.7rem); }
-.project-copy > p:last-child { max-width: 48rem; color: var(--text-muted); font-size: clamp(1.05rem, 1.5vw, 1.25rem); }
+.project-copy h2 { font-size: var(--text-3xl); }
+.project-copy > p:last-child { max-width: 48rem; color: var(--text-muted); font-size: var(--text-lg); }
 .project-body { padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-muted); }
 .project-related { margin-top: clamp(1rem, 5vw, 4rem); padding: clamp(2rem, 5vw, 4rem); color: var(--white); background: var(--blue-700); }
 .project-related .eyebrow { color: rgb(255 255 255 / 58%); }

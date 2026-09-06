@@ -79,7 +79,7 @@
 .media-card__body { display: flex; min-height: 12rem; padding: var(--space-5); flex: 1; flex-direction: column; gap: var(--space-4); }
 .media-card__meta { display: flex; justify-content: space-between; gap: var(--space-4); color: var(--accent-600); font: 700 .66rem/1.4 var(--font-tech); letter-spacing: .06em; text-transform: uppercase; }
 .media-card__meta span { display: inline-flex; align-items: center; gap: .5rem; }
-.media-card h3 { margin: 0; font-size: clamp(1.2rem, 2vw, 1.55rem); }
+.media-card h3 { margin: 0; font-size: var(--text-xl); }
 .media-card h3 a { text-decoration: none; }
 .media-card__summary { display: -webkit-box; overflow: hidden; margin: 0; color: var(--text-muted); font-size: .9rem; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 .card-arrow { display: grid; width: 2.5rem; margin-top: auto; aspect-ratio: 1; align-self: flex-end; place-items: center; border: 1px solid var(--border); border-radius: 50%; color: var(--link); transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
@@ -112,7 +112,7 @@
 .person-card__placeholder { display: grid; height: 100%; place-items: center; color: var(--blue-700); font: 800 2rem/1 var(--font-display); }
 .person-card__portrait .provisional-badge { top: auto; right: .8rem; bottom: .8rem; }
 .person-card__copy { padding: clamp(1.4rem, 3vw, 2.25rem); }
-.person-card h3 { font-size: clamp(1.45rem, 2.3vw, 2rem); }
+.person-card h3 { font-size: var(--text-2xl); }
 .person-card__study { display: flex; min-height: 3rem; color: var(--text-muted); flex-direction: column; font-size: .88rem; }
 .person-card blockquote { margin: var(--space-5) 0 0; padding-top: 1.25rem; border-top: 1px solid var(--border); color: var(--text); font-size: var(--text-base); font-style: italic; line-height: 1.65; }
 .person-card ul { margin: 1.25rem 0 0; padding: var(--space-4) 0 0 1.15rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .85rem; }
@@ -165,10 +165,10 @@
 .page-hero { position: relative; overflow: hidden; padding-block: clamp(1.75rem, 3.5vw, 3rem); color: var(--on-dark); background: var(--navy-950); }
 .page-hero::after { position: absolute; top: -13rem; right: -9rem; width: 36rem; aspect-ratio: 1; border: 1px solid rgb(109 145 255 / 18%); border-radius: 50%; box-shadow: 0 0 0 5rem rgb(109 145 255 / 4%), 0 0 0 10rem rgb(109 145 255 / 2%); content: ""; }
 .page-hero > .container { position: relative; z-index: 1; }
-.page-hero h1 { margin: 0; color: var(--on-dark); font-size: clamp(1.9rem, 3.4vw, 2.9rem); }
+.page-hero h1 { margin: 0; color: var(--on-dark); font-size: var(--text-3xl); }
 /* The same short orange rule the section headings carry. */
 .page-hero h1::after { display: block; width: 3.5rem; height: 3px; margin-top: var(--space-4); background: var(--accent-600); content: ""; }
-.page-hero__lead { max-width: 42rem; margin: var(--space-4) 0 0; color: var(--on-dark-muted); font-size: clamp(1rem, 1.4vw, 1.12rem); }
+.page-hero__lead { max-width: 42rem; margin: var(--space-4) 0 0; color: var(--on-dark-muted); font-size: var(--text-lg); }
 .page-hero .breadcrumb { margin-bottom: var(--space-4); color: var(--on-dark-quiet); }
 .page-hero .breadcrumb a:hover { color: var(--accent-600); }
 .page-hero .draft-label { margin-top: var(--space-5); }
@@ -184,7 +184,7 @@
 .page-hero--split::after { content: none; }
 .page-hero--split .page-hero__grid { position: relative; z-index: 1; display: grid; min-height: clamp(38rem, 74vh, 54rem); align-items: stretch; grid-template-columns: minmax(0, 1fr) minmax(24rem, 1fr); gap: 0; }
 .page-hero__copy { display: flex; padding: clamp(4rem, 8vw, 8rem) clamp(2rem, 7vw, 7rem) clamp(4rem, 8vw, 8rem) 0; justify-content: center; flex-direction: column; }
-.page-hero--split h1 { max-width: 14ch; font-size: clamp(2.8rem, 5.6vw, 5.6rem); }
+.page-hero--split h1 { max-width: 14ch; font-size: var(--text-4xl); }
 .page-hero--split .page-hero__lead { max-width: 42rem; margin-block: var(--space-5) var(--space-6); }
 .page-hero--split .breadcrumb { margin-bottom: clamp(2rem, 5vw, 4rem); }
 .page-hero__media { position: relative; min-height: 100%; overflow: hidden; }

@@ -55,11 +55,11 @@
   --text-xs: .72rem;                         /* eyebrows, table headings */
   --text-sm: .87rem;                         /* navigation, card metadata */
   --text-base: 1rem;
-  --text-lg: clamp(1.05rem, 1.6vw, 1.25rem); /* lead paragraphs */
-  --text-xl: clamp(1.25rem, 2vw, 1.6rem);    /* h3 */
-  --text-2xl: clamp(1.5rem, 3vw, 2.35rem);   /* card and item titles */
-  --text-3xl: clamp(2rem, 4vw, 3.35rem);     /* section headings */
-  --text-4xl: clamp(2.8rem, 5.6vw, 5.6rem);  /* page titles */
+  --text-lg: clamp(1rem, 1.2vw, 1.125rem);      /* lead paragraphs */
+  --text-xl: clamp(1.15rem, 1.5vw, 1.375rem);   /* h3 */
+  --text-2xl: clamp(1.35rem, 2.1vw, 1.8rem);    /* card and item titles */
+  --text-3xl: clamp(1.75rem, 2.8vw, 2.5rem);    /* section headings */
+  --text-4xl: clamp(2.2rem, 4vw, 3.75rem);      /* page titles */
 
   --leading-tight: 1.08;
   --leading-snug: 1.35;
@@ -80,8 +80,8 @@
 
   --container: 76rem;
   --page-space: clamp(1.25rem, 4vw, 3rem);   /* container side gutter */
-  --section-space: clamp(4rem, 9vw, 8rem);   /* vertical section rhythm */
-  --block-space: clamp(2rem, 5vw, 4.5rem);   /* padding inside large panels */
+  --section-space: clamp(3rem, 6vw, 5.5rem); /* vertical section rhythm */
+  --block-space: clamp(1.75rem, 3.5vw, 3.25rem); /* padding inside large panels */
   --grid-gap: 1.25rem;                       /* standard card-grid gap */
 
   /* --- Shape ----------------------------------------------------------- */

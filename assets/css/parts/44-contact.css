@@ -4,8 +4,8 @@
 .contact-detail { position: relative; display: grid; min-height: 11rem; padding: clamp(1.5rem, 4vw, 3.5rem); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); grid-template-columns: 2rem minmax(0, 1fr); gap: clamp(1rem, 2vw, 2rem); }
 .contact-detail--wide { grid-column: 1 / -1; }
 .contact-detail > span { color: var(--accent-600); font: 700 .68rem/1.4 var(--font-tech); }
-.contact-detail address { max-width: 55rem; font-size: clamp(1.35rem, 3vw, 2.5rem); font-style: normal; font-weight: 700; line-height: 1.35; }
-.contact-detail a, .contact-detail strong { display: block; font-size: clamp(1.15rem, 2vw, 1.75rem); overflow-wrap: anywhere; text-decoration: none; }
+.contact-detail address { max-width: 55rem; font-size: var(--text-2xl); font-style: normal; font-weight: 700; line-height: 1.35; }
+.contact-detail a, .contact-detail strong { display: block; font-size: var(--text-xl); overflow-wrap: anywhere; text-decoration: none; }
 .contact-detail a:hover { color: var(--accent-600); }
 .contact-detail small { display: block; margin-top: .45rem; color: var(--text-muted); }
 .contact-pending { color: var(--text-muted); }

@@ -7,9 +7,9 @@ img { display: block; max-width: 100%; }
 a { color: inherit; }
 button { font: inherit; }
 h1, h2, h3 { margin: 0 0 1rem; font-family: var(--font-display); line-height: 1.08; letter-spacing: -.035em; }
-h1 { max-width: 17ch; font-size: clamp(2.7rem, 7vw, 6rem); }
-h2 { max-width: 22ch; font-size: clamp(2rem, 4vw, 3.7rem); }
-h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); }
+h1 { max-width: 17ch; font-size: var(--text-4xl); }
+h2 { max-width: 22ch; font-size: var(--text-3xl); }
+h3 { font-size: var(--text-xl); }
 p { margin: 0 0 1rem; }
 .container { width: min(100% - 2 * var(--page-space), var(--container)); margin-inline: auto; }
 .section { padding-block: var(--section-space); }
