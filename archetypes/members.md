@@ -1,6 +1,6 @@
 +++
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
-role = 'EPA@Lab member'
+role = 'EPA-Lab member'
 program = ''
 study_year = ''
 generation = ''

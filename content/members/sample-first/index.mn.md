@@ -1,6 +1,6 @@
 +++
 title = "Жишээ гишүүн A"
-role = "EPA@Lab-ийн гишүүн"
+role = "EPA-Lab-ийн гишүүн"
 program = "Цахилгаан системийн автоматжуулалт"
 study_year = "4-р курс"
 generation = "first-generation"

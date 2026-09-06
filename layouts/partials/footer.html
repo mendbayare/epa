@@ -7,9 +7,9 @@
 
   <div class="container relative grid grid-cols-[minmax(18rem,1.35fr)_minmax(10rem,.65fr)_minmax(15rem,.8fr)] gap-[clamp(3rem,7vw,7rem)] max-md:grid-cols-[1.2fr_.8fr] max-sm:grid-cols-1 max-sm:gap-12">
     <div>
-      <a class="inline-flex items-center gap-[.7rem] font-display text-[1.35rem] leading-none font-extrabold no-underline" href="{{ site.Home.RelPermalink }}" aria-label="EPA@Lab">
+      <a class="inline-flex items-center gap-[.7rem] font-display text-[1.35rem] leading-none font-extrabold no-underline" href="{{ site.Home.RelPermalink }}" aria-label="EPA-Lab">
         <span class="grid aspect-square w-9 place-items-center rounded-md bg-blue-700 text-white">E</span>
-        <span class="flex flex-col gap-1"><strong class="leading-none">EPA<span class="text-accent-600">@</span>Lab</strong><small class="font-body text-[.58rem] leading-none font-bold tracking-[.12em] text-white/48">{{ if $isMn }}ШУТИС · ЭХИС{{ else }}MUST · PES{{ end }}</small></span>
+        <span class="flex flex-col gap-1"><strong class="leading-none">EPA<span class="text-accent-600">-</span>Lab</strong><small class="font-body text-[.58rem] leading-none font-bold tracking-[.12em] text-white/48">{{ if $isMn }}ШУТИС · ЭХИС{{ else }}MUST · PES{{ end }}</small></span>
       </a>
       <p class="mt-7 mb-8 max-w-120 text-white/58">{{ site.Params.description }}</p>
       <div class="flex flex-wrap gap-[.65rem]" aria-label="{{ if $isMn }}Олон нийтийн сүлжээ{{ else }}Social media{{ end }}">
@@ -48,7 +48,7 @@
   </div>
 
   <div class="container relative mt-[clamp(4rem,7vw,6rem)] grid grid-cols-[1fr_auto_1fr] items-center gap-6 border-t border-line-on-dark py-6 font-tech text-[.68rem] leading-[1.5] font-medium tracking-[.03em] text-white/45 max-sm:grid-cols-1">
-    <span>© {{ now.Year }} EPA@Lab</span>
+    <span>© {{ now.Year }} EPA-Lab</span>
     <span>{{ if $isMn }}ШУТИС · Эрчим хүчний инженерчлэлийн сургууль{{ else }}MUST · School of Power and Electrical Engineering{{ end }}</span>
     <a class="justify-self-end text-on-dark-quiet no-underline hover:text-accent-600 max-sm:justify-self-start" href="#main">{{ if $isMn }}Дээш буцах{{ else }}Back to top{{ end }} <span aria-hidden="true">↑</span></a>
   </div>

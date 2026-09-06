@@ -6,9 +6,9 @@ hero_image = "images/lab-hero.jpg"
 vision = "To become a leading student research environment where the next generation of power-automation knowledge and solutions is built together."
 mission = "We connect theory with real equipment, experiments, and research to develop capable engineers and work of lasting value."
 mentor_name = "Dr. B. Tuvshinbayar"
-mentor_role = "EPA@Lab faculty mentor"
+mentor_role = "EPA-Lab faculty mentor"
 mentor_image = "images/mentor-tuvshinbayar.jpg"
-mentor_greeting = "EPA@Lab gives students a place to test their initiative and research interests on real systems. Together, we learn, experiment, and develop solutions that can contribute to the power sector."
+mentor_greeting = "EPA-Lab gives students a place to test their initiative and research interests on real systems. Together, we learn, experiment, and develop solutions that can contribute to the power sector."
 mentor_page = "about/"
 equipment = ["ABB", "SEL", "MEGGER", "RTAC", "RTU", "PLC", "RASPBERRY PI", "ARDUINO", "ESP32", "LoRa"]
 
@@ -52,4 +52,4 @@ description = "Provisional research and teaching collaboration information."
 provisional = true
 +++
 
-EPA@Lab brings students and researchers together to work on power-system automation, protection, monitoring, and control.
+EPA-Lab brings students and researchers together to work on power-system automation, protection, monitoring, and control.

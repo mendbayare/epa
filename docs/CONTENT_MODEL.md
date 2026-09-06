@@ -1,4 +1,4 @@
-# EPA@Lab baseline content model
+# EPA-Lab baseline content model
 
 **Status:** Revised from stakeholder-confirmed site structure
 **Last updated:** 2026-09-02
@@ -30,7 +30,7 @@ ordinary page.
 | Field | Type | Required | Purpose |
 | --- | --- | --- | --- |
 | `lab_name` | localized string | Yes | Full laboratory name |
-| `short_name` | string | Yes | `EPA@Lab` |
+| `short_name` | string | Yes | `EPA-Lab` |
 | `description` | localized string | Yes | Default metadata description |
 | `logo` | image path | No | Approved logo; placeholder until supplied |
 | `email` | email | No | Official public laboratory email |
@@ -38,7 +38,7 @@ ordinary page.
 | `map_url` | URL | No | External map destination |
 | `social_links` | list | No | Label and URL for each approved account |
 
-Confirmed: the EPA@Lab logo remains independent. The institution and school name
+Confirmed: the EPA-Lab logo remains independent. The institution and school name
 are displayed as ordinary supporting text beside or beneath it, allowing the text
 to shorten or hide on smaller screens without altering the logo.
 
@@ -80,7 +80,7 @@ Location: `content/members/{slug}/index.{lang}.md`
 | `program` | string | No | Academic program |
 | `study_year` | string | No | Current study year/level |
 | `generation` | controlled key | Yes | Stable generation/cohort key used for page grouping and anchors |
-| `joined_year` | integer | No | Year the member joined EPA@Lab, if separately useful |
+| `joined_year` | integer | No | Year the member joined EPA-Lab, if separately useful |
 | `portrait` | image path | Yes | Approved portrait |
 | `summary` | string | Yes | Card-length biography |
 | `yearbook_quote` | string | No | Short member-approved quote shown on the card |

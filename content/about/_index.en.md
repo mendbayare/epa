@@ -1,15 +1,15 @@
 +++
 title = "About us"
-description = "The origins, development, achievements, and supervising lecturer of EPA@Lab."
+description = "The origins, development, achievements, and supervising lecturer of EPA-Lab."
 hero_image = "images/lab-hero.jpg"
 founded_label = "Established"
 founded_value = "January 2025"
-history_intro = "EPA@Lab was established to connect students of electrical-system and industrial-process automation with theoretical research, real equipment, and practical engineering experiments."
+history_intro = "EPA-Lab was established to connect students of electrical-system and industrial-process automation with theoretical research, real equipment, and practical engineering experiments."
 provisional = true
 
 [[history]]
 year = "2025.01"
-title = "EPA@Lab was established"
+title = "EPA-Lab was established"
 description = "Laboratory activities began under the guidance of B. Tuvshinbayar."
 provisional = false
 
@@ -35,7 +35,7 @@ provisional = true
 
 [supervisor]
 name = "Dr. (Ph.D.) B. Tuvshinbayar"
-role = "EPA@Lab supervising lecturer"
+role = "EPA-Lab supervising lecturer"
 portrait = "images/mentor-tuvshinbayar.jpg"
 summary = "Leads the laboratory's teaching and research in power-system automation, monitoring and control, and protection."
 bio = "This extended biography is provisional. Academic position, education, research interests, and publication details must be reviewed by the lecturer before release."

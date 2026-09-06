@@ -1,5 +1,5 @@
 baseURL = "https://example.org/"
-title = "EPA@Lab"
+title = "EPA-Lab"
 defaultContentLanguage = "mn"
 defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
@@ -20,7 +20,7 @@ disableKinds = ["taxonomy", "term"]
   [languages.mn]
     locale = "mn-MN"
     label = "Монгол"
-    title = "EPA@Lab"
+    title = "EPA-Lab"
     weight = 1
     contentDir = "content"
     [languages.mn.params]
@@ -59,7 +59,7 @@ disableKinds = ["taxonomy", "term"]
   [languages.en]
     locale = "en"
     label = "English"
-    title = "EPA@Lab"
+    title = "EPA-Lab"
     weight = 2
     contentDir = "content"
     [languages.en.params]

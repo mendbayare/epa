@@ -1,6 +1,6 @@
 +++
 title = "Sample Member A"
-role = "EPA@Lab member"
+role = "EPA-Lab member"
 program = "Electrical Systems Automation"
 study_year = "Fourth year"
 generation = "first-generation"

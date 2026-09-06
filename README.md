@@ -1,4 +1,4 @@
-# EPA@Lab website
+# EPA-Lab website
 
 Multilingual static website for the Electrical Power Automation Laboratory at MUST, built with Hugo Extended.
 

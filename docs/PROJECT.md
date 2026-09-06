@@ -1,4 +1,4 @@
-# EPA@Lab Website — Project Handbook
+# EPA-Lab Website — Project Handbook
 
 > This is the canonical cross-session project record. Read it before starting
 > work and update it at the end of every working session. Record decisions,
@@ -127,7 +127,7 @@ initial release unless approved.
 
 ### Facts currently extracted from the source material
 
-- EPA@Lab was established in January 2025.
+- EPA-Lab was established in January 2025.
 - The laboratory is led by Dr. (Ph.D.) B. Tuvshinbayar.
 - The lab leader listed in the source PDF is B. Demberelzodov.
 - Location: MUST School of Power and Electrical Engineering, Building VIII,
@@ -270,12 +270,12 @@ Access rules:
 - Accessibility and readability take priority over decorative effects.
 
 The School of Information and Communication Technology website was named as an
-initial visual influence, but EPA@Lab should have its own coherent identity.
+initial visual influence, but EPA-Lab should have its own coherent identity.
 
 ### Color system
 
 The palette is derived from the recurring colors observed on the stakeholder's
-SICT reference site. EPA@Lab uses a smaller subset so it feels related to the
+SICT reference site. EPA-Lab uses a smaller subset so it feels related to the
 institution without duplicating the SICT identity.
 
 | Token | Value | Intended use |
@@ -384,7 +384,7 @@ content entry, launch QA, deployment, and handover.
 - [ ] Verify all names, roles, study years, and contact details.
 - [ ] Confirm permission to publish supplied member photographs and reports.
 - [ ] Obtain official MUST/EHIS brand assets and usage rules.
-- [ ] Decide whether EPA@Lab needs a new logo.
+- [ ] Decide whether EPA-Lab needs a new logo.
 - [ ] Collect the official public email, social links, project reports, and captions.
 - [ ] Prepare and approve English translations for core pages.
 - [x] Confirm generation/cohort behavior and newest-first ordering on Members.
@@ -454,7 +454,7 @@ These questions must be resolved before launch:
 3. Who is the primary editor, and who takes over when that person graduates?
 4. Does the lab have an official email address and social-media accounts?
 5. Is the stakeholder-supplied Google Maps point the final approved public location?
-6. Is there an official EPA@Lab logo, or should one be designed?
+6. Is there an official EPA-Lab logo, or should one be designed?
 7. May every supplied name, portrait, activity image, and PDF be published?
 8. Which projects and publications should be included at launch?
 9. Must every item be bilingual, or only the permanent institutional pages?
@@ -520,9 +520,9 @@ Record meaningful changes here; do not use this section for every code commit.
 | 2026-08-25 | Kept Next.js/React out of the initial architecture. | They are viable but add little value for the confirmed scope. |
 | 2026-08-26 | Started a custom Hugo implementation without a third-party theme or CSS framework. | A small purpose-built design system keeps the site distinctive, fast, and maintainable. |
 | 2026-08-26 | Identified Publications as a likely dedicated section, pending scope confirmation. | The stakeholder requested a Published list, but implementation is deferred until its contents are defined. |
-| 2026-08-26 | Adopted the SICT site as visual inspiration, not a template to copy. | EPA@Lab should share its blue institutional tone and polished academic feel while retaining its own identity and accessible implementation. |
+| 2026-08-26 | Adopted the SICT site as visual inspiration, not a template to copy. | EPA-Lab should share its blue institutional tone and polished academic feel while retaining its own identity and accessible implementation. |
 | 2026-08-26 | Defined the EPA interface palette from the SICT reference site's recurring colors. | Navy, royal blue, orange, white, and cool slate establish institutional continuity while keeping the EPA identity restrained and distinct. |
-| 2026-08-26 | Kept the EPA@Lab logo independent from the institution-name lockup. | University and school affiliation will be flexible supporting text so the header can adapt cleanly across desktop, mobile, favicon, and social contexts. |
+| 2026-08-26 | Kept the EPA-Lab logo independent from the institution-name lockup. | University and school affiliation will be flexible supporting text so the header can adapt cleanly across desktop, mobile, favicon, and social contexts. |
 | 2026-08-26 | Chose manually maintained Home statistics for the baseline. | Values are stakeholder-provided indicators and may not map reliably to published site records; automatic calculation can be reconsidered later. |
 | 2026-08-26 | Excluded email addresses from public member records. | Student/member privacy and a simpler profile model outweigh the need for direct personal contact details. |
 | 2026-08-26 | Added light and dark color modes, defaulting to the visitor's system preference. | The SICT reference provides a coherent dark palette, and adding the infrastructure before component development avoids a later retrofit. |
@@ -537,7 +537,7 @@ Record meaningful changes here; do not use this section for every code commit.
 | 2026-09-02 | Removed project categories and category filtering from the confirmed model. | The stakeholder clarified that projects are not classified as automation, relay protection, SCADA/HMI, or similar research categories. |
 | 2026-09-02 | Confirmed seven primary sections and the final header/footer order. | News remains a primary section; Members is a single navigation link, with generations grouped inside its page. |
 | 2026-09-02 | Removed the supervising teacher's telephone number from public content. | The laboratory will expose only its official public email as a direct contact method. |
-| 2026-09-04 | Adopted a hybrid visual direction: SICT's institutional shell with EPA@Lab's own signature Home hero. | The reference site's consistency is worth borrowing, but EPA@Lab must read as its own laboratory rather than a school sub-site. |
+| 2026-09-04 | Adopted a hybrid visual direction: SICT's institutional shell with EPA-Lab's own signature Home hero. | The reference site's consistency is worth borrowing, but EPA-Lab must read as its own laboratory rather than a school sub-site. |
 | 2026-09-04 | Split `main.css` into ordered parts and extended tokens beyond color. | Styling had been written page by page with no shared layer, producing nine hero variants, ten card variants, and five section-heading patterns. |
 | 2026-09-04 | Created `docs/DESIGN_SYSTEM.md` as the canonical design reference. | `docs/PROJECT.md` records decisions; implementation rules needed their own home. |
 | 2026-09-04 | Removed the full-viewport rule from the Mentor and Projects sections. | Pinning them to `100svh` left a large empty band whenever their content did not fill a screen; the normal section rhythm reads better. |
@@ -546,6 +546,7 @@ Record meaningful changes here; do not use this section for every code commit.
 | 2026-09-07 | Moved the site to Tailwind v4, built by Hugo's `css.TailwindCSS`. | The hand-written parts had grown a cascade that depended on file order, where a page file could silently override a shared rule; utilities put the styling on the element that uses it. The repository now needs Node to build. |
 | 2026-09-07 | Kept the Mentor portrait's corrected aspect ratio rather than restoring the old rendering. | The old CSS asked for `aspect-ratio: .9` and never got it, because the image partial's `height` attribute won without `height: auto`. Preflight supplies that, so the portrait finally matches its intent; reverting would mean reproducing a bug the design system already documents. |
 | 2026-09-07 | Rebuilt the News card on the deep brand navy and shrank its arrow. | The lighter indigo went muddy against the navy page in the dark theme, and the arrow's 12% white border all but vanished on that ground, leaving a 40px empty circle rather than a control. |
+| 2026-09-07 | Renamed the laboratory wordmark from EPA@Lab to EPA-Lab throughout. | The stakeholder's direction. The separator keeps its accent color in the brand lockup, so the mark reads the same way it did with the at sign. |
 | 2026-09-04 | Removed the utility strip again at the stakeholder's direction. | With no confirmed email or social accounts it carried only the address, which the footer and the Contact page already provide; the header is simpler without it. |
 | 2026-09-04 | Rounded every card surface, departing from the reference. | The stakeholder asked for roundness. SICT keeps its cards square, so this is a deliberate divergence rather than an oversight, applied through one `--radius-card` token. |
 
@@ -629,7 +630,7 @@ At the end of every working session:
 **Decisions**
 
 - Use the current SICT website as a reference for institutional color and feel,
-  while creating an original EPA@Lab composition and component system.
+  while creating an original EPA-Lab composition and component system.
 - Add Publications as a first-class content type and primary navigation item;
   keep News as a separate Home-page and archive feature.
 - Design research browsing around category pills and image-led project cards.
@@ -713,7 +714,7 @@ At the end of every working session:
 - Defer Publications until the stakeholder defines whether it includes papers,
   theses, internal reports, or another set of outputs.
 - Store the member grouping field as `joined_year`, meaning the year that person
-  joined EPA@Lab; use it for the cohort/generation interface.
+  joined EPA-Lab; use it for the cohort/generation interface.
 - Keep equipment as a small ordered list on About rather than a standalone
   content collection or set of detail pages.
 
@@ -731,7 +732,7 @@ At the end of every working session:
 
 **Decision**
 
-- Use an independent EPA@Lab logo. Display the MUST and school affiliation as
+- Use an independent EPA-Lab logo. Display the MUST and school affiliation as
   supporting interface text rather than embedding it permanently in the logo.
 - The supporting text may be shortened or hidden at smaller breakpoints while
   the logo remains intact.
@@ -790,7 +791,7 @@ At the end of every working session:
 - Added reusable responsive-image rendering through Hugo, generating WebP source
   sets at build time.
 - Added flexible MUST/EHIS supporting text beneath the independent placeholder
-  EPA@Lab logo on desktop; the supporting text hides on small screens.
+  EPA-Lab logo on desktop; the supporting text hides on small screens.
 
 **Assets**
 
@@ -850,7 +851,7 @@ At the end of every working session:
   the base of the hero.
 - Added an original animated SVG power-network overlay with moving signal paths
   and pulsing nodes, inspired by the motion language of the SICT reference but
-  specific to EPA@Lab.
+  specific to EPA-Lab.
 - Disabled network animation under `prefers-reduced-motion`.
 - Tuned desktop and mobile Mongolian headline sizing and wrapping separately.
 - Self-hosted the Noto Sans variable webfont and recorded its SIL Open Font
@@ -1011,7 +1012,7 @@ At the end of every working session:
 
 **Implemented**
 
-- Rebuilt the footer as a responsive three-column layout: EPA@Lab identity and
+- Rebuilt the footer as a responsive three-column layout: EPA-Lab identity and
   social controls, primary navigation mirroring the header, and localized contact
   information.
 - Added Instagram and Facebook icon controls backed by `instagramURL` and
@@ -1023,7 +1024,7 @@ At the end of every working session:
 
 **Decision**
 
-- Do not link to generic social-media homepages or invent EPA@Lab account URLs.
+- Do not link to generic social-media homepages or invent EPA-Lab account URLs.
   Instagram and Facebook appear as visibly disabled placeholders until the
   stakeholder provides approved account links; setting the two configuration
   values automatically renders functional external links.
@@ -1036,7 +1037,7 @@ At the end of every working session:
 
 **Still unresolved**
 
-- Approved EPA@Lab Instagram and Facebook URLs are required to activate the
+- Approved EPA-Lab Instagram and Facebook URLs are required to activate the
   social links.
 
 **Next recommended action**
@@ -1597,7 +1598,7 @@ At the end of every working session:
 
 - Adopted a hybrid visual direction. The SICT reference supplies the
   institutional shell — one section-heading pattern, flat cards in even grids,
-  disciplined color, predictable rhythm. EPA@Lab keeps its own signature: the
+  disciplined color, predictable rhythm. EPA-Lab keeps its own signature: the
   full-screen photographic Home hero with the animated power network, the
   technical SVG motifs, and monospace technical labels.
 - Retired the `01`–`08` section numbering on inner pages; it remains on Home
@@ -2120,7 +2121,7 @@ At the end of every working session:
   how little approved content exists. Counts suit the reference's home page,
   where the figures are large; the reference uses none on inner pages.
 - At 317 px the band was taller than the reference's while saying less.
-- The eyebrow, "EPA@Lab / Мэдээ", repeated the highlighted navigation item and
+- The eyebrow, "EPA-Lab / Мэдээ", repeated the highlighted navigation item and
   the title directly beneath it.
 - Section headings carried the reference's orange rule but page heroes did not,
   so the same role had two treatments within EPA's own system.

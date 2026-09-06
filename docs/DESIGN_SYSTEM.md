@@ -1,17 +1,17 @@
-# EPA@Lab design system
+# EPA-Lab design system
 
 **Status:** Phases A–D complete; built on Tailwind v4
 **Last updated:** 2026-09-07
 **Reference site:** <https://www.sict.edu.mn/mn> (institutional influence, not a template)
 
-This document is the canonical reference for how the EPA@Lab site looks and how
+This document is the canonical reference for how the EPA-Lab site looks and how
 its styles are organised. `docs/PROJECT.md` records *what* was decided and why;
 this document records *how* to build against those decisions. Read it before
 adding a component or a stylesheet part.
 
 ## 1. Direction
 
-EPA@Lab uses a **hybrid** of the SICT institutional language and its own
+EPA-Lab uses a **hybrid** of the SICT institutional language and its own
 editorial character.
 
 Borrowed from the reference, because consistency is what makes that site work:
@@ -24,7 +24,7 @@ Borrowed from the reference, because consistency is what makes that site work:
   confined to eyebrows, rules, metadata, and calls to action.
 - One container width and a predictable vertical rhythm.
 
-Kept as EPA@Lab's own, because the laboratory is not the school:
+Kept as EPA-Lab's own, because the laboratory is not the school:
 
 - The full-screen photographic home hero with the animated power-network
   overlay, which is the site's single signature moment.

@@ -40,8 +40,8 @@
         </div>
       </section>
 
-      <section class="group mt-[clamp(4rem,8vw,7rem)] grid min-h-128 grid-cols-[1.1fr_.9fr] overflow-hidden bg-blue-700 text-white max-md:grid-cols-1 max-sm:min-h-0" aria-label="{{ if $isMn }}EPA@Lab-ийн газрын зураг{{ else }}Map of EPA@Lab{{ end }}">
-        <iframe class="h-full min-h-100 w-full border-0 bg-blue-100 max-sm:min-h-72" src="{{ .Params.map_embed_url | safeURL }}" title="{{ if $isMn }}EPA@Lab-ийн Google газрын зураг{{ else }}Google Map showing EPA@Lab{{ end }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <section class="group mt-[clamp(4rem,8vw,7rem)] grid min-h-128 grid-cols-[1.1fr_.9fr] overflow-hidden bg-blue-700 text-white max-md:grid-cols-1 max-sm:min-h-0" aria-label="{{ if $isMn }}EPA-Lab-ийн газрын зураг{{ else }}Map of EPA-Lab{{ end }}">
+        <iframe class="h-full min-h-100 w-full border-0 bg-blue-100 max-sm:min-h-72" src="{{ .Params.map_embed_url | safeURL }}" title="{{ if $isMn }}EPA-Lab-ийн Google газрын зураг{{ else }}Google Map showing EPA-Lab{{ end }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <a class="flex items-end justify-between gap-8 p-[clamp(2rem,5vw,4.5rem)] text-white no-underline max-sm:flex-col max-sm:items-start" href="{{ .Params.map_url }}" target="_blank" rel="noopener">
           <div>
             <p class="eyebrow mb-4 text-accent-600">Google Maps</p>

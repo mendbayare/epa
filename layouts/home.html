@@ -47,7 +47,7 @@
 
     <div class="container relative flex min-h-0 flex-1 items-end max-sm:min-h-svh max-sm:pt-22 max-sm:pb-8 sm:pt-28 sm:pb-[clamp(4.5rem,8vh,6.5rem)] desk-short:pt-24 desk-short:pb-12 phone-short:pt-20 phone-short:pb-4">
       <div class="relative z-3 mb-11 w-[min(100%-1.75rem,27rem)] sm:mb-0 sm:w-[min(72%,42rem)] sm:translate-y-[clamp(-3.5rem,-4vh,-2rem)] md:w-[min(66%,54rem)] desk-short:translate-y-[-1.5rem] phone-short:mb-5">
-        <div class="mb-4 flex items-center gap-4 max-sm:mb-3"><p class="eyebrow m-0 text-accent-600 max-sm:hidden">EPA@Lab · {{ if $isMn }}ШУТИС — ЭХИС{{ else }}MUST — PES{{ end }}</p></div>
+        <div class="mb-4 flex items-center gap-4 max-sm:mb-3"><p class="eyebrow m-0 text-accent-600 max-sm:hidden">EPA-Lab · {{ if $isMn }}ШУТИС — ЭХИС{{ else }}MUST — PES{{ end }}</p></div>
         <h1 class="{{ $heroTitle }}">{{ range .Params.hero_title_lines }}<span class="{{ $heroLine }}">{{ . }}</span>{{ end }}</h1>
         <p class="mt-7 mb-9 max-w-[35rem] text-lg text-on-dark-muted sm:mt-6 sm:mb-8 desk-short:mt-4 desk-short:mb-6 desk-short:text-base max-sm:mt-4 max-sm:mb-[1.4rem] max-sm:max-w-[25rem] max-sm:text-[.92rem] max-sm:leading-[1.6] max-sm:text-white/78 phone-short:mt-[.85rem] phone-short:mb-4 phone-short:leading-[1.5]">{{ .Params.description }}</p>
         <div class="flex flex-wrap items-center gap-6 max-sm:gap-x-4 max-sm:gap-y-[.8rem] phone-short:gap-[.55rem]">
@@ -211,7 +211,7 @@
   <section class="bg-blue-700 py-[clamp(3rem,6vw,5.5rem)] text-white">
     <div class="container grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-[clamp(1rem,3vw,3rem)] max-sm:flex max-sm:flex-col max-sm:items-start">
       <div>
-        <p class="eyebrow mb-4 text-white/65">EPA@Lab</p>
+        <p class="eyebrow mb-4 text-white/65">EPA-Lab</p>
         <h2 class="m-0 text-white">{{ if $isMn }}Санаагаа бодит ажил болгоё{{ else }}Turn your idea into practical work{{ end }}</h2>
       </div>
       <span class="{{ $sectionIndex }}">{{ $ctaIndex }}</span>
