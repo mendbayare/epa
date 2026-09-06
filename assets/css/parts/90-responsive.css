@@ -50,12 +50,6 @@
   .home-hero h1 { font-size: clamp(2.7rem, min(4.35vw, 7vh), 4.5rem); }
   .home-hero__lead { margin-block: 1rem 1.5rem; font-size: 1rem; }
   .home-hero__copy { transform: translateY(-1.5rem); }
-  .vision-mission article { min-height: 7.5rem; padding: 1rem 1.5rem; }
-  .vision-mission article p:last-child { font-size: .96rem; }
-  .home-overview__inner { padding-block: 2rem; }
-  .home-overview .section-head { margin-bottom: 1.5rem; }
-  .stats__grid { min-height: 10rem; }
-  .stat { padding-block: 1.25rem; }
 }
 
 
@@ -118,7 +112,6 @@
   .home-hero__copy { position: relative; width: min(100% - 1.75rem, 27rem); margin-bottom: 2.75rem; }
   .home-hero__kicker { margin-bottom: .75rem; }
   .home-hero__kicker .eyebrow { display: none; }
-  .home-hero__title-row { display: flex; align-items: flex-start; flex-direction: column; gap: .65rem; }
   .home-hero h1 { max-width: 100%; margin-bottom: .25rem; overflow-wrap: normal; font-size: clamp(1.85rem, 8.25vw, 2.35rem); line-height: 1.06; text-shadow: 0 2px 1.5rem rgb(0 0 0 / 35%); }
   .home-hero h1 span { white-space: normal; }
   :lang(en) .home-hero h1 span { white-space: nowrap; }

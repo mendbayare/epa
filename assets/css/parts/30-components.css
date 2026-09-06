@@ -65,7 +65,7 @@
 .card-grid--2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 3vw, 3rem); }
 /* Person cards survive a narrow column — portrait, role, name — so they stay
    two-up on phones. Media cards carry a summary and drop to one. */
-.card-grid--people { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gap); }
+.card-grid--people { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 24rem)); justify-content: center; gap: var(--grid-gap); }
 
 /* --- Media card -------------------------------------------------------
    Image on top, technical metadata, title, summary. Replaces project-card,

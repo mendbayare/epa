@@ -28,9 +28,7 @@
     <div class="container home-hero__stage">
       <div class="home-hero__copy">
         <div class="home-hero__kicker"><p class="eyebrow">EPA@Lab · {{ if $isMn }}ШУТИС — ЭХИС{{ else }}MUST — PES{{ end }}</p></div>
-        <div class="home-hero__title-row">
-          <h1>{{ range .Params.hero_title_lines }}<span>{{ . }}</span>{{ end }}</h1>
-        </div>
+        <h1>{{ range .Params.hero_title_lines }}<span>{{ . }}</span>{{ end }}</h1>
         <p class="home-hero__lead">{{ .Params.description }}</p>
         <div class="home-hero__actions">
           <a class="button" href="{{ relLangURL "projects/" }}">{{ if $isMn }}Төслүүдтэй танилцах{{ else }}Explore our projects{{ end }}</a>
@@ -153,7 +151,42 @@
     </div>
   </section>
 
-  {{ with .Params.partners }}<section class="section home-partners"><div class="container">{{ partial "section-head.html" (dict "eyebrow" (cond $isMn "Хамтын ажиллагаа" "Collaboration") "title" (cond $isMn "Хамтрагч байгууллагууд" "Partner organizations") "index" "07" "onDark" true) }}<div class="partner-grid">{{ range . }}<article class="partner-card"><span>{{ .mark }}</span><div><h3>{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }} ↗</a>{{ else }}{{ .name }}{{ end }}</h3><p>{{ .description }}</p>{{ if .provisional }}<small>{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}</div></article>{{ end }}</div></div></section>{{ end }}
+  {{ with .Params.partners }}
+    <section class="section home-partners">
+      <div class="container">
+        {{ partial "section-head.html" (dict
+          "eyebrow" (cond $isMn "Хамтын ажиллагаа" "Collaboration")
+          "title" (cond $isMn "Хамтрагч байгууллагууд" "Partner organizations")
+          "index" "07"
+          "onDark" true) }}
+        <div class="partner-grid">
+          {{ range . }}
+            <article class="partner-card">
+              <span>{{ .mark }}</span>
+              <div>
+                <h3>
+                  {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }} ↗</a>{{ else }}{{ .name }}{{ end }}
+                </h3>
+                <p>{{ .description }}</p>
+                {{ if .provisional }}<small>{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}
+              </div>
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
 
-  <section class="home-cta"><div class="container home-cta__inner"><div><p class="eyebrow">EPA@Lab</p><h2>{{ if $isMn }}Санаагаа бодит ажил болгоё{{ else }}Turn your idea into practical work{{ end }}</h2></div><span class="section-index">08</span><a class="button button--light" href="{{ relLangURL "contact/" }}">{{ if $isMn }}Холбоо барих{{ else }}Contact us{{ end }} <span aria-hidden="true">→</span></a></div></section>
+  <section class="home-cta">
+    <div class="container home-cta__inner">
+      <div>
+        <p class="eyebrow">EPA@Lab</p>
+        <h2>{{ if $isMn }}Санаагаа бодит ажил болгоё{{ else }}Turn your idea into practical work{{ end }}</h2>
+      </div>
+      <span class="section-index">08</span>
+      <a class="button button--light" href="{{ relLangURL "contact/" }}">
+        {{ if $isMn }}Холбоо барих{{ else }}Contact us{{ end }} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
 {{ end }}

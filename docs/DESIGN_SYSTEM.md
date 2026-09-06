@@ -104,11 +104,16 @@ fixed by convention and must not be invented per component:
 | tablet | `max-width: 900px` |
 | desktop | `min-width: 901px` |
 
-Height-based queries are permitted only for the full-viewport Home hero and
-overview sections, where the composition genuinely depends on available height.
-No other section may be pinned to the viewport: doing so previously left a
-large empty band under the Mentor and Projects sections whenever their content
-did not fill a screen.
+Height-based queries are permitted only for the full-viewport Home hero, where
+the composition genuinely depends on available height. No other section may be
+pinned to the viewport: doing so previously left a large empty band under the
+Mentor and Projects sections whenever their content did not fill a screen. The
+Home overview was the last section still pinned, and behaved the same way — it
+held 609 px of content in an 808 px box, and needed a whole `max-height` block
+of compression rules to fit. One of those rules, a `padding` shorthand on the
+vision panels, also overwrote their deliberate zero left padding, so the first
+paragraph sat 24 px off the column every other element in the section aligned
+to. Removing the pin removed the block and the misalignment with it.
 
 ## 4. Component consolidation targets
 
@@ -146,6 +151,13 @@ Not every page wants the same weight, so the site uses three header scales:
   standard `--section-space` is tuned for the gap *between* sections; stacked on
   a header's own bottom padding it produced 208 px of dead space before the
   first content on every index page.
+
+  For the same reason, two consecutive sections that share a background get
+  half that space at their seam. With no change of ground there is no edge for
+  the padding to separate, so a full measure from each section reads as one
+  void rather than as two sections. Home has two such seams: the navy hero into
+  the navy overview, and News into the generation section, which share
+  `--surface-soft`.
 - **Article header** — News articles, in `45-news.css`. A marketing band in
   front of a news story is the wrong instrument, so these follow an editorial
   article structure instead: breadcrumb, then the title and cover photograph at
