@@ -13,7 +13,7 @@
 */ -}}
 {{- $items := .items -}}
 {{- if $items -}}
-  <nav class="flex flex-nowrap items-center gap-2 text-[.82rem] {{ default "mb-[clamp(1.25rem,3vw,2rem)] text-muted" .class }}" aria-label="{{ if eq site.Language.Lang "mn" }}Замын мөр{{ else }}Breadcrumb{{ end }}">
+  <nav class="flex flex-nowrap items-center gap-2 text-sm {{ default "mb-6 text-muted" .class }}" aria-label="{{ if eq site.Language.Lang "mn" }}Замын мөр{{ else }}Breadcrumb{{ end }}">
     {{- range $i, $item := $items -}}
       {{- if $i }}<span class="flex-none opacity-55" aria-hidden="true">›</span>{{ end -}}
       {{- with $item.url -}}

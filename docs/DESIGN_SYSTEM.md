@@ -147,11 +147,31 @@ specified in `docs/PROJECT.md` §8. Two groups matter for implementation:
 the same size, so any new heading must be checked in both languages before its
 step is considered final.
 
-**Space.** Fixed steps come from Tailwind's numeric scale — `p-4` is 1rem, and
-the old `--space-1`…`--space-8` map onto `1, 2, 3, 4, 6, 8, 12, 16`. The four
-fluid steps the numeric scale cannot express are named: `py-section` for
-vertical rhythm, `px-page` for the container gutter, `p-block` for padding
-inside large panels, and `gap-grid` for card grids.
+**Space.** Anything that separates or pads a *region* uses a named step; the
+numeric scale (`gap-2`, `mt-3`, `px-2.5`…) is for small local gaps only, and
+stays on the 4 px grid. Do not write an arbitrary `clamp()` for spacing — that
+is how pages drifted to five different section paddings before 2026-09-24.
+
+| Step | 360 → 1440 px | Use it for |
+| --- | --- | --- |
+| `section` | 48 → 88 | padding of every section; gap between stacked sections on one page |
+| `gutter` | 32 → 96 | gap between the major columns of a layout |
+| `block` | 28 → 48 | heading to content, the block after a page header, same-ground seams, padding in large panels, list-row padding |
+| `card` | 20 → 24 | padding inside cards and table cells |
+| `grid` | 20 | gap between cards in a grid |
+| `page` | 20 → 48 | container side gutter (via `container`) |
+
+The phone never gets *more* space than desktop: a step shrinks on its own
+through `clamp()`, so `max-sm:` spacing overrides are only for genuinely
+different layouts (the two-up person card), not for rhythm.
+
+**Type scale in use.** Small text has exactly three sizes — `text-2xs` (10 px:
+chips, badges), `text-xs` (12 px: eyebrows, metadata, table heads) and
+`text-sm` (14 px: summaries, captions, secondary lines). Line height is
+`leading-none|tight|snug|normal|body` (1, 1.08, 1.25, 1.5, 1.7); letter
+spacing is `tracking-tight|wide|wider`. Arbitrary `text-[…]` values are
+allowed only for the Home hero, the Home statistics figures, and
+`em`-relative sizes inside another element.
 
 **Width.** `max-w-page` is the single container width, applied through the
 `container` utility. `max-w-measure` is the readable measure for body copy.
@@ -204,13 +224,13 @@ Not every page wants the same weight, so the site uses three header scales:
   on its inner pages. The breadcrumb replaced an eyebrow that only repeated the
   highlighted navigation item and the title beneath it.
 
-  The block after any page header also drops to a reduced top padding. The
-  standard `--section-space` is tuned for the gap *between* sections; stacked on
-  a header's own bottom padding it produced 208 px of dead space before the
-  first content on every index page.
+  A section directly after a page header keeps the normal `py-section`: the
+  header is a different ground, so there is an edge for the padding to
+  separate. Only a block that shares the header's flow (the News list, the
+  generic single page) starts at `pt-block`.
 
-  For the same reason, two consecutive sections that share a background get
-  half that space at their seam. With no change of ground there is no edge for
+  Two consecutive sections that share a background get the `block` step at
+  their seam instead. With no change of ground there is no edge for
   the padding to separate, so a full measure from each section reads as one
   void rather than as two sections. Home has two such seams: the navy hero into
   the navy overview, and News into the generation section, which share

@@ -23,11 +23,11 @@
 {{- $card := "group flex flex-col overflow-hidden rounded-card border border-line bg-surface transition-[border-color,box-shadow,transform] duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-600 hover:shadow-md" -}}
 {{- $media := "relative block aspect-video overflow-hidden bg-surface-soft" -}}
 {{- $image := "h-full w-full object-cover transition-transform duration-[550ms] ease-in-out group-hover:scale-[1.035]" -}}
-{{- $body := "flex min-h-48 flex-1 flex-col gap-4 p-6 max-sm:min-h-auto" -}}
-{{- $meta := "flex justify-between gap-4 font-tech text-[.66rem] leading-[1.4] font-bold tracking-[.06em] text-accent-600 uppercase" -}}
+{{- $body := "flex min-h-48 flex-1 flex-col gap-4 p-card max-sm:min-h-auto" -}}
+{{- $meta := "flex justify-between gap-4 font-tech text-2xs leading-normal font-bold tracking-wide text-accent-600 uppercase" -}}
 {{- $metaFirst := "inline-flex items-center gap-2" -}}
 {{- $heading := "m-0 text-xl" -}}
-{{- $summary := "m-0 line-clamp-3 text-[.9rem] text-muted" -}}
+{{- $summary := "m-0 line-clamp-3 text-sm text-muted" -}}
 {{- $arrow := "mt-auto grid aspect-square w-10 place-items-center self-end rounded-full border border-line text-link transition-[color,border-color,background-color,transform] duration-[180ms] ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-accent-600 group-hover:bg-accent-600 group-hover:text-white" -}}
 
 {{- if .invert -}}
@@ -42,15 +42,15 @@
   {{- $media = "relative block aspect-video overflow-hidden bg-navy-950" -}}
   {{- $metaFirst = "inline-flex items-center gap-2 before:size-[.45rem] before:rounded-full before:bg-accent-600 before:content-['']" -}}
   {{- $heading = "m-0 text-xl text-on-dark" -}}
-  {{- $summary = "m-0 line-clamp-3 text-[.9rem] text-on-dark-muted" -}}
-  {{- $arrow = "mt-auto grid aspect-square w-8 place-items-center self-end rounded-full border border-on-dark-faint text-[.875rem] text-on-dark transition-[color,border-color,background-color,transform] duration-[180ms] ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-accent-600 group-hover:bg-accent-600 group-hover:text-white" -}}
+  {{- $summary = "m-0 line-clamp-3 text-sm text-on-dark-muted" -}}
+  {{- $arrow = "mt-auto grid aspect-square w-8 place-items-center self-end rounded-full border border-on-dark-faint text-sm text-on-dark transition-[color,border-color,background-color,transform] duration-[180ms] ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-accent-600 group-hover:bg-accent-600 group-hover:text-white" -}}
 {{- else if .feature -}}
   {{/* The borderless About achievement card: wider media, no lift, and a
        summary that runs to its natural length instead of clamping. */}}
   {{- $card = "group flex flex-col overflow-hidden rounded-card bg-surface" -}}
   {{- $media = "relative block aspect-[16/10] overflow-hidden bg-surface-soft" -}}
   {{- $image = "h-full w-full object-cover saturate-78 transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.02] group-hover:saturate-100" -}}
-  {{- $body = "flex flex-1 flex-col gap-4 p-[clamp(1.5rem,4vw,3rem)]" -}}
+  {{- $body = "flex flex-1 flex-col gap-4 p-block" -}}
   {{- $heading = "m-0 text-2xl" -}}
   {{- $summary = "m-0 text-base text-muted" -}}
 {{- end -}}
@@ -58,8 +58,8 @@
 <article class="{{ $card }}">
   {{ if .url }}<a class="{{ $media }}" href="{{ .url }}" aria-label="{{ .title }}">{{ else }}<div class="{{ $media }}">{{ end }}
     {{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" (default "" $.imageAlt) "class" $image "sizes" $sizes) }}{{ end }}
-    {{ with .badge }}<span class="absolute top-4 right-4 bg-navy-950/82 px-[.55rem] py-[.35rem] text-2xs font-bold tracking-[.06em] text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
-    {{ with .stamp }}<time class="absolute right-0 bottom-0 bg-accent-600 px-4 py-[.7rem] font-tech text-xs leading-none font-extrabold text-white">{{ . }}</time>{{ end }}
+    {{ with .badge }}<span class="absolute top-4 right-4 bg-navy-950/82 px-2.5 py-1.5 text-2xs font-bold tracking-wide text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
+    {{ with .stamp }}<time class="absolute right-0 bottom-0 bg-accent-600 px-4 py-3 font-tech text-xs leading-none font-extrabold text-white">{{ . }}</time>{{ end }}
   {{ if .url }}</a>{{ else }}</div>{{ end }}
   <div class="{{ $body }}">
     {{ if or .metaLeft .metaRight }}
@@ -67,7 +67,7 @@
     {{ end }}
     <h3 class="{{ $heading }}">{{ if .url }}<a class="no-underline" href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h3>
     {{ with .summary }}<p class="{{ $summary }}">{{ . }}</p>{{ end }}
-    {{ with .note }}<span class="mt-3 inline-flex w-fit border border-line px-[.55rem] py-[.35rem] font-tech text-[.61rem] leading-[1.2] font-bold tracking-[.06em] text-muted uppercase">{{ . }}</span>{{ end }}
+    {{ with .note }}<span class="mt-3 inline-flex w-fit border border-line px-2.5 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-muted uppercase">{{ . }}</span>{{ end }}
     {{/* Decorative: the title link above already reaches the same destination. */}}
     {{ if .url }}<span class="{{ $arrow }}" aria-hidden="true">↗</span>{{ end }}
   </div>

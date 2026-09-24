@@ -2,12 +2,12 @@
   {{ partial "page-hero.html" (dict
     "crumbs" (slice (dict "label" (cond (eq site.Language.Lang "mn") "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
     "title" .Title "lead" .Params.description) }}
-  <div class="container pt-[clamp(2.5rem,5vw,3.5rem)] pb-section">
+  <div class="container pt-block pb-section">
     {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
     {{ if .Pages }}
-      <div class="mt-12 grid grid-cols-3 gap-5 max-md:grid-cols-1">
+      <div class="mt-block grid grid-cols-3 gap-grid max-md:grid-cols-1">
         {{ range .Pages.ByWeight }}
-          <article class="min-h-68 rounded-card border border-line bg-surface p-[clamp(1.5rem,3vw,2.25rem)] max-md:min-h-auto">
+          <article class="min-h-68 rounded-card border border-line bg-surface p-card max-md:min-h-auto">
             <p class="eyebrow mb-4 text-accent-600">{{ .Section }}</p>
             <h2><a class="no-underline" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
             {{ with .Summary }}<p class="text-muted">{{ . }}</p>{{ end }}

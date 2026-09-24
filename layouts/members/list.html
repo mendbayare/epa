@@ -8,13 +8,13 @@
     "lead" .Params.description) }}
 
   {{ if $currentTerms }}
-    <section class="bg-surface-soft py-[clamp(5rem,9vw,8rem)]">
+    <section class="bg-surface-soft py-section">
       <div class="container">
         {{ partial "section-head.html" (dict
           "eyebrow" (cond $isMn "Одоогийн удирдлага" "Current leadership")
           "title" (cond $isMn "Лабораторийн үйл ажиллагааг чиглүүлэгчид" "Leading the laboratory today")
           "support" (cond $isMn "Удирдлагын хугацааг гишүүний мэдээллээс тусад нь хадгалдаг тул жил бүр түүхийг алдагдуулахгүй шинэчилнэ." "Leadership terms are stored separately from profiles, allowing annual updates without losing history.")) }}
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,26rem),1fr))] gap-6 max-md:grid-cols-1">
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,26rem),1fr))] gap-grid max-md:grid-cols-1">
           {{ range $term := $currentTerms }}
             {{ $member := site.GetPage (printf "/members/%s" $term.member) }}
             {{ $endYear := cond $isMn "одоо" "present" }}
@@ -38,15 +38,15 @@
     </section>
   {{ end }}
 
-  <div class="container py-[clamp(4rem,9vw,8rem)]">
+  <div class="container py-section">
     {{/* The jump bar follows the reader down a long members page, but on a
          phone it would eat a third of the viewport, so it stays put there. */}}
-    <nav class="sticky top-0 z-5 mb-[clamp(4rem,8vw,7rem)] flex flex-wrap gap-[.65rem] bg-page py-4 max-sm:static max-sm:py-0" aria-label="{{ if $isMn }}Үе сонгох{{ else }}Choose a generation{{ end }}">{{ range $generations }}{{ $label := cond $isMn .label_mn .label_en }}<a class="rounded-full border border-line px-4 py-[.65rem] no-underline hover:border-accent-600 hover:bg-accent-600 hover:text-white" href="#{{ .key }}">{{ $label }}</a>{{ end }}</nav>
+    <nav class="sticky top-0 z-5 mb-section flex flex-wrap gap-2.5 bg-page py-4 max-sm:static max-sm:py-0" aria-label="{{ if $isMn }}Үе сонгох{{ else }}Choose a generation{{ end }}">{{ range $generations }}{{ $label := cond $isMn .label_mn .label_en }}<a class="rounded-full border border-line px-4 py-2.5 no-underline hover:border-accent-600 hover:bg-accent-600 hover:text-white" href="#{{ .key }}">{{ $label }}</a>{{ end }}</nav>
     {{ range $generation := $generations }}
       {{ $items := where $.Pages "Params.generation" $generation.key }}
       {{ if $items }}
         {{ $heading := cond $isMn $generation.heading_mn $generation.heading_en }}
-        <section class="scroll-mt-24 [section+&]:mt-16" id="{{ $generation.key }}">
+        <section class="scroll-mt-24 [section+&]:mt-section" id="{{ $generation.key }}">
           {{ partial "section-head.html" (dict
             "eyebrow" (printf "%s / %02d" (cond $isMn "Үе" "Generation") (div $generation.order 10))
             "title" $heading

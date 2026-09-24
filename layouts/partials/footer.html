@@ -1,18 +1,18 @@
 {{ $isMn := eq site.Language.Lang "mn" }}
-{{- $socialBase := "inline-flex min-h-11 items-center gap-[.6rem] rounded-full border border-line-on-dark bg-white/3 px-[.9rem] py-[.65rem] text-[.78rem] font-semibold text-on-dark-muted no-underline transition-[color,border-color,background-color] duration-200 ease-in-out" -}}
-{{- $socialLink := "inline-flex min-h-11 items-center gap-[.6rem] rounded-full border border-line-on-dark bg-white/3 px-[.9rem] py-[.65rem] text-[.78rem] font-semibold text-on-dark-muted no-underline transition-[color,border-color,background-color] duration-200 ease-in-out hover:border-accent-600 hover:bg-accent-600 hover:text-white" -}}
-{{- $heading := "mb-7 font-tech text-[.7rem] leading-none font-bold tracking-[.12em] text-accent-600 uppercase" -}}
-<footer class="relative overflow-hidden bg-navy-950 pt-[clamp(4rem,8vw,7rem)] text-white">
+{{- $socialBase := "inline-flex min-h-11 items-center gap-2.5 rounded-full border border-line-on-dark bg-white/3 px-3.5 py-2.5 text-xs font-semibold text-on-dark-muted no-underline transition-[color,border-color,background-color] duration-200 ease-in-out" -}}
+{{- $socialLink := "inline-flex min-h-11 items-center gap-2.5 rounded-full border border-line-on-dark bg-white/3 px-3.5 py-2.5 text-xs font-semibold text-on-dark-muted no-underline transition-[color,border-color,background-color] duration-200 ease-in-out hover:border-accent-600 hover:bg-accent-600 hover:text-white" -}}
+{{- $heading := "mb-7 font-tech text-xs leading-none font-bold tracking-wider text-accent-600 uppercase" -}}
+<footer class="relative overflow-hidden bg-navy-950 pt-section text-white">
   <span class="decor-ring decor-ring--footer -top-40 -left-40 w-120" aria-hidden="true"></span>
 
-  <div class="container relative grid grid-cols-[minmax(18rem,1.35fr)_minmax(10rem,.65fr)_minmax(15rem,.8fr)] gap-[clamp(3rem,7vw,7rem)] max-md:grid-cols-[1.2fr_.8fr] max-sm:grid-cols-1 max-sm:gap-12">
+  <div class="container relative grid grid-cols-[minmax(18rem,1.35fr)_minmax(10rem,.65fr)_minmax(15rem,.8fr)] gap-gutter max-md:grid-cols-[1.2fr_.8fr] max-sm:grid-cols-1 max-sm:gap-12">
     <div>
-      <a class="inline-flex items-center gap-[.7rem] font-display text-[1.35rem] leading-none font-extrabold no-underline" href="{{ site.Home.RelPermalink }}" aria-label="EPA-Lab">
+      <a class="inline-flex items-center gap-3 font-display text-xl leading-none font-extrabold no-underline" href="{{ site.Home.RelPermalink }}" aria-label="EPA-Lab">
         <span class="grid aspect-square w-9 place-items-center rounded-md bg-blue-700 text-white">E</span>
-        <span class="flex flex-col gap-1"><strong class="leading-none">EPA<span class="text-accent-600">-</span>Lab</strong><small class="font-body text-[.58rem] leading-none font-bold tracking-[.12em] text-white/48">{{ if $isMn }}ШУТИС · ЭХИС{{ else }}MUST · PES{{ end }}</small></span>
+        <span class="flex flex-col gap-1"><strong class="leading-none">EPA<span class="text-accent-600">-</span>Lab</strong><small class="font-body text-2xs leading-none font-bold tracking-wider text-white/48">{{ if $isMn }}ШУТИС · ЭХИС{{ else }}MUST · PES{{ end }}</small></span>
       </a>
       <p class="mt-7 mb-8 max-w-120 text-white/58">{{ site.Params.description }}</p>
-      <div class="flex flex-wrap gap-[.65rem]" aria-label="{{ if $isMn }}Олон нийтийн сүлжээ{{ else }}Social media{{ end }}">
+      <div class="flex flex-wrap gap-2.5" aria-label="{{ if $isMn }}Олон нийтийн сүлжээ{{ else }}Social media{{ end }}">
         {{ with site.Params.instagramURL }}
           <a class="{{ $socialLink }}" href="{{ . }}" rel="me noopener" target="_blank" aria-label="Instagram">
         {{ else }}
@@ -35,19 +35,19 @@
     <div>
       <p class="{{ $heading }}">{{ if $isMn }}Үндсэн цэс{{ else }}Navigation{{ end }}</p>
       <nav aria-label="{{ if $isMn }}Хөл хэсгийн цэс{{ else }}Footer navigation{{ end }}">
-        <ul class="grid gap-[.7rem]">{{ range site.Menus.main }}<li><a class="inline-flex font-semibold text-on-dark-muted no-underline transition-[color,transform] duration-200 ease-in-out hover:translate-x-[3px] hover:text-white" href="{{ .URL }}">{{ .Name }}</a></li>{{ end }}</ul>
+        <ul class="grid gap-3">{{ range site.Menus.main }}<li><a class="inline-flex font-semibold text-on-dark-muted no-underline transition-[color,transform] duration-200 ease-in-out hover:translate-x-[3px] hover:text-white" href="{{ .URL }}">{{ .Name }}</a></li>{{ end }}</ul>
       </nav>
     </div>
 
     <div class="max-md:col-span-full max-sm:col-auto">
       <p class="{{ $heading }}">{{ if $isMn }}Холбоо барих{{ else }}Contact{{ end }}</p>
       <address class="mb-5 max-w-84 text-on-dark-quiet not-italic">{{ site.Params.address }}</address>
-      {{ with site.Params.email }}<a class="mb-[.45rem] block w-fit font-bold no-underline hover:text-accent-600" href="mailto:{{ . }}">{{ . }}</a>{{ end }}
-      <a class="mt-6 inline-flex gap-2 font-tech text-[.72rem] leading-[1.4] font-bold tracking-[.06em] text-accent-600 uppercase no-underline hover:text-white" href="{{ relLangURL "contact/" }}">{{ if $isMn }}Байршил, дэлгэрэнгүй{{ else }}Location and details{{ end }} <span aria-hidden="true">↗</span></a>
+      {{ with site.Params.email }}<a class="mb-2 block w-fit font-bold no-underline hover:text-accent-600" href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+      <a class="mt-6 inline-flex gap-2 font-tech text-xs leading-normal font-bold tracking-wide text-accent-600 uppercase no-underline hover:text-white" href="{{ relLangURL "contact/" }}">{{ if $isMn }}Байршил, дэлгэрэнгүй{{ else }}Location and details{{ end }} <span aria-hidden="true">↗</span></a>
     </div>
   </div>
 
-  <div class="container relative mt-[clamp(4rem,7vw,6rem)] grid grid-cols-[1fr_auto_1fr] items-center gap-6 border-t border-line-on-dark py-6 font-tech text-[.68rem] leading-[1.5] font-medium tracking-[.03em] text-white/45 max-sm:grid-cols-1">
+  <div class="container relative mt-section grid grid-cols-[1fr_auto_1fr] items-center gap-6 border-t border-line-on-dark py-6 font-tech text-xs leading-normal font-medium text-white/45 max-sm:grid-cols-1">
     <span>© {{ now.Year }} EPA-Lab</span>
     <span>{{ if $isMn }}ШУТИС · Эрчим хүчний инженерчлэлийн сургууль{{ else }}MUST · School of Power and Electrical Engineering{{ end }}</span>
     <a class="justify-self-end text-on-dark-quiet no-underline hover:text-accent-600 max-sm:justify-self-start" href="#main">{{ if $isMn }}Дээш буцах{{ else }}Back to top{{ end }} <span aria-hidden="true">↑</span></a>

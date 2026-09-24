@@ -14,7 +14,7 @@
   {{ $ctaIndex := cond .Params.partners "08" "07" }}
 
   {{ $cardGrid := "grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:grid-cols-1" }}
-  {{ $sectionIndex := "inline-flex items-center gap-[.65rem] font-tech text-[.68rem] leading-none font-bold tracking-[.12em] text-accent-600 after:h-px after:w-8 after:bg-current after:opacity-65 after:content-['']" }}
+  {{ $sectionIndex := "inline-flex items-center gap-2.5 font-tech text-xs leading-none font-bold tracking-wider text-accent-600 after:h-px after:w-8 after:bg-current after:opacity-65 after:content-['']" }}
   {{/* Mongolian Cyrillic sets wider than Latin, so the phone title takes its
        own step and wraps freely; English keeps each line unbroken until the
        screen is too narrow even for that. */}}
@@ -24,8 +24,8 @@
     {{ $heroTitle = "max-w-none text-balance text-white [overflow-wrap:normal] text-[clamp(2.2rem,min(3.6vw,7vh),3.75rem)] [text-shadow:0_2px_1.5rem_rgb(0_0_0/35%)] sm:max-w-[14ch] sm:text-[clamp(2.3rem,min(3.4vw,6vh),3.6rem)] desk-short:text-[clamp(2.1rem,min(3.5vw,6vh),3.4rem)] max-sm:mb-1 max-sm:max-w-[15ch] max-sm:text-[clamp(1.6rem,7vw,2rem)] max-sm:leading-[1.08] phone-short:text-[2rem] max-[350px]:[overflow-wrap:anywhere]" }}
     {{ $heroLine = "block max-sm:whitespace-normal" }}
   {{ end }}
-  {{ $heroButton := "inline-flex min-h-13 items-center justify-center rounded-card bg-blue-700 px-5 py-[.8rem] font-bold text-white no-underline shadow-[0_.75rem_2rem_rgb(7_89_184/22%)] hover:bg-blue-600 max-sm:min-h-12 max-sm:w-auto max-sm:rounded-full max-sm:px-[1.2rem] phone-short:min-h-[2.85rem]" }}
-  {{ $heroLink := "font-bold text-white no-underline hover:text-accent-600 max-sm:w-fit max-sm:text-[.9rem]" }}
+  {{ $heroButton := "inline-flex min-h-13 items-center justify-center rounded-card bg-blue-700 px-5 py-3 font-bold text-white no-underline shadow-[0_.75rem_2rem_rgb(7_89_184/22%)] hover:bg-blue-600 max-sm:min-h-12 max-sm:w-auto max-sm:rounded-full phone-short:min-h-[2.85rem]" }}
+  {{ $heroLink := "font-bold text-white no-underline hover:text-accent-600 max-sm:w-fit max-sm:text-sm" }}
 
   <section class="relative isolate flex min-h-svh flex-col overflow-hidden bg-navy-950 text-white" data-hero>
     <div class="hero-backdrop absolute inset-0 z-[-2]">
@@ -49,13 +49,13 @@
       <div class="relative z-3 mb-11 w-[min(100%-1.75rem,27rem)] sm:mb-0 sm:w-[min(72%,42rem)] sm:translate-y-[clamp(-3.5rem,-4vh,-2rem)] md:w-[min(66%,54rem)] desk-short:translate-y-[-1.5rem] phone-short:mb-5">
         <div class="mb-4 flex items-center gap-4 max-sm:mb-3"><p class="eyebrow m-0 text-accent-600 max-sm:hidden">EPA-Lab · {{ if $isMn }}ШУТИС — ЭХИС{{ else }}MUST — PES{{ end }}</p></div>
         <h1 class="{{ $heroTitle }}">{{ range .Params.hero_title_lines }}<span class="{{ $heroLine }}">{{ . }}</span>{{ end }}</h1>
-        <p class="mt-7 mb-9 max-w-[35rem] text-lg text-on-dark-muted sm:mt-6 sm:mb-8 desk-short:mt-4 desk-short:mb-6 desk-short:text-base max-sm:mt-4 max-sm:mb-[1.4rem] max-sm:max-w-[25rem] max-sm:text-[.92rem] max-sm:leading-[1.6] max-sm:text-white/78 phone-short:mt-[.85rem] phone-short:mb-4 phone-short:leading-[1.5]">{{ .Params.description }}</p>
-        <div class="flex flex-wrap items-center gap-6 max-sm:gap-x-4 max-sm:gap-y-[.8rem] phone-short:gap-[.55rem]">
+        <p class="mt-7 mb-9 max-w-[35rem] text-lg text-on-dark-muted sm:mt-6 sm:mb-8 desk-short:mt-4 desk-short:mb-6 desk-short:text-base max-sm:mt-4 max-sm:mb-[1.4rem] max-sm:max-w-[25rem] max-sm:text-sm max-sm:leading-body max-sm:text-white/78 phone-short:mt-[.85rem] phone-short:mb-4 phone-short:leading-normal">{{ .Params.description }}</p>
+        <div class="flex flex-wrap items-center gap-6 max-sm:gap-x-4 max-sm:gap-y-3 phone-short:gap-2">
           <a class="{{ $heroButton }}" href="{{ relLangURL "projects/" }}">{{ if $isMn }}Төслүүдтэй танилцах{{ else }}Explore our projects{{ end }}</a>
           <a class="{{ $heroLink }}" href="{{ relLangURL "about/" }}">{{ if $isMn }}Лабораторийн тухай{{ else }}About the laboratory{{ end }} <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <a class="absolute right-[.65rem] bottom-8 z-4 flex flex-row items-center gap-3 font-tech text-[.65rem] leading-none font-bold tracking-wider text-white/68 uppercase no-underline [writing-mode:vertical-rl] hover:text-white sm:right-0 sm:bottom-5 phone-short:bottom-4" href="#direction">
+      <a class="absolute right-[.65rem] bottom-8 z-4 flex flex-row items-center gap-3 font-tech text-2xs leading-none font-bold tracking-wider text-white/68 uppercase no-underline [writing-mode:vertical-rl] hover:text-white sm:right-0 sm:bottom-5 phone-short:bottom-4" href="#direction">
         <b class="[font:inherit] text-accent-600">01</b>
         <span>{{ if $isMn }}Доош{{ else }}Scroll{{ end }}</span>
         <i class="scroll-cue-line h-11" aria-hidden="true"></i>
@@ -65,9 +65,9 @@
 
   {{/* The hero and this section share the navy ground, so a full measure of
        padding from each at the seam reads as one void rather than as two
-       sections; the top step is halved. */}}
+       sections; the top takes the smaller block step. */}}
   <section class="overview-grid relative overflow-hidden bg-navy-950 text-white max-sm:min-h-svh max-sm:items-start" id="direction" aria-label="{{ if $isMn }}Алсын хараа, эрхэм зорилго ба тоон үзүүлэлт{{ else }}Vision, mission, and laboratory statistics{{ end }}">
-    <div class="container relative pt-[calc(var(--spacing-section)*.5)] pb-section">
+    <div class="container relative pt-block pb-section">
       {{ partial "section-head.html" (dict
         "eyebrow" (cond $isMn "Бидний чиглэл" "Our direction")
         "title" (cond $isMn "Мэдлэгээс бодит шийдэл рүү" "From knowledge to working solutions")
@@ -75,36 +75,36 @@
         "onDark" true) }}
       <div class="relative z-1 grid grid-cols-2 border-t border-b border-line-on-dark max-sm:grid-cols-1">
         {{ range slice (dict "label" (cond $isMn "Алсын хараа" "Vision") "text" .Params.vision) (dict "label" (cond $isMn "Эрхэм зорилго" "Mission") "text" .Params.mission) }}
-          <article class="min-h-36 py-[clamp(1.5rem,2.5vw,2.5rem)] pr-[clamp(1rem,4vw,4rem)] pl-0 [article+&]:border-l [article+&]:border-line-on-dark [article+&]:pr-0 [article+&]:pl-[clamp(1rem,4vw,4rem)] max-sm:px-5 max-sm:py-6 max-sm:[article+&]:border-t max-sm:[article+&]:border-l-0">
+          <article class="min-h-36 py-block pr-[clamp(1rem,4vw,4rem)] pl-0 [article+&]:border-l [article+&]:border-line-on-dark [article+&]:pr-0 [article+&]:pl-[clamp(1rem,4vw,4rem)] max-sm:px-5 max-sm:py-6 max-sm:[article+&]:border-t max-sm:[article+&]:border-l-0">
             <div>
               <p class="eyebrow mb-4 text-accent-600">{{ .label }}</p>
-              <p class="m-0 max-w-[34rem] text-lg leading-[1.6] text-white/84">{{ .text }}</p>
+              <p class="m-0 max-w-[34rem] text-lg leading-body text-white/84">{{ .text }}</p>
             </div>
           </article>
         {{ end }}
       </div>
       <div class="grid min-h-40 grid-cols-3 items-stretch border-b border-line-on-dark max-sm:grid-cols-1">
-        {{ range .Params.stats }}<div class="flex flex-col justify-center px-[clamp(1rem,3vw,3rem)] py-[clamp(1.5rem,3vw,2.75rem)] first:pl-0 sm:not-first:border-l sm:not-first:border-line-on-dark max-sm:border-t max-sm:border-line-on-dark max-sm:px-0"><strong class="mb-[.8rem] font-display text-[clamp(2rem,3.4vw,3.25rem)] leading-none font-extrabold">{{ .value }}{{ with .suffix }}<small class="text-[.35em]">{{ . }}</small>{{ end }}</strong><span class="font-tech text-[.75rem] leading-[1.4] font-semibold tracking-[.06em] text-white/65 uppercase">{{ .label }}{{ if .provisional }} <small class="[font:inherit] text-accent-600">({{ if $isMn }}түр{{ else }}draft{{ end }})</small>{{ end }}</span></div>{{ end }}
+        {{ range .Params.stats }}<div class="flex flex-col justify-center px-[clamp(1rem,3vw,3rem)] py-block first:pl-0 sm:not-first:border-l sm:not-first:border-line-on-dark max-sm:border-t max-sm:border-line-on-dark max-sm:px-0"><strong class="mb-3 font-display text-[clamp(2rem,3.4vw,3.25rem)] leading-none font-extrabold">{{ .value }}{{ with .suffix }}<small class="text-[.35em]">{{ . }}</small>{{ end }}</strong><span class="font-tech text-xs leading-normal font-semibold tracking-wide text-white/65 uppercase">{{ .label }}{{ if .provisional }} <small class="[font:inherit] text-accent-600">({{ if $isMn }}түр{{ else }}draft{{ end }})</small>{{ end }}</span></div>{{ end }}
       </div>
       {{ with .Params.equipment }}
         <div class="flex min-h-16 items-center gap-6 max-md:flex-col max-md:items-start max-md:py-5" aria-label="{{ if $isMn }}Лабораторийн тоног төхөөрөмж{{ else }}Laboratory equipment{{ end }}">
-          <span class="flex-none font-tech text-[.68rem] leading-none font-bold tracking-[.12em] text-accent-600 uppercase">{{ if $isMn }}Тоног төхөөрөмж{{ else }}Equipment{{ end }}</span>
-          <ul class="flex min-w-0 flex-1 items-center justify-between max-md:w-full max-md:flex-wrap max-md:justify-start max-md:gap-x-0 max-md:gap-y-4">{{ range . }}<li class="relative px-[clamp(.55rem,1.3vw,1.15rem)] font-tech text-[clamp(.62rem,.8vw,.72rem)] leading-none font-semibold tracking-[.06em] whitespace-nowrap text-on-dark-muted not-first:before:absolute not-first:before:top-1/2 not-first:before:left-0 not-first:before:h-[.8rem] not-first:before:w-px not-first:before:-translate-y-1/2 not-first:before:bg-line-on-dark not-first:before:content-['']">{{ . }}</li>{{ end }}</ul>
+          <span class="flex-none font-tech text-xs leading-none font-bold tracking-wider text-accent-600 uppercase">{{ if $isMn }}Тоног төхөөрөмж{{ else }}Equipment{{ end }}</span>
+          <ul class="flex min-w-0 flex-1 items-center justify-between max-md:w-full max-md:flex-wrap max-md:justify-start max-md:gap-x-0 max-md:gap-y-4">{{ range . }}<li class="relative px-[clamp(.55rem,1.3vw,1.15rem)] font-tech text-[clamp(.62rem,.8vw,.72rem)] leading-none font-semibold tracking-wide whitespace-nowrap text-on-dark-muted not-first:before:absolute not-first:before:top-1/2 not-first:before:left-0 not-first:before:h-[.8rem] not-first:before:w-px not-first:before:-translate-y-1/2 not-first:before:bg-line-on-dark not-first:before:content-['']">{{ . }}</li>{{ end }}</ul>
         </div>
       {{ end }}
     </div>
   </section>
 
   <section class="scroll-mt-20 bg-surface-soft py-section" id="mentor">
-    <div class="container grid grid-cols-[minmax(18rem,.72fr)_minmax(0,1.28fr)] items-center gap-[clamp(3rem,9vw,9rem)] max-md:grid-cols-[.8fr_1.2fr] max-md:gap-12 max-sm:grid-cols-1">
+    <div class="container grid grid-cols-[minmax(18rem,.72fr)_minmax(0,1.28fr)] items-center gap-gutter max-md:grid-cols-[.8fr_1.2fr] max-md:gap-12 max-sm:grid-cols-1">
       <div class="relative w-[min(100%,29rem)] justify-self-center before:absolute before:-top-4 before:right-4 before:bottom-4 before:-left-4 before:border before:border-accent-600 before:content-[''] max-sm:w-[calc(100%-2rem)]">
         {{ partial "responsive-image.html" (dict "src" .Params.mentor_image "alt" .Params.mentor_name "class" "relative aspect-[.9] max-h-116 w-full object-cover object-[center_24%] saturate-82" "sizes" "(max-width: 800px) 80vw, 34vw") }}
-        <span class="absolute -right-8 -bottom-8 grid aspect-square w-24 place-items-center bg-blue-700 font-display text-[1.2rem] leading-none font-extrabold text-white" aria-hidden="true">EPA</span>
+        <span class="absolute -right-8 -bottom-8 grid aspect-square w-24 place-items-center bg-blue-700 font-display text-xl leading-none font-extrabold text-white" aria-hidden="true">EPA</span>
       </div>
       <div>
         <div class="mb-5 flex items-center justify-between gap-6"><p class="eyebrow m-0 text-accent-600">{{ if $isMn }}Удирдагч багшийн мэндчилгээ{{ else }}A message from our mentor{{ end }}</p><span class="{{ $sectionIndex }}">03</span></div>
-        <blockquote class="relative mt-6 mb-8 max-w-[38ch] border-l-2 border-accent-600 pl-6 font-display text-2xl leading-[1.42] font-[650] tracking-[-.025em] text-pretty max-sm:text-[1.55rem]">{{ .Params.mentor_greeting }}</blockquote>
-        <div class="mb-8 flex flex-col"><strong class="font-display">{{ .Params.mentor_name }}</strong><span class="text-[.9rem] text-muted">{{ .Params.mentor_role }}</span></div>
+        <blockquote class="relative mt-6 mb-8 max-w-[38ch] border-l-2 border-accent-600 pl-6 font-display text-2xl leading-normal font-[650] tracking-tight text-pretty">{{ .Params.mentor_greeting }}</blockquote>
+        <div class="mb-8 flex flex-col"><strong class="font-display">{{ .Params.mentor_name }}</strong><span class="text-sm text-muted">{{ .Params.mentor_role }}</span></div>
         <a class="font-bold text-link no-underline hover:text-link-hover" href="{{ relLangURL .Params.mentor_page }}">{{ if $isMn }}Дэлгэрэнгүй танилцах{{ else }}Read more{{ end }} <span aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -135,8 +135,8 @@
   </section>
 
   {{/* News and the generation strip share --surface-soft, so their seam is
-       halved for the same reason as the hero into the overview. */}}
-  <section class="bg-surface-soft pt-section pb-[calc(var(--spacing-section)*.5)]">
+       reduced to the block step for the same reason as the hero into the overview. */}}
+  <section class="bg-surface-soft pt-section pb-block">
     <div class="container">
       {{ partial "section-head.html" (dict
         "eyebrow" (cond $isMn "Сүүлийн үеийн" "Latest from the lab")
@@ -160,7 +160,7 @@
     </div>
   </section>
 
-  <section class="bg-surface-soft pt-[calc(var(--spacing-section)*.5)] pb-section" id="latest-generation">
+  <section class="bg-surface-soft pt-block pb-section" id="latest-generation">
     <div class="container">
       {{ partial "section-head.html" (dict
         "eyebrow" (cond $isMn "Хамгийн шинэ үе" "Newest generation")
@@ -192,14 +192,14 @@
           "onDark" true) }}
         <div class="grid border-t border-line-on-dark">
           {{ range $i, $partner := . }}
-            <article class="grid grid-cols-[minmax(3rem,5rem)_minmax(0,1fr)] gap-[clamp(1.5rem,4vw,4rem)] border-b border-line-on-dark py-[clamp(1.75rem,4vw,3.5rem)]">
-              <span class="font-tech text-[.7rem] leading-[1.5] font-bold text-accent-600">{{ printf "%02d" (add $i 1) }}</span>
+            <article class="grid grid-cols-[minmax(3rem,5rem)_minmax(0,1fr)] gap-block border-b border-line-on-dark py-block">
+              <span class="font-tech text-xs leading-normal font-bold text-accent-600">{{ printf "%02d" (add $i 1) }}</span>
               <div>
                 <h3 class="mb-2 text-2xl text-white">
                   {{ if $partner.url }}<a class="no-underline" href="{{ $partner.url }}" target="_blank" rel="noopener">{{ $partner.name }} ↗</a>{{ else }}{{ $partner.name }}{{ end }}
                 </h3>
                 {{ with $partner.description }}<p class="max-w-[42rem] text-white/64">{{ . }}</p>{{ end }}
-                {{ if $partner.provisional }}<small class="mt-2 inline-flex border border-line-on-dark px-2 py-[.3rem] font-tech text-[.58rem] leading-[1.2] font-bold tracking-[.06em] text-white/52 uppercase">{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}
+                {{ if $partner.provisional }}<small class="mt-2 inline-flex border border-line-on-dark px-2 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-white/52 uppercase">{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}
               </div>
             </article>
           {{ end }}
@@ -208,14 +208,14 @@
     </section>
   {{ end }}
 
-  <section class="bg-blue-700 py-[clamp(3rem,6vw,5.5rem)] text-white">
-    <div class="container grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-[clamp(1rem,3vw,3rem)] max-sm:flex max-sm:flex-col max-sm:items-start">
+  <section class="bg-blue-700 py-section text-white">
+    <div class="container grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-block max-sm:flex max-sm:flex-col max-sm:items-start">
       <div>
         <p class="eyebrow mb-4 text-white/65">EPA-Lab</p>
         <h2 class="m-0 text-white">{{ if $isMn }}Санаагаа бодит ажил болгоё{{ else }}Turn your idea into practical work{{ end }}</h2>
       </div>
       <span class="{{ $sectionIndex }}">{{ $ctaIndex }}</span>
-      <a class="inline-flex min-h-13 items-center justify-center rounded-card bg-white px-5 py-[.8rem] font-bold text-navy-950 no-underline hover:bg-accent-600 hover:text-white" href="{{ relLangURL "contact/" }}">
+      <a class="inline-flex min-h-13 items-center justify-center rounded-card bg-white px-5 py-3 font-bold text-navy-950 no-underline hover:bg-accent-600 hover:text-white" href="{{ relLangURL "contact/" }}">
         {{ if $isMn }}Холбоо барих{{ else }}Contact us{{ end }} <span aria-hidden="true">→</span>
       </a>
     </div>

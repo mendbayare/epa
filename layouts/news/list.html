@@ -11,7 +11,7 @@
     "title" .Title
     "lead" .Params.description) }}
 
-  <div class="container pt-[clamp(2.5rem,5vw,3.5rem)] pb-section">
+  <div class="container pt-block pb-section">
     {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
     {{ if $items }}
       <div class="grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:grid-cols-1">

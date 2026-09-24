@@ -39,9 +39,9 @@
 {{- if .compact -}}
   {{- $row = "group grid min-h-96 grid-cols-[minmax(12rem,.75fr)_1.25fr] overflow-hidden rounded-card bg-surface max-md:min-h-0 max-md:grid-cols-1 max-sm:grid-cols-1" -}}
   {{- $media = "relative block overflow-hidden bg-surface-soft max-md:min-h-88 max-sm:aspect-[4/3] max-sm:min-h-0" -}}
-  {{- $copy = "flex flex-col justify-center p-[clamp(1.5rem,4vw,3rem)] max-sm:p-6" -}}
+  {{- $copy = "flex flex-col justify-center p-block" -}}
 {{- else if .portrait -}}
-  {{- $row = "group grid min-h-0 grid-cols-[minmax(16rem,.38fr)_minmax(0,.62fr)] gap-[clamp(2rem,8vw,8rem)] border-t border-line py-[clamp(3rem,7vw,6rem)] last:border-b max-md:grid-cols-[minmax(14rem,.42fr)_minmax(0,.58fr)] max-md:gap-12 max-sm:grid-cols-1 max-sm:gap-8" -}}
+  {{- $row = "group grid min-h-0 grid-cols-[minmax(16rem,.38fr)_minmax(0,.62fr)] gap-gutter border-t border-line py-block last:border-b max-md:grid-cols-[minmax(14rem,.42fr)_minmax(0,.58fr)] max-md:gap-12 max-sm:grid-cols-1 max-sm:gap-8" -}}
   {{- $media = "relative block aspect-[4/5] overflow-hidden bg-surface-soft" -}}
   {{- $image = "h-full w-full object-cover saturate-72 transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.025] group-hover:saturate-100" -}}
   {{- $copy = "flex flex-col justify-center p-0" -}}
@@ -54,11 +54,11 @@
 <article class="{{ $row }}">
   {{ if .url }}<a class="{{ $media }}" href="{{ .url }}">{{ else }}<div class="{{ $media }}">{{ end }}
     {{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" (default "" $.imageAlt) "class" $image "sizes" $sizes) }}{{ end }}
-    {{ with .badge }}<span class="absolute top-4 right-4 bg-navy-950/82 px-[.55rem] py-[.35rem] text-2xs font-bold tracking-[.06em] text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
-    {{ with .mark }}<span class="absolute right-4 bottom-4 grid aspect-square w-12 place-items-center bg-blue-700 font-tech text-[.7rem] leading-none font-extrabold text-white" aria-hidden="true">{{ . }}</span>{{ end }}
+    {{ with .badge }}<span class="absolute top-4 right-4 bg-navy-950/82 px-2.5 py-1.5 text-2xs font-bold tracking-wide text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
+    {{ with .mark }}<span class="absolute right-4 bottom-4 grid aspect-square w-12 place-items-center bg-blue-700 font-tech text-xs leading-none font-extrabold text-white" aria-hidden="true">{{ . }}</span>{{ end }}
   {{ if .url }}</a>{{ else }}</div>{{ end }}
   <div class="{{ $copy }}">
-    {{ with .number }}<p class="font-tech text-xs leading-none font-bold tracking-[.12em] text-accent-600">{{ . }}</p>{{ end }}
+    {{ with .number }}<p class="font-tech text-xs leading-none font-bold tracking-wider text-accent-600">{{ . }}</p>{{ end }}
     {{ with .eyebrow }}<p class="eyebrow mb-4 text-accent-600">{{ . }}</p>{{ end }}
     {{ if eq $level "h3" }}
       <h3 class="max-w-none text-2xl">{{ if .url }}<a class="no-underline" href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h3>
@@ -68,12 +68,12 @@
     {{ with .lead }}<p class="max-w-[43rem] text-lg">{{ . }}</p>{{ end }}
     {{ with .body }}<p class="max-w-[43rem] text-muted">{{ . }}</p>{{ end }}
     {{ with .facts }}
-      <dl class="mt-6 mb-8 grid gap-[.7rem]">
-        {{ range . }}<div class="grid grid-cols-[8rem_minmax(0,1fr)] gap-4 border-t border-line pt-[.7rem] max-sm:grid-cols-1 max-sm:gap-1"><dt class="font-tech text-[.65rem] leading-[1.5] font-bold tracking-[.07em] text-muted uppercase">{{ .label }}</dt><dd class="m-0 text-[.9rem] [overflow-wrap:anywhere]">{{ default "—" .value }}</dd></div>{{ end }}
+      <dl class="mt-6 mb-8 grid gap-3">
+        {{ range . }}<div class="grid grid-cols-[8rem_minmax(0,1fr)] gap-4 border-t border-line pt-3 max-sm:grid-cols-1 max-sm:gap-1"><dt class="font-tech text-2xs leading-normal font-bold tracking-wide text-muted uppercase">{{ .label }}</dt><dd class="m-0 text-sm [overflow-wrap:anywhere]">{{ default "—" .value }}</dd></div>{{ end }}
       </dl>
     {{ end }}
-    {{ with .meta }}<span class="font-tech text-[.7rem] leading-[1.4] font-bold tracking-[.07em] text-accent-600 uppercase">{{ . }}</span>{{ end }}
-    {{ with .note }}<span class="mt-3 inline-flex w-fit border border-line px-[.55rem] py-[.35rem] font-tech text-[.61rem] leading-[1.2] font-bold tracking-[.06em] text-muted uppercase">{{ . }}</span>{{ end }}
-    {{ with .linkURL }}<a class="group/link inline-flex w-fit items-center gap-[.65rem] font-[750] text-link no-underline" href="{{ . }}">{{ $.linkText }} <span class="text-accent-600 transition-transform duration-[180ms] ease-in-out group-hover/link:translate-x-[3px] group-hover/link:-translate-y-[3px]" aria-hidden="true">↗</span></a>{{ end }}
+    {{ with .meta }}<span class="font-tech text-xs leading-normal font-bold tracking-wide text-accent-600 uppercase">{{ . }}</span>{{ end }}
+    {{ with .note }}<span class="mt-3 inline-flex w-fit border border-line px-2.5 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-muted uppercase">{{ . }}</span>{{ end }}
+    {{ with .linkURL }}<a class="group/link inline-flex w-fit items-center gap-2.5 font-[750] text-link no-underline" href="{{ . }}">{{ $.linkText }} <span class="text-accent-600 transition-transform duration-[180ms] ease-in-out group-hover/link:translate-x-[3px] group-hover/link:-translate-y-[3px]" aria-hidden="true">↗</span></a>{{ end }}
   </div>
 </article>

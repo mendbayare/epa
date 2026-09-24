@@ -17,9 +17,9 @@
 */ -}}
 {{- $split := cond (ne (default "" .support) "") true false -}}
 
-{{- $grid := "mb-[clamp(2.5rem,5vw,4rem)] grid grid-cols-[minmax(0,1fr)_auto] items-end gap-x-[clamp(2rem,6vw,6rem)] gap-y-[clamp(1rem,2.5vw,2rem)] max-sm:grid-cols-1 max-sm:gap-4" -}}
+{{- $grid := "mb-block grid grid-cols-[minmax(0,1fr)_auto] items-end gap-x-gutter gap-y-[clamp(1rem,2.5vw,2rem)] max-sm:grid-cols-1 max-sm:gap-4" -}}
 {{- if $split -}}
-  {{- $grid = "mb-[clamp(2.5rem,5vw,4rem)] grid grid-cols-[minmax(0,1fr)_minmax(18rem,.62fr)] items-end gap-x-[clamp(2rem,6vw,6rem)] gap-y-[clamp(1rem,2.5vw,2rem)] max-md:grid-cols-1 max-md:gap-6 max-sm:gap-4" -}}
+  {{- $grid = "mb-block grid grid-cols-[minmax(0,1fr)_minmax(18rem,.62fr)] items-end gap-x-gutter gap-y-[clamp(1rem,2.5vw,2rem)] max-md:grid-cols-1 max-md:gap-6 max-sm:gap-4" -}}
 {{- end -}}
 
 {{- $aside := "flex flex-wrap items-baseline justify-end gap-x-[clamp(1rem,2.5vw,2rem)] gap-y-3 max-sm:justify-start" -}}
@@ -45,7 +45,7 @@
   </div>
   {{ if or .support .index .meta .linkURL }}
     <div class="{{ $aside }}">
-      {{ with .index }}<span class="inline-flex items-center gap-[.65rem] font-tech text-[.68rem] leading-none font-bold tracking-[.12em] text-accent-600 after:h-px after:w-8 after:bg-current after:opacity-65 after:content-['']">{{ . }}</span>{{ end }}
+      {{ with .index }}<span class="inline-flex items-center gap-2.5 font-tech text-xs leading-none font-bold tracking-wider text-accent-600 after:h-px after:w-8 after:bg-current after:opacity-65 after:content-['']">{{ . }}</span>{{ end }}
       {{ with .support }}<p class="{{ $support }}">{{ . }}</p>{{ end }}
       {{ with .meta }}<span class="{{ $meta }}">{{ . }}</span>{{ end }}
       {{ with .linkURL }}<a class="{{ $link }}" href="{{ . }}">{{ $.linkText }} <span aria-hidden="true">→</span></a>{{ end }}

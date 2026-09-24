@@ -99,9 +99,9 @@
      Mongolian Cyrillic sets wider than Latin at the same size, so any new
      heading must be checked in both languages before its step is final. */
   --text-*: initial;
-  --text-2xs: .65rem;                          /* vertical cues, tiny markers */
-  --text-xs: .72rem;                           /* eyebrows, table headings */
-  --text-sm: .87rem;                           /* navigation, card metadata */
+  --text-2xs: .625rem;                         /* 10px: chips, badges, vertical cues */
+  --text-xs: .75rem;                           /* 12px: eyebrows, metadata, table headings */
+  --text-sm: .875rem;                          /* 14px: navigation, card summaries, captions */
   --text-base: 1rem;
   --text-lg: clamp(1rem, 1.2vw, 1.125rem);     /* lead paragraphs */
   --text-xl: clamp(1.15rem, 1.5vw, 1.375rem);  /* h3 */
@@ -111,9 +111,10 @@
 
   --leading-*: initial;
   --leading-none: 1;
-  --leading-tight: 1.08;
-  --leading-snug: 1.35;
-  --leading-body: 1.7;
+  --leading-tight: 1.08;   /* display headings */
+  --leading-snug: 1.25;    /* card titles, chips, short labels */
+  --leading-normal: 1.5;   /* metadata and small text */
+  --leading-body: 1.7;     /* running copy */
 
   --tracking-*: initial;
   --tracking-tight: -.035em;
@@ -121,12 +122,16 @@
   --tracking-wider: .14em;
 
   /* --- Space -----------------------------------------------------------
-     Fixed steps come from Tailwind's numeric scale (p-4 is 1rem). These
-     are the fluid ones the numeric scale cannot express. */
-  --spacing-page: clamp(1.25rem, 4vw, 3rem);        /* container side gutter */
-  --spacing-section: clamp(3rem, 6vw, 5.5rem);      /* vertical section rhythm */
-  --spacing-block: clamp(1.75rem, 3.5vw, 3.25rem);  /* padding inside large panels */
-  --spacing-grid: 1.25rem;                          /* standard card-grid gap */
+     Fixed steps come from Tailwind's numeric scale (p-4 is 1rem) and are
+     for small, local gaps only. Anything that separates or pads a region
+     uses one of these named steps, largest to smallest — never an
+     arbitrary clamp(), which is how pages drifted apart before. */
+  --spacing-page: clamp(1.25rem, 4vw, 3rem);      /* container side gutter */
+  --spacing-section: clamp(3rem, 6vw, 5.5rem);    /* padding of every section; gap between stacked sections */
+  --spacing-gutter: clamp(2rem, 6vw, 6rem);       /* gap between the major columns of a layout */
+  --spacing-block: clamp(1.75rem, 3.5vw, 3rem);   /* heading to content, after a page header, panel padding, row padding */
+  --spacing-card: clamp(1.25rem, 2vw, 1.5rem);    /* padding inside cards and table cells */
+  --spacing-grid: 1.25rem;                        /* gap between cards in a grid */
 
   --container-page: 76rem;     /* the one container width */
   /* Not --container-prose: Tailwind ships a static `max-w-prose` of 65ch that
@@ -211,7 +216,7 @@ html[data-theme="dark"] {
    states its own color and spacing. */
 @utility eyebrow {
   font-family: var(--font-tech);
-  font-size: .75rem;
+  font-size: var(--text-xs);
   font-weight: 700;
   line-height: 1.4;
   letter-spacing: var(--tracking-wider);
@@ -506,8 +511,8 @@ html[data-theme="dark"] {
       margin-bottom: .25rem;
       color: var(--color-muted);
       content: attr(data-label);
-      font: 700 .58rem/1.3 var(--font-tech);
-      letter-spacing: .07em;
+      font: 700 var(--text-2xs)/1.3 var(--font-tech);
+      letter-spacing: var(--tracking-wide);
       text-transform: uppercase;
     }
   }

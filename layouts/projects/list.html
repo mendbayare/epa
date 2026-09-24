@@ -4,7 +4,7 @@
     "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
     "title" .Title
     "lead" .Params.description) }}
-  <div class="container py-[clamp(4rem,9vw,8rem)]">
+  <div class="container py-section">
     {{ range $index, $project := .Pages.ByWeight }}
       {{/* Rows alternate their media side. The index drives it, so the row
            does not have to work out its own position in the document. */}}
