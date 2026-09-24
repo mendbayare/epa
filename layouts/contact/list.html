@@ -1,58 +1,58 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
-  {{ $detail := "relative grid min-h-44 grid-cols-[2rem_minmax(0,1fr)] gap-card border-r border-b border-line p-block max-sm:min-h-0 max-sm:grid-cols-[1.5rem_minmax(0,1fr)]" }}
-  {{ $index := "font-tech text-xs leading-normal font-bold text-accent-600" }}
+  {{ $about := site.GetPage "/about" }}
+  {{/* Three cards in a row — the two things a visitor comes to do, find the
+       laboratory and email it, each with its own action, then who to ask
+       for — and the map across the full width beneath them. */}}
+  {{ $card := "flex flex-col gap-4 rounded-card border border-line bg-surface p-card" }}
+  {{ $label := "eyebrow m-0 max-w-none text-accent-600" }}
+  {{ $value := "m-0 min-w-0 text-lg leading-snug font-semibold [overflow-wrap:anywhere]" }}
+  {{/* Each card's action is the same quiet outlined control, so the actions
+       read as available without outweighing the details they belong to. */}}
+  {{ $action := "mt-auto inline-flex min-h-11 w-fit items-center gap-2 rounded-card border border-line px-4 text-sm font-bold text-link no-underline transition-[color,border-color] duration-[180ms] ease-in-out hover:border-accent-600 hover:text-accent-600" }}
+  {{ $copy := "grid aspect-square w-9 flex-none cursor-pointer place-items-center rounded-full border border-line bg-transparent text-muted transition-[color,border-color] duration-[180ms] ease-in-out hover:border-accent-600 hover:text-accent-600 data-copied-state:border-accent-600 data-copied-state:text-accent-600" }}
   <article>
     {{ partial "page-hero.html" (dict
       "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
       "title" .Title
       "lead" .Params.description) }}
-    <div class="container py-section">
-      <section class="grid grid-cols-2 border-t border-l border-line max-sm:grid-cols-1" aria-label="{{ if $isMn }}Холбоо барих мэдээлэл{{ else }}Contact details{{ end }}">
-        {{/* The address runs long, so it takes a full row of its own; the email
-             and the lecturer pair on the next. Three details in a two-column
-             grid otherwise leave one of them alone beside a bordered gap. */}}
-        <div class="{{ $detail }} col-span-full max-sm:col-auto">
-          <span class="{{ $index }}">01</span>
-          <div>
-            <p class="eyebrow mb-4 text-accent-600">{{ if $isMn }}Байршил{{ else }}Location{{ end }}</p>
-            <address class="max-w-[55rem] text-2xl leading-normal font-bold not-italic">{{ .Params.address }}</address>
-          </div>
-        </div>
-        <div class="{{ $detail }}">
-          <span class="{{ $index }}">02</span>
-          <div>
-            <p class="eyebrow mb-4 text-accent-600">{{ if $isMn }}Имэйл{{ else }}Email{{ end }}</p>
-            {{ with .Params.email }}
-              <a class="block text-xl no-underline [overflow-wrap:anywhere] hover:text-accent-600" href="mailto:{{ . }}">{{ . }}</a>
-            {{ else }}
-              <p class="text-muted">{{ if $isMn }}Албан ёсны имэйл хүлээгдэж байна{{ else }}Official email pending{{ end }}</p>
-            {{ end }}
-          </div>
-        </div>
-        <div class="{{ $detail }}">
-          <span class="{{ $index }}">03</span>
-          <div>
-            <p class="eyebrow mb-4 text-accent-600">{{ if $isMn }}Хариуцсан багш{{ else }}Supervising lecturer{{ end }}</p>
-            <strong class="block text-xl [overflow-wrap:anywhere]">{{ .Params.supervisor_name }}</strong>
-            <small class="mt-2 block text-sm text-muted">{{ .Params.supervisor_role }}</small>
-          </div>
-        </div>
+    <div class="container grid grid-cols-3 gap-grid py-section max-md:grid-cols-1">
+      <section class="{{ $card }}" aria-labelledby="contact-location">
+        <h2 class="{{ $label }}" id="contact-location">{{ if $isMn }}Байршил{{ else }}Location{{ end }}</h2>
+        <address class="{{ $value }} not-italic">{{ .Params.address }}</address>
+        {{ with .Params.map_url }}<a class="{{ $action }}" href="{{ . }}" target="_blank" rel="noopener">{{ if $isMn }}Чиглэл харах{{ else }}Get directions{{ end }} <span aria-hidden="true">↗</span></a>{{ end }}
       </section>
 
-      <section class="group mt-section grid min-h-128 grid-cols-[1.1fr_.9fr] overflow-hidden bg-blue-700 text-white max-md:grid-cols-1 max-sm:min-h-0" aria-label="{{ if $isMn }}EPA-Lab-ийн газрын зураг{{ else }}Map of EPA-Lab{{ end }}">
-        <iframe class="h-full min-h-100 w-full border-0 bg-blue-100 max-sm:min-h-72" src="{{ .Params.map_embed_url | safeURL }}" title="{{ if $isMn }}EPA-Lab-ийн Google газрын зураг{{ else }}Google Map showing EPA-Lab{{ end }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <a class="flex items-end justify-between gap-8 p-block text-white no-underline max-sm:flex-col max-sm:items-start" href="{{ .Params.map_url }}" target="_blank" rel="noopener">
-          <div>
-            <p class="eyebrow mb-4 text-accent-600">Google Maps</p>
-            <h2 class="max-w-[14ch] text-2xl text-white">{{ if $isMn }}Газрын зураг дээр нээх{{ else }}Open in Google Maps{{ end }}</h2>
-            <p class="text-white/68">{{ if $isMn }}Том газрын зураг, чиглэл болон ойр орчмын мэдээллийг Google Maps дээр харна уу.{{ else }}Open the full map for directions and nearby location information.{{ end }}</p>
+      <section class="{{ $card }}" aria-labelledby="contact-email">
+        <h2 class="{{ $label }}" id="contact-email">{{ if $isMn }}Имэйл{{ else }}Email{{ end }}</h2>
+        {{ with .Params.email }}
+          {{/* A mail link does nothing on a computer with no mail app set up,
+               so the address can also be copied in one click. */}}
+          <div class="flex items-center gap-3">
+            <p class="{{ $value }}">{{ . }}</p>
+            <button class="{{ $copy }}" type="button" data-copy="{{ . }}"
+              data-copied="{{ if $isMn }}Имэйл хуулагдлаа{{ else }}Email copied{{ end }}"
+              aria-label="{{ if $isMn }}Имэйл хуулах{{ else }}Copy email{{ end }}">
+              <svg class="h-4 w-4 fill-none stroke-current stroke-[1.8] [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+            </button>
           </div>
-          <span class="text-[2rem] text-accent-600 transition-transform duration-200 ease-in-out group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
-        </a>
+          <a class="{{ $action }}" href="mailto:{{ . }}">{{ if $isMn }}Имэйл илгээх{{ else }}Send an email{{ end }} <span aria-hidden="true">→</span></a>
+        {{ else }}
+          <p class="m-0 text-muted">{{ if $isMn }}Албан ёсны имэйл хүлээгдэж байна{{ else }}Official email pending{{ end }}</p>
+        {{ end }}
       </section>
 
-      {{ if .Params.provisional }}<p class="mt-8 border-l-2 border-accent-600 pl-4 text-sm text-muted">{{ .Params.source_note }}</p>{{ end }}
+      <section class="{{ $card }}" aria-labelledby="contact-lecturer">
+        <h2 class="{{ $label }}" id="contact-lecturer">{{ if $isMn }}Хариуцсан багш{{ else }}Supervising lecturer{{ end }}</h2>
+        <p class="{{ $value }}">{{ .Params.supervisor_name }}</p>
+        <a class="{{ $action }}" href="{{ $about.RelPermalink }}">{{ if $isMn }}Багшийн танилцуулга{{ else }}About the lecturer{{ end }} <span aria-hidden="true">→</span></a>
+      </section>
+
+      {{ with .Params.map_embed_url }}
+        <iframe class="col-span-full block h-128 w-full rounded-card border border-line bg-blue-100 max-sm:h-80" src="{{ . | safeURL }}" title="{{ if $isMn }}EPA-Lab-ийн Google газрын зураг{{ else }}Google Map showing EPA-Lab{{ end }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      {{ end }}
+
+      {{ if .Params.provisional }}<p class="col-span-full m-0 border-l-2 border-accent-600 pl-4 text-sm text-muted">{{ .Params.source_note }}</p>{{ end }}
     </div>
   </article>
 {{ end }}

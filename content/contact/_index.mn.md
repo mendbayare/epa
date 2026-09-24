@@ -1,12 +1,11 @@
 +++
 title = "Холбоо барих"
 description = "EPA-Lab-д имэйлээр холбогдох, зочлох болон байршлыг нээх мэдээлэл."
-address = "ШУТИС, Эрчим хүчний инженерчлэлийн сургууль, хичээлийн VIII байр, 601 тоот"
+address = "ШУТИС VIII байр, 601 тоот"
 email = "epa.lab2025@gmail.com"
 supervisor_name = "Доктор (Ph.D.) Б. Түвшинбаяр"
-supervisor_role = "EPA-Lab-ийн удирдагч багш"
-map_url = "https://www.google.com/maps/search/?api=1&query=47.921139055110636%2C106.9237373548136"
-map_embed_url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d948.767276025907!2d106.9237373548136!3d47.921139055110636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d9693a627f0c703%3A0x1baecae752faa611!2z0KjQo9Ci0JjQoSA4LdGAINCx0LDQudGA!5e0!3m2!1sen!2smn!4v1788351315501!5m2!1sen!2smn"
+map_url = "https://www.google.com/maps/search/?api=1&query=8PV8WWCF%2BHR"
+map_embed_url = "https://maps.google.com/maps?q=%D0%A8%D0%A3%D0%A2%D0%98%D0%A1%208-%D1%80%20%D0%B1%D0%B0%D0%B9%D1%80&z=17&hl=mn&output=embed"
 source_note = "Хаяг болон удирдагч багшийн мэдээллийг EPA-Lab-ийн танилцуулга PDF-ээс, газрын зургийг stakeholder-ийн өгсөн Google Maps embed-ээс авсан."
 provisional = false
 +++

@@ -29,7 +29,7 @@
           {{ if .Params.provisional }}<span class="inline-flex w-fit bg-accent-600 px-2 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-white uppercase" data-draft>{{ if $isMn }}Түр агуулга{{ else }}Provisional{{ end }}</span>{{ end }}
         </div>
         <div class="flex items-center gap-2">
-          <button class="{{ $share }}" type="button" data-copy-link
+          <button class="{{ $share }}" type="button" data-copy
             data-copied="{{ if $isMn }}Хуулагдлаа{{ else }}Copied{{ end }}"
             aria-label="{{ if $isMn }}Холбоосыг хуулах{{ else }}Copy link{{ end }}">
             <svg class="h-4 w-4 fill-none stroke-current stroke-[1.8] [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7L12 19"></path></svg>

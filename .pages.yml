@@ -159,7 +159,6 @@ content:
           - { name: address, label: Хаяг, type: text, required: true }
           - { name: email, label: Цахим шуудан, type: string }
           - { name: supervisor_name, label: Удирдагчийн нэр, type: string }
-          - { name: supervisor_role, label: Удирдагчийн албан тушаал, type: string }
           - { name: map_url, label: Газрын зургийн холбоос, type: string }
           - { name: map_embed_url, label: Газрын зургийн embed хаяг, type: text }
           - { name: source_note, label: Эх сурвалжийн тэмдэглэл, type: text }

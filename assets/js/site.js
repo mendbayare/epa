@@ -30,20 +30,25 @@ if (homeHero && siteHeader) {
   headerObserver.observe(homeHero);
 }
 
-// Copy-link control on news articles. No third-party script is involved; the
-// Facebook control beside it is a plain outbound link.
-const copyLink = document.querySelector('[data-copy-link]');
-
-if (copyLink && navigator.clipboard) {
-  copyLink.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      copyLink.setAttribute('data-copied-state', '');
-      copyLink.setAttribute('aria-label', copyLink.dataset.copied);
-      setTimeout(() => copyLink.removeAttribute('data-copied-state'), 2000);
-    } catch {
-      // Clipboard access can be refused; leaving the control unchanged is
-      // preferable to reporting a success that did not happen.
-    }
-  });
+// Copy controls: the link button on news articles and the email on Contact.
+// `data-copy` holds the text to copy; left empty, it copies the page URL.
+// `data-copied` is the label announced for two seconds after a copy.
+if (navigator.clipboard) {
+  for (const control of document.querySelectorAll('[data-copy]')) {
+    const label = control.getAttribute('aria-label');
+    control.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(control.dataset.copy || window.location.href);
+        control.setAttribute('data-copied-state', '');
+        control.setAttribute('aria-label', control.dataset.copied);
+        setTimeout(() => {
+          control.removeAttribute('data-copied-state');
+          control.setAttribute('aria-label', label);
+        }, 2000);
+      } catch {
+        // Clipboard access can be refused; leaving the control unchanged is
+        // preferable to reporting a success that did not happen.
+      }
+    });
+  }
 }

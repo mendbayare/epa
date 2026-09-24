@@ -228,7 +228,7 @@ Contact front matter:
 - `description`
 - `address`
 - `email`
-- `supervisor_name` and `supervisor_role`
+- `supervisor_name`
 - `map_url`
 - `map_embed_url`
 - `source_note`
