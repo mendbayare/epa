@@ -76,18 +76,17 @@ Location: `content/members/{slug}/index.{lang}.md`
 | Field | Type | Required | Purpose |
 | --- | --- | --- | --- |
 | `title` | string | Yes | Full public name |
-| `role` | string | Yes | Mentor, leader, student, alumni, etc. |
 | `program` | string | No | Academic program |
-| `study_year` | string | No | Current study year/level |
+| `study_year` | string | No | Current study year/level, shown while not alumni |
 | `generation` | controlled key | Yes | Stable generation/cohort key used for page grouping and anchors |
 | `joined_year` | integer | No | Year the member joined EPA-Lab, if separately useful |
 | `portrait` | image path | Yes | Approved portrait |
-| `summary` | string | Yes | Card-length biography |
 | `yearbook_quote` | string | No | Short member-approved quote shown on the card |
 | `research_interests` | string list | No | Research topics |
-| `achievements` | object list | No | Achievement title, year, optional detail/link |
 | `links` | object list | No | Approved profile/research links |
 | `alumni` | boolean | Yes | Current/alumni state |
+| `graduated_year` | integer | No | Graduation year, shown on the card when alumni |
+| `leader` | boolean | No | The generation's leader: card framed, badged, and placed first |
 | `weight` | integer | Yes | Manual ordering within a generation group |
 | `draft` | boolean | Yes | Publication state |
 
@@ -96,15 +95,19 @@ current public design has no individual member pages. `generation` is the
 primary grouping on the Members page. Generation keys are stable and
 untranslated; labels are localized.
 
-Generations display in descending order: the newest generation is added at the
-top, while the first generation remains at the bottom. The numeric `order` value
-still represents the real chronological generation number.
+Generations display in ascending order: the first generation leads the page and
+each new generation is added at the end, so the page reads as the laboratory's
+history. Home still shows the newest generation. The numeric `order` value is the
+real chronological generation number.
 
 Generation labels live in `data/generations.toml`, with a stable key, numeric
-order, and Mongolian/English labels. Leadership terms live separately in
-`data/leadership.toml` and reference a member slug, role labels, start/end year,
-current state, and provisional state. This preserves former leaders when the
-current laboratory leader changes.
+order, and Mongolian/English labels. Each generation has one leader, marked with
+`leader = true` on that member's own record; because every generation keeps its
+own leader, former leaders are preserved without a separate leadership file.
+
+A member card shows portrait, name, `program`, a year line and
+`yearbook_quote`. The year line is `study_year` for a current member, and
+"Төгссөн" — "2026 онд төгссөн" when `graduated_year` is set — for alumni.
 
 Confirmed: member records do not expose email addresses. Optional approved
 professional/research links may still be used when appropriate.
@@ -235,9 +238,8 @@ Contact front matter:
 - `provisional`
 
 The current baseline uses the stakeholder-supplied Google Maps embed and keeps
-an external Maps link for opening directions. The changing laboratory leader
-remains managed by the separate leadership-term data and is not duplicated in
-Contact.
+an external Maps link for opening directions. Generation leaders are marked on
+member records and are not duplicated in Contact.
 
 ## 9. Review checklist
 
@@ -245,7 +247,7 @@ Before treating this baseline as stable, confirm:
 
 - [ ] Final values and labels for the three manually maintained Home statistics
 - [x] Member email excluded
-- [x] Generation labels and newest-first page order confirmed from source PDF
+- [x] Generation labels confirmed from source PDF; page order changed to oldest-first at the stakeholder's direction (2026-09-24)
 - [x] Publication list fields confirmed
 - [x] Free-text project duration selected for the baseline
 - [ ] Whether achievements need their own site-wide collection later

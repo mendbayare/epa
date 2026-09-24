@@ -1,66 +1,43 @@
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
-  {{ $generations := sort hugo.Data.generations.generations "order" "desc" }}
-  {{ $currentTerms := where hugo.Data.leadership.terms "current" true }}
+  {{/* Oldest generation first, so the page reads as the laboratory's history
+       and each new generation is added at the end. */}}
+  {{ $generations := sort hugo.Data.generations.generations "order" "asc" }}
   {{ partial "page-hero.html" (dict
     "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
     "title" .Title
     "lead" .Params.description) }}
 
-  {{ if $currentTerms }}
-    <section class="bg-surface-soft py-section">
-      <div class="container">
-        {{ partial "section-head.html" (dict
-          "eyebrow" (cond $isMn "Одоогийн удирдлага" "Current leadership")
-          "title" (cond $isMn "Лабораторийн үйл ажиллагааг чиглүүлэгчид" "Leading the laboratory today")
-          "support" (cond $isMn "Удирдлагын хугацааг гишүүний мэдээллээс тусад нь хадгалдаг тул жил бүр түүхийг алдагдуулахгүй шинэчилнэ." "Leadership terms are stored separately from profiles, allowing annual updates without losing history.")) }}
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,26rem),1fr))] gap-grid max-md:grid-cols-1">
-          {{ range $term := $currentTerms }}
-            {{ $member := site.GetPage (printf "/members/%s" $term.member) }}
-            {{ $endYear := cond $isMn "одоо" "present" }}
-            {{ with $term.end_year }}{{ $endYear = printf "%v" . }}{{ end }}
-            {{ with $member }}
-              {{ partial "list-row.html" (dict
-                "compact" true
-                "level" "h3"
-                "title" .Title
-                "image" .Params.portrait
-                "imageAlt" $member.Title
-                "sizes" "(max-width: 700px) 100vw, 34vw"
-                "eyebrow" (cond $isMn $term.role_mn $term.role_en)
-                "body" .Params.summary
-                "meta" (printf "%v — %s" $term.start_year $endYear)
-                "note" (cond $term.provisional (cond $isMn "Түр удирдлагын бүртгэл" "Draft leadership term") "")) }}
-            {{ end }}
-          {{ end }}
-        </div>
-      </div>
-    </section>
-  {{ end }}
-
-  <div class="container py-section">
+  <div class="container pt-block pb-section">
     {{/* The jump bar follows the reader down a long members page, but on a
          phone it would eat a third of the viewport, so it stays put there. */}}
-    <nav class="sticky top-0 z-5 mb-section flex flex-wrap gap-2.5 bg-page py-4 max-sm:static max-sm:py-0" aria-label="{{ if $isMn }}Үе сонгох{{ else }}Choose a generation{{ end }}">{{ range $generations }}{{ $label := cond $isMn .label_mn .label_en }}<a class="rounded-full border border-line px-4 py-2.5 no-underline hover:border-accent-600 hover:bg-accent-600 hover:text-white" href="#{{ .key }}">{{ $label }}</a>{{ end }}</nav>
+    <nav class="sticky top-0 z-5 mb-block flex flex-wrap gap-2.5 bg-page py-4 max-sm:static max-sm:py-0" aria-label="{{ if $isMn }}Үе сонгох{{ else }}Choose a generation{{ end }}">{{ range $generations }}<a class="rounded-full border border-line px-4 py-2.5 text-sm font-semibold no-underline hover:border-accent-600 hover:bg-accent-600 hover:text-white" href="#{{ .key }}">{{ cond $isMn .label_mn .label_en }}</a>{{ end }}</nav>
     {{ range $generation := $generations }}
       {{ $items := where $.Pages "Params.generation" $generation.key }}
       {{ if $items }}
-        {{ $heading := cond $isMn $generation.heading_mn $generation.heading_en }}
-        <section class="scroll-mt-24 [section+&]:mt-section" id="{{ $generation.key }}">
-          {{ partial "section-head.html" (dict
-            "eyebrow" (printf "%s / %02d" (cond $isMn "Үе" "Generation") (div $generation.order 10))
-            "title" $heading
-            "meta" (printf "%d %s" (len $items) (cond $isMn "гишүүн" "members"))) }}
-          <div class="grid grid-cols-[repeat(auto-fit,minmax(16rem,24rem))] justify-center gap-grid max-md:grid-cols-2 max-sm:gap-3 max-[340px]:grid-cols-1">
-            {{ range $member := $items.ByWeight }}
+        {{/* The generation's leader leads its grid; everyone else follows in
+             editorial order. */}}
+        {{ $leaders := where $items "Params.leader" true }}
+        {{ $members := $leaders.ByWeight | append (where $items "Params.leader" "!=" true).ByWeight }}
+        {{/* A light divider rather than a full section head: the generations
+             are groups within one list, not separate sections. */}}
+        <section class="scroll-mt-24 [section+&]:mt-section" id="{{ $generation.key }}" aria-labelledby="{{ $generation.key }}-heading">
+          <div class="mb-block flex items-center gap-4">
+            <h2 class="m-0 max-w-none flex-none text-2xl" id="{{ $generation.key }}-heading">{{ cond $isMn $generation.label_mn $generation.label_en }}</h2>
+            <span class="h-px flex-1 bg-line" aria-hidden="true"></span>
+            <span class="flex-none font-tech text-xs leading-none font-bold tracking-wide text-muted uppercase">{{ len $items }} {{ cond $isMn "гишүүн" (cond (eq (len $items) 1) "member" "members") }}</span>
+          </div>
+          <div class="grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:gap-3 max-[340px]:grid-cols-1">
+            {{ range $member := $members }}
               {{ partial "person-card.html" (dict
                 "name" .Title
-                "role" .Params.role
                 "portrait" .Params.portrait
-                "study" .Params.program
+                "program" .Params.program
                 "studyYear" .Params.study_year
+                "alumni" .Params.alumni
+                "graduatedYear" .Params.graduated_year
                 "quote" .Params.yearbook_quote
-                "achievements" .Params.achievements
+                "leader" .Params.leader
                 "badge" (cond .Params.provisional (cond $isMn "Түр мэдээлэл" "Draft profile") "")) }}
             {{ end }}
           </div>

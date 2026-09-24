@@ -169,12 +169,13 @@
         "linkURL" (printf "%s#%s" $membersPage.RelPermalink $latestGeneration.key)
         "linkText" (cond $isMn "Бүх гишүүнийг үзэх" "View all members")) }}
       <div class="grid grid-cols-[repeat(auto-fit,minmax(16rem,24rem))] justify-center gap-grid max-md:grid-cols-2 max-sm:gap-3 max-[340px]:grid-cols-1">
-        {{ range $member := first 3 $latestMembers.ByWeight }}
+        {{ $leaders := where $latestMembers "Params.leader" true }}
+        {{ range $member := first 3 ($leaders.ByWeight | append (where $latestMembers "Params.leader" "!=" true).ByWeight) }}
           {{ partial "person-card.html" (dict
             "name" .Title
-            "role" .Params.role
             "portrait" .Params.portrait
             "quote" .Params.yearbook_quote
+            "leader" .Params.leader
             "sizes" "(max-width: 600px) 100vw, 33vw"
             "badge" (cond .Params.provisional (cond $isMn "Түр мэдээлэл" "Draft profile") "")) }}
         {{ end }}

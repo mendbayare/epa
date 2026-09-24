@@ -549,6 +549,7 @@ Record meaningful changes here; do not use this section for every code commit.
 | 2026-09-07 | Renamed the laboratory wordmark from EPA@Lab to EPA-Lab throughout. | The stakeholder's direction. The separator keeps its accent color in the brand lockup, so the mark reads the same way it did with the at sign. |
 | 2026-09-04 | Removed the utility strip again at the stakeholder's direction. | With no confirmed email or social accounts it carried only the address, which the footer and the Contact page already provide; the header is simpler without it. |
 | 2026-09-04 | Rounded every card surface, departing from the reference. | The stakeholder asked for roundness. SICT keeps its cards square, so this is a deliberate divergence rather than an oversight, applied through one `--radius-card` token. |
+| 2026-09-24 | Rebuilt Members: oldest generation first, a leader per generation, no leadership section. | The stakeholder's direction. Each generation's leader is a toggle on the member record, which replaced `data/leadership.toml`; member cards dropped role, summary and achievements, and gained a graduation year. |
 
 ## 17. How to maintain this document
 

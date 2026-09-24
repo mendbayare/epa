@@ -284,7 +284,7 @@ replaced by three components, each with its own partial:
 | --- | --- | --- |
 | `media-card` | `media-card.html` | Home project cards, Home news cards, and — with `feature` — About achievement cards |
 | `person-card` | `person-card.html` | the Members grid and the Home newest-generation strip |
-| `list-row` | `list-row.html` | Projects index rows, the About lecturer entry (`portrait`), and Members leadership cards (`compact`) |
+| `list-row` | `list-row.html` | Projects index rows and the About lecturer entry (`portrait`) |
 
 `partner-card` stays separate: it is a text row with no media. `card` stays as
 the generic `_default/list.html` fallback.
@@ -307,11 +307,22 @@ on what the card carries:
 
 A media card carries metadata, a title and a three-line summary, so at two-up on
 a 360 px screen its ~150 px column makes the text unreadable. A person card is a
-portrait, a role and a name, which survives that column and halves the scroll on
+portrait, a name and a year line, which survives that column and halves the scroll on
 a long members page — it just needs reduced padding and type, which the card
 carries as its own `max-sm:` steps, since both grids that use it are
 `card-grid--people`. The one-column threshold is 340 px, not 380 px: 360, 375 and 390
 are the most common phone widths and must keep two columns.
+
+A generation leader's `person-card` is the one card with an emphasis
+treatment: a 2 px `accent-600` frame in place of the hairline and a solid
+accent "★ Ахлагч" chip in the portrait's top-left corner, placed first in its
+generation. It uses the brand accent rather than a new color, because orange
+already means highlight throughout the site.
+
+The Members page separates generations with a one-row divider — the
+generation name, a hairline to the container edge, and the member count — not
+a `section-head`. Generations are groups within one list, so a full section
+head for each repeated its eyebrow, rule and spacing down the page.
 
 The provisional badge is the one overlay label for draft content on any card
 media: a navy chip with a backdrop blur, set by the three card partials. Its
@@ -327,7 +338,7 @@ Conventions:
   index passes `flip` from its own loop index rather than making the row work
   out its position in the document. Alternation is a two-column effect only —
   on one column the media leads the copy whatever the row's position. The
-  `compact` and `portrait` variants do not alternate and set their own column
+  `portrait` variant does not alternate and set their own column
   ratio; do not restate those ratios at the call site.
 - The card arrow is decorative markup (`aria-hidden`), not a second link. The
   title link already reaches the same destination, so a focusable arrow would

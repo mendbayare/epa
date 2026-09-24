@@ -5,31 +5,45 @@
   ~154px column are carried here as max-sm: steps rather than by the grid.
 
   Parameters:
-    name         required  member's public name
-    role                   role label shown above the name
-    portrait, sizes        portrait image path and responsive sizes
-    study, studyYear       programme and study year, stacked under the name
-    quote                  short member-approved yearbook quote
-    achievements           list of achievement strings
-    badge                  overlay label on the portrait, e.g. a draft marker
+    name           required  member's public name
+    portrait, sizes          portrait image path and responsive sizes
+    program                  programme of study
+    studyYear                current study year, e.g. "4-р курс"
+    alumni                   true once the member has graduated
+    graduatedYear            graduation year, shown when alumni
+    quote                    short member-approved yearbook quote
+    leader                   true for the generation's leader: an accent
+                             frame and a badge on the portrait
+    badge                    overlay label on the portrait, e.g. a draft marker
 */ -}}
+{{- $isMn := eq site.Language.Lang "mn" -}}
 {{- $sizes := default "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" .sizes -}}
-<article class="group overflow-hidden rounded-card border border-line bg-surface">
+
+{{/* A graduate shows when they graduated in place of a study year. */}}
+{{- $year := .studyYear -}}
+{{- if .alumni -}}
+  {{- $year = cond $isMn "Төгссөн" "Graduated" -}}
+  {{- with .graduatedYear }}{{ $year = cond $isMn (printf "%v онд төгссөн" .) (printf "Graduated %v" .) }}{{ end -}}
+{{- end -}}
+
+{{- $card := "group overflow-hidden rounded-card border border-line bg-surface" -}}
+{{- if .leader }}{{ $card = "group overflow-hidden rounded-card border-2 border-accent-600 bg-surface" }}{{ end -}}
+
+<article class="{{ $card }}">
   <div class="relative aspect-[4/3] overflow-hidden bg-surface-soft">
     {{ with .portrait }}
       {{ partial "responsive-image.html" (dict "src" . "alt" $.name "class" "h-full w-full object-cover saturate-72 transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.02] group-hover:saturate-100" "sizes" $sizes) }}
     {{ else }}
       <span class="grid h-full place-items-center font-display text-[2rem] leading-none font-extrabold text-blue-700" aria-hidden="true">EPA</span>
     {{ end }}
+    {{ if .leader }}<span class="absolute top-3 left-3 inline-flex items-center gap-1 rounded-sm bg-accent-600 px-2.5 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-white uppercase"><span aria-hidden="true">★</span>{{ if $isMn }}Ахлагч{{ else }}Leader{{ end }}</span>{{ end }}
     {{ with .badge }}<span class="absolute right-3 bottom-3 bg-navy-950/82 px-2.5 py-1.5 text-2xs font-bold tracking-wide text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
   </div>
   <div class="p-card max-sm:p-3.5">
-    {{ with .role }}<p class="eyebrow mb-4 text-accent-600 max-sm:mb-2 max-sm:text-2xs">{{ . }}</p>{{ end }}
-    <h3 class="text-2xl max-sm:text-base">{{ .name }}</h3>
-    {{ if or .study .studyYear }}
-      <p class="flex min-h-12 flex-col text-sm text-muted max-sm:min-h-0 max-sm:text-xs">{{ with .study }}{{ . }}{{ end }}{{ with .studyYear }}<span>{{ . }}</span>{{ end }}</p>
+    <h3 class="mb-2 text-2xl max-sm:text-base">{{ .name }}</h3>
+    {{ if or .program $year }}
+      <p class="m-0 flex min-h-12 flex-col text-sm text-muted max-sm:min-h-0 max-sm:text-xs">{{ with .program }}<span>{{ . }}</span>{{ end }}{{ with $year }}<span>{{ . }}</span>{{ end }}</p>
     {{ end }}
     {{ with .quote }}<blockquote class="mt-6 border-t border-line pt-5 text-base leading-body text-body italic max-sm:mt-3.5 max-sm:pt-3.5 max-sm:text-sm">“{{ . }}”</blockquote>{{ end }}
-    {{ with .achievements }}<ul class="mt-5 list-disc border-t border-line pt-4 pl-[1.15rem] text-sm text-muted max-sm:mt-3.5 max-sm:pt-3.5 max-sm:text-xs">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
   </div>
 </article>

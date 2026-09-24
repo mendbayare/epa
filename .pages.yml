@@ -342,12 +342,11 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
-          fields: [title, role, generation]
+          fields: [title, generation, leader]
           primary: title
           sort: [weight, title]
         fields: &member_fields
           - { name: title, label: Бүтэн нэр, type: string, required: true }
-          - { name: role, label: Үүрэг, type: string, required: true }
           - name: generation
             label: Үе
             type: select
@@ -360,10 +359,10 @@ content:
           - { name: program, label: Хөтөлбөр, type: string }
           - { name: study_year, label: Курс, type: string }
           - { name: portrait, label: Хөрөг, type: image, required: true }
-          - { name: summary, label: Товч танилцуулга, type: text, required: true }
           - { name: yearbook_quote, label: Гишүүний эшлэл, type: text }
-          - { name: achievements, label: Амжилт, type: string, list: true }
           - { name: alumni, label: Төгсөгч, type: boolean, default: false }
+          - { name: graduated_year, label: Төгссөн он, type: number, description: Төгсөгч бол бөглөнө. }
+          - { name: leader, label: Үеийн ахлагч, type: boolean, default: false, description: Үе бүрт нэг ахлагч. Картыг онцолж, эхэнд харуулна. }
           - { name: weight, label: Эрэмбэ, type: number, default: 10 }
           - { name: provisional, label: Түр мэдээлэл, type: boolean, default: true }
           - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
@@ -377,7 +376,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
-          fields: [title, role, generation]
+          fields: [title, generation, leader]
           primary: title
           sort: [weight, title]
         fields: *member_fields
@@ -406,29 +405,6 @@ content:
               - { name: heading_mn, label: Гарчиг (MN), type: string, required: true }
               - { name: label_en, label: Нэр (EN), type: string, required: true }
               - { name: heading_en, label: Гарчиг (EN), type: string, required: true }
-      - name: leadership
-        label: Удирдлагын хугацаа / Leadership terms
-        type: file
-        path: data/leadership.toml
-        format: toml
-        fields:
-          - name: terms
-            label: Удирдлагын хугацаа
-            type: object
-            list: true
-            fields:
-              - name: member
-                label: Гишүүн
-                type: string
-                required: true
-                description: "Гишүүний фолдерын нэр, жишээ нь: sample-first"
-              - { name: role_key, label: Үүргийн түлхүүр, type: string }
-              - { name: role_mn, label: Үүрэг (MN), type: string, required: true }
-              - { name: role_en, label: Үүрэг (EN), type: string, required: true }
-              - { name: start_year, label: Эхэлсэн он, type: number, required: true }
-              - { name: end_year, label: Дууссан он, type: number }
-              - { name: current, label: Одоогийн, type: boolean, default: true }
-              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
 
   - name: section_headers
     label: Хэсгийн гарчиг / Section headings

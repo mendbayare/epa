@@ -1,7 +1,6 @@
 {{- /*
   Full-width row pairing a picture with a block of copy. Covers the Projects
-  index rows, the About supervising-lecturer entry, and — with the compact
-  modifier — the Members leadership cards.
+  index rows and the About supervising-lecturer entry.
 
   Parameters:
     title      required  row title
@@ -17,10 +16,8 @@
     lead                 leading paragraph, set slightly larger
     body                 secondary paragraph in muted text
     facts                list of dicts with "label" and "value"
-    meta                 short accent line below the copy, e.g. a term range
     note                 pending/sample note at the end of the copy
     linkURL, linkText    action link at the end of the copy
-    compact              true for the half-width leadership variant
     flip                 true to put the media on the right; the caller drives
                          the alternation from its own loop index, so the row
                          does not have to guess its position in the document
@@ -36,11 +33,7 @@
 {{- $image := "h-full w-full object-cover [filter:saturate(.8)_contrast(1.04)] transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.025] group-hover:[filter:saturate(1)]" -}}
 {{- $copy := "flex flex-col justify-center p-block max-sm:px-0 max-sm:pt-8 max-sm:pb-12" -}}
 
-{{- if .compact -}}
-  {{- $row = "group grid min-h-96 grid-cols-[minmax(12rem,.75fr)_1.25fr] overflow-hidden rounded-card bg-surface max-md:min-h-0 max-md:grid-cols-1 max-sm:grid-cols-1" -}}
-  {{- $media = "relative block overflow-hidden bg-surface-soft max-md:min-h-88 max-sm:aspect-[4/3] max-sm:min-h-0" -}}
-  {{- $copy = "flex flex-col justify-center p-block" -}}
-{{- else if .portrait -}}
+{{- if .portrait -}}
   {{- $row = "group grid min-h-0 grid-cols-[minmax(16rem,.38fr)_minmax(0,.62fr)] gap-gutter border-t border-line py-block last:border-b max-md:grid-cols-[minmax(14rem,.42fr)_minmax(0,.58fr)] max-md:gap-12 max-sm:grid-cols-1 max-sm:gap-8" -}}
   {{- $media = "relative block aspect-[4/5] overflow-hidden bg-surface-soft" -}}
   {{- $image = "h-full w-full object-cover saturate-72 transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.025] group-hover:saturate-100" -}}
@@ -72,7 +65,6 @@
         {{ range . }}<div class="grid grid-cols-[8rem_minmax(0,1fr)] gap-4 border-t border-line pt-3 max-sm:grid-cols-1 max-sm:gap-1"><dt class="font-tech text-2xs leading-normal font-bold tracking-wide text-muted uppercase">{{ .label }}</dt><dd class="m-0 text-sm [overflow-wrap:anywhere]">{{ default "—" .value }}</dd></div>{{ end }}
       </dl>
     {{ end }}
-    {{ with .meta }}<span class="font-tech text-xs leading-normal font-bold tracking-wide text-accent-600 uppercase">{{ . }}</span>{{ end }}
     {{ with .note }}<span class="mt-3 inline-flex w-fit border border-line px-2.5 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-muted uppercase">{{ . }}</span>{{ end }}
     {{ with .linkURL }}<a class="group/link inline-flex w-fit items-center gap-2.5 font-[750] text-link no-underline" href="{{ . }}">{{ $.linkText }} <span class="text-accent-600 transition-transform duration-[180ms] ease-in-out group-hover/link:translate-x-[3px] group-hover/link:-translate-y-[3px]" aria-hidden="true">↗</span></a>{{ end }}
   </div>
