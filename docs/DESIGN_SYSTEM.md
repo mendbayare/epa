@@ -66,7 +66,7 @@ that would be unreadable inlined. The current list is the whole list — rendere
 Markdown (`.prose`), the Home hero's blend-mode stack, the animated
 power-network SVG, the scroll cue's travelling dot, the Home overview's masked
 grid, the news byline's middot separators, the decorative ring, and the phone
-transform that turns the publications table into labelled cards. Nothing goes
+transform that turns each publications row into a record. Nothing goes
 there for brevity's sake alone; a long class string is the normal cost.
 
 ### Rules that are not obvious

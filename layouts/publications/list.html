@@ -2,7 +2,9 @@
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $publications := sort (sort .Pages "Params.month" "desc") "Params.year" "desc" }}
   {{ $cell := "text-left align-top [overflow-wrap:anywhere] sm:border-b sm:border-line sm:p-card" }}
-  {{ $action := "flex w-fit items-center gap-2 font-bold text-link no-underline" }}
+  {{/* The outlined action used on Contact, a step shorter so it sits in a
+       table row without pushing it apart. */}}
+  {{ $action := "inline-flex min-h-9 w-fit items-center gap-2 rounded-card border border-line px-3 text-sm font-bold text-link no-underline transition-[color,border-color] duration-[180ms] ease-in-out hover:border-accent-600 hover:text-accent-600" }}
   {{ partial "page-hero.html" (dict
     "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
     "title" .Title
@@ -10,8 +12,8 @@
   <section class="container py-section">
     <div class="overflow-x-auto rounded-card border border-line">
       {{/* The publication-table class is the one hook the stylesheet keeps:
-           below 600px each row becomes a stack of labelled cells, and the
-           label is generated from the cell's own data-label. */}}
+           below 600px each row becomes a record — the title and description,
+           then the date and link on one line. */}}
       <table class="publication-table w-full table-fixed">
         <thead>
           <tr>
@@ -23,13 +25,13 @@
         <tbody>
           {{ range $publications }}
             <tr class="transition-[background-color] duration-200 ease-in-out last:*:border-b-0 hover:bg-surface-soft">
-              <td class="{{ $cell }}" data-label="{{ if $isMn }}Нэр{{ else }}Name{{ end }}"><strong class="block">{{ .Title }}</strong>{{ with .Params.summary }}<span class="mt-1.5 block text-muted">{{ . }}</span>{{ end }}{{ if .Params.provisional }}<small class="mt-3 inline-flex w-fit border border-line px-2 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-muted uppercase">{{ if $isMn }}Түр агуулга{{ else }}Draft sample{{ end }}</small>{{ end }}</td>
-              <td class="{{ $cell }}" data-label="{{ if $isMn }}Он, сар{{ else }}Year, month{{ end }}"><time datetime="{{ .Params.year }}-{{ printf "%02d" (int .Params.month) }}">{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }}</time></td>
-              <td class="{{ $cell }}" data-label="{{ if $isMn }}Файл / холбоос{{ else }}File / link{{ end }}">
-                <div class="flex flex-col items-start gap-1.5">
-                  {{ with .Params.file }}<a class="{{ $action }}" href="{{ . | relURL }}" download>{{ if $isMn }}Файл татах{{ else }}Download file{{ end }} <span class="text-accent-600">↓</span></a>{{ end }}
-                  {{ with .Params.external_url }}<a class="{{ $action }}" href="{{ . }}" target="_blank" rel="noopener">{{ if $isMn }}Гадаад холбоос{{ else }}External link{{ end }} <span class="text-accent-600">↗</span></a>{{ end }}
-                  {{ if and (not .Params.file) (not .Params.external_url) }}<span class="mt-1.5 text-sm text-muted">{{ if $isMn }}Холбоос хүлээгдэж байна{{ else }}Link pending{{ end }}</span>{{ end }}
+              <td class="{{ $cell }}"><strong class="block">{{ .Title }}</strong>{{ with .Params.summary }}<span class="mt-1.5 block text-muted">{{ . }}</span>{{ end }}{{ if .Params.provisional }}<small class="mt-3 inline-flex w-fit border border-line px-2 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-muted uppercase">{{ if $isMn }}Түр агуулга{{ else }}Draft sample{{ end }}</small>{{ end }}</td>
+              <td class="{{ $cell }}"><time class="font-tech text-sm" datetime="{{ .Params.year }}-{{ printf "%02d" (int .Params.month) }}">{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }}</time></td>
+              <td class="{{ $cell }}">
+                <div class="flex flex-wrap items-start gap-2">
+                  {{ with .Params.file }}<a class="{{ $action }}" href="{{ . | relURL }}" download>{{ if $isMn }}Файл татах{{ else }}Download file{{ end }} <span aria-hidden="true">↓</span></a>{{ end }}
+                  {{ with .Params.external_url }}<a class="{{ $action }}" href="{{ . }}" target="_blank" rel="noopener">{{ if $isMn }}Гадаад холбоос{{ else }}External link{{ end }} <span aria-hidden="true">↗</span></a>{{ end }}
+                  {{ if and (not .Params.file) (not .Params.external_url) }}<span class="text-sm text-muted">{{ if $isMn }}Холбоос хүлээгдэж байна{{ else }}Link pending{{ end }}</span>{{ end }}
                 </div>
               </td>
             </tr>

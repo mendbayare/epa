@@ -45,7 +45,7 @@
     <span class="decor-ring -top-52 -right-36 w-144" aria-hidden="true"></span>
     <div class="container relative z-1">
       {{ partial "breadcrumb.html" (dict "items" .crumbs "class" "mb-4 text-on-dark-quiet") }}
-      <h1 class="title-rule m-0 text-3xl text-on-dark">{{ .title }}</h1>
+      <h1 class="title-rule m-0 max-w-none text-3xl text-on-dark">{{ .title }}</h1>
       {{ with .lead }}<p class="mt-4 mb-0 max-w-[42rem] text-lg text-on-dark-muted">{{ . }}</p>{{ end }}
       {{ with .badge }}<span class="{{ $badge }}">{{ . }}</span>{{ end }}
       {{ with .action }}<a class="{{ $button }}" href="{{ .url }}">{{ .text }}</a>{{ end }}
