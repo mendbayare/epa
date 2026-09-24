@@ -73,4 +73,22 @@
       </section>
     {{ end }}
   </article>
+
+  {{/* A way onward, so the reader does not finish the story at the footer:
+       the newest other articles, in the same order as the News list. */}}
+  {{ $all := $newsPage.RegularPages.ByWeight }}
+  {{ if where $newsPage.RegularPages "Params.date" "!=" nil }}{{ $all = $newsPage.RegularPages.ByDate.Reverse }}{{ end }}
+  {{ with first 3 (where $all "Permalink" "!=" .Permalink) }}
+    <section class="bg-surface-soft py-section">
+      <div class="container">
+        {{ partial "section-head.html" (dict
+          "title" (cond $isMn "Бусад мэдээ" "More news")
+          "linkURL" $newsPage.RelPermalink
+          "linkText" (cond $isMn "Бүх мэдээ" "All news")) }}
+        <div class="grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:grid-cols-1">
+          {{ range . }}{{ partial "news-card.html" (dict "page" .) }}{{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
 {{ end }}

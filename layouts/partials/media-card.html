@@ -13,8 +13,13 @@
     note                 pending/sample note below the summary
     feature              true for the larger, borderless achievement variant
     invert               true for the navy news treatment
+    lead                 true for the wide navy lead story: photo beside the
+                         copy from desktop up, stacked below that
+    signal               true to put the orange signal dot before the first
+                         metadata item on the light card; the navy treatments
+                         always carry it
 
-  The three treatments are written out as whole class strings rather than
+  The four treatments are written out as whole class strings rather than
   assembled from fragments, because Tailwind reads the literal strings in
   this file and never sees a value Hugo concatenated at render time.
 */ -}}
@@ -30,7 +35,19 @@
 {{- $summary := "m-0 line-clamp-3 text-sm text-muted" -}}
 {{- $arrow := "mt-auto grid aspect-square w-10 place-items-center self-end rounded-full border border-line text-link transition-[color,border-color,background-color,transform] duration-[180ms] ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-accent-600 group-hover:bg-accent-600 group-hover:text-white" -}}
 
-{{- if .invert -}}
+{{- if .lead -}}
+  {{/* The News list's lead story: the navy treatment laid out wide. The
+       photograph fills its column at any copy length, so it is positioned
+       against the media box rather than sized by its own ratio. */}}
+  {{- $card = "group grid overflow-hidden rounded-card border border-line-on-dark bg-navy-950 text-on-dark transition-[border-color,box-shadow] duration-300 ease-in-out hover:border-accent-600 hover:shadow-md md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]" -}}
+  {{- $media = "relative block aspect-video overflow-hidden bg-navy-950 md:aspect-auto md:min-h-96" -}}
+  {{- $image = "absolute inset-0 h-full w-full object-cover transition-transform duration-[550ms] ease-in-out group-hover:scale-[1.035]" -}}
+  {{- $body = "flex flex-col justify-center gap-4 p-block" -}}
+  {{- $metaFirst = "inline-flex items-center gap-2 before:size-[.45rem] before:rounded-full before:bg-accent-600 before:content-['']" -}}
+  {{- $heading = "m-0 max-w-none text-3xl text-on-dark" -}}
+  {{- $summary = "m-0 line-clamp-4 text-base text-on-dark-muted" -}}
+  {{- $arrow = "mt-4 grid aspect-square w-10 place-items-center self-start rounded-full border border-on-dark-faint text-on-dark transition-[color,border-color,background-color,transform] duration-[180ms] ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-accent-600 group-hover:bg-accent-600 group-hover:text-white" -}}
+{{- else if .invert -}}
   {{/* The solid navy news treatment, with the reference's orange signal dot
        before the first metadata item. It uses the deep brand navy rather than
        a lighter indigo, which means that in the dark theme the card sits on
@@ -54,6 +71,7 @@
   {{- $heading = "m-0 text-2xl" -}}
   {{- $summary = "m-0 text-base text-muted" -}}
 {{- end -}}
+{{- if .signal }}{{ $metaFirst = "inline-flex items-center gap-2 before:size-[.45rem] before:rounded-full before:bg-accent-600 before:content-['']" }}{{ end -}}
 
 <article class="{{ $card }}">
   {{ if .url }}<a class="{{ $media }}" href="{{ .url }}" aria-label="{{ .title }}">{{ else }}<div class="{{ $media }}">{{ end }}

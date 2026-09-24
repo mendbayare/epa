@@ -1,0 +1,34 @@
+{{- /*
+  One news article as a navy media-card, shared by the News list and the
+  "more news" row under an article so the two cannot drift apart.
+
+  Parameters:
+    page   required  the news page
+    lead             true for the wide lead-story treatment
+
+  Only the lead story is navy. A grid of navy cards between the navy page
+  header and footer read as one dark mass, and left the lead nothing to
+  stand out with; the rest use the light card, keeping the orange signal dot
+  so they still read as news. Home keeps its navy news cards, where three of
+  them mark the section among light ones.
+
+  Reading time is left to the article itself: on a card beside others of
+  similar length it repeated the same figure on every card.
+*/ -}}
+{{- $isMn := eq site.Language.Lang "mn" -}}
+{{- $lead := .lead -}}
+{{- with .page -}}
+  {{- $date := cond $isMn "Огноо хүлээгдэж байна" "Date pending" -}}
+  {{- if not .Date.IsZero }}{{ $date = .Date.Format "2006.01.02" }}{{ end -}}
+  {{ partial "media-card.html" (dict
+    "lead" $lead
+    "signal" true
+    "title" .Title
+    "url" .RelPermalink
+    "image" .Params.cover
+    "imageAlt" .Title
+    "sizes" (cond $lead "(max-width: 900px) 100vw, 58vw" "")
+    "metaLeft" $date
+    "summary" .Params.summary
+    "badge" (cond .Params.provisional (cond $isMn "Түр агуулга" "Provisional") "")) }}
+{{- end -}}

@@ -282,7 +282,7 @@ replaced by three components, each with its own partial:
 
 | Component | Partial | Covers |
 | --- | --- | --- |
-| `media-card` | `media-card.html` | Home project cards, Home news cards, and — with `feature` — About achievement cards |
+| `media-card` | `media-card.html` | Home project cards, Home news cards, the News list and the "more news" row (through `news-card.html`), the News list's wide lead story (`lead`), and — with `feature` — About achievement cards |
 | `person-card` | `person-card.html` | the Members grid and the Home newest-generation strip |
 | `list-row` | `list-row.html` | Projects index rows and the About lecturer entry (`portrait`) |
 

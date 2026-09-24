@@ -14,22 +14,14 @@
   <div class="container pt-block pb-section">
     {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
     {{ if $items }}
-      <div class="grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:grid-cols-1">
-        {{ range $item := $items }}
-          {{ $date := "" }}
-          {{ if not .Date.IsZero }}{{ $date = .Date.Format "2006.01.02" }}{{ else }}{{ $date = cond $isMn "Огноо хүлээгдэж байна" "Date pending" }}{{ end }}
-          {{ partial "media-card.html" (dict
-            "invert" true
-            "title" .Title
-            "url" .RelPermalink
-            "image" .Params.cover
-            "imageAlt" $item.Title
-            "metaLeft" $date
-            "metaRight" (printf "%d %s" .ReadingTime (cond $isMn "мин унших" "min read"))
-            "summary" .Params.summary
-            "badge" (cond .Params.provisional (cond $isMn "Түр агуулга" "Provisional") "")) }}
-        {{ end }}
-      </div>
+      {{/* The newest article leads, wide, so the page has an entry point;
+           the rest follow in the standard grid. */}}
+      {{ partial "news-card.html" (dict "page" (index $items 0) "lead" true) }}
+      {{ with after 1 $items }}
+        <div class="mt-grid grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:grid-cols-1">
+          {{ range . }}{{ partial "news-card.html" (dict "page" .) }}{{ end }}
+        </div>
+      {{ end }}
     {{ else }}
       <p class="rounded-card border border-dashed border-line p-8 text-muted">{{ if $isMn }}Мэдээ удахгүй нэмэгдэнэ.{{ else }}News will be added soon.{{ end }}</p>
     {{ end }}
