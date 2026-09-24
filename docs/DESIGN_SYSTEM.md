@@ -100,6 +100,23 @@ have already caused bugs:
   between treatments it assigns whole strings to a variable; it never builds
   one by concatenating fragments.
 
+### Justified Mongolian text
+
+News article bodies are justified (`text-justify`) at every width. Browsers
+ship no Mongolian hyphenation dictionary, so `hyphens: auto` alone does
+nothing for Mongolian and justified lines open wide gaps between its long
+words. `scripts/hyphenate.mjs` runs after `hugo` in the deploy workflow and
+writes invisible soft hyphens, from the TeX `hyph-mn-cyrl` patterns (the
+`hyphen` package), into every element marked `data-hyphenate` on a Mongolian
+page. It never leaves fewer than three letters on either side of a break.
+English is left to the browser's own hyphenation.
+
+To justify another block of Mongolian text, add `text-justify hyphens-auto
+data-hyphenate` to its element. `hugo server` does not run the script, so a
+local preview shows justification without hyphens; run
+`node scripts/hyphenate.mjs public` after `hugo` to see the real result, and
+`node --test scripts/hyphenate.test.mjs` after changing the script.
+
 ### Breakpoints
 
 CSS cannot use custom properties in media queries and Tailwind's defaults are

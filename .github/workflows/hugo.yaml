@@ -51,6 +51,11 @@ jobs:
         run: |
           hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
+      # Browsers cannot hyphenate Mongolian, so justified text gets its soft
+      # hyphens written in here, after Hugo has produced the pages.
+      - name: Hyphenate Mongolian text
+        run: node scripts/hyphenate.mjs public
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v5
         with:

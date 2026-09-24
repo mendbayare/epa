@@ -1,9 +1,10 @@
 {
   "name": "epa-lab",
   "private": true,
-  "description": "Build dependencies for the EPA-Lab Hugo site. Hugo drives the Tailwind CLI through css.TailwindCSS; there is no separate build script to run.",
+  "description": "Build dependencies for the EPA-Lab Hugo site. Hugo drives the Tailwind CLI through css.TailwindCSS; after hugo, scripts/hyphenate.mjs adds soft hyphens to Mongolian justified text.",
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.0",
+    "hyphen": "^1.14.1",
     "tailwindcss": "^4.1.0"
   }
 }

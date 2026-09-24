@@ -49,7 +49,7 @@
     {{ end }}
 
     <div class="container pb-section">
-      <div class="prose mx-auto">{{ .Content }}</div>
+      <div class="prose mx-auto text-justify hyphens-auto" data-hyphenate>{{ .Content }}</div>
       {{ with .Params.tags }}
         <ul class="mx-auto mt-block flex max-w-measure flex-wrap gap-2" aria-label="{{ if $isMn }}Сэдэв{{ else }}Topics{{ end }}">
           {{ range . }}<li class="border border-line px-2.5 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-muted uppercase">{{ . }}</li>{{ end }}
