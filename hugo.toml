@@ -33,10 +33,6 @@ disableKinds = ["taxonomy", "term"]
 
 [params]
   description = "Electrical Power Automation Laboratory at MUST"
-  email = ""
-  address = "ШУТИС, Эрчим хүчний инженерчлэлийн сургууль, VIII байр, 601 тоот"
-  instagramURL = ""
-  facebookURL = ""
 
 [languages]
   [languages.mn]
@@ -47,7 +43,6 @@ disableKinds = ["taxonomy", "term"]
     contentDir = "content"
     [languages.mn.params]
       description = "ШУТИС-ийн Цахилгаан эрчим хүчний автоматжуулалтын лаборатори"
-      address = "ШУТИС, ЭХИС-ийн VIII байр, 601 тоот"
     [[languages.mn.menus.main]]
       name = "Нүүр"
       pageRef = "/"
@@ -86,7 +81,6 @@ disableKinds = ["taxonomy", "term"]
     contentDir = "content"
     [languages.en.params]
       description = "Electrical Power Automation Laboratory at MUST"
-      address = "MUST School of Power and Electrical Engineering, Building VIII, room 601"
     [[languages.en.menus.main]]
       name = "Home"
       pageRef = "/"

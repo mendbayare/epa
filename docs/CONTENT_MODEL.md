@@ -52,8 +52,10 @@ Icons (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, the
 
 ## 1. Site settings
 
-Site-wide values belong in `hugo.toml` or a structured data file rather than an
-ordinary page.
+The laboratory's name and default description live in `hugo.toml`. Its
+contact details — address, email, phone and social accounts — live only on the
+Contact page (section 8), and the footer and Home's structured data read them
+from there, so there is one place to edit them.
 
 | Field | Type | Required | Purpose |
 | --- | --- | --- | --- |
@@ -61,10 +63,6 @@ ordinary page.
 | `short_name` | string | Yes | `EPA-Lab` |
 | `description` | localized string | Yes | Default metadata description |
 | `logo` | image path | No | Approved logo; placeholder until supplied |
-| `email` | email | No | Official public laboratory email |
-| `address` | localized string | Yes | Public postal/location text |
-| `map_url` | URL | No | External map destination |
-| `social_links` | list | No | Label and URL for each approved account |
 
 Confirmed: the EPA-Lab logo remains independent. The institution and school name
 are displayed as ordinary supporting text beside or beneath it, allowing the text
@@ -80,22 +78,16 @@ fields define the stakeholder-requested sections.
 | `title` | string | Yes | Main hero heading |
 | `description` | string | Yes | Short hero introduction |
 | `hero_image` | image path | Yes | Large introductory photograph |
-| `vision` | short rich text | Yes | Алсын хараа |
-| `mission` | short rich text | Yes | Эрхэм зорилго |
-| `stats` | ordered list | Yes | Key, numeric value, label, optional suffix |
+| `mission` | text | Yes | Лабораторийн зорилго — the official aim |
+| `vision` | text | Yes | Гарах үр дүн — the official intended results |
+| `mentor_greeting` | text | No | The supervising lecturer's greeting; his name, role and portrait come from About's `supervisor` |
+| `stats` | ordered list | Yes | Value, label, optional suffix |
 | `equipment` | string list | Yes | Compact Home strip of laboratory equipment brands/models |
-| `partners` | object list | No | Home-only partners: name, optional logo, URL and one-line description, and provisional state. Logos show on a white panel and need the organization's permission |
+| `partners` | object list | No | Home-only partners: name, optional logo, URL and one-line description. Logos show on a white panel and need the organization's permission |
 
-Baseline statistic keys:
-
-- `publications`
-- `projects`
-- `alumni`
-
-Confirmed for the baseline: statistics are manually maintained in Home front
-matter. Their labels and values remain provisional until stakeholder approval.
-They may later be calculated from published records if that becomes reliable and
-useful.
+Statistics are maintained by hand in Home front matter. They currently show
+figures countable from the official introduction: members, generations and
+research areas.
 
 ## 3. Members
 
@@ -226,7 +218,7 @@ pending state for a record without one, and fall back to editorial `weight` for
 ordering while no record has a date.
 
 News is a confirmed primary section and may also supply featured cards to Home.
-The current records are provisional samples and must be replaced or approved
+The current records are samples and must be replaced or approved
 before launch.
 
 ## 7. Home equipment
@@ -246,27 +238,21 @@ About front matter:
 - `description`
 - `hero_image`
 - `history_intro`
-- ordered `history` milestones with year, title, description, and provisional state
-- ordered `achievements` with title, year, description, image, and provisional state
-- one `supervisor` object with name, role, portrait, summary, biography, and provisional state
-- page-level `provisional` state
+- ordered `history` milestones with year, title and description
+- ordered `achievements` with title, year, description and optional image
+- one `supervisor` object with name, role, portrait, summary and biography — the
+  single source of the lecturer's details, which Home and Contact read
 
-The body may contain the longer laboratory history and supporting context. About
-contains only the supervising teacher; it is not a directory of lecturers or
-researchers. Until approved content arrives, every invented sample record must
-retain `provisional = true` and a visible public label.
+About contains only the supervising teacher; it is not a directory of lecturers
+or researchers.
 
 Contact front matter:
 
 - `title`
 - `description`
-- `address`
-- `email`
-- `supervisor_name`
-- `map_url`
-- `map_embed_url`
-- `source_note`
-- `provisional`
+- `address`, `email`, `phone`
+- `facebook_url`, `instagram_url` — shown in the footer when set
+- `map_url`, `map_embed_url`
 
 The current baseline uses the stakeholder-supplied Google Maps embed and keeps
 an external Maps link for opening directions. Generation leaders are marked on

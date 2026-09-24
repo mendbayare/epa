@@ -5,7 +5,6 @@
     title      required  row title
     url                  makes the media and title a link, and shows the action
     image, imageAlt      image path and alternative text
-    badge                overlay label on the media, e.g. a draft marker
     body                 secondary paragraph in muted text
     facts                list of dicts with "label" and "value"
     linkURL, linkText    action link at the end of the copy
@@ -35,7 +34,6 @@
 <article class="{{ $row }}">
   {{ if .url }}<a class="{{ $media }}" href="{{ .url }}">{{ else }}<div class="{{ $media }}">{{ end }}
     {{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" (default "" $.imageAlt) "class" $image "sizes" $sizes) }}{{ end }}
-    {{ with .badge }}<span class="absolute top-4 right-4 bg-navy-950/82 px-2.5 py-1.5 text-2xs font-bold tracking-wide text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
   {{ if .url }}</a>{{ else }}</div>{{ end }}
   <div class="{{ $copy }}">
     <h2 class="max-w-none text-2xl">{{ if .url }}<a class="no-underline" href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h2>

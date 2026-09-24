@@ -8,6 +8,5 @@ portrait = "images/members/altanbagana.jpg"
 alumni = false
 leader = false
 weight = 20
-provisional = false
 draft = false
 +++

@@ -13,8 +13,7 @@
     graduatedYear            graduation year, shown when alumni
     quote                    short member-approved yearbook quote
     leader                   true for the generation's leader: an accent
-                             frame and a badge on the portrait
-    badge                    overlay label on the portrait, e.g. a draft marker
+                             frame and a "leader" chip on the portrait
 */ -}}
 {{- $isMn := eq site.Language.Lang "mn" -}}
 {{- $sizes := default "(max-width: 600px) 50vw, (max-width: 900px) 33vw, 18rem" .sizes -}}
@@ -40,7 +39,6 @@
       <span class="grid h-full place-items-center font-display text-[2rem] leading-none font-extrabold text-blue-700" aria-hidden="true">EPA</span>
     {{ end }}
     {{ if .leader }}<span class="absolute top-3 left-3 inline-flex items-center gap-1 rounded-sm bg-accent-600 px-2.5 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-white uppercase"><span aria-hidden="true">★</span>{{ if $isMn }}Ахлагч{{ else }}Leader{{ end }}</span>{{ end }}
-    {{ with .badge }}<span class="absolute right-3 bottom-3 bg-navy-950/82 px-2.5 py-1.5 text-2xs font-bold tracking-wide text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
   </div>
   <div class="p-card max-sm:p-3.5">
     <h3 class="mb-2 text-2xl max-sm:text-base">{{ .name }}</h3>

@@ -8,6 +8,5 @@ portrait = "images/members/sedzana.jpg"
 alumni = false
 leader = false
 weight = 30
-provisional = false
 draft = false
 +++

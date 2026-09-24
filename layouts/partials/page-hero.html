@@ -10,14 +10,12 @@
     title      required  page title
     crumbs               slice for partials/breadcrumb.html
     lead                 supporting paragraph
-    badge                draft label below the copy
     image, imageAlt      photograph; supplying it selects the split shape
     sizes                responsive sizes attribute for that photograph
     mediaLabel           small vertical label in the image corner
     action               dict of "url" and "text" for a button below the copy
 */ -}}
 {{- $sizes := default "(max-width: 900px) 100vw, 48vw" .sizes -}}
-{{- $badge := "mt-6 inline-flex w-fit bg-accent-600 px-2.5 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-white uppercase" -}}
 {{- $button := "mt-8 inline-flex min-h-13 items-center justify-center rounded-card bg-blue-700 px-5 py-3 font-bold text-white no-underline shadow-[0_.75rem_2rem_rgb(7_89_184/22%)] hover:bg-blue-600" -}}
 
 {{ if .image }}
@@ -27,7 +25,6 @@
         {{ partial "breadcrumb.html" (dict "items" .crumbs "class" "mb-block text-on-dark-quiet") }}
         <h1 class="title-rule m-0 max-w-[14ch] text-4xl text-on-dark max-sm:max-w-none">{{ .title }}</h1>
         {{ with .lead }}<p class="mt-6 mb-8 max-w-[42rem] text-lg text-on-dark-muted">{{ . }}</p>{{ end }}
-        {{ with .badge }}<span class="{{ $badge }}">{{ . }}</span>{{ end }}
         {{ with .action }}<a class="{{ $button }}" href="{{ .url }}">{{ .text }}</a>{{ end }}
       </div>
       {{/* The scrim tips the photograph towards the copy so the title keeps
@@ -49,7 +46,6 @@
       {{ partial "breadcrumb.html" (dict "items" .crumbs "class" "mb-4 text-on-dark-quiet") }}
       <h1 class="title-rule m-0 max-w-none text-3xl text-on-dark">{{ .title }}</h1>
       {{ with .lead }}<p class="mt-4 mb-0 max-w-[42rem] text-lg text-on-dark-muted">{{ . }}</p>{{ end }}
-      {{ with .badge }}<span class="{{ $badge }}">{{ . }}</span>{{ end }}
       {{ with .action }}<a class="{{ $button }}" href="{{ .url }}">{{ .text }}</a>{{ end }}
     </div>
   </header>

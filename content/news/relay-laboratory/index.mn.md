@@ -5,7 +5,6 @@ date = 2025-04-22
 summary = "Хоёрдугаар курсын оюутнууд реле хамгаалалт, автомат төхөөрөмжийн элементийн баазыг туршив."
 cover = "images/activity-relay.jpg"
 featured = false
-provisional = false
 draft = false
 tags = ["Реле хамгаалалт", "Туршилт"]
 

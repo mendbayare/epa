@@ -8,6 +8,5 @@ portrait = "images/members/usukhbayar.jpg"
 alumni = false
 leader = false
 weight = 70
-provisional = false
 draft = false
 +++

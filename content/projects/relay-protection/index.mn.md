@@ -17,7 +17,6 @@ results = """
 related_publications = ["content/publications/sample-publication/index.mn.md", "content/publications/sample-description-only/index.mn.md"]
 cover = "images/research-protection.jpg"
 featured = true
-provisional = false
 weight = 20
 draft = false
 

@@ -6,6 +6,5 @@ month = 1
 file = "/files/sample-publication.pdf"
 external_url = "https://example.org/"
 summary = "Тоон релений тохируулгын аргачлал, туршилтын үр дүнгийн тайлан."
-provisional = false
 draft = false
 +++

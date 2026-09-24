@@ -8,6 +8,5 @@ portrait = "images/members/chinzorig.jpg"
 alumni = false
 leader = false
 weight = 50
-provisional = false
 draft = false
 +++

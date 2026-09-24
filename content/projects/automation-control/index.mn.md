@@ -11,7 +11,6 @@ results = "Удирдлагын логик, төхөөрөмжийн холбо�
 related_publications = ["content/publications/sample-description-only/index.mn.md"]
 cover = "images/research-automation.jpg"
 featured = true
-provisional = false
 weight = 30
 draft = false
 

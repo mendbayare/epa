@@ -8,6 +8,5 @@ portrait = "images/members/amarbold.jpg"
 alumni = false
 leader = false
 weight = 40
-provisional = false
 draft = false
 +++

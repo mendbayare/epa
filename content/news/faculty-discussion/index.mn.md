@@ -5,7 +5,6 @@ date = 2025-05-30
 summary = "Салбарын багш нарт лабораторийн туршилтын үр дүнг танилцуулж, санал солилцов."
 cover = "images/activity-classroom.jpg"
 featured = false
-provisional = false
 draft = false
 tags = ["Хэлэлцүүлэг", "Багш нар"]
 

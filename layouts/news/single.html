@@ -24,9 +24,6 @@
           {{ with .ReadingTime }}
             <span>{{ . }} {{ if $isMn }}мин унших{{ else }}min read{{ end }}</span>
           {{ end }}
-          {{/* data-draft keeps the middot separator off the marker, which is a
-               label rather than another fact in the run. */}}
-          {{ if .Params.provisional }}<span class="inline-flex w-fit bg-accent-600 px-2 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-white uppercase" data-draft>{{ if $isMn }}Түр агуулга{{ else }}Provisional{{ end }}</span>{{ end }}
         </div>
         <div class="flex items-center gap-2">
           <button class="{{ $share }}" type="button" data-copy

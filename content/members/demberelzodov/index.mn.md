@@ -8,6 +8,5 @@ portrait = "images/members/demberelzodov.jpg"
 alumni = false
 leader = true
 weight = 10
-provisional = false
 draft = false
 +++

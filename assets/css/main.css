@@ -442,13 +442,13 @@ html[data-theme="dark"] {
   /* A middot between the news byline facts, in the manner of the reference.
      They wrap on a phone, which would strand a separator at the start of a
      line, so spacing alone carries them there. */
-  .byline-facts > * + *:not([data-draft])::before {
+  .byline-facts > * + *::before {
     margin-right: .9rem;
     content: "\00B7";
     opacity: .55;
   }
   @media (width <= 600px) {
-    .byline-facts > * + *:not([data-draft])::before { content: none; }
+    .byline-facts > * + *::before { content: none; }
   }
 
   /* --- Publications table ----------------------------------------------

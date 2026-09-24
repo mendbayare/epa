@@ -5,7 +5,6 @@ date = 2026-02-25
 summary = "Students saw the protection and control systems of a working substation at first hand."
 cover = "images/lab-hero.jpg"
 featured = true
-provisional = false
 draft = false
 tags = ["Substation", "Site visit"]
 

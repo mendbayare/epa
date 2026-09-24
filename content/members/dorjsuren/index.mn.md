@@ -8,6 +8,5 @@ portrait = "images/members/dorjsuren.jpg"
 alumni = false
 leader = false
 weight = 10
-provisional = false
 draft = false
 +++

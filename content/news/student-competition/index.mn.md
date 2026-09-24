@@ -5,7 +5,6 @@ date = 2025-11-19
 summary = "Лабораторийн баг автоматжуулалтын шийдлээрээ сургуулийн уралдаанд оролцов."
 cover = "images/research-automation.jpg"
 featured = true
-provisional = false
 draft = false
 tags = ["Уралдаан", "Оюутан"]
 

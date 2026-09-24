@@ -5,7 +5,6 @@ date = '2025-03-14'
 summary = 'Нэгдүгээр курсын оюутнуудад зориулсан бодлого, хэлэлцүүлэгт суурилсан сургалтын үйл ажиллагаа.'
 cover = 'images/activity-seminar.jpg'
 featured = false
-provisional = false
 draft = false
 tags = ["Онол", "Семинар"]
 

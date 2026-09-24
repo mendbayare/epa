@@ -1,5 +1,7 @@
 {{ $isMn := eq site.Language.Lang "mn" }}
-{{- $socialBase := "inline-flex min-h-11 items-center gap-2.5 rounded-full border border-line-on-dark bg-white/3 px-3.5 py-2.5 text-xs font-semibold text-on-dark-muted no-underline transition-[color,border-color,background-color] duration-200 ease-in-out" -}}
+{{/* Address, email, phone and social links come from the Contact page, the
+     one place editors keep them, so the footer cannot drift from it. */}}
+{{ $contact := site.GetPage "/contact" }}
 {{- $socialLink := "inline-flex min-h-11 items-center gap-2.5 rounded-full border border-line-on-dark bg-white/3 px-3.5 py-2.5 text-xs font-semibold text-on-dark-muted no-underline transition-[color,border-color,background-color] duration-200 ease-in-out hover:border-accent-600 hover:bg-accent-600 hover:text-white" -}}
 {{- $heading := "mb-7 font-tech text-xs leading-none font-bold tracking-wider text-accent-600 uppercase" -}}
 <footer class="relative overflow-hidden bg-navy-950 pt-section text-white">
@@ -12,24 +14,13 @@
         <span class="flex flex-col gap-1"><strong class="leading-none">EPA<span class="text-accent-600">-</span>Lab</strong><small class="font-body text-2xs leading-none font-bold tracking-wider text-white/48">{{ if $isMn }}ШУТИС · ЭХИС{{ else }}MUST · PES{{ end }}</small></span>
       </a>
       <p class="mt-7 mb-8 max-w-120 text-white/58">{{ site.Params.description }}</p>
-      <div class="flex flex-wrap gap-2.5" aria-label="{{ if $isMn }}Олон нийтийн сүлжээ{{ else }}Social media{{ end }}">
-        {{ with site.Params.instagramURL }}
-          <a class="{{ $socialLink }}" href="{{ . }}" rel="me noopener" target="_blank" aria-label="Instagram">
-        {{ else }}
-          <span class="{{ $socialBase }} cursor-not-allowed opacity-45" aria-label="{{ if $isMn }}Instagram холбоос хүлээгдэж байна{{ else }}Instagram link pending{{ end }}">
-        {{ end }}
-            <svg class="h-4 w-4 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg>
-            <span>Instagram</span>
-        {{ if site.Params.instagramURL }}</a>{{ else }}</span>{{ end }}
-        {{ with site.Params.facebookURL }}
-          <a class="{{ $socialLink }}" href="{{ . }}" rel="me noopener" target="_blank" aria-label="Facebook">
-        {{ else }}
-          <span class="{{ $socialBase }} cursor-not-allowed opacity-45" aria-label="{{ if $isMn }}Facebook холбоос хүлээгдэж байна{{ else }}Facebook link pending{{ end }}">
-        {{ end }}
-            <svg class="h-4 w-4 fill-current stroke-none" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.7.3-1 1-1Z"></path></svg>
-            <span>Facebook</span>
-        {{ if site.Params.facebookURL }}</a>{{ else }}</span>{{ end }}
-      </div>
+      {{/* Each account shows only once its link is set on the Contact page. */}}
+      {{ if or $contact.Params.instagram_url $contact.Params.facebook_url }}
+        <div class="flex flex-wrap gap-2.5" aria-label="{{ if $isMn }}Олон нийтийн сүлжээ{{ else }}Social media{{ end }}">
+          {{ with $contact.Params.instagram_url }}<a class="{{ $socialLink }}" href="{{ . }}" rel="me noopener" target="_blank"><svg class="h-4 w-4 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg><span>Instagram</span></a>{{ end }}
+          {{ with $contact.Params.facebook_url }}<a class="{{ $socialLink }}" href="{{ . }}" rel="me noopener" target="_blank"><svg class="h-4 w-4 fill-current stroke-none" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.7.3-1 1-1Z"></path></svg><span>Facebook</span></a>{{ end }}
+        </div>
+      {{ end }}
     </div>
 
     <div>
@@ -41,8 +32,9 @@
 
     <div class="max-md:col-span-full max-sm:col-auto">
       <p class="{{ $heading }}">{{ if $isMn }}Холбоо барих{{ else }}Contact{{ end }}</p>
-      <address class="mb-5 max-w-84 text-on-dark-quiet not-italic">{{ site.Params.address }}</address>
-      {{ with site.Params.email }}<a class="mb-2 block w-fit font-bold no-underline hover:text-accent-600" href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+      <address class="mb-5 max-w-84 text-on-dark-quiet not-italic">{{ $contact.Params.address }}</address>
+      {{ with $contact.Params.email }}<a class="mb-2 block w-fit font-bold no-underline hover:text-accent-600" href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+      {{ with $contact.Params.phone }}<a class="mb-2 block w-fit font-bold no-underline hover:text-accent-600" href="tel:{{ replace . " " "" }}">{{ . }}</a>{{ end }}
       <a class="mt-6 inline-flex gap-2 font-tech text-xs leading-normal font-bold tracking-wide text-accent-600 uppercase no-underline hover:text-white" href="{{ relLangURL "contact/" }}">{{ if $isMn }}Байршил, дэлгэрэнгүй{{ else }}Location and details{{ end }} <span aria-hidden="true">↗</span></a>
     </div>
   </div>

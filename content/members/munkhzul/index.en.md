@@ -8,6 +8,5 @@ portrait = "images/members/munkhzul.jpg"
 alumni = false
 leader = false
 weight = 60
-provisional = false
 draft = false
 +++

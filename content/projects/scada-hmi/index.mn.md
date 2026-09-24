@@ -11,7 +11,6 @@ results = "Хяналтын дэлгэцийн эхний хувилбарыг �
 related_publications = ["content/publications/sample-publication/index.mn.md"]
 cover = "images/research-scada.jpg"
 featured = true
-provisional = false
 weight = 10
 draft = false
 

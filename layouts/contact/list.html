@@ -45,15 +45,13 @@
 
       <section class="{{ $card }}" aria-labelledby="contact-lecturer">
         <h2 class="{{ $label }}" id="contact-lecturer">{{ if $isMn }}Хариуцсан багш{{ else }}Supervising lecturer{{ end }}</h2>
-        <p class="{{ $value }}">{{ .Params.supervisor_name }}</p>
+        <p class="{{ $value }}">{{ $about.Params.supervisor.name }}</p>
         <a class="{{ $action }}" href="{{ $about.RelPermalink }}#supervisor">{{ if $isMn }}Багшийн танилцуулга{{ else }}About the lecturer{{ end }} <span aria-hidden="true">→</span></a>
       </section>
 
       {{ with .Params.map_embed_url }}
         <iframe class="col-span-full block h-128 w-full rounded-card border border-line bg-blue-100 max-sm:h-80" src="{{ . | safeURL }}" title="{{ if $isMn }}EPA-Lab-ийн Google газрын зураг{{ else }}Google Map showing EPA-Lab{{ end }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       {{ end }}
-
-      {{ if .Params.provisional }}<p class="col-span-full m-0 border-l-2 border-accent-600 pl-4 text-sm text-muted">{{ .Params.source_note }}</p>{{ end }}
     </div>
   </article>
 {{ end }}

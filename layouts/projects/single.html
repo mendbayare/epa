@@ -21,8 +21,7 @@
       "lead" .Params.summary
       "image" .Params.cover
       "sizes" "(max-width: 900px) 100vw, 46vw"
-      "mediaLabel" "EPA / PROJECT"
-      "badge" (cond .Params.provisional (cond $isMn "Загварын түр агуулга" "Draft sample content") "")) }}
+      "mediaLabel" "EPA / PROJECT") }}
     <div class="container py-section">
       <dl class="mb-block grid grid-cols-4 border-t border-l border-line max-md:grid-cols-2 max-sm:grid-cols-1">
         {{ with .Params.client }}<div class="{{ $fact }}"><dt class="{{ $factLabel }}">{{ if $isMn }}Захиалагч{{ else }}Client{{ end }}</dt><dd class="m-0 [overflow-wrap:anywhere]">{{ . }}</dd></div>{{ end }}

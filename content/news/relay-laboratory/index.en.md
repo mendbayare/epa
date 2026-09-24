@@ -5,7 +5,6 @@ date = 2025-04-22
 summary = "Second-year students explored protection relays and the component base of automation devices."
 cover = "images/activity-relay.jpg"
 featured = false
-provisional = false
 draft = false
 tags = ["Relay protection", "Testing"]
 

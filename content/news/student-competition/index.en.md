@@ -5,7 +5,6 @@ date = 2025-11-19
 summary = "A laboratory team entered the school competition with an automation solution."
 cover = "images/research-automation.jpg"
 featured = true
-provisional = false
 draft = false
 tags = ["Competition", "Students"]
 

@@ -5,7 +5,6 @@ date = 2025-03-14
 summary = "A problem-solving and discussion-based learning activity for first-year students."
 cover = "images/activity-seminar.jpg"
 featured = false
-provisional = false
 draft = false
 tags = ["Theory", "Seminar"]
 

@@ -8,6 +8,5 @@ portrait = "images/members/luvsanjamba.jpg"
 alumni = false
 leader = false
 weight = 20
-provisional = false
 draft = false
 +++

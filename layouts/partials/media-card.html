@@ -6,7 +6,6 @@
     url                  makes the media and title a link, and shows the arrow
     image, imageAlt      cover image path and alternative text
     sizes                responsive sizes attribute; defaults to a 3-up grid
-    badge                overlay label on the media, e.g. a provisional marker
     metaLeft, metaRight  short technical metadata above the title
     summary              card body text, clamped to three lines
     invert               true for the navy news treatment
@@ -64,7 +63,6 @@
 <article class="{{ $card }}">
   {{ if .url }}<a class="{{ $media }}" href="{{ .url }}" aria-label="{{ .title }}">{{ else }}<div class="{{ $media }}">{{ end }}
     {{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" (default "" $.imageAlt) "class" $image "sizes" $sizes) }}{{ end }}
-    {{ with .badge }}<span class="absolute top-4 right-4 bg-navy-950/82 px-2.5 py-1.5 text-2xs font-bold tracking-wide text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
   {{ if .url }}</a>{{ else }}</div>{{ end }}
   <div class="{{ $body }}">
     {{ if or .metaLeft .metaRight }}

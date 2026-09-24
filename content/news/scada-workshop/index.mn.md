@@ -5,7 +5,6 @@ date = 2025-10-08
 summary = "Оюутнууд хяналтын дэлгэц зохиож, бодит төхөөрөмжөөс өгөгдөл цуглуулах дадлага хийв."
 cover = "images/research-scada.jpg"
 featured = true
-provisional = false
 draft = false
 tags = ["SCADA", "HMI", "Сургалт"]
 

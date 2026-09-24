@@ -337,13 +337,9 @@ generation name, a hairline to the container edge, and the member count — not
 a `section-head`. Generations are groups within one list, so a full section
 head for each repeated its eyebrow, rule and spacing down the page.
 
-The provisional badge is the one overlay label for draft content on any card
-media: a navy chip with a backdrop blur, set by the three card partials. Its
-counterpart is the same marker in solid accent set inline in text flow rather
-than laid over a photograph, used by the page hero and the news byline.
-Both are written inline where they are used. Do not use the inline marker as an
-overlay: the solid accent fill is meant to be read against the page, not
-against an image.
+There is no draft or "provisional" marker: the switch and its badges were
+removed on 2026-09-24, once real content began replacing samples. The only
+overlay chip on card media is a generation leader's "★ Ахлагч".
 
 Conventions:
 

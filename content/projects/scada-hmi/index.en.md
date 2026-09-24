@@ -11,7 +11,6 @@ results = "Built the first version of the control screen and tested data collect
 related_publications = ["content/publications/sample-publication/index.mn.md"]
 cover = "images/research-scada.jpg"
 featured = true
-provisional = false
 weight = 10
 draft = false
 

@@ -5,7 +5,6 @@ date = 2026-02-25
 summary = "Оюутнууд ажиллаж буй дэд станцын хамгаалалт, хяналтын системтэй газар дээр нь танилцав."
 cover = "images/lab-hero.jpg"
 featured = true
-provisional = false
 draft = false
 tags = ["Дэд станц", "Айлчлал"]
 

@@ -5,7 +5,6 @@ date = 2026-04-16
 summary = "Power quality indicators were discussed on the basis of measurement results."
 cover = "images/research-protection.jpg"
 featured = false
-provisional = false
 draft = false
 tags = ["Power quality", "Measurement"]
 
