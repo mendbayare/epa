@@ -8,6 +8,6 @@ portrait = "images/activity-seminar.jpg"
 yearbook_quote = "Never be afraid to ask the question."
 alumni = false
 weight = 40
-provisional = true
+provisional = false
 draft = false
 +++

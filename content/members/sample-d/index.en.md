@@ -8,6 +8,6 @@ yearbook_quote = "Automation is not about replacing people but helping them deci
 alumni = true
 graduated_year = 2026
 weight = 30
-provisional = true
+provisional = false
 draft = false
 +++

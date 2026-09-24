@@ -3,9 +3,9 @@ title = "Жишээ бүтээлийн нэр"
 slug = "sample-publication"
 year = 2026
 month = 1
-file = ""
+file = "/files/sample-publication.pdf"
 external_url = "https://example.org/"
-summary = "Хүснэгтийн бүтэц, урт гарчгийн мөр шилжилтийг шалгах түр агуулга."
-provisional = true
+summary = "Тоон релений тохируулгын аргачлал, туршилтын үр дүнгийн тайлан."
+provisional = false
 draft = false
 +++

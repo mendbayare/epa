@@ -5,8 +5,17 @@ date = 2025-11-19
 summary = "Лабораторийн баг автоматжуулалтын шийдлээрээ сургуулийн уралдаанд оролцов."
 cover = "images/research-automation.jpg"
 featured = true
-provisional = true
+provisional = false
 draft = false
+tags = ["Уралдаан", "Оюутан"]
+
+[[gallery]]
+image = "images/activity-relay.jpg"
+caption = "Үйл ажиллагааны үеэр"
+
+[[gallery]]
+image = "images/lab-hero.jpg"
+caption = "Лабораторийн орчинд"
 +++
 
 Лабораторийн оюутны баг сургуулийн хэмжээнд зохион байгуулагдсан инженерийн

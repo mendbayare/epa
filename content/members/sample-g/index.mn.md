@@ -8,6 +8,6 @@ portrait = "images/research-scada.jpg"
 yearbook_quote = "SCADA дэлгэцийн цаана бодит систем амьдарч байгааг мартаж болохгүй."
 alumni = false
 weight = 60
-provisional = true
+provisional = false
 draft = false
 +++

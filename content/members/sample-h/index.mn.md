@@ -8,6 +8,6 @@ yearbook_quote = "Багаараа ажиллах нь ганцаараа хур
 alumni = true
 graduated_year = 2026
 weight = 70
-provisional = true
+provisional = false
 draft = false
 +++

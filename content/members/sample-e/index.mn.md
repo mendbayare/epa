@@ -8,6 +8,6 @@ portrait = "images/lab-hero.jpg"
 yearbook_quote = "Лабораторид өнгөрүүлсэн орой бүр миний хамгийн сайн хичээл байсан."
 alumni = false
 weight = 40
-provisional = true
+provisional = false
 draft = false
 +++

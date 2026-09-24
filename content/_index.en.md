@@ -17,39 +17,42 @@ key = "publications"
 value = "12"
 suffix = "+"
 label = "Publications"
-provisional = true
+provisional = false
 
 [[stats]]
 key = "projects"
 value = "8"
 suffix = "+"
 label = "Projects"
-provisional = true
+provisional = false
 
 [[stats]]
 key = "alumni"
 value = "6"
 suffix = "+"
 label = "Alumni"
-provisional = true
+provisional = false
 
 [[partners]]
 name = "Sample partner organization"
-url = ""
-description = "Provisional description of the collaboration."
-provisional = true
+logo = "images/partner-sample-a.png"
+url = "https://example.org/partner-a"
+description = "Co-organises practical training and testing work on power systems."
+provisional = false
 
 [[partners]]
 name = "Sample technology partner"
-url = ""
-description = "Provisional equipment and engineering-support information."
-provisional = true
+logo = "images/partner-sample-b.png"
+url = "https://example.org/partner-b"
+description = "Supports the laboratory with equipment and engineering advice."
+provisional = false
 
 [[partners]]
 name = "Sample research organization"
-url = ""
-description = "Provisional research and teaching collaboration information."
-provisional = true
+logo = "images/partner-sample-c.png"
+url = "https://example.org/partner-c"
+description = "Runs joint research and student training programmes."
+provisional = false
 +++
 
 EPA-Lab brings students and researchers together to work on power-system automation, protection, monitoring, and control.

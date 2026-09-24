@@ -5,8 +5,17 @@ date = 2025-04-22
 summary = "Хоёрдугаар курсын оюутнууд реле хамгаалалт, автомат төхөөрөмжийн элементийн баазыг туршив."
 cover = "images/activity-relay.jpg"
 featured = false
-provisional = true
+provisional = false
 draft = false
+tags = ["Реле хамгаалалт", "Туршилт"]
+
+[[gallery]]
+image = "images/research-protection.jpg"
+caption = "Үйл ажиллагааны үеэр"
+
+[[gallery]]
+image = "images/activity-relay.jpg"
+caption = "Лабораторийн орчинд"
 +++
 
 Хоёрдугаар курсын оюутнууд лабораторийн реле хамгаалалтын самбар дээр практик

@@ -5,8 +5,17 @@ date = 2025-11-19
 summary = "A laboratory team entered the school competition with an automation solution."
 cover = "images/research-automation.jpg"
 featured = true
-provisional = true
+provisional = false
 draft = false
+tags = ["Competition", "Students"]
+
+[[gallery]]
+image = "images/activity-relay.jpg"
+caption = "During the activity"
+
+[[gallery]]
+image = "images/lab-hero.jpg"
+caption = "In the laboratory"
 +++
 
 A student team from the laboratory took part in the engineering competition

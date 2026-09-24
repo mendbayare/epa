@@ -8,6 +8,6 @@ yearbook_quote = "Хамгаалалтын реле зөв ажиллах тэр
 alumni = true
 graduated_year = 2025
 weight = 20
-provisional = true
+provisional = false
 draft = false
 +++

@@ -8,6 +8,6 @@ yearbook_quote = "Every calculation proves its worth the moment a protection rel
 alumni = true
 graduated_year = 2025
 weight = 20
-provisional = true
+provisional = false
 draft = false
 +++

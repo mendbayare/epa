@@ -8,6 +8,6 @@ portrait = "images/research-protection.jpg"
 yearbook_quote = "Every small improvement makes a large system more reliable."
 alumni = false
 weight = 50
-provisional = true
+provisional = false
 draft = false
 +++

@@ -8,6 +8,6 @@ portrait = "images/research-automation.jpg"
 yearbook_quote = "Код бичихээс өмнө схемээ ойлгох нь хамгийн чухал."
 alumni = false
 weight = 20
-provisional = true
+provisional = false
 draft = false
 +++

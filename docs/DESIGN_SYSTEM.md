@@ -103,7 +103,12 @@ have already caused bugs:
 
 ### Justified Mongolian text
 
-News article bodies are justified (`text-justify`) at every width. Browsers
+Long text is justified (`text-justify`) at every width: news article bodies,
+project objective, results and text, About's history introduction,
+achievement descriptions and lecturer biography, Home's vision and mission,
+and any Markdown page body. Short text in narrow columns — card summaries,
+one-line descriptions, member quotes, table cells — stays left-aligned,
+because justification at that width opens wide gaps between words. Browsers
 ship no Mongolian hyphenation dictionary, so `hyphens: auto` alone does
 nothing for Mongolian and justified lines open wide gaps between its long
 words. `scripts/hyphenate.mjs` runs after `hugo` in the deploy workflow and
@@ -270,9 +275,11 @@ and the 404 page as well, which previously used a lighter `page-header`. Those
 three pages therefore changed from a pale band to the navy one — a deliberate
 consistency change, not a regression.
 
-Generic slots replaced the page-specific decorations: `stampLabel`/`stampValue`
-render the orange founded chip on About, `mediaLabel` renders the vertical
-label on a project detail page, and `back` renders the project back link.
+Generic slots replaced the page-specific decorations: `mediaLabel` renders the
+vertical label on a project detail page and `action` a button below the copy.
+The orange founded-date stamp that About used to lay over its photograph was
+removed on 2026-09-24; the founding date is the first milestone in About's
+history list.
 
 **Cards: ten variants → three. Done.**
 

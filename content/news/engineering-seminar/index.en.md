@@ -5,8 +5,17 @@ date = 2025-03-14
 summary = "A problem-solving and discussion-based learning activity for first-year students."
 cover = "images/activity-seminar.jpg"
 featured = false
-provisional = true
+provisional = false
 draft = false
+tags = ["Theory", "Seminar"]
+
+[[gallery]]
+image = "images/activity-classroom.jpg"
+caption = "During the activity"
+
+[[gallery]]
+image = "images/activity-seminar.jpg"
+caption = "In the laboratory"
 +++
 
 The laboratory ran a theory seminar for first-year students. Its aim was to

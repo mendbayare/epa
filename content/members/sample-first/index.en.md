@@ -9,6 +9,6 @@ yearbook_quote = "Understand why the system should work before asking it to work
 alumni = false
 leader = true
 weight = 10
-provisional = true
+provisional = false
 draft = false
 +++

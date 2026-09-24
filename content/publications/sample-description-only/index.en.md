@@ -1,11 +1,11 @@
 +++
-title = "Sample publication awaiting a file or external link"
+title = "Sample publication: SCADA/HMI data collection"
 slug = "sample-description-only"
 year = 2025
 month = 11
-file = ""
-external_url = ""
-summary = "Provisional content used to verify a record that does not yet have a file or external destination."
-provisional = true
+file = "/files/sample-description-only.pdf"
+external_url = "https://example.org/publications/research-note"
+summary = "A research note on data collection in the SCADA/HMI system."
+provisional = false
 draft = false
 +++

@@ -9,9 +9,11 @@
     "lead" .Params.description) }}
 
   <div class="container pt-block pb-section">
-    {{/* The jump bar follows the reader down a long members page, but on a
-         phone it would eat a third of the viewport, so it stays put there. */}}
-    <nav class="sticky top-0 z-5 mb-block flex flex-wrap gap-2.5 bg-page py-4 max-sm:static max-sm:py-0" aria-label="{{ if $isMn }}Үе сонгох{{ else }}Choose a generation{{ end }}">{{ range $generations }}<a class="rounded-full border border-line px-4 py-2.5 text-sm font-semibold no-underline hover:border-accent-600 hover:bg-accent-600 hover:text-white" href="#{{ .key }}">{{ cond $isMn .label_mn .label_en }}</a>{{ end }}</nav>
+    {{/* The jump bar follows the reader down a long members page, sticking
+         just below the sticky site header, but on a phone it would eat a
+         third of the viewport, so it stays put there. A generation jumped to
+         lands below both bars. */}}
+    <nav class="sticky top-20 z-5 mb-block flex flex-wrap gap-2.5 bg-page py-4 max-sm:static max-sm:py-0" aria-label="{{ if $isMn }}Үе сонгох{{ else }}Choose a generation{{ end }}">{{ range $generations }}<a class="rounded-full border border-line px-4 py-2.5 text-sm font-semibold no-underline hover:border-accent-600 hover:bg-accent-600 hover:text-white" href="#{{ .key }}">{{ cond $isMn .label_mn .label_en }}</a>{{ end }}</nav>
     {{ range $generation := $generations }}
       {{ $items := where $.Pages "Params.generation" $generation.key }}
       {{ if $items }}
@@ -21,7 +23,7 @@
         {{ $members := $leaders.ByWeight | append (where $items "Params.leader" "!=" true).ByWeight }}
         {{/* A light divider rather than a full section head: the generations
              are groups within one list, not separate sections. */}}
-        <section class="scroll-mt-24 [section+&]:mt-section" id="{{ $generation.key }}" aria-labelledby="{{ $generation.key }}-heading">
+        <section class="scroll-mt-44 [section+&]:mt-section max-sm:scroll-mt-28" id="{{ $generation.key }}" aria-labelledby="{{ $generation.key }}-heading">
           <div class="mb-block flex items-center gap-4">
             <h2 class="m-0 max-w-none flex-none text-2xl" id="{{ $generation.key }}-heading">{{ cond $isMn $generation.label_mn $generation.label_en }}</h2>
             <span class="h-px flex-1 bg-line" aria-hidden="true"></span>

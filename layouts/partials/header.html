@@ -2,7 +2,9 @@
   Site header. On Home it sits fixed over the full-bleed hero, transparent
   until the hero scrolls out of view, at which point site.js sets
   data-scrolled and the navy ground fades in. Every other page gets the
-  ordinary bordered bar.
+  ordinary bordered bar, sticky at the top so navigation and the language
+  switch stay in reach on long pages. Anything else that sticks, or any
+  anchor target, must clear its 5rem (top-20) height.
 
   The two treatments differ in color, not structure, so the templates pick
   between complete class strings rather than composing them — Tailwind reads
@@ -11,7 +13,7 @@
 {{- $isMn := eq site.Language.Lang "mn" -}}
 {{- $home := .IsHome -}}
 
-{{- $header := "relative z-20 border-b border-line bg-header backdrop-blur-[1rem] transition-[background-color,border-color,box-shadow] duration-300 ease-in-out" -}}
+{{- $header := "sticky top-0 z-20 border-b border-line bg-header backdrop-blur-[1rem] transition-[background-color,border-color,box-shadow] duration-300 ease-in-out" -}}
 {{- $navPanel := "flex items-center gap-7 max-md:absolute max-md:inset-x-0 max-md:top-full max-md:hidden max-md:border-b max-md:border-line max-md:bg-surface max-md:px-page max-md:py-6 max-md:shadow-lg data-open:max-md:block" -}}
 {{- $navLink := "text-sm font-semibold hover:text-link-hover aria-[current=page]:text-link-hover" -}}
 {{- $toggle := "grid aspect-square w-9 cursor-pointer place-items-center rounded-[.55rem] border border-line bg-surface p-[.45rem] text-muted hover:border-accent-600 hover:text-accent-600 max-md:mt-4" -}}

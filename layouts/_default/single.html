@@ -8,6 +8,6 @@
          inter-section rhythm. */}}
     {{/* `container` clears max-width, so it cannot share an element with
          `prose` — the measure would be lost. */}}
-    <div class="container pt-block pb-section"><div class="prose">{{ .Content }}</div></div>
+    <div class="container pt-block pb-section"><div class="prose text-justify hyphens-auto" data-hyphenate>{{ .Content }}</div></div>
   </article>
 {{ end }}

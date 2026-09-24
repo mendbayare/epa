@@ -60,7 +60,7 @@ content:
               - { name: value, label: Утга, type: string, required: true }
               - { name: label, label: Тайлбар, type: string, required: true }
               - { name: suffix, label: Дагавар, type: string }
-              - { name: provisional, label: Түр утга, type: boolean, default: true }
+              - { name: provisional, label: Түр утга, type: boolean, default: false }
           - name: equipment
             label: Тоног төхөөрөмж
             type: string
@@ -80,7 +80,7 @@ content:
               - { name: logo, label: Лого, type: image, description: Цагаан дэвсгэр дээр харагдана. Байгууллагын зөвшөөрөлтэй лого оруулна. }
               - { name: url, label: Вэб хаяг, type: string }
               - { name: description, label: Тайлбар, type: text }
-              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: false }
       - name: home_en
         label: Home (English)
         type: file
@@ -103,8 +103,6 @@ content:
           - { name: title, label: Гарчиг, type: string, required: true }
           - { name: description, label: Товч танилцуулга, type: text, required: true }
           - { name: hero_image, label: Нүүр зураг, type: image, required: true }
-          - { name: founded_label, label: Байгуулагдсан (гарчиг), type: string }
-          - { name: founded_value, label: Байгуулагдсан (огноо), type: string }
           - { name: history_intro, label: Түүхийн оршил, type: text }
           - name: history
             label: Түүхэн үе шатууд
@@ -114,7 +112,7 @@ content:
               - { name: year, label: Он, type: string, required: true }
               - { name: title, label: Гарчиг, type: string, required: true }
               - { name: description, label: Тайлбар, type: text }
-              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: false }
           - name: achievements
             label: Амжилтууд
             type: object
@@ -124,7 +122,7 @@ content:
               - { name: year, label: Он, type: string }
               - { name: description, label: Тайлбар, type: text }
               - { name: image, label: Зураг, type: image }
-              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: false }
           - name: supervisor
             label: Удирдагч багш
             type: object
@@ -134,8 +132,8 @@ content:
               - { name: portrait, label: Хөрөг, type: image }
               - { name: summary, label: Товч танилцуулга, type: text }
               - { name: bio, label: Намтар, type: text }
-              - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }
-          - { name: provisional, label: Хуудас түр агуулгатай, type: boolean, default: true }
+              - { name: provisional, label: Түр бүртгэл, type: boolean, default: false }
+          - { name: provisional, label: Хуудас түр агуулгатай, type: boolean, default: false }
           - { name: body, label: Нэмэлт агуулга, type: rich-text }
       - name: about_en
         label: About (English)
@@ -164,7 +162,7 @@ content:
           - { name: map_url, label: Газрын зургийн холбоос, type: string }
           - { name: map_embed_url, label: Газрын зургийн embed хаяг, type: text }
           - { name: source_note, label: Эх сурвалжийн тэмдэглэл, type: text }
-          - { name: provisional, label: Түр агуулгатай, type: boolean, default: true }
+          - { name: provisional, label: Түр агуулгатай, type: boolean, default: false }
       - name: contact_en
         label: Contact (English)
         type: file
@@ -213,7 +211,7 @@ content:
               - { name: caption, label: Тайлбар, type: string }
           - { name: tags, label: Түлхүүр үг, type: string, list: true }
           - { name: featured, label: Нүүр хуудсанд харуулах, type: boolean, default: false }
-          - { name: provisional, label: Түр агуулга, type: boolean, default: true }
+          - { name: provisional, label: Түр агуулга, type: boolean, default: false }
           - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
           - { name: body, label: Агуулга, type: rich-text }
       - name: news_en
@@ -282,7 +280,7 @@ content:
               - { name: alt, label: Тайлбар, type: string }
           - { name: featured, label: Нүүр хуудсанд харуулах, type: boolean, default: false }
           - { name: weight, label: Эрэмбэ, type: number, default: 10 }
-          - { name: provisional, label: Түр агуулга, type: boolean, default: true }
+          - { name: provisional, label: Түр агуулга, type: boolean, default: false }
           - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
           - { name: body, label: Нэмэлт агуулга, type: rich-text }
       - name: projects_en
@@ -334,7 +332,7 @@ content:
             description: Зөвхөн нийтлэхийг зөвшөөрсөн баримтыг оруулна.
           - { name: external_url, label: Гадаад холбоос, type: string }
           - { name: summary, label: Тайлбар, type: text }
-          - { name: provisional, label: Түр агуулга, type: boolean, default: true }
+          - { name: provisional, label: Түр агуулга, type: boolean, default: false }
           - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
           - { name: body, label: Нэмэлт агуулга, type: rich-text }
       - name: publications_en
@@ -394,7 +392,7 @@ content:
           - { name: graduated_year, label: Төгссөн он, type: number, description: Төгсөгч бол бөглөнө. }
           - { name: leader, label: Үеийн ахлагч, type: boolean, default: false, description: Үе бүрт нэг ахлагч. Картыг онцолж, эхэнд харуулна. }
           - { name: weight, label: Эрэмбэ, type: number, default: 10 }
-          - { name: provisional, label: Түр мэдээлэл, type: boolean, default: true }
+          - { name: provisional, label: Түр мэдээлэл, type: boolean, default: false }
           - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
       - name: members_en
         label: Members (English)

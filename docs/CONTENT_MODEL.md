@@ -225,7 +225,6 @@ About front matter:
 - `title`
 - `description`
 - `hero_image`
-- `founded_label` and `founded_value`
 - `history_intro`
 - ordered `history` milestones with year, title, description, and provisional state
 - ordered `achievements` with title, year, description, image, and provisional state

@@ -4,8 +4,8 @@ slug = "relay-protection"
 summary = "Research into configuration, coordination, and testing methods for ABB and SEL digital protection relays."
 client = "Sample commissioning organization"
 collaborators = ["Sample collaborating implementer"]
-duration_text = "Spring 2025 (sample)"
-objective = "Develop and verify a workflow for numerical-relay settings, configuration, and testing."
+duration_text = "Spring 2025"
+objective = "Develop and test a workflow for numerical-relay settings, configuration, and testing."
 implementation_site = "Sample substation"
 results = """
 The testing work produced the following documents:
@@ -14,12 +14,20 @@ The testing work produced the following documents:
 - Setting tables for the digital relays
 - An explanation of the results and conclusions
 """
-related_publications = []
+related_publications = ["content/publications/sample-publication/index.mn.md", "content/publications/sample-description-only/index.mn.md"]
 cover = "images/research-protection.jpg"
 featured = true
-provisional = true
+provisional = false
 weight = 20
 draft = false
+
+[[gallery]]
+src = "images/research-protection.jpg"
+alt = "Testing in progress"
+
+[[gallery]]
+src = "images/activity-seminar.jpg"
+alt = "Presenting the results"
 +++
 
-This is provisional content used to test the project layout, not an approved project report.
+Testing was carried out on ABB and SEL numerical relays, and the setting method was introduced into student practical classes.

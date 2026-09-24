@@ -5,8 +5,17 @@ date = 2025-04-22
 summary = "Second-year students explored protection relays and the component base of automation devices."
 cover = "images/activity-relay.jpg"
 featured = false
-provisional = true
+provisional = false
 draft = false
+tags = ["Relay protection", "Testing"]
+
+[[gallery]]
+image = "images/research-protection.jpg"
+caption = "During the activity"
+
+[[gallery]]
+image = "images/activity-relay.jpg"
+caption = "In the laboratory"
 +++
 
 Second-year students carried out practical work on the laboratory's protection

@@ -8,6 +8,6 @@ portrait = "images/lab-hero.jpg"
 yearbook_quote = "Every evening in the lab was my best lesson."
 alumni = false
 weight = 40
-provisional = true
+provisional = false
 draft = false
 +++

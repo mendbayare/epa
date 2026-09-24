@@ -5,8 +5,17 @@ date = 2025-10-08
 summary = "Оюутнууд хяналтын дэлгэц зохиож, бодит төхөөрөмжөөс өгөгдөл цуглуулах дадлага хийв."
 cover = "images/research-scada.jpg"
 featured = true
-provisional = true
+provisional = false
 draft = false
+tags = ["SCADA", "HMI", "Сургалт"]
+
+[[gallery]]
+image = "images/research-scada.jpg"
+caption = "Үйл ажиллагааны үеэр"
+
+[[gallery]]
+image = "images/activity-seminar.jpg"
+caption = "Лабораторийн орчинд"
 +++
 
 Лаборатори SCADA болон операторын интерфейсийн чиглэлээр практик сургалт

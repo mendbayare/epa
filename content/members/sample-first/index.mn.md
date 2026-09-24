@@ -9,6 +9,6 @@ yearbook_quote = "Системийг зөв ажиллуулахын өмнө я
 alumni = false
 leader = true
 weight = 10
-provisional = true
+provisional = false
 draft = false
 +++

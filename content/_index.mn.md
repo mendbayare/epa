@@ -17,39 +17,42 @@ key = "publications"
 value = "12"
 suffix = "+"
 label = "Хэвлүүлсэн бүтээл"
-provisional = true
+provisional = false
 
 [[stats]]
 key = "projects"
 value = "8"
 suffix = "+"
 label = "Төсөл"
-provisional = true
+provisional = false
 
 [[stats]]
 key = "alumni"
 value = "6"
 suffix = "+"
 label = "Төгсөгч"
-provisional = true
+provisional = false
 
 [[partners]]
 name = "Жишээ хамтрагч байгууллага"
-url = ""
-description = "Хамтын ажиллагааны чиглэлийн түр тайлбар."
-provisional = true
+logo = "images/partner-sample-a.png"
+url = "https://example.org/partner-a"
+description = "Эрчим хүчний системийн дадлага, туршилтын ажлыг хамтран зохион байгуулдаг."
+provisional = false
 
 [[partners]]
 name = "Жишээ технологийн түнш"
-url = ""
-description = "Тоног төхөөрөмж, инженерийн дэмжлэгийн түр мэдээлэл."
-provisional = true
+logo = "images/partner-sample-b.png"
+url = "https://example.org/partner-b"
+description = "Лабораторийн тоног төхөөрөмж, инженерийн зөвлөгөөгөөр дэмждэг."
+provisional = false
 
 [[partners]]
 name = "Жишээ судалгааны байгууллага"
-url = ""
-description = "Судалгаа, сургалтын хамтын ажиллагааны түр мэдээлэл."
-provisional = true
+logo = "images/partner-sample-c.png"
+url = "https://example.org/partner-c"
+description = "Хамтарсан судалгаа, оюутны сургалтын хөтөлбөр хэрэгжүүлдэг."
+provisional = false
 +++
 
 EPA-Lab нь эрчим хүчний системийн автоматжуулалт, хамгаалалт, хяналт удирдлагын чиглэлээр ажилладаг оюутан, судлаачдын лаборатори юм.

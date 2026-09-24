@@ -8,6 +8,6 @@ portrait = "images/lab-hero.jpg"
 yearbook_quote = "Нарны эрчим хүч бол ирээдүй биш, аль хэдийн өнөөдөр."
 alumni = false
 weight = 30
-provisional = true
+provisional = false
 draft = false
 +++

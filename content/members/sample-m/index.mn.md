@@ -8,6 +8,6 @@ portrait = "images/research-scada.jpg"
 yearbook_quote = "Онол, дадлага хоёр нэг зоосны хоёр тал."
 alumni = false
 weight = 60
-provisional = true
+provisional = false
 draft = false
 +++

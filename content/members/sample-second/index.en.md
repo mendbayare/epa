@@ -9,6 +9,6 @@ yearbook_quote = "Today's small experiment can become tomorrow's practical solut
 alumni = false
 leader = true
 weight = 10
-provisional = true
+provisional = false
 draft = false
 +++

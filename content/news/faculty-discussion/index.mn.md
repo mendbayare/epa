@@ -5,8 +5,17 @@ date = 2025-05-30
 summary = "Салбарын багш нарт лабораторийн туршилтын үр дүнг танилцуулж, санал солилцов."
 cover = "images/activity-classroom.jpg"
 featured = false
-provisional = true
+provisional = false
 draft = false
+tags = ["Хэлэлцүүлэг", "Багш нар"]
+
+[[gallery]]
+image = "images/activity-seminar.jpg"
+caption = "Үйл ажиллагааны үеэр"
+
+[[gallery]]
+image = "images/research-scada.jpg"
+caption = "Лабораторийн орчинд"
 +++
 
 Лабораторийн баг хагас жилийн туршид гүйцэтгэсэн туршилтын ажлын үр дүнг

@@ -8,6 +8,6 @@ portrait = "images/research-automation.jpg"
 yearbook_quote = "Understanding the diagram matters more than writing the code."
 alumni = false
 weight = 20
-provisional = true
+provisional = false
 draft = false
 +++

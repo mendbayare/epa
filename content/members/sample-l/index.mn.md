@@ -8,6 +8,6 @@ portrait = "images/research-protection.jpg"
 yearbook_quote = "Жижиг сайжруулалт бүр том системийг илүү найдвартай болгодог."
 alumni = false
 weight = 50
-provisional = true
+provisional = false
 draft = false
 +++

@@ -5,8 +5,17 @@ date = 2026-02-25
 summary = "Students saw the protection and control systems of a working substation at first hand."
 cover = "images/lab-hero.jpg"
 featured = true
-provisional = true
+provisional = false
 draft = false
+tags = ["Substation", "Site visit"]
+
+[[gallery]]
+image = "images/research-protection.jpg"
+caption = "During the activity"
+
+[[gallery]]
+image = "images/research-automation.jpg"
+caption = "In the laboratory"
 +++
 
 Students from the laboratory made a visit to a working substation, organised

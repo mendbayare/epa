@@ -5,8 +5,17 @@ date = 2026-04-16
 summary = "Хэмжилтийн үр дүнд тулгуурлан цахилгааны чанарын үзүүлэлтийг хэлэлцэв."
 cover = "images/research-protection.jpg"
 featured = false
-provisional = true
+provisional = false
 draft = false
+tags = ["Цахилгааны чанар", "Хэмжилт"]
+
+[[gallery]]
+image = "images/lab-hero.jpg"
+caption = "Үйл ажиллагааны үеэр"
+
+[[gallery]]
+image = "images/research-automation.jpg"
+caption = "Лабораторийн орчинд"
 +++
 
 Лаборатори цахилгааны чанарын судалгааны чиглэлээр дотоод семинар зохион

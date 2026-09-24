@@ -5,8 +5,17 @@ date = 2025-05-30
 summary = "Laboratory results were presented to faculty members for discussion and technical feedback."
 cover = "images/activity-classroom.jpg"
 featured = false
-provisional = true
+provisional = false
 draft = false
+tags = ["Discussion", "Faculty"]
+
+[[gallery]]
+image = "images/activity-seminar.jpg"
+caption = "During the activity"
+
+[[gallery]]
+image = "images/research-scada.jpg"
+caption = "In the laboratory"
 +++
 
 The laboratory team presented the results of six months of experimental work

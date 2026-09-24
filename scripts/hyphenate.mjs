@@ -20,6 +20,10 @@ import mn from 'hyphen/mn-cyrl/index.js';
 const { hyphenateHTMLSync } = mn;
 
 const SHY = '\u00AD';
+// The inside of a tag, where quoted attribute values may contain ">" — as a
+// Tailwind class such as [&>:last-child]:mb-0 does — so a plain [^>]* would
+// end the tag early.
+const ATTRS = `(?:"[^"]*"|'[^']*'|[^'">])*`;
 // Fewest letters left on either side of a break. Two-letter fragments such
 // as "Ла-" or "-ав" read as mistakes rather than as hyphenation.
 const MIN_EDGE = 3;
@@ -42,11 +46,11 @@ export function hyphenatePage(html) {
   if (!/<html[^>]*\slang="?mn/i.test(html)) return html;
   let out = '';
   let pos = 0;
-  const open = /<([a-z][a-z0-9]*)\b[^>]*\sdata-hyphenate\b[^>]*>/gi;
+  const open = new RegExp(`<([a-z][a-z0-9]*)\\b${ATTRS}?\\sdata-hyphenate\\b${ATTRS}>`, 'gi');
   for (let m; (m = open.exec(html)); ) {
     const tag = m[1].toLowerCase();
     const start = m.index + m[0].length;
-    const tags = new RegExp(`<(/?)${tag}\\b[^>]*>`, 'gi');
+    const tags = new RegExp(`<(/?)${tag}\\b${ATTRS}>`, 'gi');
     tags.lastIndex = start;
     let depth = 1;
     let end = html.length;

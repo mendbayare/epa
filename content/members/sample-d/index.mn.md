@@ -8,6 +8,6 @@ yearbook_quote = "Автоматжуулалт бол хүнийг орлох б
 alumni = true
 graduated_year = 2026
 weight = 30
-provisional = true
+provisional = false
 draft = false
 +++

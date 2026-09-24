@@ -26,3 +26,11 @@ test('English pages are left to the browser', () => {
   const html = page('en-US', '<p>операторын</p>');
   assert.equal(hyphenatePage(html), html);
 });
+
+test('a ">" inside a class value does not end the tag early', () => {
+  const html = '<html lang="mn"><body><div class="prose [&>:last-child]:mb-0" data-hyphenate><p>операторын <span class="[&>b]:x">интерфейсийн</span></p><div class="[&>*]:y">автоматжуулалтын</div></div><p>операторын</p></body></html>';
+  const out = hyphenatePage(html);
+  assert.ok(out.includes(`опе${S}ра${S}то${S}рын <span`), 'the marked element is found');
+  assert.ok(out.includes(`мат${S}жуу${S}лал${S}тын`), 'content after a nested div with ">" in its class is still reached');
+  assert.ok(out.endsWith('<p>операторын</p></body></html>'), 'text after the element is untouched');
+});

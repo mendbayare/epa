@@ -8,6 +8,6 @@ portrait = "images/activity-seminar.jpg"
 yearbook_quote = "Асуулт асуухаас хэзээ ч бүү ай."
 alumni = false
 weight = 40
-provisional = true
+provisional = false
 draft = false
 +++

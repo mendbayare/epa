@@ -8,8 +8,6 @@
       "title" .Title
       "lead" .Params.description
       "image" .Params.hero_image
-      "stampLabel" .Params.founded_label
-      "stampValue" .Params.founded_value
       "badge" (cond .Params.provisional (cond $isMn "Загварын түр агуулгатай" "Contains draft sample content") "")) }}
 
     {{/* History. The laboratory is young, so this is an introduction rather
@@ -21,7 +19,7 @@
           {{ partial "section-head.html" (dict
             "eyebrow" (cond $isMn "Лабораторийн түүх" "Our history")
             "title" (cond $isMn "Санаанаас инженерийн орчин хүртэл" "From an idea to an engineering environment")) }}
-          {{ with .Params.history_intro }}<p class="m-0 max-w-measure text-lg text-muted">{{ . }}</p>{{ end }}
+          {{ with .Params.history_intro }}<p class="m-0 max-w-measure text-lg text-muted text-justify hyphens-auto" data-hyphenate>{{ . }}</p>{{ end }}
         </div>
         {{ with .Params.history }}
           <ol class="m-0 list-none self-end border-t border-line p-0">
@@ -54,7 +52,7 @@
                 <time class="font-tech text-sm leading-body text-accent-600">{{ .year }}</time>
                 <div class="max-w-measure">
                   <h3 class="mb-2 max-w-none text-xl">{{ .title }}</h3>
-                  {{ with .description }}<p class="m-0 text-muted">{{ . }}</p>{{ end }}
+                  {{ with .description }}<p class="m-0 text-muted text-justify hyphens-auto" data-hyphenate>{{ . }}</p>{{ end }}
                   {{ if .provisional }}<span class="{{ $sample }}">{{ $sampleText }}</span>{{ end }}
                 </div>
                 {{ with .image }}
@@ -92,8 +90,8 @@
               </div>
             </div>
             <div class="min-w-0 max-w-measure md:border-l md:border-line md:pl-block">
-              {{ with .summary }}<p class="text-lg">{{ . }}</p>{{ end }}
-              {{ with .bio }}<p class="m-0 text-muted">{{ . }}</p>{{ end }}
+              {{ with .summary }}<p class="text-lg text-justify hyphens-auto" data-hyphenate>{{ . }}</p>{{ end }}
+              {{ with .bio }}<p class="m-0 text-muted text-justify hyphens-auto" data-hyphenate>{{ . }}</p>{{ end }}
               {{ if .provisional }}<span class="{{ $sample }}">{{ cond $isMn "Намтрыг баталгаажуулна" "Biography pending review" }}</span>{{ end }}
             </div>
           </div>

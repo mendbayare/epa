@@ -9,6 +9,6 @@ yearbook_quote = ''
 alumni = false
 leader = false
 weight = 10
-provisional = true
+provisional = false
 draft = true
 +++

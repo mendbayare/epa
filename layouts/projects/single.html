@@ -9,7 +9,7 @@
   {{/* Objective and results are Markdown in a plain CMS text field, so an
        editor can write a paragraph or a "- " bullet list. Goldmark keeps raw
        HTML disabled, so the field cannot inject markup. */}}
-  {{ $field := "prose text-lg text-muted [&>:last-child]:mb-0" }}
+  {{ $field := "prose text-lg text-muted text-justify hyphens-auto [&>:last-child]:mb-0" }}
   {{ $copy := "[*+&]:mt-block [*+&]:border-t [*+&]:border-line [*+&]:pt-block" }}
   <article>
     {{ partial "page-hero.html" (dict
@@ -31,9 +31,9 @@
         {{ with .Params.implementation_site }}<div class="{{ $fact }}"><dt class="{{ $factLabel }}">{{ if $isMn }}Хэрэгжүүлсэн газар / объект{{ else }}Location / site{{ end }}</dt><dd class="m-0 [overflow-wrap:anywhere]">{{ . }}</dd></div>{{ end }}
       </dl>
       <div class="mx-auto max-w-measure">
-        {{ with .Params.objective }}<section class="{{ $copy }}"><h2 class="text-2xl">{{ if $isMn }}Зорилго{{ else }}Objective{{ end }}</h2><div class="{{ $field }}">{{ $.RenderString (dict "display" "block") . }}</div></section>{{ end }}
-        {{ with .Params.results }}<section class="{{ $copy }}"><h2 class="text-2xl">{{ if $isMn }}Үр дүн, хийсэн ажил{{ else }}Results and completed work{{ end }}</h2><div class="{{ $field }}">{{ $.RenderString (dict "display" "block") . }}</div></section>{{ end }}
-        {{ with .Content }}<div class="{{ $copy }} prose text-muted">{{ . }}</div>{{ end }}
+        {{ with .Params.objective }}<section class="{{ $copy }}"><h2 class="text-2xl">{{ if $isMn }}Зорилго{{ else }}Objective{{ end }}</h2><div class="{{ $field }}" data-hyphenate>{{ $.RenderString (dict "display" "block") . }}</div></section>{{ end }}
+        {{ with .Params.results }}<section class="{{ $copy }}"><h2 class="text-2xl">{{ if $isMn }}Үр дүн, хийсэн ажил{{ else }}Results and completed work{{ end }}</h2><div class="{{ $field }}" data-hyphenate>{{ $.RenderString (dict "display" "block") . }}</div></section>{{ end }}
+        {{ with .Content }}<div class="{{ $copy }} prose text-muted text-justify hyphens-auto" data-hyphenate>{{ . }}</div>{{ end }}
       </div>
       {{/* Each related publication links straight to what a reader wants — its
            file or its external page — exactly as the Publications table does;

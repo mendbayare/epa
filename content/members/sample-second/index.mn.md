@@ -9,6 +9,6 @@ yearbook_quote = "Өнөөдрийн жижиг туршилт маргааши�
 alumni = false
 leader = true
 weight = 10
-provisional = true
+provisional = false
 draft = false
 +++

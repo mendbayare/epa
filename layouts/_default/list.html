@@ -3,7 +3,7 @@
     "crumbs" (slice (dict "label" (cond (eq site.Language.Lang "mn") "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
     "title" .Title "lead" .Params.description) }}
   <div class="container pt-block pb-section">
-    {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+    {{ with .Content }}<div class="prose text-justify hyphens-auto" data-hyphenate>{{ . }}</div>{{ end }}
     {{ if .Pages }}
       <div class="mt-block grid grid-cols-3 gap-grid max-md:grid-cols-1">
         {{ range .Pages.ByWeight }}

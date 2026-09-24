@@ -5,8 +5,17 @@ date = '2025-03-14'
 summary = 'Нэгдүгээр курсын оюутнуудад зориулсан бодлого, хэлэлцүүлэгт суурилсан сургалтын үйл ажиллагаа.'
 cover = 'images/activity-seminar.jpg'
 featured = false
-provisional = true
+provisional = false
 draft = false
+tags = ["Онол", "Семинар"]
+
+[[gallery]]
+image = "images/activity-classroom.jpg"
+caption = "Үйл ажиллагааны үеэр"
+
+[[gallery]]
+image = "images/activity-seminar.jpg"
+caption = "Лабораторийн орчинд"
 +++
 Лаборатори нэгдүгээр курсын оюутнуудад зориулсан онолын семинарыг зохион
 байгуулав. Семинарын зорилго нь хичээлээр үзсэн ойлголтуудыг бодит бодлого

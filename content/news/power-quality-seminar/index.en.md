@@ -5,8 +5,17 @@ date = 2026-04-16
 summary = "Power quality indicators were discussed on the basis of measurement results."
 cover = "images/research-protection.jpg"
 featured = false
-provisional = true
+provisional = false
 draft = false
+tags = ["Power quality", "Measurement"]
+
+[[gallery]]
+image = "images/lab-hero.jpg"
+caption = "During the activity"
+
+[[gallery]]
+image = "images/research-automation.jpg"
+caption = "In the laboratory"
 +++
 
 The laboratory held an internal seminar on power quality research.
