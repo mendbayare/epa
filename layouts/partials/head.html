@@ -1,17 +1,79 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#1b2a6b">
+{{/* The site opens in the light theme whatever the system prefers; dark is
+     only ever the visitor's own choice, made with the header toggle and
+     remembered in localStorage. */}}
 <script>
   (() => {
-    const saved = localStorage.getItem('epa-theme');
-    const dark = saved === 'dark' || (!saved && matchMedia('(prefers-color-scheme: dark)').matches);
-    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    let saved = null;
+    try { saved = localStorage.getItem('epa-theme'); } catch {}
+    document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light';
   })();
 </script>
-<title>{{ if .IsHome }}{{ site.Title }} — {{ .Title }}{{ else }}{{ .Title }} — {{ site.Title }}{{ end }}</title>
-<meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+{{/* One title, description and image per page, shared by the search tags,
+     the social-sharing tags and — on Home — the structured data, so they
+     cannot disagree. The description is the page's own: its description,
+     else its summary (news and projects), else the site description. The
+     image is its cover, else its header photograph, else Home's. */}}
+{{- $title := cond .IsHome (printf "%s — %s" site.Title .Title) (printf "%s — %s" .Title site.Title) -}}
+{{- $description := .Params.description | default .Params.summary | default site.Params.description | plainify | htmlUnescape -}}
+{{- $imagePath := .Params.cover | default .Params.hero_image | default site.Home.Params.hero_image -}}
+{{- $isArticle := and .IsPage (eq .Section "news") -}}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $description }}">
 <link rel="canonical" href="{{ .Permalink }}">
 {{ range .AllTranslations }}<link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">{{ end }}
+{{/* x-default is the default-language (Mongolian) version, which sorts first. */}}
+{{ with index .AllTranslations 0 }}<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">{{ end }}
+
+{{/* Icons: SVG for browsers that take it, ICO as the fallback every browser
+     asks for, a touch icon for iOS and a manifest for Android home screens. */}}
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="48x48">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
+
+{{/* Social sharing (Facebook, Messenger, Telegram, X). The image is cropped
+     to the 1.91:1 card those services show, as JPEG, which all of them read. */}}
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ cond $isArticle "article" "website" }}">
+<meta property="og:locale" content="{{ cond (eq .Language.Lang "mn") "mn_MN" "en_US" }}">
+{{ range .Translations }}<meta property="og:locale:alternate" content="{{ cond (eq .Language.Lang "mn") "mn_MN" "en_US" }}">{{ end }}
+{{ with resources.Get $imagePath }}
+  {{ $card := .Fill "1200x630 Center jpg q82" }}
+  <meta property="og:image" content="{{ $card.Permalink }}">
+  <meta property="og:image:width" content="{{ $card.Width }}">
+  <meta property="og:image:height" content="{{ $card.Height }}">
+  <meta property="og:image:alt" content="{{ $.Title }}">
+  <meta name="twitter:image" content="{{ $card.Permalink }}">
+{{ end }}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{ if and $isArticle (not .Date.IsZero) }}<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+
+{{/* Structured data on Home only: who the laboratory is, for search engines. */}}
+{{ if .IsHome }}
+  {{ $contact := site.GetPage "/contact" }}
+  {{ $org := dict
+    "@context" "https://schema.org"
+    "@type" "ResearchOrganization"
+    "name" site.Title
+    "alternateName" site.Params.description
+    "url" site.Home.Permalink
+    "logo" ("icon-512.png" | absURL)
+    "address" (dict "@type" "PostalAddress" "streetAddress" site.Params.address "addressLocality" (cond (eq site.Language.Lang "mn") "Улаанбаатар" "Ulaanbaatar") "addressCountry" "MN")
+    "parentOrganization" (dict "@type" "CollegeOrUniversity" "name" (cond (eq site.Language.Lang "mn") "Шинжлэх Ухаан Технологийн Их Сургууль" "Mongolian University of Science and Technology") "url" "https://www.must.edu.mn")
+  }}
+  {{ with $contact.Params.email }}{{ $org = merge $org (dict "email" .) }}{{ end }}
+  {{ $same := slice }}{{ with site.Params.facebookURL }}{{ $same = $same | append . }}{{ end }}{{ with site.Params.instagramURL }}{{ $same = $same | append . }}{{ end }}
+  {{ with $same }}{{ $org = merge $org (dict "sameAs" .) }}{{ end }}
+  <script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>
+{{ end }}
 {{ with resources.Get "fonts/noto-sans-variable.woff2" }}
   {{ $font := . | fingerprint }}
   <style>@font-face{font-family:"Noto Sans";font-style:normal;font-weight:100 900;font-display:swap;src:url("{{ $font.RelPermalink }}") format("woff2")}</style>

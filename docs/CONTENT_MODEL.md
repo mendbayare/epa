@@ -30,6 +30,26 @@ after content migration should be avoided.
 - Dates use ISO format: `YYYY-MM-DD`.
 - Empty optional fields are omitted rather than filled with placeholder values.
 
+## Page metadata
+
+Every page's search and social-sharing metadata comes from fields editors
+already fill, in `layouts/partials/head.html`; there is nothing extra to
+maintain:
+
+- **Title** — the page title, followed by "— EPA-Lab" (on Home, preceded).
+- **Description** — the page's `description`, else its `summary` (news
+  articles and projects), else the site description in `hugo.toml`. Keep
+  summaries to one or two sentences: they are what Google and a shared link
+  show.
+- **Share image** — the page's `cover`, else its `hero_image`, else Home's
+  hero photograph, cropped to a 1200×630 card.
+- News articles are shared as articles with their publication date; Home
+  carries structured data naming the laboratory, its address, contact email
+  (from Contact) and parent university.
+
+Icons (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, the
+`icon-192`/`icon-512` PNGs and `site.webmanifest`) live in `static/`.
+
 ## 1. Site settings
 
 Site-wide values belong in `hugo.toml` or a structured data file rather than an
