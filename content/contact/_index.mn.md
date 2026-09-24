@@ -2,6 +2,7 @@
 title = "Холбоо барих"
 description = "EPA-Lab-д имэйлээр холбогдох, зочлох болон байршлыг нээх мэдээлэл."
 address = "ШУТИС VIII байр, 601 тоот"
+phone = "9553 2207"
 email = "epa.lab2025@gmail.com"
 supervisor_name = "Доктор (Ph.D.) Б. Түвшинбаяр"
 map_url = "https://www.google.com/maps/search/?api=1&query=8PV8WWCF%2BHR"

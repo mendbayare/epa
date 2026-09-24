@@ -309,7 +309,7 @@ on what the card carries:
 | Helper | Desktop | Tablet ≤900 | Mobile ≤600 | ≤340 |
 | --- | --- | --- | --- | --- |
 | `card-grid--3` (media cards) | 3 | 2 | 1 | 1 |
-| `card-grid--people` (person cards) | 3 | 2 | 2 | 1 |
+| `card-grid--people` (person cards) | 4 | 3 | 2 | 1 |
 
 A media card carries metadata, a title and a three-line summary, so at two-up on
 a 360 px screen its ~150 px column makes the text unreadable. A person card is a

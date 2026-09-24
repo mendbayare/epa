@@ -29,7 +29,7 @@
             <span class="h-px flex-1 bg-line" aria-hidden="true"></span>
             <span class="flex-none font-tech text-xs leading-none font-bold tracking-wide text-muted uppercase">{{ len $items }} {{ cond $isMn "гишүүн" (cond (eq (len $items) 1) "member" "members") }}</span>
           </div>
-          <div class="grid grid-cols-3 gap-grid max-md:grid-cols-2 max-sm:gap-3 max-[340px]:grid-cols-1">
+          <div class="grid grid-cols-4 gap-grid max-md:grid-cols-3 max-sm:grid-cols-2 max-sm:gap-3 max-[340px]:grid-cols-1">
             {{ range $member := $members }}
               {{ partial "person-card.html" (dict
                 "name" .Title

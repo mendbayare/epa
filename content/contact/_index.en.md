@@ -2,6 +2,7 @@
 title = "Contact"
 description = "Information for emailing EPA-Lab, visiting the laboratory, and opening its location."
 address = "MUST School of Power and Electrical Engineering, Academic Building VIII, room 601"
+phone = "9553 2207"
 email = "epa.lab2025@gmail.com"
 supervisor_name = "Dr. (Ph.D.) B. Tuvshinbayar"
 map_url = "https://www.google.com/maps/search/?api=1&query=8PV8WWCF%2BHR"

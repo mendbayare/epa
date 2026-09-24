@@ -3,10 +3,10 @@ title = "Electrical Power Automation Laboratory"
 hero_title_lines = ["Electrical Power", "Automation", "Laboratory"]
 description = "Research, innovation, and hands-on engineering in one laboratory."
 hero_image = "images/lab-hero.jpg"
-vision = "To become a leading student research environment where the next generation of power-automation knowledge and solutions is built together."
-mission = "We connect theory with real equipment, experiments, and research to develop capable engineers and work of lasting value."
+vision = "To develop control solutions for all kinds of automated systems and the SCADA/HMI systems that suit them, and to carry out theoretical research whose results are presented at research conferences and published."
+mission = "To study the automation, monitoring, control and functional operation of power systems and all kinds of systems, at both theoretical and applied levels."
 mentor_name = "Dr. B. Tuvshinbayar"
-mentor_role = "EPA-Lab faculty mentor"
+mentor_role = "Senior lecturer, MUST School of Power Engineering"
 mentor_image = "images/mentor-tuvshinbayar.jpg"
 mentor_greeting = "EPA-Lab gives students a place to test their initiative and research interests on real systems. Together, we learn, experiment, and develop solutions that can contribute to the power sector."
 mentor_page = "about/#supervisor"
@@ -14,23 +14,23 @@ equipment = ["ABB", "SEL", "MEGGER", "RTAC", "RTU", "PLC", "RASPBERRY PI", "ARDU
 
 [[stats]]
 key = "publications"
-value = "12"
-suffix = "+"
-label = "Publications"
+value = "13"
+suffix = ""
+label = "Members"
 provisional = false
 
 [[stats]]
 key = "projects"
-value = "8"
-suffix = "+"
-label = "Projects"
+value = "2"
+suffix = ""
+label = "Generations"
 provisional = false
 
 [[stats]]
 key = "alumni"
 value = "6"
-suffix = "+"
-label = "Alumni"
+suffix = ""
+label = "Research areas"
 provisional = false
 
 [[partners]]

@@ -17,7 +17,7 @@
     badge                    overlay label on the portrait, e.g. a draft marker
 */ -}}
 {{- $isMn := eq site.Language.Lang "mn" -}}
-{{- $sizes := default "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" .sizes -}}
+{{- $sizes := default "(max-width: 600px) 50vw, (max-width: 900px) 33vw, 18rem" .sizes -}}
 
 {{/* A graduate shows when they graduated in place of a study year. */}}
 {{- $year := .studyYear -}}

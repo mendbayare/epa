@@ -54,7 +54,7 @@
   {{/* The hero and this section share the navy ground, so a full measure of
        padding from each at the seam reads as one void rather than as two
        sections; the top takes the smaller block step. */}}
-  <section class="overview-grid relative overflow-hidden bg-navy-950 text-white max-sm:min-h-svh max-sm:items-start" id="direction" aria-label="{{ if $isMn }}Алсын хараа, эрхэм зорилго ба тоон үзүүлэлт{{ else }}Vision, mission, and laboratory statistics{{ end }}">
+  <section class="overview-grid relative overflow-hidden bg-navy-950 text-white max-sm:min-h-svh max-sm:items-start" id="direction" aria-label="{{ if $isMn }}Зорилго, гарах үр дүн ба тоон үзүүлэлт{{ else }}Aim, intended results, and laboratory figures{{ end }}">
     <div class="container relative pt-block pb-section">
       {{ partial "section-head.html" (dict
         "eyebrow" (cond $isMn "Бидний чиглэл" "Our direction")
@@ -62,7 +62,9 @@
         "index" "02"
         "onDark" true) }}
       <div class="relative z-1 grid grid-cols-2 border-t border-b border-line-on-dark max-sm:grid-cols-1">
-        {{ range slice (dict "label" (cond $isMn "Алсын хараа" "Vision") "text" .Params.vision) (dict "label" (cond $isMn "Эрхэм зорилго" "Mission") "text" .Params.mission) }}
+        {{/* Labelled as the laboratory's official introduction does: its aim, then
+       its intended results. The fields keep their original names. */}}
+        {{ range slice (dict "label" (cond $isMn "Лабораторийн зорилго" "Our aim") "text" .Params.mission) (dict "label" (cond $isMn "Гарах үр дүн" "Intended results") "text" .Params.vision) }}
           <article class="min-h-36 py-block pr-[clamp(1rem,4vw,4rem)] pl-0 [article+&]:border-l [article+&]:border-line-on-dark [article+&]:pr-0 [article+&]:pl-[clamp(1rem,4vw,4rem)] max-sm:px-5 max-sm:py-6 max-sm:[article+&]:border-t max-sm:[article+&]:border-l-0">
             <div>
               <p class="eyebrow mb-4 text-accent-600">{{ .label }}</p>
@@ -175,13 +177,13 @@
         <ul class="m-0 flex list-none snap-x snap-mandatory gap-grid overflow-x-auto p-0 [scrollbar-width:none] max-sm:gap-3 [&::-webkit-scrollbar]:hidden" data-carousel-track aria-label="{{ $latestGenerationLabel }}">
           {{ $leaders := where $latestMembers "Params.leader" true }}
           {{ range $member := $leaders.ByWeight | append (where $latestMembers "Params.leader" "!=" true).ByWeight }}
-            <li class="flex-none basis-[calc((100%-2*var(--spacing-grid))/3)] snap-start [&>article]:h-full max-md:basis-[calc((100%-var(--spacing-grid))/2)] max-sm:basis-[calc((100%-.75rem)/2)] max-[340px]:basis-full">
+            <li class="flex-none basis-[calc((100%-3*var(--spacing-grid))/4)] snap-start [&>article]:h-full max-md:basis-[calc((100%-2*var(--spacing-grid))/3)] max-sm:basis-[calc((100%-.75rem)/2)] max-[340px]:basis-full">
               {{ partial "person-card.html" (dict
                 "name" .Title
                 "portrait" .Params.portrait
                 "quote" .Params.yearbook_quote
                 "leader" .Params.leader
-                "sizes" "(max-width: 600px) 50vw, (max-width: 900px) 50vw, 33vw"
+                "sizes" "(max-width: 600px) 50vw, (max-width: 900px) 33vw, 18rem"
                 "badge" (cond .Params.provisional (cond $isMn "Түр мэдээлэл" "Draft profile") "")) }}
             </li>
           {{ end }}

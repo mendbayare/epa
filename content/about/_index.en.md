@@ -1,8 +1,8 @@
 +++
 title = "About us"
 description = "The origins, development, achievements, and supervising lecturer of EPA-Lab."
-hero_image = "images/lab-hero.jpg"
-history_intro = "EPA-Lab was established to connect students of electrical-system and industrial-process automation with theoretical research, real equipment, and practical engineering experiments."
+hero_image = "images/lab-group.jpg"
+history_intro = "EPA-Lab was founded in January 2025 under the supervision of Dr. B. Tuvshinbayar, for students of electrical-system automation and industrial-process automation at the School of Power Engineering, working in control, automation and theoretical research."
 provisional = false
 
 [[history]]
@@ -33,9 +33,9 @@ provisional = false
 
 [supervisor]
 name = "Dr. (Ph.D.) B. Tuvshinbayar"
-role = "EPA-Lab supervising lecturer"
+role = "Senior lecturer, MUST School of Power Engineering"
 portrait = "images/mentor-tuvshinbayar.jpg"
 summary = "Leads the laboratory's teaching and research in power-system automation, monitoring and control, and protection."
-bio = "He has taught at the MUST School of Power and Electrical Engineering for many years and researches power-system automation and relay protection. He founded EPA-Lab in 2025 and leads its work giving students real equipment to experiment on."
+bio = "He founded EPA-Lab in January 2025 and leads the laboratory's work."
 provisional = false
 +++

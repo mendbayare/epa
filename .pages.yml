@@ -49,8 +49,8 @@ content:
             list: true
             description: Гарчгийг мөр мөрөөр нь бичнэ. Монгол нэр урт тул мөр таслалт гараар тохируулна.
           - { name: hero_image, label: Нүүр зураг, type: image, required: true }
-          - { name: vision, label: Алсын хараа, type: text, required: true }
-          - { name: mission, label: Эрхэм зорилго, type: text, required: true }
+          - { name: vision, label: Гарах үр дүн, type: text, required: true }
+          - { name: mission, label: Лабораторийн зорилго, type: text, required: true }
           - name: stats
             label: Тоон үзүүлэлт
             type: object
@@ -158,6 +158,7 @@ content:
           - { name: description, label: Товч танилцуулга, type: text }
           - { name: address, label: Хаяг, type: text, required: true }
           - { name: email, label: Цахим шуудан, type: string }
+          - { name: phone, label: Утас, type: string }
           - { name: supervisor_name, label: Удирдагчийн нэр, type: string }
           - { name: map_url, label: Газрын зургийн холбоос, type: string }
           - { name: map_embed_url, label: Газрын зургийн embed хаяг, type: text }
