@@ -95,17 +95,25 @@
     </div>
   </section>
 
+  {{/* The greeting leads; the lecturer signs it with a small portrait beside
+       his name, at his request that his picture not be shown large. The
+       block is centred at a reading width so neither side stands empty. */}}
   <section class="scroll-mt-20 bg-surface-soft py-section" id="mentor">
-    <div class="container grid grid-cols-[minmax(18rem,.72fr)_minmax(0,1.28fr)] items-center gap-gutter max-md:grid-cols-[.8fr_1.2fr] max-md:gap-12 max-sm:grid-cols-1">
-      <div class="relative w-[min(100%,29rem)] justify-self-center before:absolute before:-top-4 before:right-4 before:bottom-4 before:-left-4 before:border before:border-accent-600 before:content-[''] max-sm:w-[calc(100%-2rem)]">
-        {{ partial "responsive-image.html" (dict "src" .Params.mentor_image "alt" .Params.mentor_name "class" "relative aspect-[.9] max-h-116 w-full object-cover object-[center_24%] saturate-82" "sizes" "(max-width: 800px) 80vw, 34vw") }}
-        <span class="absolute -right-8 -bottom-8 grid aspect-square w-24 place-items-center bg-blue-700 font-display text-xl leading-none font-extrabold text-white" aria-hidden="true">EPA</span>
-      </div>
-      <div>
-        <div class="mb-5 flex items-center justify-between gap-6"><p class="eyebrow m-0 text-accent-600">{{ if $isMn }}Удирдагч багшийн мэндчилгээ{{ else }}A message from our mentor{{ end }}</p><span class="{{ $sectionIndex }}">03</span></div>
-        <blockquote class="relative mt-6 mb-8 max-w-[38ch] border-l-2 border-accent-600 pl-6 font-display text-2xl leading-normal font-[650] tracking-tight text-pretty">{{ .Params.mentor_greeting }}</blockquote>
-        <div class="mb-8 flex flex-col"><strong class="font-display">{{ .Params.mentor_name }}</strong><span class="text-sm text-muted">{{ .Params.mentor_role }}</span></div>
-        <a class="font-bold text-link no-underline hover:text-link-hover" href="{{ relLangURL .Params.mentor_page }}">{{ if $isMn }}Дэлгэрэнгүй танилцах{{ else }}Read more{{ end }} <span aria-hidden="true">→</span></a>
+    <div class="container">
+      <div class="mx-auto max-w-[52rem]">
+        <div class="mb-block flex items-center justify-between gap-6"><p class="eyebrow m-0 text-accent-600">{{ if $isMn }}Удирдагч багшийн мэндчилгээ{{ else }}A message from our mentor{{ end }}</p><span class="{{ $sectionIndex }}">03</span></div>
+        <blockquote class="m-0 border-l-2 border-accent-600 pl-6 font-display text-2xl leading-normal font-[650] tracking-tight text-pretty">{{ .Params.mentor_greeting }}</blockquote>
+        <div class="mt-block flex flex-wrap items-center justify-between gap-x-block gap-y-card">
+          <div class="flex items-center gap-4">
+            {{ with .Params.mentor_image }}
+              <div class="aspect-[4/5] w-16 flex-none overflow-hidden rounded-card bg-surface">
+                {{ partial "responsive-image.html" (dict "src" . "alt" "" "class" "h-full w-full object-cover object-[center_24%] saturate-82" "sizes" "4rem") }}
+              </div>
+            {{ end }}
+            <div class="flex flex-col"><strong class="font-display">{{ .Params.mentor_name }}</strong><span class="text-sm text-muted">{{ .Params.mentor_role }}</span></div>
+          </div>
+          <a class="font-bold text-link no-underline hover:text-link-hover" href="{{ relLangURL .Params.mentor_page }}">{{ if $isMn }}Дэлгэрэнгүй танилцах{{ else }}Read more{{ end }} <span aria-hidden="true">→</span></a>
+        </div>
       </div>
     </div>
   </section>

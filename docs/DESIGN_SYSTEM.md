@@ -282,9 +282,9 @@ replaced by three components, each with its own partial:
 
 | Component | Partial | Covers |
 | --- | --- | --- |
-| `media-card` | `media-card.html` | Home project cards and the "other projects" row (through `project-card.html`), Home news cards, the News list and the "more news" row (through `news-card.html`), the News list's wide lead story (`lead`), and — with `feature` — About achievement cards |
+| `media-card` | `media-card.html` | Home project cards and the "other projects" row (through `project-card.html`), Home news cards, the News list and the "more news" row (through `news-card.html`), and the News list's wide lead story (`lead`) |
 | `person-card` | `person-card.html` | the Members grid and the Home newest-generation strip |
-| `list-row` | `list-row.html` | Projects index rows and the About lecturer entry (`portrait`) |
+| `list-row` | `list-row.html` | Projects index rows |
 
 `partner-card` stays separate: it is a text row with no media. `card` stays as
 the generic `_default/list.html` fallback.
@@ -303,7 +303,6 @@ on what the card carries:
 | --- | --- | --- | --- | --- |
 | `card-grid--3` (media cards) | 3 | 2 | 1 | 1 |
 | `card-grid--people` (person cards) | 3 | 2 | 2 | 1 |
-| `card-grid--2` (feature cards) | 2 | 2 | 1 | 1 |
 
 A media card carries metadata, a title and a three-line summary, so at two-up on
 a 360 px screen its ~150 px column makes the text unreadable. A person card is a
@@ -312,6 +311,13 @@ a long members page — it just needs reduced padding and type, which the card
 carries as its own `max-sm:` steps, since both grids that use it are
 `card-grid--people`. The one-column threshold is 340 px, not 380 px: 360, 375 and 390
 are the most common phone widths and must keep two columns.
+
+About renders its three sections without card components. History is an
+introduction beside a short milestone list; achievements are a record list
+with an optional small thumbnail, because an award or certificate rarely has a
+photograph worth a card; and the supervising lecturer's portrait stays small
+beside his text, at his request. The former `feature` media card, `portrait`
+list row and `card-grid--2` existed only for About and were removed with it.
 
 A generation leader's `person-card` is the one card with an emphasis
 treatment: a 2 px `accent-600` frame in place of the hairline and a solid
@@ -337,9 +343,7 @@ Conventions:
 - `list-row` alternates its media side, but the caller drives it: the Projects
   index passes `flip` from its own loop index rather than making the row work
   out its position in the document. Alternation is a two-column effect only —
-  on one column the media leads the copy whatever the row's position. The
-  `portrait` variant does not alternate and set their own column
-  ratio; do not restate those ratios at the call site.
+  on one column the media leads the copy whatever the row's position.
 - The card arrow is decorative markup (`aria-hidden`), not a second link. The
   title link already reaches the same destination, so a focusable arrow would
   duplicate it for keyboard and screen-reader users.

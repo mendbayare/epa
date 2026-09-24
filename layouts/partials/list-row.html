@@ -1,21 +1,13 @@
 {{- /*
-  Full-width row pairing a picture with a block of copy. Covers the Projects
-  index rows and the About supervising-lecturer entry.
+  Full-width row pairing a picture with a block of copy: the Projects index.
 
   Parameters:
     title      required  row title
     url                  makes the media and title a link, and shows the action
-    level                heading element for the title, "h2" (default) or "h3"
     image, imageAlt      image path and alternative text
-    sizes                responsive sizes attribute
-    portrait             true for a narrow 4:5 portrait column instead of a filled panel
     badge                overlay label on the media, e.g. a draft marker
-    mark                 small square marker in the media corner, e.g. "01"
-    eyebrow              small label above the title
-    lead                 leading paragraph, set slightly larger
     body                 secondary paragraph in muted text
     facts                list of dicts with "label" and "value"
-    note                 pending/sample note at the end of the copy
     linkURL, linkText    action link at the end of the copy
     flip                 true to put the media on the right; the caller drives
                          the alternation from its own loop index, so the row
@@ -24,8 +16,7 @@
   Full-width records stay square: they are separated by rules across the
   whole container rather than being panels, so a radius has nothing to sit on.
 */ -}}
-{{- $level := default "h2" .level -}}
-{{- $sizes := default "(max-width: 700px) 100vw, 48vw" .sizes -}}
+{{- $sizes := "(max-width: 900px) 100vw, 48vw" -}}
 
 {{/* A 3:2 spacer, not a forced minimum, sets the row's height, and the
      photograph fills the media box edge to edge — also when the copy beside
@@ -37,13 +28,6 @@
 {{- $image := "absolute inset-0 h-full w-full object-cover [filter:saturate(.8)_contrast(1.04)] transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.025] group-hover:[filter:saturate(1)]" -}}
 {{- $copy := "flex flex-col justify-center p-block max-sm:px-0 max-sm:pt-8 max-sm:pb-12" -}}
 
-{{- if .portrait -}}
-  {{- $row = "group grid min-h-0 grid-cols-[minmax(16rem,.38fr)_minmax(0,.62fr)] gap-gutter border-t border-line py-block last:border-b max-md:grid-cols-[minmax(14rem,.42fr)_minmax(0,.58fr)] max-md:gap-12 max-sm:grid-cols-1 max-sm:gap-8" -}}
-  {{- $media = "relative block aspect-[4/5] overflow-hidden bg-surface-soft" -}}
-  {{- $image = "h-full w-full object-cover saturate-72 transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.025] group-hover:saturate-100" -}}
-  {{- $copy = "flex flex-col justify-center p-0" -}}
-{{- end -}}
-
 {{/* Alternation is a two-column desktop effect only; on one column the media
      must lead the copy whatever the row's position. */}}
 {{- if .flip }}{{ $media = printf "%s order-2 max-md:order-none" $media }}{{ end -}}
@@ -52,23 +36,15 @@
   {{ if .url }}<a class="{{ $media }}" href="{{ .url }}">{{ else }}<div class="{{ $media }}">{{ end }}
     {{ with .image }}{{ partial "responsive-image.html" (dict "src" . "alt" (default "" $.imageAlt) "class" $image "sizes" $sizes) }}{{ end }}
     {{ with .badge }}<span class="absolute top-4 right-4 bg-navy-950/82 px-2.5 py-1.5 text-2xs font-bold tracking-wide text-white uppercase backdrop-blur-[.5rem]">{{ . }}</span>{{ end }}
-    {{ with .mark }}<span class="absolute right-4 bottom-4 grid aspect-square w-12 place-items-center bg-blue-700 font-tech text-xs leading-none font-extrabold text-white" aria-hidden="true">{{ . }}</span>{{ end }}
   {{ if .url }}</a>{{ else }}</div>{{ end }}
   <div class="{{ $copy }}">
-    {{ with .eyebrow }}<p class="eyebrow mb-4 text-accent-600">{{ . }}</p>{{ end }}
-    {{ if eq $level "h3" }}
-      <h3 class="max-w-none text-2xl">{{ if .url }}<a class="no-underline" href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h3>
-    {{ else }}
-      <h2 class="max-w-none text-2xl">{{ if .url }}<a class="no-underline" href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h2>
-    {{ end }}
-    {{ with .lead }}<p class="max-w-[43rem] text-lg">{{ . }}</p>{{ end }}
+    <h2 class="max-w-none text-2xl">{{ if .url }}<a class="no-underline" href="{{ .url }}">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</h2>
     {{ with .body }}<p class="max-w-[43rem] text-muted">{{ . }}</p>{{ end }}
     {{ with .facts }}
       <dl class="mt-6 mb-8 grid gap-3">
         {{ range . }}<div class="grid grid-cols-[8rem_minmax(0,1fr)] gap-4 border-t border-line pt-3 max-sm:grid-cols-1 max-sm:gap-1"><dt class="font-tech text-2xs leading-normal font-bold tracking-wide text-muted uppercase">{{ .label }}</dt><dd class="m-0 text-sm [overflow-wrap:anywhere]">{{ default "—" .value }}</dd></div>{{ end }}
       </dl>
     {{ end }}
-    {{ with .note }}<span class="mt-3 inline-flex w-fit border border-line px-2.5 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-muted uppercase">{{ . }}</span>{{ end }}
     {{ with .linkURL }}<a class="group/link inline-flex w-fit items-center gap-2.5 font-[750] text-link no-underline" href="{{ . }}">{{ $.linkText }} <span class="text-accent-600 transition-transform duration-[180ms] ease-in-out group-hover/link:translate-x-[3px] group-hover/link:-translate-y-[3px]" aria-hidden="true">↗</span></a>{{ end }}
   </div>
 </article>

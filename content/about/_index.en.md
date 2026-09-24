@@ -41,5 +41,3 @@ summary = "Leads the laboratory's teaching and research in power-system automati
 bio = "This extended biography is provisional. Academic position, education, research interests, and publication details must be reviewed by the lecturer before release."
 provisional = true
 +++
-
-This page structure is ready for real history, achievement, and supervising-lecturer information without template changes.
