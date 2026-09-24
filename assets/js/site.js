@@ -52,3 +52,53 @@ if (navigator.clipboard) {
     });
   }
 }
+
+// Newest-generation carousel on Home. The row is a native scroll-snap list,
+// so it already swipes; this adds previous/next, a pause button, and a slow
+// autoplay that returns to the start after the last card. Autoplay stops
+// while the pointer is over the row or focus is inside it, while it is off
+// screen, when the visitor pauses it, and entirely under reduced motion.
+for (const carousel of document.querySelectorAll('[data-carousel]')) {
+  const track = carousel.querySelector('[data-carousel-track]');
+  const controls = carousel.querySelector('[data-carousel-controls]');
+  const toggle = carousel.querySelector('[data-carousel-toggle]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const behavior = reduce ? 'auto' : 'smooth';
+
+  const overflowing = () => track.scrollWidth > track.clientWidth + 2;
+  const step = () => track.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap);
+  const go = (direction) => {
+    const end = track.scrollWidth - track.clientWidth;
+    if (direction > 0 && track.scrollLeft >= end - 2) track.scrollTo({ left: 0, behavior });
+    else if (direction < 0 && track.scrollLeft <= 2) track.scrollTo({ left: end, behavior });
+    else track.scrollBy({ left: direction * step(), behavior });
+  };
+
+  let playing = !reduce;
+  let held = false;
+  let visible = false;
+  const setPlaying = (on) => {
+    playing = on;
+    toggle.dataset.state = on ? 'playing' : 'paused';
+    toggle.setAttribute('aria-label', on ? toggle.dataset.pause : toggle.dataset.play);
+  };
+
+  carousel.querySelector('[data-carousel-prev]').addEventListener('click', () => go(-1));
+  carousel.querySelector('[data-carousel-next]').addEventListener('click', () => go(1));
+  toggle.addEventListener('click', () => setPlaying(!playing));
+  carousel.addEventListener('pointerenter', () => { held = true; });
+  carousel.addEventListener('pointerleave', () => { held = false; });
+  carousel.addEventListener('focusin', () => { held = true; });
+  carousel.addEventListener('focusout', (event) => { held = carousel.contains(event.relatedTarget); });
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(track);
+
+  // The controls only appear when there are more cards than fit.
+  const sync = () => { controls.hidden = !overflowing(); };
+  sync();
+  addEventListener('resize', sync);
+  setPlaying(playing);
+
+  setInterval(() => {
+    if (playing && !held && visible && !document.hidden && overflowing()) go(1);
+  }, 5000);
+}

@@ -26,8 +26,9 @@ Borrowed from the reference, because consistency is what makes that site work:
 
 Kept as EPA-Lab's own, because the laboratory is not the school:
 
-- The full-screen photographic home hero with the animated power-network
-  overlay, which is the site's single signature moment.
+- The full-screen photographic home hero, which is the site's single
+  signature moment. Its animated power-network overlay was removed at the
+  stakeholder's direction on 2026-09-24.
 - Monospace technical labels for metadata and eyebrows.
 
 Deliberately dropped in the hybrid direction:
@@ -63,8 +64,8 @@ unsafe HTML disabled, so content files cannot introduce markup.
 Only a rule that a utility genuinely cannot express: a pseudo-element carrying
 generated content, a child the template does not own, or a layered composition
 that would be unreadable inlined. The current list is the whole list — rendered
-Markdown (`.prose`), the Home hero's blend-mode stack, the animated
-power-network SVG, the scroll cue's travelling dot, the Home overview's masked
+Markdown (`.prose`), the Home hero's blend-mode stack, the scroll cue's
+travelling dot, the Home overview's masked
 grid, the news byline's middot separators, the decorative ring, and the phone
 transform that turns each publications row into a record. Nothing goes
 there for brevity's sake alone; a long class string is the normal cost.
@@ -194,8 +195,7 @@ allowed only for the Home hero, the Home statistics figures, and
 `container` utility. `max-w-measure` is the readable measure for body copy.
 
 **Shape, elevation, motion.** `rounded-sm|md|lg|card`, `shadow-sm|md|lg`, and
-the three keyframe animations `animate-network-flow`, `animate-node-pulse` and
-`animate-scroll-cue`. The site's easing curve is Tailwind's own `ease-in-out`.
+the one keyframe animation, `animate-scroll-cue`. The site's easing curve is Tailwind's own `ease-in-out`.
 Durations are written literally: `duration-[180ms]`, `duration-300`,
 `duration-[550ms]`.
 
@@ -379,6 +379,12 @@ Two conventions come with it:
   transitions and animations globally under that query.
 - Keyboard focus uses the shared `:focus-visible` ring; components must not
   remove it.
+- The one moving element is Home's newest-generation carousel. It is a native
+  scroll-snap row, so it works without JavaScript; `site.js` adds previous,
+  next and a visible pause button, and an autoplay of one card every five
+  seconds that returns to the start after the last. Autoplay stops on hover,
+  on focus inside the row, off screen, when paused, and never runs under
+  `prefers-reduced-motion`. Its controls appear only when the cards overflow.
 
 ## 6. Work log
 

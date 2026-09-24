@@ -33,18 +33,6 @@
     </div>
     <span class="hero-scrim" aria-hidden="true"></span>
 
-    <div class="power-network pointer-events-none absolute top-0 right-0 bottom-auto left-[38%] z-1 h-[78%] opacity-72 max-sm:hidden" aria-hidden="true">
-      <svg viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice">
-        <path class="power-network__line" pathLength="1" d="M560 550C650 160 860 110 1160 210"></path>
-        <path class="power-network__line" pathLength="1" d="M500 470C720 410 800 120 1110 80"></path>
-        <path class="power-network__line" pathLength="1" d="M650 590C800 500 980 520 1180 350"></path>
-        <circle class="power-network__node" cx="624" cy="366" r="8"></circle>
-        <circle class="power-network__node" cx="826" cy="183" r="8"></circle>
-        <circle class="power-network__node" cx="1047" cy="151" r="8"></circle>
-        <circle class="power-network__node" cx="1030" cy="440" r="8"></circle>
-      </svg>
-    </div>
-
     <div class="container relative flex min-h-0 flex-1 items-end max-sm:min-h-svh max-sm:pt-22 max-sm:pb-8 sm:pt-28 sm:pb-[clamp(4.5rem,8vh,6.5rem)] desk-short:pt-24 desk-short:pb-12 phone-short:pt-20 phone-short:pb-4">
       <div class="relative z-3 mb-11 w-[min(100%-1.75rem,27rem)] sm:mb-0 sm:w-[min(72%,42rem)] sm:translate-y-[clamp(-3.5rem,-4vh,-2rem)] md:w-[min(66%,54rem)] desk-short:translate-y-[-1.5rem] phone-short:mb-5">
         <div class="mb-4 flex items-center gap-4 max-sm:mb-3"><p class="eyebrow m-0 text-accent-600 max-sm:hidden">EPA-Lab · {{ if $isMn }}ШУТИС — ЭХИС{{ else }}MUST — PES{{ end }}</p></div>
@@ -89,7 +77,7 @@
       {{ with .Params.equipment }}
         <div class="flex min-h-16 items-center gap-6 max-md:flex-col max-md:items-start max-md:py-5" aria-label="{{ if $isMn }}Лабораторийн тоног төхөөрөмж{{ else }}Laboratory equipment{{ end }}">
           <span class="flex-none font-tech text-xs leading-none font-bold tracking-wider text-accent-600 uppercase">{{ if $isMn }}Тоног төхөөрөмж{{ else }}Equipment{{ end }}</span>
-          <ul class="flex min-w-0 flex-1 items-center justify-between max-md:w-full max-md:flex-wrap max-md:justify-start max-md:gap-x-0 max-md:gap-y-4">{{ range . }}<li class="relative px-[clamp(.55rem,1.3vw,1.15rem)] font-tech text-[clamp(.62rem,.8vw,.72rem)] leading-none font-semibold tracking-wide whitespace-nowrap text-on-dark-muted not-first:before:absolute not-first:before:top-1/2 not-first:before:left-0 not-first:before:h-[.8rem] not-first:before:w-px not-first:before:-translate-y-1/2 not-first:before:bg-line-on-dark not-first:before:content-['']">{{ . }}</li>{{ end }}</ul>
+          <ul class="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-y-3 max-md:w-full max-md:justify-start max-md:gap-x-0 max-md:gap-y-4">{{ range . }}<li class="relative px-[clamp(.55rem,1.3vw,1.15rem)] font-tech text-[clamp(.62rem,.8vw,.72rem)] leading-none font-semibold tracking-wide whitespace-nowrap text-on-dark-muted not-first:before:absolute not-first:before:top-1/2 not-first:before:left-0 not-first:before:h-[.8rem] not-first:before:w-px not-first:before:-translate-y-1/2 not-first:before:bg-line-on-dark not-first:before:content-['']">{{ . }}</li>{{ end }}</ul>
         </div>
       {{ end }}
     </div>
@@ -101,7 +89,7 @@
   <section class="scroll-mt-20 bg-surface-soft py-section" id="mentor">
     <div class="container">
       <div class="mx-auto max-w-[52rem]">
-        <div class="mb-block flex items-center justify-between gap-6"><p class="eyebrow m-0 text-accent-600">{{ if $isMn }}Удирдагч багшийн мэндчилгээ{{ else }}A message from our mentor{{ end }}</p><span class="{{ $sectionIndex }}">03</span></div>
+        <div class="mb-block flex items-center justify-between gap-6"><h2 class="eyebrow m-0 max-w-none text-accent-600">{{ if $isMn }}Удирдагч багшийн мэндчилгээ{{ else }}A message from our mentor{{ end }}</h2><span class="{{ $sectionIndex }}">03</span></div>
         <blockquote class="m-0 border-l-2 border-accent-600 pl-6 font-display text-2xl leading-normal font-[650] tracking-tight text-pretty">{{ .Params.mentor_greeting }}</blockquote>
         <div class="mt-block flex flex-wrap items-center justify-between gap-x-block gap-y-card">
           <div class="flex items-center gap-4">
@@ -137,7 +125,7 @@
   <section class="bg-surface-soft pt-section pb-block">
     <div class="container">
       {{ partial "section-head.html" (dict
-        "eyebrow" (cond $isMn "Сүүлийн үеийн" "Latest from the lab")
+        "eyebrow" (cond $isMn "Сүүлийн үеийн үйл явдал" "Latest from the lab")
         "title" (cond $isMn "Мэдээ, сургалт, үйл ажиллагаа" "News, training, and activities")
         "index" "05"
         "linkURL" $newsPage.RelPermalink
@@ -166,17 +154,38 @@
         "index" "06"
         "linkURL" (printf "%s#%s" $membersPage.RelPermalink $latestGeneration.key)
         "linkText" (cond $isMn "Бүх гишүүнийг үзэх" "View all members")) }}
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(16rem,24rem))] justify-center gap-grid max-md:grid-cols-2 max-sm:gap-3 max-[340px]:grid-cols-1">
-        {{ $leaders := where $latestMembers "Params.leader" true }}
-        {{ range $member := first 3 ($leaders.ByWeight | append (where $latestMembers "Params.leader" "!=" true).ByWeight) }}
-          {{ partial "person-card.html" (dict
-            "name" .Title
-            "portrait" .Params.portrait
-            "quote" .Params.yearbook_quote
-            "leader" .Params.leader
-            "sizes" "(max-width: 600px) 100vw, 33vw"
-            "badge" (cond .Params.provisional (cond $isMn "Түр мэдээлэл" "Draft profile") "")) }}
-        {{ end }}
+      {{/* Every member of the newest generation, leader first, in a row that
+           slides one card at a time and returns to the start after the last.
+           It is a native scroll-snap row, so without JavaScript it still
+           swipes; site.js adds the controls and the gentle autoplay, which
+           pauses on hover, focus and its own button, and never runs for
+           visitors who ask for reduced motion. */}}
+      {{ $button := "group grid size-10 cursor-pointer place-items-center rounded-full border border-line bg-surface text-link transition-[color,border-color] duration-[180ms] ease-in-out hover:border-accent-600 hover:text-accent-600" }}
+      <div data-carousel>
+        <div class="mb-4 flex justify-end gap-2" data-carousel-controls hidden>
+          <button class="{{ $button }}" type="button" data-carousel-prev aria-label="{{ if $isMn }}Өмнөх{{ else }}Previous{{ end }}"><span aria-hidden="true">←</span></button>
+          <button class="{{ $button }}" type="button" data-carousel-toggle
+            data-pause="{{ if $isMn }}Гүйлгээг зогсоох{{ else }}Pause the slideshow{{ end }}"
+            data-play="{{ if $isMn }}Гүйлгээг үргэлжлүүлэх{{ else }}Play the slideshow{{ end }}">
+            <svg class="size-4 fill-current group-data-[state=paused]:hidden" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg>
+            <svg class="hidden size-4 fill-current group-data-[state=paused]:block" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l11-6.5a1 1 0 0 0 0-1.72l-11-6.5A1 1 0 0 0 8 5.5Z"></path></svg>
+          </button>
+          <button class="{{ $button }}" type="button" data-carousel-next aria-label="{{ if $isMn }}Дараах{{ else }}Next{{ end }}"><span aria-hidden="true">→</span></button>
+        </div>
+        <ul class="m-0 flex list-none snap-x snap-mandatory gap-grid overflow-x-auto p-0 [scrollbar-width:none] max-sm:gap-3 [&::-webkit-scrollbar]:hidden" data-carousel-track aria-label="{{ $latestGenerationLabel }}">
+          {{ $leaders := where $latestMembers "Params.leader" true }}
+          {{ range $member := $leaders.ByWeight | append (where $latestMembers "Params.leader" "!=" true).ByWeight }}
+            <li class="flex-none basis-[calc((100%-2*var(--spacing-grid))/3)] snap-start [&>article]:h-full max-md:basis-[calc((100%-var(--spacing-grid))/2)] max-sm:basis-[calc((100%-.75rem)/2)] max-[340px]:basis-full">
+              {{ partial "person-card.html" (dict
+                "name" .Title
+                "portrait" .Params.portrait
+                "quote" .Params.yearbook_quote
+                "leader" .Params.leader
+                "sizes" "(max-width: 600px) 50vw, (max-width: 900px) 50vw, 33vw"
+                "badge" (cond .Params.provisional (cond $isMn "Түр мэдээлэл" "Draft profile") "")) }}
+            </li>
+          {{ end }}
+        </ul>
       </div>
     </div>
   </section>
@@ -189,20 +198,25 @@
           "title" (cond $isMn "Хамтрагч байгууллагууд" "Partner organizations")
           "index" "07"
           "onDark" true) }}
-        <div class="grid border-t border-line-on-dark">
-          {{ range $i, $partner := . }}
-            <article class="grid grid-cols-[minmax(3rem,5rem)_minmax(0,1fr)] gap-block border-b border-line-on-dark py-block">
-              <span class="font-tech text-xs leading-normal font-bold text-accent-600">{{ printf "%02d" (add $i 1) }}</span>
-              <div>
-                <h3 class="mb-2 text-2xl text-white">
-                  {{ if $partner.url }}<a class="no-underline" href="{{ $partner.url }}" target="_blank" rel="noopener">{{ $partner.name }} ↗</a>{{ else }}{{ $partner.name }}{{ end }}
-                </h3>
-                {{ with $partner.description }}<p class="max-w-[42rem] text-white/64">{{ . }}</p>{{ end }}
-                {{ if $partner.provisional }}<small class="mt-2 inline-flex border border-line-on-dark px-2 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-white/52 uppercase">{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}
-              </div>
-            </article>
+        {{/* One tile per partner: logo, name, one line on the partnership. Logos
+             sit on a white panel because most are drawn for a light ground and
+             would vanish on navy; a partner without one shows its name alone,
+             so the row stays even. A logo is scaled down to fit, never up. */}}
+        <ul class="m-0 grid list-none grid-cols-3 gap-grid p-0 max-md:grid-cols-2 max-sm:grid-cols-1">
+          {{ range . }}
+            <li class="flex flex-col gap-4 rounded-card border border-line-on-dark p-card">
+              {{ with .logo }}{{ with resources.Get . }}
+                {{ $logo := .Fit "400x200 webp q90" }}
+                <div class="grid h-28 place-items-center rounded-md bg-white p-4">
+                  <img class="max-h-full w-auto max-w-full object-contain" src="{{ $logo.RelPermalink }}" width="{{ $logo.Width }}" height="{{ $logo.Height }}" alt="" loading="lazy" decoding="async">
+                </div>
+              {{ end }}{{ end }}
+              <h3 class="m-0 max-w-none text-xl text-on-dark">{{ if .url }}<a class="no-underline hover:text-accent-600" href="{{ .url }}" target="_blank" rel="noopener">{{ .name }} <span aria-hidden="true">↗</span></a>{{ else }}{{ .name }}{{ end }}</h3>
+              {{ with .description }}<p class="m-0 text-sm text-on-dark-muted">{{ . }}</p>{{ end }}
+              {{ if .provisional }}<small class="mt-auto inline-flex w-fit border border-line-on-dark px-2 py-1.5 font-tech text-2xs leading-snug font-bold tracking-wide text-on-dark-faint uppercase">{{ if $isMn }}Жишээ байгууллага{{ else }}Sample organization{{ end }}</small>{{ end }}
+            </li>
           {{ end }}
-        </div>
+        </ul>
       </div>
     </section>
   {{ end }}

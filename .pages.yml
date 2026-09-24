@@ -65,6 +65,7 @@ content:
             label: Тоног төхөөрөмж
             type: string
             list: true
+            description: Нүүр хуудасны тоног төхөөрөмжийн мөр. Нэмэх, устгах, чирж дараалал солих боломжтой; олон бол мөр шилжинэ.
           - { name: mentor_name, label: Удирдагчийн нэр, type: string }
           - { name: mentor_role, label: Удирдагчийн албан тушаал, type: string }
           - { name: mentor_greeting, label: Мэндчилгээ, type: text }
@@ -76,6 +77,7 @@ content:
             list: true
             fields:
               - { name: name, label: Нэр, type: string, required: true }
+              - { name: logo, label: Лого, type: image, description: Цагаан дэвсгэр дээр харагдана. Байгууллагын зөвшөөрөлтэй лого оруулна. }
               - { name: url, label: Вэб хаяг, type: string }
               - { name: description, label: Тайлбар, type: text }
               - { name: provisional, label: Түр бүртгэл, type: boolean, default: true }

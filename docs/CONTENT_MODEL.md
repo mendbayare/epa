@@ -64,7 +64,7 @@ fields define the stakeholder-requested sections.
 | `mission` | short rich text | Yes | Эрхэм зорилго |
 | `stats` | ordered list | Yes | Key, numeric value, label, optional suffix |
 | `equipment` | string list | Yes | Compact Home strip of laboratory equipment brands/models |
-| `partners` | object list | No | Home-only partners with name, URL, description, mark, and provisional state |
+| `partners` | object list | No | Home-only partners: name, optional logo, URL and one-line description, and provisional state. Logos show on a white panel and need the organization's permission |
 
 Baseline statistic keys:
 

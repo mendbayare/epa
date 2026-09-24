@@ -62,7 +62,6 @@
   --color-blue-50: #f5f7fc;    /* alternating section backgrounds */
   --color-accent-600: #d4712a; /* eyebrows, rules, metadata, small highlights */
   --color-accent-700: #c0601e; /* accent hover/pressed */
-  --color-signal-500: #6d91ff; /* technical line work in diagrams and overlays */
 
   /* --- Semantic surfaces and text --------------------------------------
      These are the ones that flip with the theme; see the dark block below
@@ -156,16 +155,8 @@
      Tailwind's own ease-in-out is the curve this site already used. All of
      these are neutralised by the reduced-motion block in the base layer. */
   --animate-*: initial;
-  --animate-network-flow: network-flow 12s linear infinite;
-  --animate-node-pulse: node-pulse 2.8s ease-in-out infinite;
   --animate-scroll-cue: scroll-cue 2s ease-in-out infinite;
 
-  @keyframes network-flow {
-    to { stroke-dashoffset: -1; }
-  }
-  @keyframes node-pulse {
-    50% { transform: scale(1.55); filter: drop-shadow(0 0 .65rem var(--color-accent-600)); }
-  }
   @keyframes scroll-cue {
     0% { transform: translateY(0); opacity: 0; }
     20% { opacity: 1; }
@@ -408,30 +399,6 @@ html[data-theme="dark"] {
       mix-blend-mode: normal;
     }
   }
-
-  /* The animated power-network overlay. Its targets are SVG children the
-     template does not put classes on individually. */
-  .power-network svg { width: 100%; height: 100%; overflow: visible; }
-  .power-network__line {
-    fill: none;
-    stroke: var(--color-signal-500);
-    stroke-width: 1.5;
-    stroke-dasharray: .08 .04;
-    animation: var(--animate-network-flow);
-  }
-  .power-network__line:nth-of-type(2) { animation-duration: 16s; animation-direction: reverse; }
-  .power-network__line:nth-of-type(3) { animation-duration: 20s; }
-  .power-network__node {
-    fill: var(--color-accent-600);
-    stroke: var(--color-on-dark-faint);
-    stroke-width: 2;
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: var(--animate-node-pulse);
-  }
-  .power-network__node:nth-of-type(2) { animation-delay: -.7s; }
-  .power-network__node:nth-of-type(3) { animation-delay: -1.4s; }
-  .power-network__node:nth-of-type(4) { animation-delay: -2.1s; }
 
   /* The scroll cue's travelling dot, which rides inside a 1px rule. */
   .scroll-cue-line {
