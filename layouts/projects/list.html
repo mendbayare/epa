@@ -14,7 +14,6 @@
         "image" .Params.cover
         "imageAlt" $project.Title
         "flip" (eq (mod $index 2) 1)
-        "number" (printf "%02d" (add $index 1))
         "body" .Params.summary
         "facts" (slice
           (dict "label" (cond $isMn "Захиалагч" "Client") "value" .Params.client)

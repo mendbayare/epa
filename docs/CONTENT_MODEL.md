@@ -122,10 +122,10 @@ Location: `content/projects/{slug}/index.{lang}.md`
 | `client` | string | Yes | Client or commissioning organization |
 | `collaborators` | string list | No | Collaborating implementers/organizations |
 | `duration_text` | localized string | Yes | Stakeholder-written project duration |
-| `objective` | rich text | Yes | Project objective |
+| `objective` | Markdown text | Yes | Project objective; a paragraph or a `- ` bullet list |
 | `implementation_site` | localized string | Yes | Implementation location, object, or site |
 | `summary` | string | Yes | Card and metadata summary |
-| `results` | rich text | Yes | Results and description of completed work |
+| `results` | Markdown text | Yes | Results and completed work; a paragraph or a `- ` bullet list |
 | `related_publications` | page-reference list | No | Published outputs produced by the project |
 | `cover` | image path | No | Card and social image |
 | `gallery` | image list | No | Additional approved images/captions |

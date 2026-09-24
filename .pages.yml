@@ -245,10 +245,10 @@ content:
           - { name: client, label: Захиалагч, type: string, required: true }
           - { name: collaborators, label: Хамтран гүйцэтгэгч, type: string, list: true }
           - { name: duration_text, label: Хугацаа, type: string, required: true }
-          - { name: objective, label: Зорилго, type: text, required: true }
+          - { name: objective, label: Зорилго, type: text, required: true, description: "Жагсаалт бол мөр бүрийг «- »-ээр эхлүүлнэ. Догол мөрийг хоосон мөрөөр тусгаарлана." }
           - { name: implementation_site, label: Хэрэгжүүлэх байршил / объект, type: string, required: true }
           - { name: summary, label: Товч агуулга, type: text, required: true }
-          - { name: results, label: Үр дүн, type: text, required: true }
+          - { name: results, label: Үр дүн, type: text, required: true, description: "Жагсаалт бол мөр бүрийг «- »-ээр эхлүүлнэ. Догол мөрийг хоосон мөрөөр тусгаарлана." }
           - name: related_publications
             label: Холбогдох бүтээл
             type: string

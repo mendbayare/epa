@@ -119,17 +119,7 @@
         "linkURL" $projectsPage.RelPermalink
         "linkText" (cond $isMn "Бүх төслийг үзэх" "View all projects")) }}
       <div class="{{ $cardGrid }}">
-        {{ range $project := $projects.ByWeight }}
-          {{ partial "media-card.html" (dict
-            "title" .Title
-            "url" .RelPermalink
-            "image" .Params.cover
-            "imageAlt" $project.Title
-            "metaLeft" .Params.client
-            "metaRight" .Params.duration_text
-            "summary" .Params.summary
-            "badge" (cond .Params.provisional (cond $isMn "Түр агуулга" "Provisional") "")) }}
-        {{ end }}
+        {{ range $projects.ByWeight }}{{ partial "project-card.html" (dict "page" .) }}{{ end }}
       </div>
     </div>
   </section>

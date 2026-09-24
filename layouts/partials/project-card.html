@@ -1,0 +1,19 @@
+{{- /*
+  One project as a media-card, shared by Home's projects section and the
+  "other projects" row under a project page so the two cannot drift apart.
+
+  Parameters:
+    page   required  the project page
+*/ -}}
+{{- $isMn := eq site.Language.Lang "mn" -}}
+{{- with .page -}}
+  {{ partial "media-card.html" (dict
+    "title" .Title
+    "url" .RelPermalink
+    "image" .Params.cover
+    "imageAlt" .Title
+    "metaLeft" .Params.client
+    "metaRight" .Params.duration_text
+    "summary" .Params.summary
+    "badge" (cond .Params.provisional (cond $isMn "Түр агуулга" "Provisional") "")) }}
+{{- end -}}
