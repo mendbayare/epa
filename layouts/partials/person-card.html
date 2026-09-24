@@ -30,9 +30,12 @@
 {{- if .leader }}{{ $card = "group overflow-hidden rounded-card border-2 border-accent-600 bg-surface" }}{{ end -}}
 
 <article class="{{ $card }}">
-  <div class="relative aspect-[4/3] overflow-hidden bg-surface-soft">
+  {{/* A square frame: member photos are head-and-shoulders portraits, which
+       a landscape frame cropped through the face. The crop favours the top
+       third, where faces sit, when a photo is not square itself. */}}
+  <div class="relative aspect-square overflow-hidden bg-surface-soft">
     {{ with .portrait }}
-      {{ partial "responsive-image.html" (dict "src" . "alt" $.name "class" "h-full w-full object-cover saturate-72 transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.02] group-hover:saturate-100" "sizes" $sizes) }}
+      {{ partial "responsive-image.html" (dict "src" . "alt" $.name "class" "h-full w-full object-cover object-[center_25%] saturate-72 transition-[filter,transform] duration-[550ms] ease-in-out group-hover:scale-[1.02] group-hover:saturate-100" "sizes" $sizes) }}
     {{ else }}
       <span class="grid h-full place-items-center font-display text-[2rem] leading-none font-extrabold text-blue-700" aria-hidden="true">EPA</span>
     {{ end }}
