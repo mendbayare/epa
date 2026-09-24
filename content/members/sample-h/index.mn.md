@@ -1,5 +1,6 @@
 +++
 title = "Жишээ гишүүн H"
+slug = "sample-h"
 program = "Цахилгаан эрчим хүчний систем"
 generation = "first-generation"
 portrait = "images/activity-classroom.jpg"

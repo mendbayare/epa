@@ -1,5 +1,6 @@
 +++
 title = "Automation and control"
+slug = "automation-control"
 summary = "Testing control solutions built around RTAC, RTU, PLC, and intelligent electronic devices."
 client = "Sample commissioning organization"
 collaborators = []

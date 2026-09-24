@@ -1,5 +1,6 @@
 +++
 title = "Sample Member H"
+slug = "sample-h"
 program = "Electric Power Systems"
 generation = "first-generation"
 portrait = "images/activity-classroom.jpg"

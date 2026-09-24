@@ -1,5 +1,6 @@
 +++
 title = "Sample Member J"
+slug = "sample-j"
 program = "Renewable Energy"
 study_year = "Third year"
 generation = "second-generation"

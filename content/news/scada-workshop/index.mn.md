@@ -1,5 +1,6 @@
 +++
 title = "SCADA болон HMI-ийн практик сургалт"
+slug = "scada-workshop"
 date = 2025-10-08
 summary = "Оюутнууд хяналтын дэлгэц зохиож, бодит төхөөрөмжөөс өгөгдөл цуглуулах дадлага хийв."
 cover = "images/research-scada.jpg"

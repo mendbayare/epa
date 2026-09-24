@@ -1,5 +1,6 @@
 +++
 title = "Жишээ гишүүн D"
+slug = "sample-d"
 program = "Цахилгаан системийн автоматжуулалт"
 generation = "first-generation"
 portrait = "images/research-automation.jpg"

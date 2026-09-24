@@ -1,5 +1,6 @@
 +++
 title = "Taking part in the student engineering competition"
+slug = "student-competition"
 date = 2025-11-19
 summary = "A laboratory team entered the school competition with an automation solution."
 cover = "images/research-automation.jpg"

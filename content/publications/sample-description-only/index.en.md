@@ -1,5 +1,6 @@
 +++
 title = "Sample publication awaiting a file or external link"
+slug = "sample-description-only"
 year = 2025
 month = 11
 file = ""

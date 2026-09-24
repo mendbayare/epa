@@ -35,7 +35,31 @@
         {{ with .Params.results }}<section class="{{ $copy }}"><h2 class="text-2xl">{{ if $isMn }}Үр дүн, хийсэн ажил{{ else }}Results and completed work{{ end }}</h2><div class="{{ $field }}">{{ $.RenderString (dict "display" "block") . }}</div></section>{{ end }}
         {{ with .Content }}<div class="{{ $copy }} prose text-muted">{{ . }}</div>{{ end }}
       </div>
-      {{ with .Params.related_publications }}<section class="mt-block bg-blue-700 p-block text-white"><p class="eyebrow mb-4 text-white/58">{{ if $isMn }}Холбогдох бүтээл{{ else }}Related publications{{ end }}</p>{{ range . }}{{ with site.GetPage . }}<a class="flex items-center justify-between gap-4 border-t border-white/22 pt-5 no-underline" href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong><span class="text-white/68">{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }} ↗</span></a>{{ end }}{{ end }}</section>{{ end }}
+      {{/* Each related publication links straight to what a reader wants — its
+           file or its external page — exactly as the Publications table does;
+           publications have no pages of their own. The CMS reference stores a
+           content file path, reduced here to the publication's section path. */}}
+      {{ with .Params.related_publications }}
+        {{ $action := "inline-flex min-h-9 items-center gap-2 rounded-card border border-on-dark-faint px-3 text-sm font-bold text-on-dark no-underline transition-[color,border-color] duration-[180ms] ease-in-out hover:border-accent-600 hover:text-accent-600" }}
+        <section class="mt-block rounded-card bg-blue-700 p-block text-on-dark" aria-labelledby="related-publications">
+          <h2 class="eyebrow mb-4 max-w-none text-on-dark-muted" id="related-publications">{{ if $isMn }}Холбогдох бүтээл{{ else }}Related publications{{ end }}</h2>
+          {{ range . }}
+            {{ with site.GetPage (. | replaceRE `^content/` "/" | replaceRE `/index\.[a-z]+\.md$` "") }}
+              <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-on-dark-faint py-4 last:pb-0">
+                <div class="min-w-0">
+                  <strong class="block [overflow-wrap:anywhere]">{{ .Title }}</strong>
+                  <time class="font-tech text-sm text-on-dark-muted" datetime="{{ .Params.year }}-{{ printf "%02d" (int .Params.month) }}">{{ .Params.year }}.{{ printf "%02d" (int .Params.month) }}</time>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  {{ with .Params.file }}<a class="{{ $action }}" href="{{ . | relURL }}" download>{{ if $isMn }}Файл татах{{ else }}Download file{{ end }} <span aria-hidden="true">↓</span></a>{{ end }}
+                  {{ with .Params.external_url }}<a class="{{ $action }}" href="{{ . }}" target="_blank" rel="noopener">{{ if $isMn }}Гадаад холбоос{{ else }}External link{{ end }} <span aria-hidden="true">↗</span></a>{{ end }}
+                  {{ if and (not .Params.file) (not .Params.external_url) }}<span class="text-sm text-on-dark-muted">{{ if $isMn }}Холбоос хүлээгдэж байна{{ else }}Link pending{{ end }}</span>{{ end }}
+                </div>
+              </div>
+            {{ end }}
+          {{ end }}
+        </section>
+      {{ end }}
       {{ with .Params.gallery }}<section class="mt-section"><div><p class="eyebrow mb-4 text-accent-600">{{ if $isMn }}Зургийн цомог{{ else }}Gallery{{ end }}</p><h2>{{ if $isMn }}Төслийн явц, үр дүн{{ else }}Process and outcomes{{ end }}</h2></div><div class="mt-8 grid grid-cols-[1.15fr_.85fr] gap-4 max-sm:grid-cols-1">{{ range $i, $item := . }}{{ partial "responsive-image.html" (dict "src" .src "alt" .alt "class" (cond (eq $i 1) "h-full min-h-88 w-full object-cover mt-16 max-sm:mt-0 max-sm:min-h-60" "h-full min-h-88 w-full object-cover max-sm:min-h-60") "sizes" "(max-width: 700px) 100vw, 50vw") }}{{ end }}</div></section>{{ end }}
     </div>
   </article>

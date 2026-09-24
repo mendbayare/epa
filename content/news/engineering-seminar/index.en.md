@@ -1,5 +1,6 @@
 +++
 title = "Electrical engineering theory seminar"
+slug = "engineering-seminar"
 date = 2025-03-14
 summary = "A problem-solving and discussion-based learning activity for first-year students."
 cover = "images/activity-seminar.jpg"

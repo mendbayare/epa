@@ -1,5 +1,6 @@
 +++
 title = "SCADA and HMI practical workshop"
+slug = "scada-workshop"
 date = 2025-10-08
 summary = "Students built control screens and practised collecting data from real devices."
 cover = "images/research-scada.jpg"

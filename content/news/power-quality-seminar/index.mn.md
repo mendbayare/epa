@@ -1,5 +1,6 @@
 +++
 title = "Цахилгааны чанарын судалгааны семинар"
+slug = "power-quality-seminar"
 date = 2026-04-16
 summary = "Хэмжилтийн үр дүнд тулгуурлан цахилгааны чанарын үзүүлэлтийг хэлэлцэв."
 cover = "images/research-protection.jpg"

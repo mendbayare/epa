@@ -1,5 +1,6 @@
 +++
 title = "Site visit to a substation"
+slug = "substation-visit"
 date = 2026-02-25
 summary = "Students saw the protection and control systems of a working substation at first hand."
 cover = "images/lab-hero.jpg"

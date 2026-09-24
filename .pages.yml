@@ -183,7 +183,7 @@ content:
         type: collection
         path: content/news
         subfolders: true
-        filename: "{primary}/index.mn.md"
+        filename: "{fields.slug}/index.mn.md"
         exclude: ["index.en.md", "_index.mn.md", "_index.en.md"]
         format: toml-frontmatter
         delimiters: "+++"
@@ -193,6 +193,12 @@ content:
           sort: [date, title]
         fields: &news_fields
           - { name: title, label: Гарчиг, type: string, required: true }
+          - name: slug
+            label: URL нэр
+            type: string
+            required: true
+            pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Зөвхөн жижиг латин үсэг, тоо, зураас (-). Жишээ: relay-protection" }
+            description: "Хуудасны хаяг ба фолдерын нэр. Монгол, англи хоёр хувилбарт яг ижлээр бичнэ — өөр бол хоёр хэл холбогдохгүй. Үүсгэсний дараа бүү өөрчил."
           - { name: date, label: Нийтэлсэн огноо, type: date, options: { format: "yyyy-MM-dd" }, required: true }
           - { name: summary, label: Товч агуулга, type: text, required: true }
           - { name: cover, label: Нүүр зураг, type: image, required: true }
@@ -213,7 +219,7 @@ content:
         type: collection
         path: content/news
         subfolders: true
-        filename: "{primary}/index.en.md"
+        filename: "{fields.slug}/index.en.md"
         exclude: ["index.mn.md", "_index.mn.md", "_index.en.md"]
         format: toml-frontmatter
         delimiters: "+++"
@@ -232,7 +238,7 @@ content:
         type: collection
         path: content/projects
         subfolders: true
-        filename: "{primary}/index.mn.md"
+        filename: "{fields.slug}/index.mn.md"
         exclude: ["index.en.md", "_index.mn.md", "_index.en.md"]
         format: toml-frontmatter
         delimiters: "+++"
@@ -242,6 +248,12 @@ content:
           sort: [weight, title]
         fields: &project_fields
           - { name: title, label: Төслийн нэр, type: string, required: true }
+          - name: slug
+            label: URL нэр
+            type: string
+            required: true
+            pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Зөвхөн жижиг латин үсэг, тоо, зураас (-). Жишээ: relay-protection" }
+            description: "Хуудасны хаяг ба фолдерын нэр. Монгол, англи хоёр хувилбарт яг ижлээр бичнэ — өөр бол хоёр хэл холбогдохгүй. Үүсгэсний дараа бүү өөрчил."
           - { name: client, label: Захиалагч, type: string, required: true }
           - { name: collaborators, label: Хамтран гүйцэтгэгч, type: string, list: true }
           - { name: duration_text, label: Хугацаа, type: string, required: true }
@@ -251,9 +263,13 @@ content:
           - { name: results, label: Үр дүн, type: text, required: true, description: "Жагсаалт бол мөр бүрийг «- »-ээр эхлүүлнэ. Догол мөрийг хоосон мөрөөр тусгаарлана." }
           - name: related_publications
             label: Холбогдох бүтээл
-            type: string
-            list: true
-            description: "Бүтээлийн зам, жишээ нь: /publications/sample-publication"
+            type: reference
+            description: Төслөөс гарсан бүтээлийг жагсаалтаас сонгоно.
+            options:
+              collection: publications_mn
+              multiple: true
+              label: "{fields.title}"
+              search: title
           - { name: cover, label: Нүүр зураг, type: image }
           - name: gallery
             label: Зургийн цомог
@@ -272,7 +288,7 @@ content:
         type: collection
         path: content/projects
         subfolders: true
-        filename: "{primary}/index.en.md"
+        filename: "{fields.slug}/index.en.md"
         exclude: ["index.mn.md", "_index.mn.md", "_index.en.md"]
         format: toml-frontmatter
         delimiters: "+++"
@@ -291,7 +307,7 @@ content:
         type: collection
         path: content/publications
         subfolders: true
-        filename: "{primary}/index.mn.md"
+        filename: "{fields.slug}/index.mn.md"
         exclude: ["index.en.md", "_index.mn.md", "_index.en.md"]
         format: toml-frontmatter
         delimiters: "+++"
@@ -301,6 +317,12 @@ content:
           sort: [year, month, title]
         fields: &publication_fields
           - { name: title, label: Бүтээлийн нэр, type: string, required: true }
+          - name: slug
+            label: URL нэр
+            type: string
+            required: true
+            pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Зөвхөн жижиг латин үсэг, тоо, зураас (-). Жишээ: relay-protection" }
+            description: "Хуудасны хаяг ба фолдерын нэр. Монгол, англи хоёр хувилбарт яг ижлээр бичнэ — өөр бол хоёр хэл холбогдохгүй. Үүсгэсний дараа бүү өөрчил."
           - { name: year, label: Он, type: number, required: true }
           - { name: month, label: Сар (1–12), type: number, required: true }
           - name: file
@@ -318,7 +340,7 @@ content:
         type: collection
         path: content/publications
         subfolders: true
-        filename: "{primary}/index.en.md"
+        filename: "{fields.slug}/index.en.md"
         exclude: ["index.mn.md", "_index.mn.md", "_index.en.md"]
         format: toml-frontmatter
         delimiters: "+++"
@@ -337,7 +359,7 @@ content:
         type: collection
         path: content/members
         subfolders: true
-        filename: "{primary}/index.mn.md"
+        filename: "{fields.slug}/index.mn.md"
         exclude: ["index.en.md", "_index.mn.md", "_index.en.md"]
         format: toml-frontmatter
         delimiters: "+++"
@@ -347,6 +369,12 @@ content:
           sort: [weight, title]
         fields: &member_fields
           - { name: title, label: Бүтэн нэр, type: string, required: true }
+          - name: slug
+            label: URL нэр
+            type: string
+            required: true
+            pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Зөвхөн жижиг латин үсэг, тоо, зураас (-). Жишээ: relay-protection" }
+            description: "Хуудасны хаяг ба фолдерын нэр. Монгол, англи хоёр хувилбарт яг ижлээр бичнэ — өөр бол хоёр хэл холбогдохгүй. Үүсгэсний дараа бүү өөрчил."
           - name: generation
             label: Үе
             type: select
@@ -371,7 +399,7 @@ content:
         type: collection
         path: content/members
         subfolders: true
-        filename: "{primary}/index.en.md"
+        filename: "{fields.slug}/index.en.md"
         exclude: ["index.mn.md", "_index.mn.md", "_index.en.md"]
         format: toml-frontmatter
         delimiters: "+++"

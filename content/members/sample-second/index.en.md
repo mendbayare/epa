@@ -1,5 +1,6 @@
 +++
 title = "Sample Member B"
+slug = "sample-second"
 program = "Electrical Systems Automation"
 study_year = "Third year"
 generation = "second-generation"

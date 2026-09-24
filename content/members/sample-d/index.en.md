@@ -1,5 +1,6 @@
 +++
 title = "Sample Member D"
+slug = "sample-d"
 program = "Electrical Systems Automation"
 generation = "first-generation"
 portrait = "images/research-automation.jpg"

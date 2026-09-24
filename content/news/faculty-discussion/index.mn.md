@@ -1,5 +1,6 @@
 +++
 title = "Туршилтын үр дүнгийн хэлэлцүүлэг"
+slug = "faculty-discussion"
 date = 2025-05-30
 summary = "Салбарын багш нарт лабораторийн туршилтын үр дүнг танилцуулж, санал солилцов."
 cover = "images/activity-classroom.jpg"

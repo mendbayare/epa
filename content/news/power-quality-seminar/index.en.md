@@ -1,5 +1,6 @@
 +++
 title = "Power quality research seminar"
+slug = "power-quality-seminar"
 date = 2026-04-16
 summary = "Power quality indicators were discussed on the basis of measurement results."
 cover = "images/research-protection.jpg"

@@ -1,5 +1,6 @@
 +++
 title = "Sample Member L"
+slug = "sample-l"
 program = "Electric Power Systems"
 study_year = "Second year"
 generation = "second-generation"

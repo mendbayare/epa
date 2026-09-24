@@ -1,5 +1,6 @@
 +++
 title = "Жишээ гишүүн L"
+slug = "sample-l"
 program = "Цахилгаан эрчим хүчний систем"
 study_year = "2-р курс"
 generation = "second-generation"

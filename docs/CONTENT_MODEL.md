@@ -16,6 +16,14 @@ after content migration should be avoided.
 - `title`, `summary`, and Markdown body content are translated independently.
 - Identifiers such as generation keys, dates, URLs, and image paths stay identical
   across translations.
+- Every News, Projects, Publications and Members entry carries a `slug`: a short
+  Latin key such as `relay-protection`, identical in both languages. The CMS
+  names the entry's folder after it (`{slug}/index.mn.md`), so the two language
+  files land in one bundle and Hugo pairs them as translations, and it is the
+  last segment of the page address. Folder names used to come from each
+  language's own title, which put a new entry's translations in two different
+  folders. Set it once when the entry is created; changing it later changes the
+  address.
 - Images live in page bundles when they belong to one entry. Shared institutional
   assets live under `assets/images/`.
 - Every public record may be hidden with `draft = true`.
@@ -126,7 +134,7 @@ Location: `content/projects/{slug}/index.{lang}.md`
 | `implementation_site` | localized string | Yes | Implementation location, object, or site |
 | `summary` | string | Yes | Card and metadata summary |
 | `results` | Markdown text | Yes | Results and completed work; a paragraph or a `- ` bullet list |
-| `related_publications` | page-reference list | No | Published outputs produced by the project |
+| `related_publications` | publication reference list | No | Published outputs produced by the project, picked from the Publications collection; each links straight to its file or external URL |
 | `cover` | image path | No | Card and social image |
 | `gallery` | image list | No | Additional approved images/captions |
 | `featured` | boolean | Yes | Eligible for Home display |
@@ -161,6 +169,10 @@ Location: `content/publications/{slug}/index.{lang}.md`
 The Markdown body is optional descriptive text. At least one of `file`,
 `external_url`, `summary`, or body content should normally be present. A public
 link does not imply permission to host a copy of the file.
+
+Publications have no pages of their own: they appear only as rows of the table
+and in a project's related publications, both of which link straight to the
+file or external URL. `hugo.toml` keeps them in lists but does not render them.
 
 The index sorts by year and month in descending order. File and external-link
 actions render independently; when neither exists, the table shows a neutral

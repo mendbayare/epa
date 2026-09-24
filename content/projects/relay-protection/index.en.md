@@ -1,5 +1,6 @@
 +++
 title = "Digital protection relay research"
+slug = "relay-protection"
 summary = "Research into configuration, coordination, and testing methods for ABB and SEL digital protection relays."
 client = "Sample commissioning organization"
 collaborators = ["Sample collaborating implementer"]

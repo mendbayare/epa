@@ -1,5 +1,6 @@
 +++
 title = "Жишээ гишүүн F"
+slug = "sample-f"
 program = "Цахилгаан хангамж"
 generation = "first-generation"
 portrait = "images/activity-relay.jpg"

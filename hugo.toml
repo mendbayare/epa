@@ -15,6 +15,19 @@ disableKinds = ["taxonomy", "term"]
     source = 'layouts/.*'
     target = 'css'
 
+# Publications are shown only as rows of the Publications table, which links
+# each one straight to its file or external page, so an individual page per
+# publication would be an undesigned dead end. They stay in lists; they are
+# not rendered. This lives here rather than in the section's _index front
+# matter because the CMS rewrites that file when an editor saves it.
+[[cascade]]
+  [cascade.build]
+    list = "always"
+    render = "never"
+  [cascade.target]
+    kind = "page"
+    path = "{/publications/**}"
+
 [pagination]
   pagerSize = 9
 

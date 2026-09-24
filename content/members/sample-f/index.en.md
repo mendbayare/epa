@@ -1,5 +1,6 @@
 +++
 title = "Sample Member F"
+slug = "sample-f"
 program = "Power Supply"
 generation = "first-generation"
 portrait = "images/activity-relay.jpg"

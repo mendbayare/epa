@@ -1,5 +1,6 @@
 +++
 title = "Sample Member C"
+slug = "sample-c"
 program = "Electric Power Systems"
 generation = "first-generation"
 portrait = "images/research-protection.jpg"

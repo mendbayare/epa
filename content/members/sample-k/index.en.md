@@ -1,5 +1,6 @@
 +++
 title = "Sample Member K"
+slug = "sample-k"
 program = "Power Supply"
 study_year = "Second year"
 generation = "second-generation"

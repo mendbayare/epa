@@ -1,5 +1,6 @@
 +++
 title = "SCADA ба HMI хөгжүүлэлт"
+slug = "scada-hmi"
 summary = "Хяналт, өгөгдөл цуглуулалт, операторын интерфейсийг бодит төхөөрөмжтэй уялдуулан хөгжүүлэх судалгааны чиглэл."
 client = "Жишээ захиалагч байгууллага"
 collaborators = ["Жишээ хамтран гүйцэтгэгч"]
@@ -7,7 +8,7 @@ duration_text = "2025 он — үргэлжилж буй (жишээ)"
 objective = "Шинэ төслийн талбар болон урт текстийн байрлалыг шалгах жишээ зорилго."
 implementation_site = "Жишээ хэрэгжүүлэх объект"
 results = "Хийсэн ажил болон холбогдох бүтээлийн хэсгийг шалгах түр үр дүн."
-related_publications = ["/publications/sample-publication"]
+related_publications = ["content/publications/sample-publication/index.mn.md"]
 cover = "images/research-scada.jpg"
 featured = true
 provisional = true

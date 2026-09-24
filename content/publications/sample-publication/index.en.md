@@ -1,5 +1,6 @@
 +++
 title = "Sample publication title used to verify responsive text wrapping"
+slug = "sample-publication"
 year = 2026
 month = 1
 file = ""

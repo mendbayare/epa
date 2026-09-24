@@ -1,5 +1,6 @@
 +++
 title = "Жишээ гишүүн K"
+slug = "sample-k"
 program = "Цахилгаан хангамж"
 study_year = "2-р курс"
 generation = "second-generation"

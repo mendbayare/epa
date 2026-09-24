@@ -1,5 +1,6 @@
 +++
 title = "Жишээ гишүүн C"
+slug = "sample-c"
 program = "Цахилгаан эрчим хүчний систем"
 generation = "first-generation"
 portrait = "images/research-protection.jpg"

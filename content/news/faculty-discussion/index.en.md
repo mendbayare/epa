@@ -1,5 +1,6 @@
 +++
 title = "Discussion of experimental results"
+slug = "faculty-discussion"
 date = 2025-05-30
 summary = "Laboratory results were presented to faculty members for discussion and technical feedback."
 cover = "images/activity-classroom.jpg"

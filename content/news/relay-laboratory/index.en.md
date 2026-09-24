@@ -1,5 +1,6 @@
 +++
 title = "Protection relay laboratory work"
+slug = "relay-laboratory"
 date = 2025-04-22
 summary = "Second-year students explored protection relays and the component base of automation devices."
 cover = "images/activity-relay.jpg"

@@ -1,5 +1,6 @@
 +++
 title = "Файл, холбоос хүлээгдэж буй жишээ бүтээл"
+slug = "sample-description-only"
 year = 2025
 month = 11
 file = ""
