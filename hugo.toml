@@ -6,6 +6,15 @@ enableRobotsTXT = true
 enableGitInfo = false
 disableKinds = ["taxonomy", "term"]
 
+# Tailwind builds the stylesheet from the class names in layouts/, but Hugo
+# does not know the CSS depends on those files, so `hugo server` would keep
+# serving the old stylesheet after a template gains a new class. Rebuild the
+# CSS whenever a template changes.
+[build]
+  [[build.cachebusters]]
+    source = 'layouts/.*'
+    target = 'css'
+
 [pagination]
   pagerSize = 9
 
