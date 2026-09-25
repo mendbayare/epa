@@ -13,6 +13,9 @@
 #
 # The Markdown body of a file is edited through a field named `body`.
 # Layout, configuration and template files are deliberately not exposed.
+#
+# Every field carries a Mongolian `description`: where it shows on the site
+# and what to enter. Keep them true when a template changes.
 
 media:
   - name: images
@@ -41,39 +44,41 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         fields: &home_fields
-          - { name: title, label: Гарчиг, type: string, required: true }
-          - { name: description, label: Товч танилцуулга, type: text, required: true }
+          - { name: title, label: Гарчиг, type: string, required: true, description: "Хөтчийн таб, хайлтын үр дүн, хуваалцсан холбоост харагдах нэр. Нүүр хуудсан дээр өөрөө харагдахгүй. «Нүүр гарчгийн мөрүүд»-тэй ижил утгатай байлгана." }
           - name: hero_title_lines
             label: Нүүр гарчгийн мөрүүд
             type: string
-            list: true
-            description: Гарчгийг мөр мөрөөр нь бичнэ. Монгол нэр урт тул мөр таслалт гараар тохируулна.
-          - { name: hero_image, label: Нүүр зураг, type: image, required: true }
-          - { name: vision, label: Гарах үр дүн, type: text, required: true }
-          - { name: mission, label: Лабораторийн зорилго, type: text, required: true }
+            list: { min: 1 }
+            description: Нүүр зурган дээрх том гарчиг. Гарчгийг мөр мөрөөр нь бичнэ. Монгол нэр урт тул мөр таслалт гараар тохируулна. «Гарчиг» талбартай ижил утгатай байлгана.
+          - { name: description, label: Товч танилцуулга, type: text, required: true, description: "Нүүр зурган дээр гарчгийн доор харагдах нэг хоёр өгүүлбэр. Хайлтын үр дүн, хуваалцсан холбоосын тайлбарт мөн гарна." }
+          - { name: hero_image, label: Нүүр зураг, type: image, required: true, description: "Нүүр хуудасны дээд хэсгийг бүтэн дүүргэх арын зураг. Хэвтээ, өндөр нягтралтай зураг сонгоно. Өөрийн зураггүй хуудсыг хуваалцахад энэ зураг гарна." }
+          - { name: mission, label: Лабораторийн зорилго, type: text, required: true, description: "«Бидний чиглэл» хэсгийн зүүн баганад «Лабораторийн зорилго» гарчигтай харагдана." }
+          - { name: vision, label: Гарах үр дүн, type: text, required: true, description: "«Бидний чиглэл» хэсгийн баруун баганад «Гарах үр дүн» гарчигтай харагдана." }
           - name: stats
             label: Тоон үзүүлэлт
             type: object
             list: { min: 0, max: 3, collapsible: false }
+            description: Зорилго, үр дүнгийн доор гурван баганаар харагдах тоонууд. Хамгийн ихдээ 3.
             fields:
-              - { name: value, label: Утга, type: string, required: true }
-              - { name: label, label: Тайлбар, type: string, required: true }
-              - { name: suffix, label: Дагавар, type: string }
+              - { name: value, label: Утга, type: string, required: true, description: "Томоор харагдах тоо. Жишээ: 12" }
+              - { name: suffix, label: Дагавар, type: string, description: "Тооны ард жижгээр харагдах тэмдэг. Жишээ: + эсвэл %" }
+              - { name: label, label: Тайлбар, type: string, required: true, description: "Тооны доор харагдах тайлбар. Жишээ: Идэвхтэй гишүүн" }
           - name: equipment
             label: Тоног төхөөрөмж
             type: string
             list: true
             description: Нүүр хуудасны тоног төхөөрөмжийн мөр. Нэмэх, устгах, чирж дараалал солих боломжтой; олон бол мөр шилжинэ.
-          - { name: mentor_greeting, label: Мэндчилгээ, type: text }
+          - { name: mentor_greeting, label: Мэндчилгээ, type: text, description: "«Удирдагч багшийн мэндчилгээ» хэсэгт ишлэл болж харагдана. Багшийн нэр, албан тушаал, хөрөг «Бидний тухай» хуудасны «Удирдагч багш»-аас автоматаар орно." }
           - name: partners
             label: Хамтрагч байгууллага
             type: object
             list: true
+            description: Нүүр хуудасны «Хамтрагч байгууллагууд» хэсэг. Хоосон бол хэсэг бүхэлдээ харагдахгүй.
             fields:
-              - { name: name, label: Нэр, type: string, required: true }
               - { name: logo, label: Лого, type: image, description: Цагаан дэвсгэр дээр харагдана. Байгууллагын зөвшөөрөлтэй лого оруулна. }
-              - { name: url, label: Вэб хаяг, type: string }
-              - { name: description, label: Тайлбар, type: text }
+              - { name: name, label: Нэр, type: string, required: true, description: "Байгууллагын албан ёсны нэр." }
+              - { name: url, label: Вэб хаяг, type: string, description: "https://-ээр эхэлсэн бүтэн холбоос. Бөглөвөл нэр дээр дарахад тухайн сайт шинэ цонхонд нээгдэнэ." }
+              - { name: description, label: Тайлбар, type: text, description: "Хамтын ажиллагааны талаар нэг өгүүлбэр. Нэрийн доор харагдана." }
       - name: home_en
         label: Home (English)
         type: file
@@ -93,36 +98,39 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         fields: &about_fields
-          - { name: title, label: Гарчиг, type: string, required: true }
-          - { name: description, label: Товч танилцуулга, type: text, required: true }
-          - { name: hero_image, label: Нүүр зураг, type: image, required: true }
-          - { name: history_intro, label: Түүхийн оршил, type: text }
+          - { name: title, label: Гарчиг, type: string, required: true, description: "Хуудасны том гарчиг. Хөтчийн таб, хуваалцсан холбоост мөн харагдана." }
+          - { name: description, label: Товч танилцуулга, type: text, required: true, description: "Гарчгийн доор харагдах товч тайлбар. Хайлтын үр дүн, хуваалцсан холбоосын тайлбарт мөн гарна." }
+          - { name: hero_image, label: Нүүр зураг, type: image, required: true, description: "Хуудасны дээд хэсгийн арын зураг. Хуудсыг хуваалцахад мөн энэ зураг гарна." }
+          - { name: history_intro, label: Түүхийн оршил, type: text, description: "«Лабораторийн түүх» хэсгийн зүүн талд харагдах оршил." }
           - name: history
             label: Түүхэн үе шатууд
             type: object
             list: true
+            description: Оршлын баруун талд жагсаалт болж харагдана. Шинэ үе шат бүрийг нэг мөр болгон нэмнэ.
             fields:
-              - { name: year, label: Он, type: string, required: true }
-              - { name: title, label: Гарчиг, type: string, required: true }
-              - { name: description, label: Тайлбар, type: text }
+              - { name: year, label: Он, type: string, required: true, description: "Жишээ: 2024" }
+              - { name: title, label: Гарчиг, type: string, required: true, description: "Тухайн оны гол үйл явдал." }
+              - { name: description, label: Тайлбар, type: text, description: "Гарчгийн доор жижгээр харагдах нэмэлт тайлбар." }
           - name: achievements
             label: Амжилтууд
             type: object
             list: true
+            description: «Амжилт» хэсэг. Хоосон бол хэсэг харагдахгүй.
             fields:
-              - { name: title, label: Гарчиг, type: string, required: true }
-              - { name: year, label: Он, type: string }
-              - { name: description, label: Тайлбар, type: text }
-              - { name: image, label: Зураг, type: image }
+              - { name: year, label: Он, type: string, description: "Жишээ: 2025" }
+              - { name: title, label: Гарчиг, type: string, required: true, description: "Шагнал, батламж, амжилтын нэр." }
+              - { name: description, label: Тайлбар, type: text, description: "Гарчгийн доор харагдах дэлгэрэнгүй." }
+              - { name: image, label: Зураг, type: image, description: "Шагнал, батламж, үйл явдлын зураг. Мөрийн төгсгөлд харагдана." }
           - name: supervisor
             label: Удирдагч багш
             type: object
+            description: Багшийн мэдээлэл зөвхөн энд хадгалагдана. Нүүр хуудасны мэндчилгээ, Холбоо барих хуудас эндээс уншина.
             fields:
-              - { name: name, label: Нэр, type: string, required: true }
-              - { name: role, label: Албан тушаал, type: string }
-              - { name: portrait, label: Хөрөг, type: image }
-              - { name: summary, label: Товч танилцуулга, type: text }
-              - { name: bio, label: Намтар, type: text }
+              - { name: portrait, label: Хөрөг, type: image, description: "Багшийн хүсэлтээр жижиг харагдана. Босоо (4:5) зураг тохиромжтой." }
+              - { name: role, label: Албан тушаал, type: string, description: "Нэрийн хамт харагдана. Жишээ: Ахлах багш" }
+              - { name: name, label: Нэр, type: string, required: true, description: "Нүүр, Холбоо барих хуудсанд мөн харагдана." }
+              - { name: summary, label: Товч танилцуулга, type: text, description: "Нэрийн хажууд томоор харагдах эхний догол мөр." }
+              - { name: bio, label: Намтар, type: text, description: "Товч танилцуулгын доор харагдах дэлгэрэнгүй намтар." }
       - name: about_en
         label: About (English)
         type: file
@@ -142,15 +150,14 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         fields: &contact_fields
-          - { name: title, label: Гарчиг, type: string, required: true }
-          - { name: description, label: Товч танилцуулга, type: text }
-          - { name: address, label: Хаяг, type: text, required: true }
-          - { name: email, label: Цахим шуудан, type: string }
-          - { name: phone, label: Утас, type: string }
+          - { name: title, label: Гарчиг, type: string, required: true, description: "Хуудасны том гарчиг. Хөтчийн таб, хуваалцсан холбоост мөн харагдана." }
+          - { name: description, label: Товч танилцуулга, type: text, description: "Гарчгийн доор харагдах товч тайлбар. Хайлтын үр дүн, хуваалцсан холбоосын тайлбарт мөн гарна." }
+          - { name: address, label: Хаяг, type: text, required: true, description: "«Байршил» карт болон сайтын хөл хэсэгт харагдана." }
+          - { name: map_url, label: Газрын зургийн холбоос, type: string, description: "Google Maps дээрх байршлын холбоос. «Чиглэл харах» товч үүн рүү нээгдэнэ. Хоосон бол товч харагдахгүй." }
+          - { name: email, label: Цахим шуудан, type: string, description: "Имэйл карт болон хөл хэсэгт харагдана. Хоосон бол «Албан ёсны имэйл хүлээгдэж байна» гэж гарна." }
+          - { name: map_embed_url, label: Газрын зургийн embed хаяг, type: text, description: "Google Maps → Хуваалцах → Газрын зураг оруулах цэснээс хуулсан кодын src доторх хаяг (https://www.google.com/maps/embed-ээр эхэлнэ). Хуудасны доод хэсэгт газрын зураг харагдана." }
           - { name: facebook_url, label: Facebook хаяг, type: string, description: Бүтэн холбоос. Хоосон бол хөл хэсэгт харагдахгүй. }
           - { name: instagram_url, label: Instagram хаяг, type: string, description: Бүтэн холбоос. Хоосон бол хөл хэсэгт харагдахгүй. }
-          - { name: map_url, label: Газрын зургийн холбоос, type: string }
-          - { name: map_embed_url, label: Газрын зургийн embed хаяг, type: text }
       - name: contact_en
         label: Contact (English)
         type: file
@@ -180,27 +187,28 @@ content:
           primary: title
           sort: [date, title]
         fields: &news_fields
-          - { name: title, label: Гарчиг, type: string, required: true }
           - name: slug
             label: URL нэр
             type: string
             required: true
             pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Зөвхөн жижиг латин үсэг, тоо, зураас (-). Жишээ: relay-protection" }
             description: "Хуудасны хаяг ба фолдерын нэр. Монгол, англи хоёр хувилбарт яг ижлээр бичнэ — өөр бол хоёр хэл холбогдохгүй. Үүсгэсний дараа бүү өөрчил."
-          - { name: date, label: Нийтэлсэн огноо, type: date, options: { format: "yyyy-MM-dd" }, required: true }
-          - { name: summary, label: Товч агуулга, type: text, required: true }
-          - { name: cover, label: Нүүр зураг, type: image, required: true }
+          - { name: title, label: Гарчиг, type: string, required: true, description: "Мэдээний карт болон мэдээний хуудсанд харагдана." }
+          - { name: date, label: Нийтэлсэн огноо, type: date, options: { format: "yyyy-MM-dd" }, required: true, description: "Мэдээний жагсаалт энэ огноогоор шинээс хуучин руу эрэмбэлэгдэнэ." }
+          - { name: cover, label: Нүүр зураг, type: image, required: true, description: "Карт болон мэдээний хуудасны дээд хэсэгт харагдах зураг. Хэвтээ зураг тохиромжтой." }
+          - { name: summary, label: Товч агуулга, type: text, required: true, description: "Картанд гарчгийн доор харагдах 1–2 өгүүлбэр. Хуваалцсан холбоосын тайлбарт мөн гарна." }
+          - { name: body, label: Агуулга, type: rich-text, description: "Мэдээний үндсэн текст. Гарчиг, жагсаалт, холбоос оруулж болно." }
+          - { name: tags, label: Түлхүүр үг, type: string, list: true, description: "Мэдээний төгсгөлд шошго болж харагдана. Нэг мөрөнд нэг үг." }
           - name: gallery
             label: Зургийн цомог
             type: object
             list: true
+            description: Мэдээний доод хэсэгт гурван баганаар харагдана.
             fields:
-              - { name: image, label: Зураг, type: image, required: true }
-              - { name: caption, label: Тайлбар, type: string }
-          - { name: tags, label: Түлхүүр үг, type: string, list: true }
-          - { name: featured, label: Нүүр хуудсанд харуулах, type: boolean, default: false }
-          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
-          - { name: body, label: Агуулга, type: rich-text }
+              - { name: image, label: Зураг, type: image, required: true, description: "Хэвтээ зураг тохиромжтой; 4:3 хүрээнд тайрагдана." }
+              - { name: caption, label: Тайлбар, type: string, description: "Зургийн доор жижгээр харагдана." }
+          - { name: featured, label: Нүүр хуудсанд харуулах, type: boolean, default: false, description: "Сонговол нүүр хуудасны «Мэдээ» хэсэгт гарна. Карт гурваар эгнэдэг тул 3 эсвэл 6-г сонгоход цэгцтэй." }
+          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false, description: "Сонговол сайтад нийтлэгдэхгүй. Бэлэн болмогц сонголтыг арилгана." }
       - name: news_en
         label: News (English)
         type: collection
@@ -234,20 +242,22 @@ content:
           primary: title
           sort: [weight, title]
         fields: &project_fields
-          - { name: title, label: Төслийн нэр, type: string, required: true }
           - name: slug
             label: URL нэр
             type: string
             required: true
             pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Зөвхөн жижиг латин үсэг, тоо, зураас (-). Жишээ: relay-protection" }
             description: "Хуудасны хаяг ба фолдерын нэр. Монгол, англи хоёр хувилбарт яг ижлээр бичнэ — өөр бол хоёр хэл холбогдохгүй. Үүсгэсний дараа бүү өөрчил."
-          - { name: client, label: Захиалагч, type: string, required: true }
-          - { name: collaborators, label: Хамтран гүйцэтгэгч, type: string, list: true }
-          - { name: duration_text, label: Хугацаа, type: string, required: true }
+          - { name: title, label: Төслийн нэр, type: string, required: true, description: "Төслийн карт болон төслийн хуудсанд харагдана." }
+          - { name: summary, label: Товч агуулга, type: text, required: true, description: "Карт болон төслийн хуудасны гарчгийн доор харагдана. Хуваалцсан холбоосын тайлбарт мөн гарна." }
+          - { name: cover, label: Нүүр зураг, type: image, description: "Карт болон төслийн хуудасны дээд хэсэгт харагдах зураг. Хэвтээ зураг тохиромжтой." }
+          - { name: client, label: Захиалагч, type: string, required: true, description: "Карт болон төслийн хуудасны мэдээлэлд харагдана." }
+          - { name: collaborators, label: Хамтран гүйцэтгэгч, type: string, list: true, description: "Нэг мөрөнд нэг байгууллага. Сайтад таслалаар залгагдаж харагдана." }
+          - { name: duration_text, label: Хугацаа, type: string, required: true, description: "Чөлөөтэй бичнэ. Жишээ: 2024.03–2025.06" }
+          - { name: implementation_site, label: Хэрэгжүүлэх байршил / объект, type: string, required: true, description: "Төсөл хэрэгжсэн газар эсвэл объект. Төслийн жагсаалт, хуудасны мэдээлэлд харагдана." }
           - { name: objective, label: Зорилго, type: text, required: true, description: "Жагсаалт бол мөр бүрийг «- »-ээр эхлүүлнэ. Догол мөрийг хоосон мөрөөр тусгаарлана." }
-          - { name: implementation_site, label: Хэрэгжүүлэх байршил / объект, type: string, required: true }
-          - { name: summary, label: Товч агуулга, type: text, required: true }
           - { name: results, label: Үр дүн, type: text, required: true, description: "Жагсаалт бол мөр бүрийг «- »-ээр эхлүүлнэ. Догол мөрийг хоосон мөрөөр тусгаарлана." }
+          - { name: body, label: Нэмэлт агуулга, type: rich-text, description: "Зорилго, үр дүнгийн доор харагдах нэмэлт текст. Шаардлагагүй бол хоосон орхино." }
           - name: related_publications
             label: Холбогдох бүтээл
             type: reference
@@ -257,18 +267,17 @@ content:
               multiple: true
               label: "{fields.title}"
               search: title
-          - { name: cover, label: Нүүр зураг, type: image }
           - name: gallery
             label: Зургийн цомог
             type: object
             list: true
+            description: Төслийн хуудасны доод хэсэгт хоёр баганаар харагдана.
             fields:
-              - { name: src, label: Зураг, type: image, required: true }
-              - { name: alt, label: Тайлбар, type: string }
-          - { name: featured, label: Нүүр хуудсанд харуулах, type: boolean, default: false }
-          - { name: weight, label: Эрэмбэ, type: number, default: 10 }
-          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
-          - { name: body, label: Нэмэлт агуулга, type: rich-text }
+              - { name: src, label: Зураг, type: image, required: true, description: "Өндөр нягтралтай зураг сонгоно." }
+              - { name: alt, label: Тайлбар, type: string, description: "Зураг дээр юу байгааг товч бичнэ. Сайтад харагдахгүй; зураг ачаалагдаагүй үед болон дэлгэц уншигчид ашиглагдана." }
+          - { name: featured, label: Нүүр хуудсанд харуулах, type: boolean, default: false, description: "Сонговол нүүр хуудасны «Төслүүд» хэсэгт гарна. Карт гурваар эгнэдэг тул 3 эсвэл 6-г сонгоход цэгцтэй." }
+          - { name: weight, label: Эрэмбэ, type: number, default: 10, description: "Бага тоотой нь эхэнд. Төслийн жагсаалт, нүүр хуудсанд энэ дарааллаар харагдана." }
+          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false, description: "Сонговол сайтад нийтлэгдэхгүй. Бэлэн болмогц сонголтыг арилгана." }
       - name: projects_en
         label: Projects (English)
         type: collection
@@ -302,23 +311,23 @@ content:
           primary: title
           sort: [year, month, title]
         fields: &publication_fields
-          - { name: title, label: Бүтээлийн нэр, type: string, required: true }
           - name: slug
             label: URL нэр
             type: string
             required: true
             pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Зөвхөн жижиг латин үсэг, тоо, зураас (-). Жишээ: relay-protection" }
             description: "Хуудасны хаяг ба фолдерын нэр. Монгол, англи хоёр хувилбарт яг ижлээр бичнэ — өөр бол хоёр хэл холбогдохгүй. Үүсгэсний дараа бүү өөрчил."
-          - { name: year, label: Он, type: number, required: true }
-          - { name: month, label: Сар (1–12), type: number, required: true }
+          - { name: title, label: Бүтээлийн нэр, type: string, required: true, description: "Бүтээлийн жагсаалт болон холбогдох төслийн хуудсанд харагдана." }
+          - { name: summary, label: Тайлбар, type: text, description: "Нэрийн доор жижгээр харагдана. Жишээ: зохиогчид, сэтгүүлийн нэр." }
+          - { name: year, label: Он, type: number, required: true, description: "Хэвлэгдсэн он. Жагсаалт он, сараар шинээс хуучин руу эрэмбэлэгдэнэ." }
+          - { name: month, label: Сар (1–12), type: number, required: true, description: "Хэвлэгдсэн сар. Жишээ: 3" }
           - name: file
             label: Файл
             type: file
             options: { media: documents }
-            description: Зөвхөн нийтлэхийг зөвшөөрсөн баримтыг оруулна.
-          - { name: external_url, label: Гадаад холбоос, type: string }
-          - { name: summary, label: Тайлбар, type: text }
-          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
+            description: Зөвхөн нийтлэхийг зөвшөөрсөн баримтыг оруулна. Оруулбал «Файл татах» товч гарна.
+          - { name: external_url, label: Гадаад холбоос, type: string, description: "Сэтгүүл, хурлын хуудасны бүтэн холбоос. Файл ч холбоос ч үгүй бол «Холбоос хүлээгдэж байна» гэж гарна." }
+          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false, description: "Сонговол сайтад нийтлэгдэхгүй. Бэлэн болмогц сонголтыг арилгана." }
       - name: publications_en
         label: Publications (English)
         type: collection
@@ -352,7 +361,6 @@ content:
           primary: title
           sort: [weight, title]
         fields: &member_fields
-          - { name: title, label: Бүтэн нэр, type: string, required: true }
           - name: slug
             label: URL нэр
             type: string
@@ -368,15 +376,16 @@ content:
                 - { label: "I үе", value: first-generation }
                 - { label: "II үе", value: second-generation }
             description: Шинэ үе нэмэхэд data/generations.toml файлыг эхлээд шинэчилнэ.
-          - { name: program, label: Хөтөлбөр, type: string }
-          - { name: study_year, label: Курс, type: string }
-          - { name: portrait, label: Хөрөг, type: image, required: true }
-          - { name: yearbook_quote, label: Гишүүний эшлэл, type: text }
-          - { name: alumni, label: Төгсөгч, type: boolean, default: false }
+          - { name: portrait, label: Хөрөг, type: image, required: true, description: "Толгой, мөрний зураг. Дөрвөлжин хүрээнд тайрагдана; дөрвөлжин биш бол дээд хэсэг нь үлдэнэ." }
+          - { name: title, label: Бүтэн нэр, type: string, required: true, description: "Гишүүний картанд харагдах нэр." }
+          - { name: program, label: Хөтөлбөр, type: string, description: "Нэрийн доор харагдана. Жишээ: Цахилгаан эрчим хүчний систем" }
+          - { name: study_year, label: Курс, type: string, description: "Хөтөлбөрийн доор харагдана. Төгсөгч бол оронд нь төгссөн он гарна. Жишээ: 4-р курс" }
+          - { name: alumni, label: Төгсөгч, type: boolean, default: false, description: "Сонговол курсийн оронд «Төгссөн» гэж харагдана." }
           - { name: graduated_year, label: Төгссөн он, type: number, description: Төгсөгч бол бөглөнө. }
+          - { name: yearbook_quote, label: Гишүүний эшлэл, type: text, description: "Гишүүний зөвшөөрсөн богино эшлэл. Картын доод хэсэгт налуу үсгээр харагдана." }
           - { name: leader, label: Үеийн ахлагч, type: boolean, default: false, description: Үе бүрт нэг ахлагч. Картыг онцолж, эхэнд харуулна. }
-          - { name: weight, label: Эрэмбэ, type: number, default: 10 }
-          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false }
+          - { name: weight, label: Эрэмбэ, type: number, default: 10, description: "Бага тоотой нь эхэнд. Үе дотор ахлагчийн дараа энэ дарааллаар харагдана." }
+          - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false, description: "Сонговол сайтад нийтлэгдэхгүй. Бэлэн болмогц сонголтыг арилгана." }
       - name: members_en
         label: Members (English)
         type: collection
@@ -409,13 +418,14 @@ content:
             label: Үеүүд
             type: object
             list: true
+            description: Шинэ үе нэмбэл «Гишүүд»-ийн «Үе» сонголтод мөн нэмэх шаардлагатай тул хөгжүүлэгчид хандана.
             fields:
-              - { name: key, label: Түлхүүр, type: string, required: true }
-              - { name: order, label: Дараалал, type: number, required: true }
-              - { name: label_mn, label: Нэр (MN), type: string, required: true }
-              - { name: heading_mn, label: Гарчиг (MN), type: string, required: true }
-              - { name: label_en, label: Нэр (EN), type: string, required: true }
-              - { name: heading_en, label: Гарчиг (EN), type: string, required: true }
+              - { name: key, label: Түлхүүр, type: string, required: true, description: "Гишүүний «Үе» талбарын утгатай яг ижил байна. Жишээ: third-generation. Үүсгэсний дараа бүү өөрчил." }
+              - { name: order, label: Дараалал, type: number, required: true, description: "Шинэ үе том тоотой. Нүүр хуудсанд хамгийн том тоотой үе харагдана." }
+              - { name: label_mn, label: Нэр (MN), type: string, required: true, description: "Гишүүд хуудсанд үеийн гарчиг болж харагдана. Жишээ: I үе" }
+              - { name: heading_mn, label: Гарчиг (MN), type: string, required: true, description: "Нүүр хуудасны «Хамгийн шинэ үе» хэсгийн гарчиг." }
+              - { name: label_en, label: Нэр (EN), type: string, required: true, description: "Англи Гишүүд хуудсанд үеийн гарчиг болж харагдана. Жишээ: Generation I" }
+              - { name: heading_en, label: Гарчиг (EN), type: string, required: true, description: "Англи нүүр хуудасны «Хамгийн шинэ үе» хэсгийн гарчиг." }
 
   - name: section_headers
     label: Хэсгийн гарчиг / Section headings
@@ -429,8 +439,8 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         fields: &index_fields
-          - { name: title, label: Гарчиг, type: string, required: true }
-          - { name: description, label: Тайлбар, type: text }
+          - { name: title, label: Гарчиг, type: string, required: true, description: "Хуудасны том гарчиг. Хөтчийн таб, хуваалцсан холбоост мөн харагдана." }
+          - { name: description, label: Тайлбар, type: text, description: "Гарчгийн доор харагдах товч тайлбар. Хайлтын үр дүн, хуваалцсан холбоосын тайлбарт мөн гарна." }
       - { name: news_index_en, label: "News — heading (EN)", type: file, path: content/news/_index.en.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }
       - { name: projects_index_mn, label: "Төсөл — гарчиг (MN)", type: file, path: content/projects/_index.mn.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }
       - { name: projects_index_en, label: "Projects — heading (EN)", type: file, path: content/projects/_index.en.md, format: toml-frontmatter, delimiters: "+++", fields: *index_fields }

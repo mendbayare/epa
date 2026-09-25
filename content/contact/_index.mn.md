@@ -2,7 +2,6 @@
 title = "Холбоо барих"
 description = "EPA-Lab-д имэйлээр холбогдох, зочлох болон байршлыг нээх мэдээлэл."
 address = "ШУТИС VIII байр, 601 тоот"
-phone = "9553 2207"
 facebook_url = ""
 instagram_url = ""
 email = "epa.lab2025@gmail.com"

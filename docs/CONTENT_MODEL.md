@@ -53,7 +53,7 @@ Icons (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, the
 ## 1. Site settings
 
 The laboratory's name and default description live in `hugo.toml`. Its
-contact details — address, email, phone and social accounts — live only on the
+contact details — address, email and social accounts — live only on the
 Contact page (section 8), and the footer and Home's structured data read them
 from there, so there is one place to edit them.
 
@@ -250,7 +250,7 @@ Contact front matter:
 
 - `title`
 - `description`
-- `address`, `email`, `phone`
+- `address`, `email`
 - `facebook_url`, `instagram_url` — shown in the footer when set
 - `map_url`, `map_embed_url`
 

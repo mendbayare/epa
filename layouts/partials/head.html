@@ -70,7 +70,6 @@
     "parentOrganization" (dict "@type" "CollegeOrUniversity" "name" (cond (eq site.Language.Lang "mn") "Шинжлэх Ухаан Технологийн Их Сургууль" "Mongolian University of Science and Technology") "url" "https://www.must.edu.mn")
   }}
   {{ with $contact.Params.email }}{{ $org = merge $org (dict "email" .) }}{{ end }}
-  {{ with $contact.Params.phone }}{{ $org = merge $org (dict "telephone" (printf "+976 %s" .)) }}{{ end }}
   {{ $same := slice }}{{ with $contact.Params.facebook_url }}{{ $same = $same | append . }}{{ end }}{{ with $contact.Params.instagram_url }}{{ $same = $same | append . }}{{ end }}
   {{ with $same }}{{ $org = merge $org (dict "sameAs" .) }}{{ end }}
   <script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>

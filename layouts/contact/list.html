@@ -36,7 +36,6 @@
               <svg class="h-4 w-4 fill-none stroke-current stroke-[1.8] [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
             </button>
           </div>
-          {{ with $.Params.phone }}<p class="m-0 text-muted">{{ if $isMn }}Утас{{ else }}Phone{{ end }}: <a class="font-semibold text-link no-underline hover:text-link-hover" href="tel:{{ replace . " " "" }}">{{ . }}</a></p>{{ end }}
           <a class="{{ $action }}" href="mailto:{{ . }}">{{ if $isMn }}Имэйл илгээх{{ else }}Send an email{{ end }} <span aria-hidden="true">→</span></a>
         {{ else }}
           <p class="m-0 text-muted">{{ if $isMn }}Албан ёсны имэйл хүлээгдэж байна{{ else }}Official email pending{{ end }}</p>

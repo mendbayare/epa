@@ -2,7 +2,6 @@
 title = "Contact"
 description = "Information for emailing EPA-Lab, visiting the laboratory, and opening its location."
 address = "MUST School of Power and Electrical Engineering, Academic Building VIII, room 601"
-phone = "9553 2207"
 facebook_url = ""
 instagram_url = ""
 email = "epa.lab2025@gmail.com"
