@@ -1,3 +1,7 @@
+{{- /*
+  One project: hero with summary and cover, key facts, objective, results,
+  extra body text, related publications, gallery, then other projects.
+*/ -}}
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $projectsPage := site.GetPage "/projects" }}

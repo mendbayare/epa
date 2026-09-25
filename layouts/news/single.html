@@ -1,3 +1,7 @@
+{{- /*
+  One news article: title, date and share buttons, cover, body, tags,
+  gallery, then the three newest other articles.
+*/ -}}
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $newsPage := site.GetPage "/news" }}
@@ -16,11 +20,7 @@
 
       <div class="mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 max-sm:items-start">
         <div class="byline-facts flex flex-wrap items-center gap-x-3.5 gap-y-2 text-sm text-muted max-sm:gap-x-3 max-sm:gap-y-1.5">
-          {{ if not .Date.IsZero }}
-            <time class="font-semibold" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
-          {{ else }}
-            <span class="italic">{{ if $isMn }}Огноо баталгаажаагүй{{ else }}Date not confirmed{{ end }}</span>
-          {{ end }}
+          <time class="font-semibold" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
           {{ with .ReadingTime }}
             <span>{{ . }} {{ if $isMn }}мин унших{{ else }}min read{{ end }}</span>
           {{ end }}
@@ -73,8 +73,7 @@
 
   {{/* A way onward, so the reader does not finish the story at the footer:
        the newest other articles, in the same order as the News list. */}}
-  {{ $all := $newsPage.RegularPages.ByWeight }}
-  {{ if where $newsPage.RegularPages "Params.date" "!=" nil }}{{ $all = $newsPage.RegularPages.ByDate.Reverse }}{{ end }}
+  {{ $all := $newsPage.RegularPages.ByDate.Reverse }}
   {{ with first 3 (where $all "Permalink" "!=" .Permalink) }}
     <section class="bg-surface-soft py-section">
       <div class="container">

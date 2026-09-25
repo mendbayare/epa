@@ -1,3 +1,7 @@
+{{- /*
+  Contact: location, email and supervising-lecturer cards, then the
+  embedded map. The footer reads the same address and email from this page.
+*/ -}}
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $about := site.GetPage "/about" }}

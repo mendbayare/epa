@@ -28,9 +28,6 @@ disableKinds = ["taxonomy", "term"]
     kind = "page"
     path = "{/publications/**}"
 
-[pagination]
-  pagerSize = 9
-
 [params]
   description = "Electrical Power Automation Laboratory at MUST"
 

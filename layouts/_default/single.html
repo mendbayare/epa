@@ -1,3 +1,8 @@
+{{- /*
+  Fallback for a standalone page that has no template of its own. Today
+  that is only the editors' guide at /guide: the page hero, then the
+  Markdown body.
+*/ -}}
 {{ define "main" }}
   <article>
     {{ partial "page-hero.html" (dict

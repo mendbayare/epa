@@ -1,3 +1,7 @@
+{{- /*
+  Shown for any address that does not exist, in either language: a short
+  band with a link back to Home.
+*/ -}}
 {{ define "main" }}
   {{ partial "page-hero.html" (dict
     "title" (cond (eq site.Language.Lang "mn") "Хуудас олдсонгүй" "Page not found")

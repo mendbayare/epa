@@ -1,3 +1,7 @@
+// Behaviour that HTML and CSS cannot manage alone. Each part first looks for
+// its data-* hook, so a page without that element is left untouched.
+
+// Mobile menu: the header's menu button opens and closes the navigation.
 const toggle = document.querySelector('[data-nav-toggle]');
 const nav = document.querySelector('[data-nav]');
 
@@ -9,16 +13,21 @@ if (toggle && nav) {
   });
 }
 
+// Light/dark switch. head.html applies the saved choice before the page
+// paints; this saves a new one. Storage can be blocked (private windows),
+// in which case the switch still works for the current page.
 const themeToggle = document.querySelector('[data-theme-toggle]');
 
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
-    localStorage.setItem('epa-theme', next);
+    try { localStorage.setItem('epa-theme', next); } catch {}
   });
 }
 
+// Home's header sits transparent over the hero and gains its navy ground
+// (data-scrolled) once the hero has scrolled out from under it.
 const homeHero = document.querySelector('[data-hero]');
 const siteHeader = document.querySelector('[data-header]');
 

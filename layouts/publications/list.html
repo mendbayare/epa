@@ -1,3 +1,8 @@
+{{- /*
+  Publications: one table of every publication, newest first, each row
+  linking to its PDF or external page. Publications have no pages of their
+  own; see the cascade in hugo.toml.
+*/ -}}
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $publications := sort (sort .Pages "Params.month" "desc") "Params.year" "desc" }}

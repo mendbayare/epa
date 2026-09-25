@@ -1,10 +1,10 @@
+{{- /*
+  News index: every article as a card, newest first.
+*/ -}}
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
-  {{/* Order by publication date once records carry one. The current sample
-       records deliberately have no date pending laboratory review, so the
-       editorial weight is used until real dates arrive. */}}
-  {{ $items := .Pages.ByWeight }}
-  {{ if where .Pages "Params.date" "!=" nil }}{{ $items = .Pages.ByDate.Reverse }}{{ end }}
+  {{/* Newest first. Every article has a date: the CMS requires one. */}}
+  {{ $items := .Pages.ByDate.Reverse }}
 
   {{ partial "page-hero.html" (dict
     "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))

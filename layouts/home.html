@@ -1,3 +1,9 @@
+{{- /*
+  Home, top to bottom: hero, direction (aim, intended results, stats,
+  equipment), the mentor's greeting, featured projects, featured news, the
+  newest generation, partners, and a closing call to get in touch. The
+  section numbers 01–08 follow that order.
+*/ -}}
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{ $projectsPage := site.GetPage "/projects" }}
@@ -137,7 +143,7 @@
         "linkURL" $newsPage.RelPermalink
         "linkText" (cond $isMn "Бүх мэдээг үзэх" "View all news")) }}
       <div class="{{ $cardGrid }}">
-        {{ range $item := $news.ByWeight }}
+        {{ range $item := $news.ByDate.Reverse }}
           {{ partial "media-card.html" (dict
             "invert" true
             "title" .Title

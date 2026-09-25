@@ -55,13 +55,10 @@
   --color-white: #fff;
 
   --color-navy-950: #0d1538;   /* footer, dark sections, strongest text */
-  --color-navy-900: #1b2a6b;   /* major headings, prominent brand surfaces */
   --color-blue-700: #1b3faa;   /* primary actions, links, active navigation */
   --color-blue-600: #2241a8;   /* hover states, gradients */
   --color-blue-100: #e1e7f8;   /* pale borders and selected pale elements */
-  --color-blue-50: #f5f7fc;    /* alternating section backgrounds */
   --color-accent-600: #d4712a; /* eyebrows, rules, metadata, small highlights */
-  --color-accent-700: #c0601e; /* accent hover/pressed */
 
   /* --- Semantic surfaces and text --------------------------------------
      These are the ones that flip with the theme; see the dark block below
