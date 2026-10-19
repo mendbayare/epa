@@ -1,12 +1,12 @@
 +++
-title = "B. Dorjsuren"
-slug = "dorjsuren"
-program = "Electrical Systems Automation"
-study_year = "Third year"
-generation = "second-generation"
-portrait = "images/members/dorjsuren.jpg"
+slug = 'dorjsuren'
+generation = 'second-generation'
+portrait = 'images/Screenshot 2026-10-19 111205-1.png'
+title = 'B. Dorjsuren'
+program = 'Electrical Systems Automation'
+study_year = 'Third year'
 alumni = false
 leader = false
-weight = 10
+weight = 10.0
 draft = false
 +++
