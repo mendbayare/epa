@@ -1,12 +1,12 @@
 +++
-title = "B. Demberelzodov"
-slug = "demberelzodov"
-program = "Electrical Systems Automation"
-study_year = "Fourth year"
-generation = "first-generation"
-portrait = "images/members/demberelzodov.jpg"
-alumni = false
+slug = 'demberelzodov'
+generation = 'first-generation'
+portrait = 'images/members/demberelzodov.jpg'
+title = 'B. Demberelzodov'
+program = 'Electrical Systems Automation'
+alumni = true
+graduated_year = 2026.0
 leader = true
-weight = 10
+weight = 10.0
 draft = false
 +++
