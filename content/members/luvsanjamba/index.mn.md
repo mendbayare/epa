@@ -1,12 +1,12 @@
 +++
-title = "Г.Лувсанжамба"
-slug = "luvsanjamba"
-program = "Цахилгаан системийн автоматжуулалт"
-study_year = "4-р курс"
-generation = "first-generation"
-portrait = "images/members/luvsanjamba.jpg"
-alumni = false
+slug = 'luvsanjamba'
+generation = 'first-generation'
+portrait = 'images/members/luvsanjamba.jpg'
+title = 'Г.Лувсанжамба'
+program = 'Цахилгаан системийн автоматжуулалт'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 20
+weight = 20.0
 draft = false
 +++
