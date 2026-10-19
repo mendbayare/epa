@@ -1,12 +1,12 @@
 +++
-title = "M. Urtnasan"
-slug = "urtnasan"
-program = "Electrical Systems Automation"
-study_year = "Fourth year"
-generation = "first-generation"
-portrait = "images/members/urtnasan.jpg"
-alumni = false
+slug = 'urtnasan'
+generation = 'first-generation'
+portrait = 'images/members/urtnasan.jpg'
+title = 'M. Urtnasan'
+program = 'Electrical Systems Automation'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 40
+weight = 40.0
 draft = false
 +++
