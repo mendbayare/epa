@@ -1,12 +1,12 @@
 +++
-title = "G. Luvsanjamba"
-slug = "luvsanjamba"
-program = "Electrical Systems Automation"
-study_year = "Fourth year"
-generation = "first-generation"
-portrait = "images/members/luvsanjamba.jpg"
-alumni = false
+slug = 'luvsanjamba'
+generation = 'first-generation'
+portrait = 'images/members/luvsanjamba.jpg'
+title = 'G. Luvsanjamba'
+program = 'Electrical Systems Automation'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 20
+weight = 20.0
 draft = false
 +++
