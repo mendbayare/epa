@@ -1,7 +1,7 @@
 +++
 slug = 'khandsuren'
 generation = 'second-generation'
-portrait = 'images/Screenshot 2026-10-19 100851.png'
+portrait = 'images/Screenshot 2026-10-19 112524-2.png'
 title = 'Б.Хандсүрэн'
 program = 'Цахилгаан системийн автоматжуулалт'
 study_year = '3-р курс'
