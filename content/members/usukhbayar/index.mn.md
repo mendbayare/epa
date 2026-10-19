@@ -1,12 +1,12 @@
 +++
-title = "Г.Өсөхбаяр"
-slug = "usukhbayar"
-program = "Цахилгаан системийн автоматжуулалт"
-study_year = "4-р курс"
-generation = "first-generation"
-portrait = "images/members/usukhbayar.jpg"
-alumni = false
+slug = 'usukhbayar'
+generation = 'first-generation'
+portrait = 'images/members/usukhbayar.jpg'
+title = 'Г.Өсөхбаяр'
+program = 'Цахилгаан системийн автоматжуулалт'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 70
+weight = 70.0
 draft = false
 +++
