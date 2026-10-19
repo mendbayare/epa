@@ -1,12 +1,12 @@
 +++
-title = "E. Barkhas"
-slug = "barkhas"
-program = "Electrical Systems Automation"
-study_year = "Third year"
-generation = "second-generation"
-portrait = "images/members/barkhas.jpg"
+slug = 'barkhas'
+generation = 'second-generation'
+portrait = 'images/Screenshot 2026-10-18 172632-2.png'
+title = 'E. Barkhas'
+program = 'Electrical Systems Automation'
+study_year = 'Third year'
 alumni = false
 leader = false
-weight = 60
+weight = 60.0
 draft = false
 +++
