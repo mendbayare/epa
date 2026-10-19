@@ -1,12 +1,12 @@
 +++
-title = "G. Usukhbayar"
-slug = "usukhbayar"
-program = "Electrical Systems Automation"
-study_year = "Fourth year"
-generation = "first-generation"
-portrait = "images/members/usukhbayar.jpg"
-alumni = false
+slug = 'usukhbayar'
+generation = 'first-generation'
+portrait = 'images/members/usukhbayar.jpg'
+title = 'G. Usukhbayar'
+program = 'Electrical Systems Automation'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 70
+weight = 70.0
 draft = false
 +++
