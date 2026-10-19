@@ -1,12 +1,12 @@
 +++
-title = "Е.Сэдзана"
-slug = "sedzana"
-program = "Цахилгаан системийн автоматжуулалт"
-study_year = "4-р курс"
-generation = "first-generation"
-portrait = "images/members/sedzana.jpg"
-alumni = false
+slug = 'sedzana'
+generation = 'first-generation'
+portrait = 'images/members/sedzana.jpg'
+title = 'Е.Сэдзана'
+program = 'Цахилгаан системийн автоматжуулалт'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 30
+weight = 30.0
 draft = false
 +++
