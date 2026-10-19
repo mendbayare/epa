@@ -1,12 +1,12 @@
 +++
-title = "Б.Мөнхтуяа"
-slug = "munkhtuya"
-program = "Цахилгаан системийн автоматжуулалт"
-study_year = "4-р курс"
-generation = "first-generation"
-portrait = "images/members/munkhtuya.jpg"
-alumni = false
+slug = 'munkhtuya'
+generation = 'first-generation'
+portrait = 'images/members/munkhtuya.jpg'
+title = 'Б.Мөнхтуяа'
+program = 'Цахилгаан системийн автоматжуулалт'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 50
+weight = 50.0
 draft = false
 +++
