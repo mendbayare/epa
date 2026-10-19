@@ -1,12 +1,12 @@
 +++
-title = "М.Уртнасан"
-slug = "urtnasan"
-program = "Цахилгаан системийн автоматжуулалт"
-study_year = "4-р курс"
-generation = "first-generation"
-portrait = "images/members/urtnasan.jpg"
-alumni = false
+slug = 'urtnasan'
+generation = 'first-generation'
+portrait = 'images/members/urtnasan.jpg'
+title = 'М.Уртнасан'
+program = 'Цахилгаан системийн автоматжуулалт'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 40
+weight = 40.0
 draft = false
 +++
