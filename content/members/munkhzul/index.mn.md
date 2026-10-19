@@ -1,12 +1,12 @@
 +++
-title = "Т.Мөнхзул"
-slug = "munkhzul"
-program = "Цахилгаан системийн автоматжуулалт"
-study_year = "4-р курс"
-generation = "first-generation"
-portrait = "images/members/munkhzul.jpg"
-alumni = false
+slug = 'munkhzul'
+generation = 'first-generation'
+portrait = 'images/members/munkhzul.jpg'
+title = 'Т.Мөнхзул'
+program = 'Цахилгаан системийн автоматжуулалт'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 60
+weight = 60.0
 draft = false
 +++
