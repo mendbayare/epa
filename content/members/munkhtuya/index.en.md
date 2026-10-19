@@ -1,12 +1,12 @@
 +++
-title = "B. Munkhtuya"
-slug = "munkhtuya"
-program = "Electrical Systems Automation"
-study_year = "Fourth year"
-generation = "first-generation"
-portrait = "images/members/munkhtuya.jpg"
-alumni = false
+slug = 'munkhtuya'
+generation = 'first-generation'
+portrait = 'images/members/munkhtuya.jpg'
+title = 'B. Munkhtuya'
+program = 'Electrical Systems Automation'
+alumni = true
+graduated_year = 2026.0
 leader = false
-weight = 50
+weight = 50.0
 draft = false
 +++
