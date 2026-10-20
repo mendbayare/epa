@@ -393,7 +393,7 @@ content:
           - { name: alumni, label: Төгсөгч, type: boolean, default: false, description: "Сонговол курсийн оронд «Төгссөн» гэж харагдана." }
           - { name: graduated_year, label: Төгссөн он, type: number, description: Төгсөгч бол бөглөнө. }
           - { name: yearbook_quote, label: Гишүүний эшлэл, type: text, description: "Гишүүний зөвшөөрсөн богино эшлэл. Картын доод хэсэгт налуу үсгээр харагдана." }
-          - { name: leader, label: Үеийн ахлагч, type: boolean, default: false, description: Үе бүрт нэг ахлагч. Картыг онцолж, эхэнд харуулна. }
+          - { name: leader, label: Үеийн ахлагч, type: boolean, default: false, description: "Үе бүрт нэг ахлагч. Картыг онцолж, эхэнд харуулна." }
           - { name: weight, label: Эрэмбэ, type: number, default: 10, description: "Бага тоотой нь эхэнд. Үе дотор ахлагчийн дараа энэ дарааллаар харагдана." }
           - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false, description: "Сонговол сайтад нийтлэгдэхгүй. Бэлэн болмогц сонголтыг арилгана." }
       - name: members_en
