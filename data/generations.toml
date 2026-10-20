@@ -1,6 +1,0 @@
-
-generations = [
-	{ key = 'first-generation', order = 10.0, label_mn = 'I үе', heading_mn = 'I үеийн гишүүд', label_en = 'First generation', heading_en = 'First-generation members' },
-	{ key = 'second-generation', order = 20.0, label_mn = 'II үе', heading_mn = 'II үеийн гишүүд', label_en = 'Second generation', heading_en = 'Second-generation members' },
-	{ key = 'third-generation', order = 30.0, label_mn = 'III үе', heading_mn = 'III үеийн гишүүд', label_en = 'Third generation', heading_en = 'Third-generation members' },
-]

@@ -369,13 +369,14 @@ content:
             description: "Хуудасны хаяг ба фолдерын нэр. Монгол, англи хоёр хувилбарт яг ижлээр бичнэ — өөр бол хоёр хэл холбогдохгүй. Үүсгэсний дараа бүү өөрчил."
           - name: generation
             label: Үе
-            type: select
+            type: reference
             required: true
             options:
-              values:
-                - { label: "I үе", value: first-generation }
-                - { label: "II үе", value: second-generation }
-            description: Шинэ үе нэмэхэд data/generations.toml файлыг эхлээд шинэчилнэ.
+              collection: generations
+              value: "{fields.key}"
+              label: "{fields.label_mn}"
+              search: label_mn
+            description: "Гишүүд хуудсанд аль үеийн дотор харагдахыг заана. Шинэ үе «Тохиргооны жагсаалт → Үеүүд»-д нэмэгдмэгц энд гарч ирнэ."
           - { name: portrait, label: Хөрөг, type: image, required: true, description: "Толгой, мөрний зураг. Дөрвөлжин хүрээнд тайрагдана; дөрвөлжин биш бол дээд хэсэг нь үлдэнэ." }
           - { name: title, label: Бүтэн нэр, type: string, required: true, description: "Гишүүний картанд харагдах нэр." }
           - { name: program, label: Хөтөлбөр, type: string, description: "Нэрийн доор харагдана. Жишээ: Цахилгаан эрчим хүчний систем" }
@@ -408,24 +409,25 @@ content:
     label: Тохиргооны жагсаалт / Reference data
     type: group
     items:
+      # One file per generation, so the members' «Үе» field can list them
+      # through a reference field: a new generation shows up there at once.
       - name: generations
         label: Үеүүд / Generations
-        type: file
-        path: data/generations.toml
+        type: collection
+        path: data/generations
+        filename: "{fields.key}.toml"
         format: toml
+        view:
+          fields: [label_mn, order]
+          primary: label_mn
+          sort: [order]
         fields:
-          - name: generations
-            label: Үеүүд
-            type: object
-            list: true
-            description: Шинэ үе нэмбэл «Гишүүд»-ийн «Үе» сонголтод мөн нэмэх шаардлагатай тул хөгжүүлэгчид хандана.
-            fields:
-              - { name: key, label: Түлхүүр, type: string, required: true, description: "Гишүүний «Үе» талбарын утгатай яг ижил байна. Жишээ: third-generation. Үүсгэсний дараа бүү өөрчил." }
-              - { name: order, label: Дараалал, type: number, required: true, description: "Шинэ үе том тоотой. Нүүр хуудсанд хамгийн том тоотой үе харагдана." }
-              - { name: label_mn, label: Нэр (MN), type: string, required: true, description: "Гишүүд хуудсанд үеийн гарчиг болж харагдана. Жишээ: I үе" }
-              - { name: heading_mn, label: Гарчиг (MN), type: string, required: true, description: "Нүүр хуудасны «Хамгийн шинэ үе» хэсгийн гарчиг." }
-              - { name: label_en, label: Нэр (EN), type: string, required: true, description: "Англи Гишүүд хуудсанд үеийн гарчиг болж харагдана. Жишээ: Generation I" }
-              - { name: heading_en, label: Гарчиг (EN), type: string, required: true, description: "Англи нүүр хуудасны «Хамгийн шинэ үе» хэсгийн гарчиг." }
+          - { name: key, label: Түлхүүр, type: string, required: true, pattern: { regex: "^[a-z0-9]+(-[a-z0-9]+)*$", message: "Зөвхөн жижиг латин үсэг, тоо, зураас (-). Жишээ: fourth-generation" }, description: "Гишүүний «Үе» талбарт хадгалагдах дотоод нэр, файлын нэр. Сайтад харагдахгүй. Жишээ: fourth-generation. Үүсгэсний дараа бүү өөрчил." }
+          - { name: order, label: Дараалал, type: number, required: true, description: "Шинэ үе том тоотой. Гишүүд хуудсанд энэ дарааллаар харагдах ба нүүр хуудсанд хамгийн том тоотой үе гарна. Жишээ: 40" }
+          - { name: label_mn, label: Нэр (MN), type: string, required: true, description: "Гишүүд хуудсанд үеийн гарчиг, гишүүний «Үе» сонголтод харагдана. Жишээ: IV үе" }
+          - { name: heading_mn, label: Гарчиг (MN), type: string, required: true, description: "Нүүр хуудасны «Хамгийн шинэ үе» хэсгийн гарчиг. Жишээ: IV үеийн гишүүд" }
+          - { name: label_en, label: Нэр (EN), type: string, required: true, description: "Англи Гишүүд хуудсанд үеийн гарчиг болж харагдана. Жишээ: Fourth generation" }
+          - { name: heading_en, label: Гарчиг (EN), type: string, required: true, description: "Англи нүүр хуудасны «Хамгийн шинэ үе» хэсгийн гарчиг. Жишээ: Fourth-generation members" }
 
   - name: section_headers
     label: Хэсгийн гарчиг / Section headings

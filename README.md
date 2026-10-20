@@ -25,7 +25,7 @@ content/            Page text, one folder per section
   publications/     Listed only; they have no pages of their own
   guide/            The editors' guide (Mongolian only, unlisted)
 data/
-  generations.toml  Member generations (I үе, II үе, …)
+  generations/      Member generations (I үе, II үе, …), one file each
 layouts/            Hugo templates
   baseof.html       The frame every page renders inside
   home.html         Home

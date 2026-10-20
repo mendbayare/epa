@@ -120,7 +120,7 @@ each new generation is added at the end, so the page reads as the laboratory's
 history. Home still shows the newest generation. The numeric `order` value is the
 real chronological generation number.
 
-Generation labels live in `data/generations.toml`, with a stable key, numeric
+Generation labels live in `data/generations/`, one file per generation, with a stable key, numeric
 order, and Mongolian/English labels. Each generation has one leader, marked with
 `leader = true` on that member's own record; because every generation keeps its
 own leader, former leaders are preserved without a separate leadership file.

@@ -1,12 +1,12 @@
 {{- /*
   Members: a jump bar to each generation, then every generation as a grid
-  of person cards, leader first. Generations come from data/generations.toml.
+  of person cards, leader first. Generations come from data/generations/, one file each.
 */ -}}
 {{ define "main" }}
   {{ $isMn := eq site.Language.Lang "mn" }}
   {{/* Oldest generation first, so the page reads as the laboratory's history
        and each new generation is added at the end. */}}
-  {{ $generations := sort hugo.Data.generations.generations "order" "asc" }}
+  {{ $generations := sort hugo.Data.generations "order" "asc" }}
   {{ partial "page-hero.html" (dict
     "crumbs" (slice (dict "label" (cond $isMn "Нүүр" "Home") "url" (relLangURL "")) (dict "label" .Title))
     "title" .Title

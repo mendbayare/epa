@@ -15,7 +15,7 @@
        record; Home keeps only its own greeting. */}}
   {{ $aboutPage := site.GetPage "/about" }}
   {{ $supervisor := $aboutPage.Params.supervisor }}
-  {{ $generations := sort hugo.Data.generations.generations "order" "desc" }}
+  {{ $generations := sort hugo.Data.generations "order" "desc" }}
   {{ $latestGeneration := index $generations 0 }}
   {{ $latestMembers := where $membersPage.RegularPages "Params.generation" $latestGeneration.key }}
   {{ $latestGenerationLabel := cond $isMn $latestGeneration.heading_mn $latestGeneration.heading_en }}
