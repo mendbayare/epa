@@ -7,7 +7,9 @@
 #      index.mn.md and index.en.md. Pages CMS filters a collection with
 #      `exclude`, which matches bare filenames across all subfolders, so each
 #      content type appears twice — once per language — and each collection
-#      excludes the other language's filename.
+#      excludes the other language's filename. `view.node` names that
+#      language's file, so each bundle lists as one entry rather than a
+#      folder an editor has to open (and could add an entry inside).
 #
 #   2. Front matter is TOML delimited by +++, hence `format: toml-frontmatter`.
 #
@@ -183,6 +185,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
+          node: index.mn.md
           fields: [title, date, featured]
           primary: title
           sort: [date, title]
@@ -219,6 +222,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
+          node: index.en.md
           fields: [title, date, featured]
           primary: title
           sort: [date, title]
@@ -238,6 +242,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
+          node: index.mn.md
           fields: [title, client, featured]
           primary: title
           sort: [weight, title]
@@ -288,6 +293,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
+          node: index.en.md
           fields: [title, client, featured]
           primary: title
           sort: [weight, title]
@@ -307,6 +313,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
+          node: index.mn.md
           fields: [title, year, month]
           primary: title
           sort: [year, month, title]
@@ -338,6 +345,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
+          node: index.en.md
           fields: [title, year, month]
           primary: title
           sort: [year, month, title]
@@ -357,6 +365,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
+          node: index.mn.md
           fields: [title, generation, leader]
           primary: title
           sort: [weight, title]
@@ -384,7 +393,7 @@ content:
           - { name: alumni, label: Төгсөгч, type: boolean, default: false, description: "Сонговол курсийн оронд «Төгссөн» гэж харагдана." }
           - { name: graduated_year, label: Төгссөн он, type: number, description: Төгсөгч бол бөглөнө. }
           - { name: yearbook_quote, label: Гишүүний эшлэл, type: text, description: "Гишүүний зөвшөөрсөн богино эшлэл. Картын доод хэсэгт налуу үсгээр харагдана." }
-          - { name: leader, label: Үеийн ахлагч, type: boolean, default: false, description: Үе бүрт нэг ахлагч. Картыг онцолж, эхэнд харуулна. }
+          - { name: leader, label: Үеийн ахлагч, type: boolean, default: false, description: "Үе бүрт нэг ахлагч. Картыг онцолж, эхэнд харуулна." }
           - { name: weight, label: Эрэмбэ, type: number, default: 10, description: "Бага тоотой нь эхэнд. Үе дотор ахлагчийн дараа энэ дарааллаар харагдана." }
           - { name: draft, label: Ноорог (нийтлэхгүй), type: boolean, default: false, description: "Сонговол сайтад нийтлэгдэхгүй. Бэлэн болмогц сонголтыг арилгана." }
       - name: members_en
@@ -397,6 +406,7 @@ content:
         format: toml-frontmatter
         delimiters: "+++"
         view:
+          node: index.en.md
           fields: [title, generation, leader]
           primary: title
           sort: [weight, title]
