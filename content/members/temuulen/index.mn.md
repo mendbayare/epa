@@ -1,7 +1,7 @@
 +++
 slug = 'temuulen'
 generation = 'third-generation'
-portrait = 'images/Screenshot 2026-10-21 155121.png'
+portrait = 'images/Screenshot 2026-10-21 162132.png'
 title = 'М.Тэмүүлэн'
 program = 'Цахилгаан системийн автоматжуулалт'
 study_year = '3-р курс'
